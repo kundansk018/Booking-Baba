@@ -111,7 +111,7 @@ export default function Home() {
       </div>
 
 
-      <Link href="/SignUp"><h1>Sign Up</h1></Link>
+      <Link href="/signUp"><h1>Sign Up</h1></Link>
 
     </main>
   )
