@@ -4,6 +4,7 @@ import BBInput from "../components/BBInput";
 import { Radio } from "@material-tailwind/react";
 import BBTypography from "../components/BBTypography";
 import BBButton from "../components/BBButton";
+import BBErrorDialog from "../components/BBErrorDialog";
 
 export default function () {
   const [firstName, setFirstName] = useState("");
@@ -16,15 +17,53 @@ export default function () {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [passwordError, setPasswordError] = useState("");
+  const [showErrorDialog, setShowErrorDialog] = useState(false);
 
-  const signUpCredential = (e: any) => {
-    console.log("called");
-    console.log("signup data ", password, confirmPassword);
-    if (password === confirmPassword) {
-      setConfirmPassword(confirmPassword);
-    } else {
-      setPasswordError("Password Not Matching..");
-      console.log(passwordError);
+  const [errorDialogMessage, setErrorDialogMessage] = useState([]);
+
+  const signUpCredential = () => {
+    let isErrorFound = false;
+    let error: any = [];
+    if (!firstName || !firstName.trim()) {
+      isErrorFound = true;
+      error.push("Please enter first name");
+    }
+
+    if (!lastName || !lastName.trim()) {
+      isErrorFound = true;
+      error.push("Please enter last name");
+    }
+
+    if (!mobileNumber || !mobileNumber.trim()) {
+      isErrorFound = true;
+      error.push("Please enter Mobile Number");
+    }
+    if (!email || !email.trim()) {
+      isErrorFound = true;
+      error.push("Please enter Email Address");
+    }
+    if (!birthDate || !birthDate.trim()) {
+      isErrorFound = true;
+      error.push("Please enter Birthdate");
+    }
+    if (!password || !password.trim()) {
+      isErrorFound = true;
+      error.push("Please Enter Password");
+    }
+    if (!confirmPassword || !confirmPassword.trim()) {
+      isErrorFound = true;
+      error.push("Please Enter Confirm Password");
+    }
+    if (password || confirmPassword) {
+      isErrorFound = true;
+      error.push(
+        " Password Not Matching ..!! Password and Confirm-Password Should Be Same"
+      );
+    }
+    if (isErrorFound) {
+      setErrorDialogMessage(error);
+      setShowErrorDialog(true);
+      return;
     }
   };
 
@@ -104,8 +143,20 @@ export default function () {
             text="Gender"
           />
 
-          <Radio label="Male" name="gender" color="purple" />
-          <Radio label="Female" name="gender" color="purple" />
+          <Radio
+            label="Male"
+            name="gender"
+            color="purple"
+            value={gender}
+            onChange={(e) => setGender(e.target.value)}
+          />
+          <Radio
+            label="Female"
+            name="gender"
+            color="purple"
+            value={gender}
+            onChange={(e) => setGender(e.target.value)}
+          />
         </div>
         <BBButton
           color=""
@@ -115,6 +166,12 @@ export default function () {
           className="relative h-12 bg-blackblue"
         />
       </form>
+      <BBErrorDialog
+        dialogHeader="Error"
+        dialogMessage={errorDialogMessage}
+        open={showErrorDialog}
+        onOkClick={() => setShowErrorDialog(false)}
+      />
     </>
   );
 }
