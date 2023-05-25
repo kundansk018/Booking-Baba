@@ -1,20 +1,21 @@
 import React from "react";
 import BBInput from "../components/BBInput";
 
-import { Button, Typography, Radio } from "@material-tailwind/react";
+import { Button, Radio } from "@material-tailwind/react";
+import BBTypography from "../components/BBTypography";
+import BBButton from "../components/BBButton";
 
 export default function () {
   return (
     <>
-      <form className="mt-6 flex flex-col gap-3">
+      <form className="mt-0 flex flex-col gap-3">
         <div>
-          <Typography
+          <BBTypography
             variant="small"
             color="blue-gray"
-            className="mb-2 font-medium"
-          >
-            Personal Details
-          </Typography>
+            className="mb-0 font-medium"
+            text="Personal Details"
+          />
         </div>
         <div className="flex items-center gap-2">
           <BBInput
@@ -26,15 +27,23 @@ export default function () {
           <BBInput
             label="Last Name"
             containerProps={{ className: "min-w-[30px]" }}
-            value="name"
+            value=""
             onChange={(e) => console.log(e.target.value)}
           />
         </div>
-        <div>
+
+        <div className="flex items-center gap-2">
           <BBInput
-            type="text"
-            label="Mobile Number"
-            value="name"
+            label="Mobile Number "
+            containerProps={{ className: "min-w-[30px]" }}
+            value={""}
+            onChange={(e) => console.log(e.target.value)}
+          />
+          <BBInput
+            type="date"
+            label="Birth-Date"
+            containerProps={{ className: "min-w-[30px]" }}
+            value={""}
             onChange={(e) => console.log(e.target.value)}
           />
         </div>
@@ -42,42 +51,47 @@ export default function () {
         <div>
           <BBInput
             type="email"
-            label="Email "
-            value="name"
+            label="Email Address "
+            value={""}
             onChange={(e) => console.log(e.target.value)}
           />
         </div>
-        <div>
+        <div className="flex items-center gap-2">
           <BBInput
-            type="date"
-            label="Birth-Date "
-            value="name"
-            onChange={(e) => console.log(e.target.value)}
-          />
-        </div>
-        <div>
-          <Typography
-            variant="small"
-            color="blue-gray"
-            className="mb-0 font-medium"
-          >
-            Gender
-          </Typography>
-          <Radio label="Male" name="r1" className="colors-red" />
-          <Radio label="Female" name="r1" color="green" />
-        </div>
-        <div>
-          <BBInput
+            containerProps={{ className: "min-w-[30px]" }}
             type="password"
             label="Password "
             value={""}
-            color="orange"
+            onChange={(e) => console.log(e.target.value)}
+          />
+
+          <BBInput
+            type="password"
+            label="Confirm-Password "
+            containerProps={{ className: "min-w-[30px]" }}
+            value={""}
             onChange={(e) => console.log(e.target.value)}
           />
         </div>
-        <Button size="lg" color="blue" className="relative h-12 bg-blue">
-          Sign Up
-        </Button>
+
+        <div>
+          <BBTypography
+            variant="small"
+            color="blue-gray"
+            className="mb-0 font-medium"
+            text="Gender"
+          />
+
+          <Radio label="Male" name="gender" color="purple" />
+          <Radio label="Female" name="gender" color="purple" />
+        </div>
+        <BBButton
+          color=""
+          label="Sign Up"
+          size="lg"
+          onClick={() => alert("Submit btn")}
+          className="relative h-12 bg-blackblue"
+        />
       </form>
     </>
   );

@@ -11,7 +11,7 @@ interface Props {
   color?: any;
 }
 
-export default function (props: Props) {
+export default function BBInput(props: Props) {
   return (
     <Input
       label={props.label}
@@ -23,7 +23,9 @@ export default function (props: Props) {
       containerProps={
         props.containerProps
           ? props.containerProps
-          : { className: "min-w-[30px] bg-sky-500 hover:bg-sky-700" }
+          : {
+              className: "min-w-[30px] bg-sky-500 hover:bg-sky-700 ",
+            }
       }
     />
   );
