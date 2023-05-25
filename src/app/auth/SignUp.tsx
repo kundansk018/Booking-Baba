@@ -69,12 +69,12 @@ export default function () {
 
   return (
     <>
-      <form className="mt-0 flex flex-col gap-3">
+      <form className="mt-0 flex flex-col gap-3 font-signika">
         <div>
           <BBTypography
             variant="small"
             color="blue-gray"
-            className="mb-0 font-medium"
+            className="mb-0 font-medium font-signika"
             text="Personal Details"
           />
         </div>
@@ -139,7 +139,7 @@ export default function () {
           <BBTypography
             variant="small"
             color="blue-gray"
-            className="mb-0 font-medium"
+            className="mb-0 font-medium font-signika"
             text="Gender"
           />
 

@@ -21,6 +21,10 @@ module.exports = withMT({
         GreenBlue: "#1B6CA8",
         blackblue: "#243f56",
       },
+      fontFamily: {
+        Signika: ["Signika", "sans-serif"],
+        Castoro: ["Castoro Titling", "cursive"],
+      },
     },
   },
   plugins: [],

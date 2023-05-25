@@ -33,7 +33,7 @@ export default function page() {
           <div className="mb-2 rounded-full border border-white/10 bg-white/10 p-6 text-white">
             <BanknotesIcon className="h-10 w-10" />
           </div>
-          <Typography variant="h5" color="white">
+          <Typography className="font-castoro" variant="h5" color="white">
             Booking Baba
           </Typography>
         </CardHeader>

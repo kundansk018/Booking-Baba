@@ -14,12 +14,12 @@ import Link from "next/link";
 
 export default function Login() {
   return (
-    <form className="mt-6  flex flex-col gap-4  ">
+    <form className="mt-6  flex flex-col gap-4  font-signika">
       <div className="">
         <Typography
           variant="small"
           color="blue-gray"
-          className="mb-2 font-medium h-[30%]"
+          className="mb-2 font-medium h-[30%] font-signika"
         >
           Email Id
         </Typography>
@@ -35,7 +35,7 @@ export default function Login() {
         <Typography
           variant="small"
           color="blue-gray"
-          className="mb-2 font-medium"
+          className="mb-2 font-medium font-signika"
         >
           Password
         </Typography>
@@ -47,7 +47,7 @@ export default function Login() {
         />
       </div>
 
-      <div className="flex flex-row justify-between items-center">
+      <div className="flex flex-row justify-between items-center font-signika">
         <Checkbox label="REMEMBER ME" color="blue" className=" left-0" />
         <a
           href="#"
@@ -64,7 +64,7 @@ export default function Login() {
         onClick={() => alert("Login Succesfully")}
         className="relative h-12 bg-blackblue my-0"
       />
-      <Typography variant="small" className="flex justify-center my-3">
+      <Typography variant="small" className="flex justify-center my-3 font-signika">
         Don&apos;t have an account?
         <Typography
           as="a"
