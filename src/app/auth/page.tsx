@@ -47,19 +47,17 @@ export default function page() {
               </Tab>
               <Tab
                 value="signup"
-                className=""
+                className={type === "signup" ? "text-white" : "text-blue"}
                 onClick={() => setType("signup")}
               >
                 Sign Up
               </Tab>
             </TabsHeader>
-            <TabsBody
-
-            >
+            <TabsBody>
               <TabPanel value="login" className="p-0">
                 <Login />
               </TabPanel>
-              <TabPanel value="signup" className="p-0" >
+              <TabPanel value="signup" className="p-0">
                 <SignUp />
               </TabPanel>
             </TabsBody>
@@ -68,8 +66,7 @@ export default function page() {
         {/* <CardFooter>
           <Button className="mt-0" fullWidth style={{ color: "black", backgroundColor: "green" }}>Login</Button>
         </CardFooter> */}
-
-      </Card >
-    </div >
+      </Card>
+    </div>
   );
 }
