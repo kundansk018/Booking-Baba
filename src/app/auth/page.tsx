@@ -11,6 +11,8 @@ import {
   TabsBody,
   Tab,
   TabPanel,
+  CardFooter,
+  Button,
 } from "@material-tailwind/react";
 
 import { BanknotesIcon } from "@heroicons/react/24/solid";
@@ -19,10 +21,10 @@ import SignUp from "./SignUp";
 import Login from "./Login";
 
 export default function page() {
-  const [type, setType] = React.useState("card");
+  const [type, setType] = React.useState("login");
 
   return (
-    <div className="flex justify-center items-center py-[20px]">
+    <div className="flex justify-center items-center py-[20px] h-[30%] ">
       <Card className="w-full max-w-[24rem] ">
         <CardHeader
           color="red"
@@ -40,7 +42,7 @@ export default function page() {
         <CardBody>
           <Tabs value={type} className="overflow-visible ">
             <TabsHeader className="relative z-0">
-              <Tab value="card" onClick={() => setType("card")}>
+              <Tab value="login" onClick={() => setType("login")}>
                 Log In
               </Tab>
               <Tab
@@ -52,20 +54,9 @@ export default function page() {
               </Tab>
             </TabsHeader>
             <TabsBody
-              className="!overflow-x-hidden !overflow-y-visible"
-              animate={{
-                initial: {
-                  x: type === "card" ? 400 : -400,
-                },
-                mount: {
-                  x: 0,
-                },
-                unmount: {
-                  x: type === "card" ? 400 : -400,
-                },
-              }}
+
             >
-              <TabPanel value="card" className="p-0">
+              <TabPanel value="login" className="p-0">
                 <Login />
               </TabPanel>
               <TabPanel value="signup" className="p-0" >
