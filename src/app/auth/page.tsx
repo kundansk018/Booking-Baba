@@ -16,6 +16,7 @@ import {
 import { BanknotesIcon } from "@heroicons/react/24/solid";
 
 import SignUp from "./SignUp";
+import Login from "./Login";
 
 export default function page() {
   const [type, setType] = React.useState("card");
@@ -43,9 +44,9 @@ export default function page() {
                 Log In
               </Tab>
               <Tab
-                value="paypal"
+                value="signup"
                 className=""
-                onClick={() => setType("paypal")}
+                onClick={() => setType("signup")}
               >
                 Sign Up
               </Tab>
@@ -65,15 +66,19 @@ export default function page() {
               }}
             >
               <TabPanel value="card" className="p-0">
-                <></>
+                <Login />
               </TabPanel>
-              <TabPanel value="paypal" className="p-0">
+              <TabPanel value="signup" className="p-0" >
                 <SignUp />
               </TabPanel>
             </TabsBody>
           </Tabs>
         </CardBody>
-      </Card>
-    </div>
+        {/* <CardFooter>
+          <Button className="mt-0" fullWidth style={{ color: "black", backgroundColor: "green" }}>Login</Button>
+        </CardFooter> */}
+
+      </Card >
+    </div >
   );
 }
