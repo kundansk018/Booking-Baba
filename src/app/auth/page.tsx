@@ -13,6 +13,7 @@ import {
   Tab,
   TabPanel,
   Radio,
+  CardFooter,
 } from "@material-tailwind/react";
 
 import {
@@ -23,16 +24,18 @@ import {
 import Input from "../components/BBInput";
 import SignUp from "./SignUp";
 import Login from "./Login";
+import { test } from "node:test";
 
 export default function page() {
-  const [type, setType] = React.useState("card");
-  const [cardNumber, setCardNumber] = React.useState("");
-  const [cardExpires, setCardExpires] = React.useState("");
+  const [type, setType] = React.useState("login");
+  // const [cardNumber, setCardNumber] = React.useState("");
+  // const [cardExpires, setCardExpires] = React.useState("");
   return (
-    <div className="flex justify-center items-center py-[20px]">
+    <div className="flex justify-center items-center">
       <Card className="w-full max-w-[24rem]">
         <CardHeader
-          color="blue"
+          color="red"
+
           floated={false}
           shadow={false}
           className="m-0 grid place-items-center rounded-b-none py-8 px-4 text-center"
@@ -47,36 +50,27 @@ export default function page() {
         <CardBody>
           <Tabs value={type} className="overflow-visible ">
             <TabsHeader className="relative z-0 bg-green ">
-              <Tab value="card" onClick={() => setType("card")}>
+              <Tab style={{ color: "green" }} value="login" onClick={() => setType("login")} >
                 Log In
               </Tab>
-              <Tab value="paypal" onClick={() => setType("paypal")}>
+              <Tab value="signup" onClick={() => setType("signup")}>
                 Sign Up
               </Tab>
             </TabsHeader>
-            <TabsBody
-              className="!overflow-x-hidden !overflow-y-visible"
-              animate={{
-                initial: {
-                  x: type === "card" ? 400 : -400,
-                },
-                mount: {
-                  x: 0,
-                },
-                unmount: {
-                  x: type === "card" ? 400 : -400,
-                },
-              }}
-            >
-              <TabPanel value="card" className="p-0">
+            <TabsBody style={{ overflow: "hidden" }}>
+              <TabPanel value="login" className="p-0">
                 <Login />
               </TabPanel>
-              <TabPanel value="paypal" className="p-0">
+              <TabPanel value="signup" className="p-0" >
                 <SignUp />
               </TabPanel>
             </TabsBody>
           </Tabs>
         </CardBody>
+        <CardFooter>
+          <Button className="mt-0" fullWidth style={{ color: "black", backgroundColor: "green" }}>Login</Button>
+        </CardFooter>
+
       </Card>
     </div>
   );
