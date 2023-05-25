@@ -68,11 +68,10 @@ export default function Login() {
         Don&apos;t have an account?
         <Typography
           as="a"
-          href="#signup"
+          href=""
           variant="small"
           color="blue"
           className="ml-1 font-bold"
-        
         >
           Sign up
         </Typography>

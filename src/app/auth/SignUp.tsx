@@ -74,7 +74,11 @@ export default function () {
           <BBTypography
             variant="small"
             color="blue-gray"
+<<<<<<< Updated upstream
             className="mb-0 font-medium font-signika"
+=======
+            className=" font-medium"
+>>>>>>> Stashed changes
             text="Personal Details"
           />
         </div>
