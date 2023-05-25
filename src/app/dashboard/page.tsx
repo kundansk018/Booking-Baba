@@ -8,10 +8,10 @@ export default function AdminPage() {
 
     return (
         <>
-            <div className='back flex justify-center text-center font-semibold flex-1 bg-black text-black  h-20'>
+            {/* <div className='back flex justify-center text-center font-semibold flex-1 bg-black text-black  h-20'>
                 <h1 className='text-4xl'> BOOKING-BABA</h1>
-            </div>
-            <div className='m-9 mt-5 mb-3 rounded-lg'>
+            </div> */}
+            <div className='m-10 mt-10 mb-3 rounded-lg'>
 
             <div className="flex flex-row flex-1 h-70 mt-5 rounded-lg ">
 
