@@ -1,10 +1,36 @@
-import React, { Dispatch } from "react";
-import { SIGNUP_REQUEST, SIGNUP_REQUEST_SUCCESS } from "../constant";
+import React from "react";
+import {
+  SIGNUP_REQUEST,
+  SIGNUP_REQUEST_FAIL,
+  SIGNUP_REQUEST_SUCCESS,
+} from "../constant";
 import { AppDispatch } from "../store";
 
-export const signup = () => (dispatch: AppDispatch) => {
-  console.log("data in action: ");
-  dispatch({ type: SIGNUP_REQUEST_SUCCESS, payload: { firstname: "Sanket" } });
+export const signup = (data: any) => async (dispatch: AppDispatch) => {
+  console.log("data in action: ", data);
+  dispatch({ type: SIGNUP_REQUEST, payload: null });
+
+  //api call
+  const res = await fetch(
+    "http://localhost:3000/api/demo/demo?action=createUser",
+    {
+      method: "POST",
+
+      body: JSON.stringify(data),
+      headers: {
+        "content-type": "application/json",
+      },
+    }
+  );
+  if (res.ok === true) {
+    console.log("inside if:::::::::", res);
+
+    dispatch({ type: SIGNUP_REQUEST_SUCCESS, payload: data });
+  } else {
+    dispatch({ type: SIGNUP_REQUEST_FAIL, payload: null });
+  }
+
+  //fail
 };
 
-//dispatch: Dispatch<IGetAllAssets | ISetAllAssets>
+// dispatch: Dispatch<IGetAllAssets | ISetAllAssets>

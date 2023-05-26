@@ -1,12 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import BBInput from "../components/BBInput";
 
 import { Radio } from "@material-tailwind/react";
 import BBTypography from "../components/BBTypography";
 import BBButton from "../components/BBButton";
 import BBErrorDialog from "../components/BBErrorDialog";
+import { signup } from "@/redux/action/user";
+import { useAppDispatch } from "@/redux/store";
+import { useSelector } from "react-redux";
+import { useRouter } from "next/navigation";
 
 export default function () {
+  const dispatch = useAppDispatch();
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -16,44 +21,32 @@ export default function () {
 
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [passwordError, setPasswordError] = useState("");
   const [showErrorDialog, setShowErrorDialog] = useState(false);
 
   const [errorDialogMessage, setErrorDialogMessage] = useState([]);
 
-  const sendData = async (data: any) => {
-    console.log("Data is::::::>", data);
-    const res = await fetch(
-      "http://localhost:3000/api/demo/demo?action=createUser",
-      {
-        method: "POST",
+  const router: any = useRouter();
 
-        body: JSON.stringify({
-          firstName: data.firstName,
-          lastName: data.lastName,
-          mobileNumber: data.mobileNumber,
-          birthDate: data.birthDate,
-          email: data.email,
-          password: data.password,
-        }),
-        headers: {
-          "content-type": "application/json",
-        },
-      }
-    );
-    console.log("called", res);
-  };
+  const userData: any = useSelector((state: any) => state.user.createdUser);
+  console.log("userData is ..", userData);
+  useEffect(() => {
+    if (userData) {
+      router.push("/dashboard");
+    }
+  }, [userData]);
 
   const signUpCredential = () => {
     let data = {
-      firstName: firstName,
-      lastName: lastName,
-      mobileNumber: mobileNumber,
-      birthDate: birthDate,
-      email: email,
-      password: password,
+      role: "Admin",
+      firstName,
+      lastName,
+      mobileNumber,
+      birthDate,
+      email,
+      password,
     };
-    sendData(data);
+    dispatch(signup(data));
+
     let isErrorFound = false;
     let error: any = [];
     if (!firstName || !firstName.trim()) {

@@ -1,31 +1,30 @@
 import { MongoClient } from "mongodb";
 
-const getDB = async () =>{
-    const uri = "mongodb+srv://kbsavale:bookingbaba123@cluster0.zzkhcsh.mongodb.net/?retryWrites=true&w=majority"
+const getDB = async () => {
+  const uri =
+    "mongodb+srv://kbsavale:bookingbaba123@cluster0.zzkhcsh.mongodb.net/?retryWrites=true&w=majority";
 
-    const options :any={
-        useUnifiedTopology :true ,
+  // "mongodb+srv://jadhavbhushan228:booking%40123@cluster0.j6wxgsd.mongodb.net/?retryWrites=true&w=majority";
 
-        useNewUrlParser: true ,
-    
-    };
+  const options: any = {
+    useUnifiedTopology: true,
 
-    let client, db;
+    useNewUrlParser: true,
+  };
 
-    if(!uri){
-        throw new Error("Connection error ..")
-    }
+  let client, db;
 
-    client = new MongoClient(uri , options)
+  if (!uri) {
+    throw new Error("Connection error ..");
+  }
 
-    await client.connect();
+  client = new MongoClient(uri);
 
-    db = client.db("booking_baba")
+  await client.connect();
 
-    return db;
+  db = client.db("booking_baba");
 
+  return db;
+};
 
-}
-
-
-export default getDB
+export default getDB;
