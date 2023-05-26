@@ -1,19 +1,112 @@
-import React from "react";
+import React, { useState } from "react";
 import BBInput from "../components/BBInput";
 
-import { Button, Radio } from "@material-tailwind/react";
+import { Radio } from "@material-tailwind/react";
 import BBTypography from "../components/BBTypography";
 import BBButton from "../components/BBButton";
+import BBErrorDialog from "../components/BBErrorDialog";
 
 export default function () {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [mobileNumber, setMobileNumber] = useState("");
+  const [gender, setGender] = useState("");
+  const [birthDate, setBirthDate] = useState("");
+
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [showErrorDialog, setShowErrorDialog] = useState(false);
+
+  const [errorDialogMessage, setErrorDialogMessage] = useState([]);
+
+  const sendData = async (data: any) => {
+    console.log("Data is::::::>", data);
+    const res = await fetch(
+      "http://localhost:3000/api/demo/demo?action=createUser",
+      {
+        method: "POST",
+
+        body: JSON.stringify({
+          firstName: data.firstName,
+          lastName: data.lastName,
+          mobileNumber: data.mobileNumber,
+          birthDate: data.birthDate,
+          email: data.email,
+          password: data.password,
+        }),
+        headers: {
+          "content-type": "application/json",
+        },
+      }
+    );
+    console.log("called", res);
+  };
+
+  const signUpCredential = () => {
+    let data = {
+      firstName: firstName,
+      lastName: lastName,
+      mobileNumber: mobileNumber,
+      birthDate: birthDate,
+      email: email,
+      password: password,
+    };
+    sendData(data);
+    let isErrorFound = false;
+    let error: any = [];
+    if (!firstName || !firstName.trim()) {
+      isErrorFound = true;
+      error.push("Please enter first name");
+    }
+
+    if (!lastName || !lastName.trim()) {
+      isErrorFound = true;
+      error.push("Please enter last name");
+    }
+
+    if (!mobileNumber || !mobileNumber.trim()) {
+      isErrorFound = true;
+      error.push("Please enter Mobile Number");
+    }
+    if (!email || !email.trim()) {
+      isErrorFound = true;
+      error.push("Please enter Email Address");
+    }
+    if (!birthDate || !birthDate.trim()) {
+      isErrorFound = true;
+      error.push("Please enter Birthdate");
+    }
+    if (!password || !password.trim()) {
+      isErrorFound = true;
+      error.push("Please Enter Password");
+    }
+    if (!confirmPassword || !confirmPassword.trim()) {
+      isErrorFound = true;
+      error.push("Please Enter Confirm Password");
+    }
+    if (password !== confirmPassword) {
+      isErrorFound = true;
+      error.push(
+        " Password Not Matching ..!! Password and Confirm-Password Should Be Same"
+      );
+    }
+    if (isErrorFound) {
+      setErrorDialogMessage(error);
+      setShowErrorDialog(true);
+      return;
+    }
+  };
+
   return (
     <>
-      <form className="mt-0 flex flex-col gap-3">
+      <form className="mt-0 flex flex-col gap-3 font-signika">
         <div>
           <BBTypography
             variant="small"
             color="blue-gray"
-            className="mb-0 font-medium"
+            className=" font-medium"
             text="Personal Details"
           />
         </div>
@@ -21,14 +114,14 @@ export default function () {
           <BBInput
             label="First Name"
             containerProps={{ className: "min-w-[30px]" }}
-            value={""}
-            onChange={(e) => console.log(e.target.value)}
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
           />
           <BBInput
             label="Last Name"
             containerProps={{ className: "min-w-[30px]" }}
-            value=""
-            onChange={(e) => console.log(e.target.value)}
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
           />
         </div>
 
@@ -36,15 +129,15 @@ export default function () {
           <BBInput
             label="Mobile Number "
             containerProps={{ className: "min-w-[30px]" }}
-            value={""}
-            onChange={(e) => console.log(e.target.value)}
+            value={mobileNumber}
+            onChange={(e) => setMobileNumber(e.target.value)}
           />
           <BBInput
             type="date"
             label="Birth-Date"
             containerProps={{ className: "min-w-[30px]" }}
-            value={""}
-            onChange={(e) => console.log(e.target.value)}
+            value={birthDate}
+            onChange={(e) => setBirthDate(e.target.value)}
           />
         </div>
 
@@ -52,8 +145,8 @@ export default function () {
           <BBInput
             type="email"
             label="Email Address "
-            value={""}
-            onChange={(e) => console.log(e.target.value)}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
         </div>
         <div className="flex items-center gap-2">
@@ -61,16 +154,16 @@ export default function () {
             containerProps={{ className: "min-w-[30px]" }}
             type="password"
             label="Password "
-            value={""}
-            onChange={(e) => console.log(e.target.value)}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
 
           <BBInput
             type="password"
             label="Confirm-Password "
             containerProps={{ className: "min-w-[30px]" }}
-            value={""}
-            onChange={(e) => console.log(e.target.value)}
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
           />
         </div>
 
@@ -78,21 +171,39 @@ export default function () {
           <BBTypography
             variant="small"
             color="blue-gray"
-            className="mb-0 font-medium"
+            className="mb-0 font-medium font-signika"
             text="Gender"
           />
 
-          <Radio label="Male" name="gender" color="purple" />
-          <Radio label="Female" name="gender" color="purple" />
+          <Radio
+            label="Male"
+            name="gender"
+            color="purple"
+            value={gender}
+            onChange={(e) => setGender(e.target.value)}
+          />
+          <Radio
+            label="Female"
+            name="gender"
+            color="purple"
+            value={gender}
+            onChange={(e) => setGender(e.target.value)}
+          />
         </div>
         <BBButton
           color=""
           label="Sign Up"
           size="lg"
-          onClick={() => alert("Submit btn")}
+          onClick={signUpCredential}
           className="relative h-12 bg-blackblue"
         />
       </form>
+      <BBErrorDialog
+        dialogHeader="Error"
+        dialogMessage={errorDialogMessage}
+        open={showErrorDialog}
+        onOkClick={() => setShowErrorDialog(false)}
+      />
     </>
   );
 }

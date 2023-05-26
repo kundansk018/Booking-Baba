@@ -19,7 +19,7 @@ import SignUp from "./SignUp";
 import Login from "./Login";
 
 export default function page() {
-  const [type, setType] = React.useState("card");
+  const [type, setType] = React.useState("login");
 
   return (
     <div className="flex justify-center items-center py-[20px]">
@@ -33,19 +33,28 @@ export default function page() {
           <div className="mb-2 rounded-full border border-white/10 bg-white/10 p-6 text-white">
             <BanknotesIcon className="h-10 w-10" />
           </div>
-          <Typography variant="h5" color="white">
+          <Typography className="font-castoro" variant="h5" color="white">
             Booking Baba
           </Typography>
         </CardHeader>
         <CardBody>
           <Tabs value={type} className="overflow-visible ">
-            <TabsHeader className="relative z-0">
-              <Tab value="card" onClick={() => setType("card")}>
+            <TabsHeader
+              className="relative z-0"
+              indicatorProps={{
+                className: "bg-[#4fb291] shadow-none",
+              }}
+            >
+              <Tab
+                value="login"
+                onClick={() => setType("login")}
+                className={type === "login" ? "text-white" : "text-blue"}
+              >
                 Log In
               </Tab>
               <Tab
                 value="signup"
-                className=""
+                className={type === "signup" ? "text-white" : "text-blue"}
                 onClick={() => setType("signup")}
               >
                 Sign Up
@@ -55,30 +64,26 @@ export default function page() {
               className="!overflow-x-hidden !overflow-y-visible"
               animate={{
                 initial: {
-                  x: type === "card" ? 400 : -400,
+                  x: type === "login" ? 400 : -400,
                 },
                 mount: {
                   x: 0,
                 },
                 unmount: {
-                  x: type === "card" ? 400 : -400,
+                  x: type === "login" ? 400 : -400,
                 },
               }}
             >
-              <TabPanel value="card" className="p-0">
+              <TabPanel value="login" className="p-0">
                 <Login />
               </TabPanel>
-              <TabPanel value="signup" className="p-0" >
+              <TabPanel value="signup" className="p-0">
                 <SignUp />
               </TabPanel>
             </TabsBody>
           </Tabs>
         </CardBody>
-        {/* <CardFooter>
-          <Button className="mt-0" fullWidth style={{ color: "black", backgroundColor: "green" }}>Login</Button>
-        </CardFooter> */}
-
-      </Card >
-    </div >
+      </Card>
+    </div>
   );
 }

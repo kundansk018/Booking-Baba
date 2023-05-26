@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Signika:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Castoro+Titling&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -18,11 +21,20 @@
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: rgb(var(--background-start-rgb));
+  background: rgb(var(--background-start-rgb)); 
   /* background: linear-gradient(
       to bottom,
       transparent,
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb)); */
+}
+
+.font-castoro {
+  font-family: 'Castoro Titling', "cursive";
+  letter-spacing: 2px;
+}
+  
+.font-signika {
+  font-family: 'Signika', "sans-serif"; 
 }
