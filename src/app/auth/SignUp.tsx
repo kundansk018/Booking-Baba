@@ -21,7 +21,39 @@ export default function () {
 
   const [errorDialogMessage, setErrorDialogMessage] = useState([]);
 
+  const sendData = async (data: any) => {
+    console.log("Data is::::::>", data);
+    const res = await fetch(
+      "http://localhost:3000/api/demo/demo?action=createUser",
+      {
+        method: "POST",
+
+        body: JSON.stringify({
+          firstName: data.firstName,
+          lastName: data.lastName,
+          mobileNumber: data.mobileNumber,
+          birthDate: data.birthDate,
+          email: data.email,
+          password: data.password,
+        }),
+        headers: {
+          "content-type": "application/json",
+        },
+      }
+    );
+    console.log("called", res);
+  };
+
   const signUpCredential = () => {
+    let data = {
+      firstName: firstName,
+      lastName: lastName,
+      mobileNumber: mobileNumber,
+      birthDate: birthDate,
+      email: email,
+      password: password,
+    };
+    sendData(data);
     let isErrorFound = false;
     let error: any = [];
     if (!firstName || !firstName.trim()) {
@@ -54,7 +86,7 @@ export default function () {
       isErrorFound = true;
       error.push("Please Enter Confirm Password");
     }
-    if (password || confirmPassword) {
+    if (password !== confirmPassword) {
       isErrorFound = true;
       error.push(
         " Password Not Matching ..!! Password and Confirm-Password Should Be Same"
@@ -74,11 +106,7 @@ export default function () {
           <BBTypography
             variant="small"
             color="blue-gray"
-<<<<<<< Updated upstream
-            className="mb-0 font-medium font-signika"
-=======
             className=" font-medium"
->>>>>>> Stashed changes
             text="Personal Details"
           />
         </div>
