@@ -37,4 +37,10 @@ body {
   
 .font-signika {
   font-family: 'Signika', "sans-serif"; 
+.bus-form{
+  width: 600px;
+}
+.update-form{
+  width: 600px;
+}
 }
