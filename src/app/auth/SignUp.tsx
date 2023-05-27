@@ -67,10 +67,17 @@ export default function () {
       isErrorFound = true;
       error.push("Please enter Email Address");
     }
-    if (!birthDate || !birthDate.trim()) {
+    if (
+      !email.includes("@") ||
+      (!email.includes(".com") && !email.includes(".in"))
+    ){
       isErrorFound = true;
-      error.push("Please enter Birthdate");
+        error.push("Plz Enter valid email address");
     }
+      if (!birthDate || !birthDate.trim()) {
+        isErrorFound = true;
+        error.push("Please enter Birthdate");
+      }
     if (!password || !password.trim()) {
       isErrorFound = true;
       error.push("Please Enter Password");
