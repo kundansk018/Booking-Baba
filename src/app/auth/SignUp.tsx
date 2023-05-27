@@ -1,16 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import BBInput from "../components/BBInput";
 
 import { Radio } from "@material-tailwind/react";
 import BBTypography from "../components/BBTypography";
 import BBButton from "../components/BBButton";
 import BBErrorDialog from "../components/BBErrorDialog";
-import { signup } from "@/redux/action/user";
 import { useAppDispatch } from "@/redux/store";
-import { useSelector } from "react-redux";
-import { useRouter } from "next/navigation";
+import { signup } from "@/redux/action/user";
 
-const SignUp = function () {
+export default function () {
+  const dispatch = useAppDispatch();
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -20,33 +19,22 @@ const SignUp = function () {
 
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [passwordError, setPasswordError] = useState("");
   const [showErrorDialog, setShowErrorDialog] = useState(false);
 
   const [errorDialogMessage, setErrorDialogMessage] = useState([]);
-  const dispatch = useAppDispatch();
-
-  const router: any = useRouter();
-
-  const userData: any = useSelector((state: any) => state.user.createdUser);
-  console.log("userData is ..", userData);
-  useEffect(() => {
-    if (userData) {
-      router.push("/dashboard");
-    }
-  }, [userData]);
 
   const signUpCredential = () => {
     // dispatch(signup());
     let data = {
-      role: "Admin",
-      firstName,
-      lastName,
-      mobileNumber,
-      birthDate,
-      email,
-      password,
+      firstName: firstName,
+      lastName: lastName,
+      mobileNumber: mobileNumber,
+      birthDate: birthDate,
+      email: email,
+      password: password,
     };
-
+    dispatch(signup(data));
     let isErrorFound = false;
     let error: any = [];
     if (!firstName || !firstName.trim()) {
@@ -70,14 +58,14 @@ const SignUp = function () {
     if (
       !email.includes("@") ||
       (!email.includes(".com") && !email.includes(".in"))
-    ){
+    ) {
       isErrorFound = true;
-        error.push("Plz Enter valid email address");
+      error.push("Plz Enter valid email address");
     }
-      if (!birthDate || !birthDate.trim()) {
-        isErrorFound = true;
-        error.push("Please enter Birthdate");
-      }
+    if (!birthDate || !birthDate.trim()) {
+      isErrorFound = true;
+      error.push("Please enter Birthdate");
+    }
     if (!password || !password.trim()) {
       isErrorFound = true;
       error.push("Please Enter Password");
@@ -208,6 +196,6 @@ const SignUp = function () {
       />
     </>
   );
-};
+}
 
 export default SignUp;

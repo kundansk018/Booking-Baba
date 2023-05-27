@@ -18,8 +18,11 @@ import BBCheckbox from "@/app/components/BBCheckbox";
 import BBDropdown from "@/app/components/BBDropdown";
 import { type } from "os";
 import BBErrorDialog from "@/app/components/BBErrorDialog";
+import { useAppDispatch } from "@/redux/store";
+import { addBuses } from "@/redux/action/busaction";
 
 export default function AddBus() {
+  const dispatch = useAppDispatch();
   const [busname, setBusname] = useState<String>("");
   const [from, setFrom] = useState<String>("");
   const [to, setTo] = useState<String>("");
@@ -48,8 +51,7 @@ export default function AddBus() {
 
   const addBus = (e: any) => {
     console.log("called add bus");
-    console.log(
-      "add bus data",
+    let data = {
       busname,
       busnumber,
       from,
@@ -62,8 +64,8 @@ export default function AddBus() {
       ticketprice,
       operator,
       currentStatus,
-      busType
-    );
+      busType,
+    };
 
     let isErrorFound = false;
     let error: any = [];
@@ -129,6 +131,9 @@ export default function AddBus() {
       setErrorDialogMessage(error);
       setShowErrorDialog(true);
       return;
+    } else {
+      dispatch(addBuses(data));
+      console.log("else called");
     }
   };
 

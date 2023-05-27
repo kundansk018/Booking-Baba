@@ -1,7 +1,11 @@
 import {
+<<<<<<< Updated upstream
   LOGIN_REQUEST,
   LOGIN_REQUEST_FAIL,
   LOGIN_REQUEST_SUCCESS,
+=======
+ 
+>>>>>>> Stashed changes
   SIGNUP_REQUEST,
   SIGNUP_REQUEST_FAIL,
   SIGNUP_REQUEST_SUCCESS,
@@ -10,8 +14,12 @@ export const initialState = {
   loading: false,
   userDetails: undefined,
   createdUser: undefined,
+<<<<<<< Updated upstream
 
   loginDetails: undefined,
+=======
+ 
+>>>>>>> Stashed changes
 };
 
 export const UserReducer = (state = initialState, action: any) => {
@@ -72,3 +80,6 @@ export const LoginReducer = (state = initialState, action: any) => {
     }
   }
 };
+
+
+

@@ -26,8 +26,13 @@ export default async function handler(
     case "remove":
       return await deleteUser(request, response);
 
+<<<<<<< Updated upstream:pages/api/auth/user.ts
     case "LOGIN":
       return await login(request, response);
+=======
+      case "ADD_BUS":
+        return await addBus(request, response);
+>>>>>>> Stashed changes:pages/api/demo/demo.ts
 
     default:
       return response
@@ -61,6 +66,7 @@ export async function deleteUser(
   const res = await user.DELETE({});
   return response.status(200).json({ data: res });
 }
+<<<<<<< Updated upstream:pages/api/auth/user.ts
 
 export async function login(
   request: NextApiRequest,
@@ -73,3 +79,11 @@ export async function login(
   });
   return response.status(200).json({ data: res });
 }
+=======
+export async function addBus(  request: NextApiRequest,  response: NextApiResponse) {
+  const buses = await db.collection("Bus Details");
+  const res = await buses.insertOne(request.body);
+  return response.status(200).json({ data: res });
+}
+
+>>>>>>> Stashed changes:pages/api/demo/demo.ts

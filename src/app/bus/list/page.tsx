@@ -88,7 +88,7 @@ const TABLE_ROWS = [
 export default function Buslist() {
   return (
     <>
-      <h3 style={{ fontSize: 30, textAlign: "center", position: "fixed" }}>
+      <h3 style={{ fontSize: 30, textAlign: "center" }}>
         <b>Available Buses</b>
       </h3>
       <Card className="overflow-scroll h-full w-full p-1">
