@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+"use-client";
+import React, { useEffect, useState } from "react";
 import BBInput from "../components/BBInput";
 
 import { Radio } from "@material-tailwind/react";
@@ -7,6 +8,8 @@ import BBButton from "../components/BBButton";
 import BBErrorDialog from "../components/BBErrorDialog";
 import { useAppDispatch } from "@/redux/store";
 import { signup } from "@/redux/action/user";
+import { useSelector } from "react-redux";
+import { useRouter } from "next/navigation";
 
 export default function () {
   const dispatch = useAppDispatch();
@@ -24,8 +27,18 @@ export default function () {
 
   const [errorDialogMessage, setErrorDialogMessage] = useState([]);
 
+  const router = useRouter();
+
+  const userData: any = useSelector((state: any) => state.user.createdUser);
+  console.log("userData is ..", userData);
+
+  useEffect(() => {
+    if (userData) {
+      router.push("/dashboard");
+    }
+  }, []);
+
   const signUpCredential = () => {
-    // dispatch(signup());
     let data = {
       firstName: firstName,
       lastName: lastName,
