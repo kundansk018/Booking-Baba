@@ -12,7 +12,7 @@ const Container = (props: ContainerProps) => {
   const loading: boolean = useSelector((state: any) => state.app.loading);
   return (
     <div className="relative">
-      {!["/auth", "/"].includes(window.location.pathname) && <Navigationbar />}
+      {!["/auth", "/"]?.includes(window?.location?.pathname) && <Navigationbar />}
       {props.children}
       <>
         {loading ? (

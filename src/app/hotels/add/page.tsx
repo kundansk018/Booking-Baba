@@ -46,7 +46,7 @@ export default function AddHotels() {
   }, []);
 
   return (
-    <div className="bg-white h-full mt-5 p-5 m-auto w-[85%] justify-center rounded-lg">
+    <div className="bg-white h-full mt-5 p-5 m-auto w-[55%] justify-center rounded-lg">
       <div className="flex justify-center  text-3xl">
         <h1>Add Hotel</h1>
       </div>
@@ -81,7 +81,7 @@ export default function AddHotels() {
           <BBInput
             containerProps={{ className: "w-[300px]" }}
             type="file"
-            label=""
+            label="Hotel Photos"
             value={file}
             onChange={(e) => setFile(e.target.value)}
           />
@@ -124,7 +124,7 @@ export default function AddHotels() {
           </Select>
         </div>
 
-        <div className="flex  flex-col mx-5 w-[300px] ">
+        {/* <div className="flex  flex-col mx-5 w-[300px] ">
           <BBInput
             containerProps={{ className: "mb-4" }}
             label="Price"
@@ -143,10 +143,10 @@ export default function AddHotels() {
             value={room + ""}
             onChange={(e) => setRoom(e.target.value)}
           />
-        </div>
+        </div> */}
       </div>
 
-      <List className=" flex flex-row justify-center">
+      {/* <List className=" flex flex-row justify-center">
         <h3> Services:</h3>
 
         <BBCheckbox
@@ -193,11 +193,11 @@ export default function AddHotels() {
           checked={wifi}
           label="WiFi"
         />
-      </List>
+      </List> */}
       <div className="flex justify-center mt-4">
         <BBButton
           color=""
-          label="Add "
+          label="Next "
           size="lg"
           onClick={() => alert("Submit btn")}
           className="h-12 bg-blackblue w-[500px] "

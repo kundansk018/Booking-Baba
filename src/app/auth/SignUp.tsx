@@ -11,7 +11,7 @@ import { signup } from "@/redux/action/user";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
 
-export default function () {
+function SignUp() {
   const dispatch = useAppDispatch();
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -36,7 +36,7 @@ export default function () {
     if (userData) {
       router.push("/dashboard");
     }
-  }, []);
+  }, [userData]);
 
   const signUpCredential = () => {
     let data = {
@@ -210,3 +210,5 @@ export default function () {
     </>
   );
 }
+
+export default SignUp
