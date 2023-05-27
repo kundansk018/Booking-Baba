@@ -6,17 +6,18 @@ import {
 export const initialState = {
   loading: false,
   userDetails: undefined,
-  createdUser: undefined,
+  createdUser: null,
+  
 };
 
 export const UserReducer = (state = initialState, action: any) => {
   switch (action.type) {
-    case SIGNUP_REQUEST:
-      return {
-        ...state,
-        loading: true,
-        createdUser: undefined,
-      };
+    // case SIGNUP_REQUEST:
+    //   return {
+    //     ...state,
+    //     loading: true,
+    //     createdUser: undefined,
+    //   };
 
     case SIGNUP_REQUEST_SUCCESS: {
       console.log("data in typereducer: ", action.payload);
@@ -27,11 +28,11 @@ export const UserReducer = (state = initialState, action: any) => {
       };
     }
 
-    case SIGNUP_REQUEST_FAIL:
-      return {
-        ...state,
-        loading: false,
-      };
+    // case SIGNUP_REQUEST_FAIL:
+    //   return {
+    //     ...state,
+    //     loading: false,
+    //   };
 
     default: {
       return state;
