@@ -69,7 +69,7 @@ export default function page() {
               </Tab>
             </TabsHeader>
             <TabsBody
-              className="!overflow-x-hidden !overflow-y-visible"
+              className="!overflow-x-hidden !overflow-y-hidden"
               animate={{
                 initial: {
                   x: type === "login" ? 400 : -400,

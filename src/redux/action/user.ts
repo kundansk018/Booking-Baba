@@ -1,5 +1,8 @@
 import React from "react";
 import {
+  LOGIN_REQUEST,
+  LOGIN_REQUEST_FAIL,
+  LOGIN_REQUEST_SUCCESS,
   SIGNUP_REQUEST,
   SIGNUP_REQUEST_FAIL,
   SIGNUP_REQUEST_SUCCESS,
@@ -12,7 +15,7 @@ export const signup = (data: any) => async (dispatch: AppDispatch) => {
 
   //api call
   const res = await fetch(
-    "http://localhost:3000/api/demo/demo?action=createUser",
+    "http://localhost:3000/api/auth/user?action=createUser",
     {
       method: "POST",
 
@@ -33,4 +36,30 @@ export const signup = (data: any) => async (dispatch: AppDispatch) => {
   //fail
 };
 
-// dispatch: Dispatch<IGetAllAssets | ISetAllAssets>
+export const login =
+  (email: any, password: any) => async (dispatch: AppDispatch) => {
+    console.log("data in action LOGIN: ", email);
+    dispatch({ type: LOGIN_REQUEST, payload: null });
+
+    //api call
+    const res = await fetch(
+      "http://localhost:3000/api/auth/user?action=LOGIN",
+      {
+        method: "POST",
+
+        body: JSON.stringify(email, password),
+        headers: {
+          "content-type": "application/json",
+        },
+      }
+    );
+    if (res.ok === true) {
+      console.log("inside if:::::::::", res);
+
+      dispatch({ type: LOGIN_REQUEST_SUCCESS, payload: res });
+    } else {
+      dispatch({ type: LOGIN_REQUEST_FAIL, payload: null });
+    }
+
+    //fail
+  };
