@@ -5,10 +5,8 @@ import { BusReducer } from "./bus";
 const appReducer = {
   user: UserReducer,
   app: ApplicationReducer,
-
+  bus:BusReducer,
   login: LoginReducer,
 
-  bus: BusReducer,
-};
-
+}
 export default appReducer;
