@@ -10,8 +10,7 @@ import { useAppDispatch } from "@/redux/store";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
 
-export default function () {
-  const dispatch = useAppDispatch();
+const SignUp = function () {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -24,6 +23,7 @@ export default function () {
   const [showErrorDialog, setShowErrorDialog] = useState(false);
 
   const [errorDialogMessage, setErrorDialogMessage] = useState([]);
+  const dispatch = useAppDispatch();
 
   const router: any = useRouter();
 
@@ -36,6 +36,7 @@ export default function () {
   }, [userData]);
 
   const signUpCredential = () => {
+    // dispatch(signup());
     let data = {
       role: "Admin",
       firstName,
@@ -45,7 +46,6 @@ export default function () {
       email,
       password,
     };
-    dispatch(signup(data));
 
     let isErrorFound = false;
     let error: any = [];
@@ -67,10 +67,17 @@ export default function () {
       isErrorFound = true;
       error.push("Please enter Email Address");
     }
-    if (!birthDate || !birthDate.trim()) {
+    if (
+      !email.includes("@") ||
+      (!email.includes(".com") && !email.includes(".in"))
+    ){
       isErrorFound = true;
-      error.push("Please enter Birthdate");
+        error.push("Plz Enter valid email address");
     }
+      if (!birthDate || !birthDate.trim()) {
+        isErrorFound = true;
+        error.push("Please enter Birthdate");
+      }
     if (!password || !password.trim()) {
       isErrorFound = true;
       error.push("Please Enter Password");
@@ -89,12 +96,14 @@ export default function () {
       setErrorDialogMessage(error);
       setShowErrorDialog(true);
       return;
+    } else {
+      dispatch(signup(data));
     }
   };
 
   return (
     <>
-      <form className="mt-0 flex flex-col gap-3 font-signika">
+      <form className="font-signika mt-0 flex flex-col gap-3">
         <div>
           <BBTypography
             variant="small"
@@ -164,7 +173,7 @@ export default function () {
           <BBTypography
             variant="small"
             color="blue-gray"
-            className="mb-0 font-medium font-signika"
+            className="font-signika mb-0 font-medium"
             text="Gender"
           />
 
@@ -199,4 +208,6 @@ export default function () {
       />
     </>
   );
-}
+};
+
+export default SignUp;

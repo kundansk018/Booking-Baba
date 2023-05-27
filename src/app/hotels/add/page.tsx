@@ -46,7 +46,7 @@ export default function AddHotels() {
   }, []);
 
   return (
-    <div className="bg-white h-full mt-5 p-5 m-auto w-full justify-center rounded-lg">
+    <div className="bg-white h-full mt-5 p-5 m-auto w-[85%] justify-center rounded-lg">
       <div className="flex justify-center  text-3xl">
         <h1>Add Hotel</h1>
       </div>

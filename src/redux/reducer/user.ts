@@ -1,4 +1,7 @@
 import {
+  LOGIN_REQUEST,
+  LOGIN_REQUEST_FAIL,
+  LOGIN_REQUEST_SUCCESS,
   SIGNUP_REQUEST,
   SIGNUP_REQUEST_FAIL,
   SIGNUP_REQUEST_SUCCESS,
@@ -7,16 +10,18 @@ export const initialState = {
   loading: false,
   userDetails: undefined,
   createdUser: undefined,
+
+  loginDetails: undefined,
 };
 
 export const UserReducer = (state = initialState, action: any) => {
   switch (action.type) {
-    case SIGNUP_REQUEST:
-      return {
-        ...state,
-        loading: true,
-        createdUser: undefined,
-      };
+    // case SIGNUP_REQUEST:
+    //   return {
+    //     ...state,
+    //     loading: true,
+    //     createdUser: undefined,
+    //   };
 
     case SIGNUP_REQUEST_SUCCESS: {
       console.log("data in typereducer: ", action.payload);
@@ -27,7 +32,36 @@ export const UserReducer = (state = initialState, action: any) => {
       };
     }
 
-    case SIGNUP_REQUEST_FAIL:
+    // case SIGNUP_REQUEST_FAIL:
+    //   return {
+    //     ...state,
+    //     loading: false,
+    //   };
+
+    default: {
+      return state;
+    }
+  }
+};
+
+export const LoginReducer = (state = initialState, action: any) => {
+  switch (action.type) {
+    case LOGIN_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+
+    case LOGIN_REQUEST_SUCCESS: {
+      console.log("LOGIN data in typereducer: ", action.payload);
+      return {
+        ...state,
+        loading: false,
+        loginDetails: action.payload,
+      };
+    }
+
+    case LOGIN_REQUEST_FAIL:
       return {
         ...state,
         loading: false,

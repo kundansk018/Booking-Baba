@@ -42,26 +42,34 @@ export default function page() {
             <TabsHeader
               className="relative z-0"
               indicatorProps={{
-                className: "bg-[#4fb291] shadow-none",
+                className: "bg-[#4fb291] shadow-none ",
               }}
             >
               <Tab
                 value="login"
                 onClick={() => setType("login")}
-                className={type === "login" ? "text-white" : "text-blue"}
+                className={
+                  type === "login"
+                    ? "text-white font-bold font-castoro"
+                    : "text-black font-bold  font-castoro"
+                }
               >
-                Log In
+                Log-In
               </Tab>
               <Tab
                 value="signup"
-                className={type === "signup" ? "text-white" : "text-blue"}
+                className={
+                  type === "signup"
+                    ? "text-white font-bold font-castoro"
+                    : "text-black font-bold font-castoro"
+                }
                 onClick={() => setType("signup")}
               >
                 Sign Up
               </Tab>
             </TabsHeader>
             <TabsBody
-              className="!overflow-x-hidden !overflow-y-visible"
+              className="!overflow-x-hidden !overflow-y-hidden"
               animate={{
                 initial: {
                   x: type === "login" ? 400 : -400,
