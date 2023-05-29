@@ -22,13 +22,13 @@ export default function page() {
   const [type, setType] = React.useState("login");
 
   return (
-    <div className="flex justify-center items-center py-[20px]">
+    <div className="flex justify-center items-center py-[10px]">
       <Card className="w-full max-w-[24rem] ">
         <CardHeader
           color="red"
           floated={false}
           shadow={false}
-          className="m-0 grid place-items-center rounded-b-none py-4 px-4 text-center bg-GreenBlue "
+          className="m-0 grid place-items-center rounded-b-none py-2 px-4 text-center bg-GreenBlue "
         >
           <div className="mb-2 rounded-full border border-white/10 bg-white/10 p-6 text-white">
             <BanknotesIcon className="h-10 w-10" />

@@ -92,15 +92,12 @@ const TABLE_ROWS = [
 
 export default function Hotels() {
   return (
-    <Card className="h-full w-full mt-4">
+    <Card className="h-full w-full mt-[3%]">
       <CardHeader floated={false} shadow={false} className="rounded-none">
-        <div className="mb-8 flex items-center justify-between gap-8">
+        <div className="mb-1 flex items-center justify-between gap-8">
           <div>
             <Typography variant="h5" color="blue-gray">
               Hotels list
-            </Typography>
-            <Typography color="gray" className="mt-1 font-normal">
-              See information about all members
             </Typography>
           </div>
           <div className="flex shrink-0 flex-col gap-2 sm:flex-row">
@@ -131,7 +128,7 @@ export default function Hotels() {
         </div>
       </CardHeader>
       <CardBody className="overflow-scroll px-0">
-        <table className="mt-4 w-full min-w-max table-fixed text-left">
+        <table className="mt-1 w-full min-w-max table-fixed text-left">
           <thead>
             <tr>
               {TABLE_HEAD.map((head, index) => (
@@ -170,7 +167,7 @@ export default function Hotels() {
                           <Typography
                             variant="small"
                             color="blue-gray"
-                            className="font-normal"
+                            className="font-normal" 
                           >
                             {name}
                           </Typography>

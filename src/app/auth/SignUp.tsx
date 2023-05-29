@@ -153,7 +153,7 @@ function SignUp() {
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1">
           <BBInput
             containerProps={{ className: "min-w-[30px]" }}
             type="password"
@@ -182,14 +182,14 @@ function SignUp() {
           <Radio
             label="Male"
             name="gender"
-            color="purple"
+            color="blue"
             value={gender}
             onChange={(e) => setGender(e.target.value)}
           />
           <Radio
             label="Female"
             name="gender"
-            color="purple"
+            color="blue"
             value={gender}
             onChange={(e) => setGender(e.target.value)}
           />
