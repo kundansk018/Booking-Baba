@@ -32,7 +32,7 @@ function SignUp() {
   const userData: any = useSelector((state: any) => state.user.createdUser);
   console.log("userData is ..", userData);
 
-  useEffect(() => {
+  useEffect(() => { 
     if (userData) {
       router.push("/dashboard");
     }

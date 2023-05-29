@@ -9,7 +9,7 @@ export const addHotels = (data: any) => async (dispatch: AppDispatch) => {
 
   //api call
   const res = await fetch(
-    "http://localhost:3000/api/demo/demo?action=ADD_BUS",
+    "http://localhost:3000/api/hotelsapi/hotelsapi?action=addHotels",
     {
       method: "POST",
 
