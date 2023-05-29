@@ -29,18 +29,13 @@ export default function Login() {
       email: email,
       password: password,
     };
-    if (!email && !password) {
-      alert("No Dtata");
-    } else {
-      dispatch(login(email, password));
-    }
 
     let isErrorFound = false;
     let error: any = [];
-
+    console.log("API userData is ..", userData);
     if (!email || !email.trim()) {
       isErrorFound = true;
-      error.push("Please enter Email Address");
+      error.push("Please enter valid Email Address");
     }
 
     if (!password || !password.trim()) {
@@ -51,6 +46,8 @@ export default function Login() {
       setErrorDialogMessage(error);
       setShowErrorDialog(true);
       return;
+    } else {
+      dispatch(login(data));
     }
   };
 
