@@ -18,7 +18,7 @@ export default async function handler(
 
   switch (action) {
     case "createUser":
-      return await createUser(request, response);
+      return await createUser();
 
     case "getUser":
       return await getUser(request, response);
@@ -31,30 +31,27 @@ export default async function handler(
         .status(404)
         .json({ message: "No Action Found For : " + action });
   }
-}
 
-export async function createUser(
-  request: NextApiRequest,
-  response: NextApiResponse
-) {
-  const user = await db.collection("demo");
-  const checkDetails = await user.findOne({
-    $or: [
-      {
-        email: request.body.email,
-      },
-      {
-        mobileNumber: request.body.mobileNumber,
-      },
-    ],
-  });
-  if (checkDetails) {
-    return response
-      .status(400)
-      .json({ data: "Email and mobile number Already Axists.." });
-  } else {
-    const res = await user.insertOne(request.body);
-    return response.status(200).json({ data: res });
+  async function createUser() {
+    const user = await db.collection("demo");
+    const checkDetails = await user.findOne({
+      $or: [
+        {
+          email: request.body.email,
+        },
+        {
+          mobileNumber: request.body.mobileNumber,
+        },
+      ],
+    });
+    if (checkDetails) {
+      return response
+        .status(400)
+        .json({ data: "Email and mobile number Already Axists.." });
+    } else {
+      const res = await user.insertOne(request.body);
+      return response.status(200).json({ data: res });
+    }
   }
 }
 

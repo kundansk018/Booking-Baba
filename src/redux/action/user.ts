@@ -15,12 +15,10 @@ import {
 import { AppDispatch } from "../store";
 
 export const signup = (data: any) => async (dispatch: AppDispatch) => {
-  console.log("data in action: ", data);
   dispatch({ type: REQUEST_STARTED, payload: null });
 
-  //api call
   const res = await fetch(
-    "http://localhost:3000/api/auth/user?action=createUser",
+    "http://localhost:3000/api/user/auth?action=createUser",
     {
       method: "POST",
 
@@ -35,9 +33,10 @@ export const signup = (data: any) => async (dispatch: AppDispatch) => {
 
     dispatch({ type: SIGNUP_REQUEST_SUCCESS, payload: data });
   } else {
-  
+    dispatch({ type: REQUEST_COMPLETED, payload: null });
   }
   dispatch({ type: REQUEST_COMPLETED, payload: null });
+
   //fail
 };
 

@@ -50,6 +50,7 @@ function SignUp() {
     dispatch(signup(data));
     let isErrorFound = false;
     let error: any = [];
+    dispatch(signup(data));
     if (!firstName || !firstName.trim()) {
       isErrorFound = true;
       error.push("Please enter first name");
