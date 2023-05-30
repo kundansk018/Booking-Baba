@@ -5,8 +5,7 @@ import BBInput from "@/app/components/BBInput";
 import { useCountries } from "use-react-countries";
 import "../../styles/hotel.css";
 
-import {
-  Select, Option, List,} from "@material-tailwind/react";
+import { Select, Option, List } from "@material-tailwind/react";
 import { Input } from "postcss";
 import { useEffect, useState } from "react";
 import BBCheckbox from "@/app/components/BBCheckbox";
@@ -31,6 +30,7 @@ export default function AddHotels() {
   const [kids, setKids] = useState<boolean>(true);
   const [lunch, setLunch] = useState<boolean>(true);
   const [dinner, setDinner] = useState<boolean>(true);
+
   const [price, setPrice] = useState("");
   const { countries } = useCountries();
   const [location, setLocation] = useState("");
@@ -49,12 +49,10 @@ export default function AddHotels() {
     navigator.geolocation.getCurrentPosition((position) => {
       setLocation(position.coords.latitude + ", " + position.coords.longitude);
       if (hotelData) {
-        router.push("/hotels")
+        router.push("/hotels");
       }
     });
   }, [hotelData]);
-
-
 
   const addHotelDetails = () => {
     let data = {
@@ -75,7 +73,7 @@ export default function AddHotels() {
       lunch: lunch,
       pool: pool,
       kids: kids,
-      wifi: wifi
+      wifi: wifi,
     };
 
     let isErrorFound = false;
@@ -118,11 +116,10 @@ export default function AddHotels() {
       setShowErrorDialog(true);
       return;
     } else {
-      
+      console.log("add hotels data ... inside else ", data);
       dispatch(addHotels(data));
     }
-
-  }
+  };
 
   return (
     <>
@@ -214,7 +211,8 @@ export default function AddHotels() {
             <BBInput
               containerProps={{ className: "mb-4" }}
               label="Latitude & Longitude"
-              value={location} onChange={(e) => setLocation}
+              value={location}
+              onChange={(e) => setLocation}
             />
             <BBInput
               containerProps={{ className: "mb-4" }}
@@ -282,7 +280,6 @@ export default function AddHotels() {
             onClick={addHotelDetails}
             className="h-12 bg-blackblue w-[500px] "
           />
-
         </div>
       </div>
 

@@ -1,14 +1,14 @@
-"use client"
-import React from 'react'
+"use client";
+import React, { useEffect, useState } from "react";
 // import { Button, Card, IconButton, Typography } from "@material-tailwind/react";
-import BBButton from '../components/BBButton';
-import { useRouter } from 'next/navigation';
+
+import { useRouter } from "next/navigation";
 
 import {
   MagnifyingGlassIcon,
   ChevronUpDownIcon,
 } from "@heroicons/react/24/outline";
-import { PencilIcon, UserPlusIcon } from "@heroicons/react/24/solid";
+import { UserPlusIcon } from "@heroicons/react/24/solid";
 import {
   Card,
   CardHeader,
@@ -16,14 +16,14 @@ import {
   Typography,
   Button,
   CardBody,
-  Chip,
   Tabs,
   TabsHeader,
   Tab,
-  Avatar,
-  IconButton,
-  Tooltip,
 } from "@material-tailwind/react";
+
+import { useAppDispatch } from "@/redux/store";
+import { ADD_HOTELS_DATA } from "@/redux/constant";
+import { useSelector } from "react-redux";
 
 const TABS = [
   {
@@ -40,23 +40,38 @@ const TABS = [
   },
 ];
 
-const TABLE_HEAD = ["Member", "Function", "Status", "Employed", ""];
-
-const TABLE_ROWS = [
-  {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-3.jpg",
-    name: "John Michael",
-    email: "john@creative-tim.com",
-    job: "Manager",
-    org: "Organization",
-    online: true,
-    date: "23/04/18",
-  },
-];
-
 export default function Hotels() {
+  const hotelData: any = useSelector((state: any) => state.hotel.hotelDetails);
+  console.log("hotel data is ..==>>>>", hotelData?.data);
+  const dispatch = useAppDispatch();
 
-   const router = useRouter();
+  const [hotel, setHotel] = useState<any>("");
+  console.log(" using usestate hotel data is ..", hotelData);
+
+  useEffect(() => {
+    const getHotel = async () => {
+      const response: any = await fetch(
+        `http://localhost:3000/api/hotelsapi/hotelsapi?action=getHotels`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      const hotelData = await response.json();
+
+      dispatch({ type: ADD_HOTELS_DATA, payload: hotelData });
+
+      console.log("get hotels api.. ", hotelData);
+      setHotel(hotelData);
+    };
+
+    getHotel();
+  }, []);
+
+  const router = useRouter();
   return (
     <Card className="mx-3 h-[500px] w-[98%] mt-[2%]">
       <CardHeader
@@ -115,7 +130,24 @@ export default function Hotels() {
             </tr>
           </thead>
           <tbody>
-            <tr></tr>
+            <tr>
+              {hotelData
+                ? hotelData.data.map((element: any) => (
+                    <>
+                      <td>{"Photo"}</td>
+                      <td>{element.hotelname}</td>
+                      <td>{element.ownerName}</td>
+                      <td>{element.contactno}</td>
+                      <td>{element.email}</td>
+                      <td>{element.adress}</td>
+                      <td>{element.street}</td>
+                      <td>{element.city}</td>
+                      <td>{element.pin}</td>
+                      <td>{"contries"}</td>
+                    </>
+                  ))
+                : "Data Not Found.."}
+            </tr>
           </tbody>
         </table>
       </CardBody>
@@ -123,10 +155,12 @@ export default function Hotels() {
   );
 }
 
-{/* <td className="">
+{
+  /* <td className="">
   <Tooltip content="Edit User">
     <IconButton variant="text" color="blue-gray">
       <PencilIcon className="h-4 w-4" />
     </IconButton>
   </Tooltip>
-</td>; */}
+</td>; */
+}
