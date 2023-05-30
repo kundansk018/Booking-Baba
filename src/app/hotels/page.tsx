@@ -80,7 +80,6 @@ export default function Hotels() {
         className=" rounded-none"
         // h-[370px]
       >
-        
         <div className="flex items-center justify-center">
           <Typography variant="h4" color="blue-gray">
             Hotels list
