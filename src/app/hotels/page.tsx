@@ -80,7 +80,6 @@ export default function Hotels() {
         className=" rounded-none"
         // h-[370px]
       >
-        
         <div className="flex items-center justify-center">
           <Typography variant="h4" color="blue-gray">
             Hotels list
@@ -134,16 +133,17 @@ export default function Hotels() {
               {hotelData
                 ? hotelData.data.map((element: any) => (
                     <>
-                      <td>{"Photo"}</td>
-                      <td>{element.hotelname}</td>
-                      <td>{element.ownerName}</td>
-                      <td>{element.contactno}</td>
-                      <td>{element.email}</td>
-                      <td>{element.adress}</td>
-                      <td>{element.street}</td>
-                      <td>{element.city}</td>
-                      <td>{element.pin}</td>
-                      <td>{"contries"}</td>
+                      <td className="w-[5px]">{"Photo"}</td>
+                      <td className="w-[5px]">{element.hotelname}</td>
+                      <td className="w-[5px]">{element.ownerName}</td>
+                      <td className="w-[5px]">{element.contactno}</td>
+                      <td className="w-[5px]">{element.email}</td>
+                      <td className="w-[5px]">{element.adress}</td>
+                      <td className="w-[5px]">{element.street}</td>
+                      <td className="w-[5px]">{element.city}</td>
+                      <td className="w-[5px]">{element.pin}</td>
+                      <td className="w-[5px]">{"contries"}</td>
+                      <td className="w-[5px]">{"Action btn"}</td>
                     </>
                   ))
                 : "Data Not Found.."}
