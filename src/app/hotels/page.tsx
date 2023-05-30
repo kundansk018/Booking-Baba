@@ -52,132 +52,6 @@ const TABLE_ROWS = [
     online: true,
     date: "23/04/18",
   },
-  {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-2.jpg",
-    name: "Alexa Liras",
-    email: "alexa@creative-tim.com",
-    job: "Programator",
-    org: "Developer",
-    online: false,
-    date: "23/04/18",
-  },
-  {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-1.jpg",
-    name: "Laurent Perrier",
-    email: "laurent@creative-tim.com",
-    job: "Executive",
-    org: "Projects",
-    online: false,
-    date: "19/09/17",
-  },
-  {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-4.jpg",
-    name: "Michael Levi",
-    email: "michael@creative-tim.com",
-    job: "Programator",
-    org: "Developer",
-    online: true,
-    date: "24/12/08",
-  },
-  {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-5.jpg",
-    name: "Richard Gran",
-    email: "richard@creative-tim.com",
-    job: "Manager",
-    org: "Executive",
-    online: false,
-    date: "04/10/21",
-  },
-  {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-3.jpg",
-    name: "John Michael",
-    email: "john@creative-tim.com",
-    job: "Manager",
-    org: "Organization",
-    online: true,
-    date: "23/04/18",
-  },
-  {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-2.jpg",
-    name: "Alexa Liras",
-    email: "alexa@creative-tim.com",
-    job: "Programator",
-    org: "Developer",
-    online: false,
-    date: "23/04/18",
-  },
-  {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-1.jpg",
-    name: "Laurent Perrier",
-    email: "laurent@creative-tim.com",
-    job: "Executive",
-    org: "Projects",
-    online: false,
-    date: "19/09/17",
-  },
-  {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-4.jpg",
-    name: "Michael Levi",
-    email: "michael@creative-tim.com",
-    job: "Programator",
-    org: "Developer",
-    online: true,
-    date: "24/12/08",
-  },
-  {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-5.jpg",
-    name: "Richard Gran",
-    email: "richard@creative-tim.com",
-    job: "Manager",
-    org: "Executive",
-    online: false,
-    date: "04/10/21",
-  },
-  {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-3.jpg",
-    name: "John Michael",
-    email: "john@creative-tim.com",
-    job: "Manager",
-    org: "Organization",
-    online: true,
-    date: "23/04/18",
-  },
-  {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-2.jpg",
-    name: "Alexa Liras",
-    email: "alexa@creative-tim.com",
-    job: "Programator",
-    org: "Developer",
-    online: false,
-    date: "23/04/18",
-  },
-  {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-1.jpg",
-    name: "Laurent Perrier",
-    email: "laurent@creative-tim.com",
-    job: "Executive",
-    org: "Projects",
-    online: false,
-    date: "19/09/17",
-  },
-  {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-4.jpg",
-    name: "Michael Levi",
-    email: "michael@creative-tim.com",
-    job: "Programator",
-    org: "Developer",
-    online: true,
-    date: "24/12/08",
-  },
-  {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-5.jpg",
-    name: "Richard Gran",
-    email: "richard@creative-tim.com",
-    job: "Manager",
-    org: "Executive",
-    online: false,
-    date: "04/10/21",
-  },
 ];
 
 export default function Hotels() {
@@ -188,8 +62,10 @@ export default function Hotels() {
       <CardHeader
         floated={false}
         shadow={false}
-        className="h-[370px] rounded-none"
+        className=" rounded-none"
+        // h-[370px]
       >
+        
         <div className="flex items-center justify-center">
           <Typography variant="h4" color="blue-gray">
             Hotels list
@@ -221,26 +97,25 @@ export default function Hotels() {
           </Button>
         </div>
       </CardHeader>
-      <CardBody className="overflow-scroll px-0 mt-0">
+      <CardBody className="overflow-scroll px-1 mt-0">
         <table className="mt-1 w-full min-w-max table-auto text-left">
-          <thead>
+          <thead className="bg-blue-gray-100 py-2 font-bold text-black flex-col">
             <tr>
-              <th>Hotel Photos</th>
-              <th>Hotel Name</th>
-              <th>Hotel Owner</th>
-              <th>Contact No</th>
-              <th>Email</th>
-              <th>Adress Line1</th>
-              <th>Adress Line2 & Street</th>
-              <th>City </th>
-              <th>PinCode</th>
-              <th>Country</th>
+              <th className="w-[5px]">Hotel Photos</th>
+              <th className="w-[5px]">Hotel Name</th>
+              <th className="w-[5px]">Hotel Owner</th>
+              <th className="w-[5px]">Contact No</th>
+              <th className="w-[5px]">Email</th>
+              <th className="w-[5px]">Adress Line1</th>
+              <th className="w-[5px]">Adress Line2 & Street</th>
+              <th className="w-[5px]">City </th>
+              <th className="w-[5px]">PinCode</th>
+              <th className="w-[5px]">Country</th>
+              <th className="w-[5px]">Actions</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td></td>
-            </tr>
+            <tr></tr>
           </tbody>
         </table>
       </CardBody>

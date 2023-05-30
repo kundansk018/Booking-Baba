@@ -6,13 +6,7 @@ import { useCountries } from "use-react-countries";
 import "../../styles/hotel.css";
 
 import {
-  Card,
-  Typography,
-  Select,
-  Option,
-  Checkbox,
-  List,
-} from "@material-tailwind/react";
+  Select, Option, List,} from "@material-tailwind/react";
 import { Input } from "postcss";
 import { useEffect, useState } from "react";
 import BBCheckbox from "@/app/components/BBCheckbox";
@@ -124,6 +118,7 @@ export default function AddHotels() {
       setShowErrorDialog(true);
       return;
     } else {
+      
       dispatch(addHotels(data));
     }
 

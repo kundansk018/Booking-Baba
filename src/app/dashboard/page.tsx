@@ -45,7 +45,7 @@ export default function AdminPage() {
 
                     <div className='flex-1 bg-black text-white  flex justify-center'
                         style={{ position: "absolute", zIndex: 100, backgroundColor: "rgba(0,0,0,0.6)", height: 60, bottom: 0, width: '100%', paddingTop: 18 }}>
-                        <Link href='/hotels'> <h1>Hotels Booking</h1></Link>
+                        <Link href='/hotels'> <h1>Train Booking</h1></Link>
                     </div>
                 </div>
                 <div className='flex-1 bg-black text-white  relative rounded-lg ' >
