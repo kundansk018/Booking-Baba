@@ -7,9 +7,12 @@ import {
   Button,
   IconButton,
 } from "@material-tailwind/react";
+import { useRouter } from "next/navigation";
+// import { useRouter } from "next/router";
 
 export default function Navigationbar() {
   const [openNav, setOpenNav] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     window.addEventListener(
@@ -22,11 +25,15 @@ export default function Navigationbar() {
     // <ul className="mb-4 mt-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
     <ul className="mb-4 mt-2 flex flex-col gap-2 lg:flex-row lg:gap-6">
       <Typography
+
         as="li"
         variant="small"
         // color="blue-gray"
         className="p-1 font-normal"
+        onClick={() => router.push("/auth")}//
+
       >
+
         <a href="#" className="flex items-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -49,6 +56,7 @@ export default function Navigationbar() {
         variant="small"
         // color="white-gray"
         className="p-1 font-normal"
+        onClick={() => router.push("/help")}
       >
         <a href="#" className="flex items-center text-xl mt-1">
           Help
@@ -59,6 +67,7 @@ export default function Navigationbar() {
         variant="small"
         // color="blue-gray"
         className="p-1 font-normal"
+        onClick={() => router.push("/about")}
       >
         <a href="#" className="flex items-center text-xl mt-1">
           About Us

@@ -83,7 +83,7 @@ export default function AddHotels() {
       kids: kids,
       wifi: wifi
     };
-  
+
     let isErrorFound = false;
     let error: any = [];
     if (!hotelname || !hotelname.trim()) {
@@ -114,7 +114,7 @@ export default function AddHotels() {
       isErrorFound = true;
       error.push("Please enter Address");
     }
-   
+
     if (!room || !room.trim()) {
       isErrorFound = true;
       error.push("Please enter Address");
