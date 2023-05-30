@@ -129,24 +129,23 @@ export default function Hotels() {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              {hotelData
-                ? hotelData.data.map((element: any) => (
-                    <>
-                      <td>{"Photo"}</td>
-                      <td>{element.hotelname}</td>
-                      <td>{element.ownerName}</td>
-                      <td>{element.contactno}</td>
-                      <td>{element.email}</td>
-                      <td>{element.adress}</td>
-                      <td>{element.street}</td>
-                      <td>{element.city}</td>
-                      <td>{element.pin}</td>
-                      <td>{"contries"}</td>
-                    </>
-                  ))
-                : "Data Not Found.."}
-            </tr>
+            {hotelData
+              ? hotelData.data.map((element: any) => (
+                  <tr>
+                    <td className="w-[5px]">{"Photo"}</td>
+                    <td className="w-[5px]">{element.hotelname}</td>
+                    <td className="w-[5px]">{element.ownerName}</td>
+                    <td className="w-[5px]">{element.contactno}</td>
+                    <td className="w-[5px]">{element.email}</td>
+                    <td className="w-[5px]">{element.adress}</td>
+                    <td className="w-[5px]">{element.street}</td>
+                    <td className="w-[5px]">{element.city}</td>
+                    <td className="w-[5px]">{element.pin}</td>
+                    <td className="w-[5px]">{"contries"}</td>
+                    <td className="w-[5px]">{"Action btn"}</td>
+                  </tr>
+                ))
+              : "Data Not Found.."}
           </tbody>
         </table>
       </CardBody>

@@ -4,6 +4,7 @@ import {
   ADD_HOTELS_FAIL,
   ADD_HOTELS_SUCCESS,
 } from "../constant";
+
 export const initialState = {
   loading: false,
   hotelDetails: <any>undefined,
