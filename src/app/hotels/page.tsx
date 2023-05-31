@@ -108,7 +108,7 @@ export default function Hotels() {
             className="flex items-center gap-3"
             color="blue"
             size="md"
-            onClick={() => router.push("/hotels/add")}
+            onClick={() => router.push("/hotels/add-step1")}
           >
             <UserPlusIcon strokeWidth={2} className="h-4 w-4" /> Add New Hotels
           </Button>
@@ -133,7 +133,7 @@ export default function Hotels() {
           </thead>
           <tbody>
             {hotelData
-              ? hotelData.data.map((element: any) => (
+              ? hotelData?.data?.map((element: any) => (
                   <tr>
                     <td className="w-[5px]">{"Photo"}</td>
                     <td className="w-[5px] grid-cols">

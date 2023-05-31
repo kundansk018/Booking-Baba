@@ -1,5 +1,5 @@
 import React from "react";
-import { ADD_HOTELS, ADD_HOTELS_DATA, ADD_HOTELS_FAIL, ADD_HOTELS_SUCCESS } from "../constant";
+import { ADD_HOTELS, ADD_HOTELS_FAIL, ADD_HOTELS_SUCCESS, PREVIOUS_HOTEL_DATA } from "../constant";
 import { AppDispatch } from "../store";
 
 export const addHotels = (data: any) => async (dispatch: AppDispatch) => {
@@ -8,6 +8,7 @@ export const addHotels = (data: any) => async (dispatch: AppDispatch) => {
 
   //api call
   const res = await fetch(
+   
     "http://localhost:3000/api/hotelsapi/hotelsapi?action=addHotels",
     {
       method: "POST",
@@ -26,6 +27,17 @@ export const addHotels = (data: any) => async (dispatch: AppDispatch) => {
   } else {
     dispatch({ type: ADD_HOTELS_FAIL, payload: null });
   }
+
+ 
+};
+
+export const savePreviousData = (data: any) => async (dispatch: AppDispatch) => {
+
+  dispatch({ type: PREVIOUS_HOTEL_DATA, payload: data });
+
+
+
+ 
 };
 
 // export const getHotel = (data: any) => async (dispatch: AppDispatch) => {

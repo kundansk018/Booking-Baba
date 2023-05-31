@@ -1,13 +1,16 @@
 import {
   ADD_HOTELS,
-  ADD_HOTELS_DATA,
   ADD_HOTELS_FAIL,
   ADD_HOTELS_SUCCESS,
-} from "../constant";
+  PREVIOUS_HOTEL_DATA,
+  ADD_HOTELS_DATA,
 
+} from "../constant";
 export const initialState = {
   loading: false,
-  hotelDetails: <any>undefined,
+  hotelDetails: undefined,
+  previousHotelData: null
+
 };
 
 export const HotelReducer = (state = initialState, action: any) => {
@@ -34,12 +37,21 @@ export const HotelReducer = (state = initialState, action: any) => {
         loading: false,
       };
 
+
     case ADD_HOTELS_DATA:
       return {
         ...state,
         loading: false,
         hotelDetails: action.payload,
       };
+
+    case PREVIOUS_HOTEL_DATA: {
+      return {
+        ...state,
+        previousHotelData: action.payload,
+
+      }
+    };
 
     default: {
       return state;

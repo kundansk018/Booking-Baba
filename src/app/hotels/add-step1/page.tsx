@@ -2,15 +2,22 @@
 
 import BBButton from "@/app/components/BBButton";
 import BBInput from "@/app/components/BBInput";
-import { useCountries } from "use-react-countries";
+
 import "../../styles/hotel.css";
 
-import { Select, Option, List } from "@material-tailwind/react";
+import {
+  Card,
+  Typography,
+  Select,
+  Option,
+  Checkbox,
+  List,
+} from "@material-tailwind/react";
 import { Input } from "postcss";
 import { useEffect, useState } from "react";
 import BBCheckbox from "@/app/components/BBCheckbox";
 import { useAppDispatch } from "@/redux/store";
-import { addHotels } from "@/redux/action/hotelaction";
+import { addHotels, savePreviousData } from "@/redux/action/hotelaction";
 import { useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
 import BBErrorDialog from "@/app/components/BBErrorDialog";
@@ -30,11 +37,11 @@ export default function AddHotels() {
   const [kids, setKids] = useState<boolean>(true);
   const [lunch, setLunch] = useState<boolean>(true);
   const [dinner, setDinner] = useState<boolean>(true);
+  // const [price, setPrice] = useState("");
+  const [country, setCountry] = useState("")
 
-  const [price, setPrice] = useState("");
-  const { countries } = useCountries();
   const [location, setLocation] = useState("");
-  const [room, setRoom] = useState("");
+  // const [room, setRoom] = useState("");
 
   const dispatch = useAppDispatch();
   const [errorDialogMessage, setErrorDialogMessage] = useState([]);
@@ -48,11 +55,13 @@ export default function AddHotels() {
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((position) => {
       setLocation(position.coords.latitude + ", " + position.coords.longitude);
-      if (hotelData) {
-        router.push("/hotels");
-      }
+      // if (hotelData) {
+      //   router.push("/hotels/add-step2")
+      // }
     });
   }, [hotelData]);
+
+
 
   const addHotelDetails = () => {
     let data = {
@@ -65,15 +74,15 @@ export default function AddHotels() {
       street: street,
       city: city,
       pin: pin,
-      countries: countries,
-      price: price,
+      country: country,
+      // price: price,
       location: location,
-      room: room,
+      // room: room,
       dinner: dinner,
       lunch: lunch,
       pool: pool,
       kids: kids,
-      wifi: wifi,
+      wifi: wifi
     };
 
     let isErrorFound = false;
@@ -107,28 +116,30 @@ export default function AddHotels() {
       error.push("Please enter Address");
     }
 
-    if (!room || !room.trim()) {
-      isErrorFound = true;
-      error.push("Please enter Address");
-    }
+    // if (!room || !room.trim()) {
+    //   isErrorFound = true;
+    //   error.push("Please enter Address");
+    // }
     if (isErrorFound) {
       setErrorDialogMessage(error);
       setShowErrorDialog(true);
       return;
     } else {
-      console.log("add hotels data ... inside else ", data);
-      dispatch(addHotels(data));
+
+      dispatch(savePreviousData(data));
+      router.push("/hotels/add-step2")
     }
-  };
+
+  }
 
   return (
     <>
-      <div className="bg-white h-full mt-5 p-5 m-auto w-[70%] justify-center rounded-lg">
-        <div className="flex justify-center  text-3xl">
+      <div className="bg-white h-[40%] pb-4 mt-5 m-auto w-[60%] justify-center rounded-lg">
+        <div className="flex justify-center h-12 bg-[#4fb291] text-white px-5  text-3xl">
           <h1>Add Hotel</h1>
         </div>
         <div className="flex flex-row justify-center m-6">
-          <div className="flex  flex-col mx-5 w-[300px] ">
+          <div className="flex  flex-col mx-4 w-[300px] ">
             <BBInput
               containerProps={{ className: "mb-4" }}
               label="Hotel Name"
@@ -156,11 +167,16 @@ export default function AddHotels() {
               onChange={(e) => setEmail(e.target.value)}
             />
             <BBInput
-              containerProps={{ className: "w-[300px]" }}
+              containerProps={{ className: "w-[300px] mb-4" }}
               type="file"
               label="Hotel Photos"
               value={file}
               onChange={(e) => setFile(e.target.value)}
+            />
+            <BBInput
+              containerProps={{ className: "" }}
+              label="Latitude & Longitude"
+              value={location} onChange={(e) => setLocation(location)}
             />
           </div>
           <div className="flex  flex-col mx-5 w-[300px]">
@@ -188,38 +204,11 @@ export default function AddHotels() {
               value={pin}
               onChange={(e) => setPin(e.target.value)}
             />
-            <Select
+            <BBInput
               containerProps={{ className: "mb-4" }}
               label="Country"
-              menuProps={{ className: "h-48" }}
-            >
-              {countries.map(({ name }: any) => (
-                <Option key={name} value={name}>
-                  {name}
-                </Option>
-              ))}
-            </Select>
-          </div>
-
-          <div className="flex  flex-col mx-5 w-[300px] ">
-            <BBInput
-              containerProps={{ className: "mb-4" }}
-              label="Price"
-              value={price + ""}
-              onChange={(e) => setPrice(e.target.value)}
-            />
-            <BBInput
-              containerProps={{ className: "mb-4" }}
-              label="Latitude & Longitude"
-              value={location}
-              onChange={(e) => setLocation}
-            />
-            <BBInput
-              containerProps={{ className: "mb-4" }}
-              type="number"
-              label="Room"
-              value={room + ""}
-              onChange={(e) => setRoom(e.target.value)}
+              value={country}
+              onChange={(e) => setCountry(e.target.value)}
             />
           </div>
         </div>
@@ -275,11 +264,12 @@ export default function AddHotels() {
         <div className="flex justify-center mt-4">
           <BBButton
             color=""
-            label="ADD "
+            label="NEXT"
             size="lg"
             onClick={addHotelDetails}
             className="h-12 bg-blackblue w-[500px] "
           />
+
         </div>
       </div>
 
