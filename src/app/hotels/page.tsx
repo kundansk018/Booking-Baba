@@ -80,7 +80,6 @@ export default function Hotels() {
         floated={false}
         shadow={false}
         className=" rounded-none"
-      // h-[370px]
       >
         <div className="flex items-center justify-center">
           <Typography className="font-castoro" variant="h5" color="black">
@@ -124,7 +123,7 @@ export default function Hotels() {
         <table className="mt-1 w-full min-w-max table-auto text-left text-sm text-black   font-signika">
           <thead className="bg-blue-gray-100 py-2 font-bold flex-col">
             <tr>
-              <th className="w-[5px] p-2 ">Hotel Photos</th>
+              <th className="w-[5px] p-2">Hotel Photos</th>
               <th className="w-[5px] p-2">Hotel Name</th>
               <th className="w-[5px] p-2">Hotel Owner</th>
               <th className="w-[5px] p-2">Contact No</th>

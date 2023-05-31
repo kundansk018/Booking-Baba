@@ -80,13 +80,21 @@ export default function Train() {
     <Card className="mx-3 h-[500px] w-[98%] mt-[2%]">
       <CardHeader floated={false} shadow={false} className=" rounded-none">
         <div className="flex items-center justify-center">
-          <Typography variant="h4" color="blue-gray">
+          <Typography className="font-castoro" variant="h5" color="black">
             Trains list
           </Typography>
         </div>
         <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
-          <Tabs value="all" className="w-full md:w-max">
-            <TabsHeader>
+          <Tabs
+            value="all"
+            className="w-full sm:w-max text-black   font-castoro"
+          >
+            <TabsHeader
+              className=" z-0"
+              indicatorProps={{
+                className: "bg-[#4fb291] shadow-none ",
+              }}
+            >
               {TABS.map(({ label, value }) => (
                 <Tab key={value} value={value}>
                   &nbsp;&nbsp;{label}&nbsp;&nbsp;
@@ -101,8 +109,7 @@ export default function Train() {
             />
           </div>
           <Button
-            className="flex items-center gap-3"
-            color="blue"
+            className="flex items-center gap-3 bg-[#4fb291]"
             size="md"
             onClick={() => router.push("/train/add")}
           >
@@ -110,9 +117,9 @@ export default function Train() {
           </Button>
         </div>
       </CardHeader>
-      <CardBody className="overflow-scroll mt-0">
-        <table className="mt-1 w-full min-w-max table-auto text-left">
-          <thead>
+      <CardBody className="overflow-scroll px-1 mt-0">
+        <table className="mt-1 w-full min-w-max table-auto text-left text-sm text-black   font-signika">
+          <thead className="bg-blue-gray-100 py-2 font-bold flex-col">
             <tr>
               <th>Train Number</th>
               <th>Train Name</th>
