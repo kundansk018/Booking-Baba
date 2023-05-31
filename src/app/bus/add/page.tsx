@@ -52,6 +52,7 @@ export default function AddBus() {
   const addBus = (e: any) => {
     console.log("called add bus");
     let data = {
+      // file,
       busname,
       busnumber,
       from,
@@ -122,10 +123,10 @@ export default function AddBus() {
       isErrorFound = true;
       error.push("Please enter current status");
     }
-    if (!file || !file.trim()) {
-      isErrorFound = true;
-      error.push("Please upload file");
-    }
+    // if (!file || !file.trim()) {
+    //   isErrorFound = true;
+    //   error.push("Please upload file");
+    // }
 
     if (isErrorFound) {
       setErrorDialogMessage(error);
@@ -162,14 +163,19 @@ export default function AddBus() {
           <BBDropdown
             options={[{ label: "Nashik" }, { label: "Pune" }]}
             value={from}
-            onChange={(e) => setFrom(e.target.value)}
+            onPress={(value: any) => {
+              setFrom(value);
+            }}
             label="From"
           />
-
+          <br />
           <BBDropdown
             options={[{ label: "Nashik" }, { label: "Pune" }]}
             value={to}
-            onChange={(e) => setTo(e.target.value)}
+            onPress={(value: any) => {
+
+              setTo(value);
+            }}
             label="To"
           />
           <br />
@@ -229,34 +235,40 @@ export default function AddBus() {
               { label: "mahamarg" },
             ]}
             value={pickUpPoint}
-            onChange={(e) => setPickUpPoint(e.target.value)}
-            label="Pickup Point"
+            onPress={(value: any) => {
+              setPickUpPoint(value);
+            }}
+            label="PickUp Point"
           />
           <br />
 
           <BBDropdown
             options={[{ label: "Non-Sleeper" }, { label: "Sleeper" }]}
             value={busType}
-            onChange={(e) => setBusType(e.target.value)}
-            label="Bus Type"
+            onPress={(value: any) => {
+              setBusType(value);
+            }}
+            label="BusType"
           />
           <br />
 
           <BBDropdown
             options={[{ label: "Available" }, { label: "Not-Availabel" }]}
             value={currentStatus}
-            onChange={(e) => setCurrentStatus(e.target.value)}
-            label="Current Status"
+            onPress={(value: any) => {
+              setCurrentStatus(value);
+            }}
+            label="CurrentStatus"
           />
           <br />
 
-          <BBInput
+          {/* <BBInput
             containerProps={{ className: "w-[300px]" }}
             type="file"
             label=""
             value={file}
             onChange={(e) => setFile(e.target.value)}
-          />
+          /> */}
         </div>
       </div>
 

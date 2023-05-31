@@ -13,51 +13,51 @@ export default function AdminPage() {
             </div> */}
             <div className='m-10 mt-10 mb-3 rounded-lg'>
 
-            <div className="flex flex-row flex-1 h-70 mt-5 rounded-lg ">
+                <div className="flex flex-row flex-1 h-70 mt-5 rounded-lg ">
 
-                <div className='flex-1 bg-black text-white mr-5 relative rounded-lg' >
-                    <img className="h-60 w-full rounded-lg "
-                        src="/image/hotel.jpg" alt="nature image" />
+                    <div className='flex-1 bg-black text-white mr-5 relative rounded-lg' >
+                        <img className="h-60 w-full rounded-lg "
+                            src="/image/hotel.jpg" alt="nature image" />
 
-                    <div className='flex-1 bg-black text-white flex justify-center rounded-lg'
-                        style={{ position: "absolute", zIndex: 100, backgroundColor: "rgba(0,0,0,0.6)", height: 60, bottom: 0, width: '100%', paddingTop: 18 }}>
-                        <Link href='/hotels'> <h1>Hotels Booking</h1></Link>
+                        <div className='flex-1 bg-black text-white flex justify-center rounded-lg'
+                            style={{ position: "absolute", zIndex: 100, backgroundColor: "rgba(0,0,0,0.6)", height: 60, bottom: 0, width: '100%', paddingTop: 18 }}>
+                            <Link href='/hotels'> <h1>Hotels Booking</h1></Link>
+                        </div>
+
                     </div>
 
-                </div>
+                    <div className='flex-1 bg-black text-white relative rounded-lg ' >
 
-                <div className='flex-1 bg-black text-white relative rounded-lg ' >
+                        <img className="h-60 w-full rounded-lg"
+                            src="/image/bus.jpg" alt="nature image" />
+                        <div className='flex-1 bg-black text-white flex justify-center'
+                            style={{ position: "absolute", zIndex: 100, backgroundColor: "rgba(0,0,0,0.6)", height: 60, bottom: 0, width: '100%', paddingTop: 18 }}>
+                            <Link href='/bus'>   <h1> Travles Booking</h1></Link>
+                        </div>
 
-                    <img className="h-60 w-full rounded-lg"
-                        src="/image/bus.jpg" alt="nature image" />
-                    <div className='flex-1 bg-black text-white flex justify-center'
-                        style={{ position: "absolute", zIndex: 100, backgroundColor: "rgba(0,0,0,0.6)", height: 60, bottom: 0, width: '100%', paddingTop: 18 }}>
-                        <Link href='/bus'>   <h1> Travles Booking</h1></Link>
                     </div>
 
-                </div>
+                </div>  <div className="flex flex-row flex-1 h-70 mt-5 rounded-lg">
 
-            </div>  <div className="flex flex-row flex-1 h-70 mt-5 rounded-lg">
+                    <div className='flex-1 bg-black text-white mr-5 relative rounded-lg' >
+                        <img className="h-60 w-full rounded-lg "
+                            src="/image/trr.jpg" alt="nature image" />
 
-                <div className='flex-1 bg-black text-white mr-5 relative rounded-lg' >
-                    <img className="h-60 w-full rounded-lg "
-                        src="/image/trr.jpg" alt="nature image" />
-
-                    <div className='flex-1 bg-black text-white  flex justify-center'
-                        style={{ position: "absolute", zIndex: 100, backgroundColor: "rgba(0,0,0,0.6)", height: 60, bottom: 0, width: '100%', paddingTop: 18 }}>
-                        <Link href='/hotels'> <h1>Train Booking</h1></Link>
+                        <div className='flex-1 bg-black text-white  flex justify-center'
+                            style={{ position: "absolute", zIndex: 100, backgroundColor: "rgba(0,0,0,0.6)", height: 60, bottom: 0, width: '100%', paddingTop: 18 }}>
+                            <Link href='/hotels'> <h1>Train Booking</h1></Link>
+                        </div>
                     </div>
-                </div>
-                <div className='flex-1 bg-black text-white  relative rounded-lg ' >
-                    <img className="h-60 w-full rounded-lg"
-                  
-                        src="/image/userm.jpg" alt="nature image" />
-                    <div className='flex-1 bg-black text-white  flex justify-center'
-                        style={{ position: "absolute", zIndex: 100, backgroundColor: "rgba(0,0,0,0.6)", height: 60, bottom: 0, width: '100%', paddingTop: 18 }}>
-                        <Link href='/bus'><h1> User mangement</h1></Link>
-                    </div>
+                    <div className='flex-1 bg-black text-white  relative rounded-lg ' >
+                        <img className="h-60 w-full rounded-lg"
 
-                </div>
+                            src="/image/userm.jpg" alt="nature image" />
+                        <div className='flex-1 bg-black text-white  flex justify-center'
+                            style={{ position: "absolute", zIndex: 100, backgroundColor: "rgba(0,0,0,0.6)", height: 60, bottom: 0, width: '100%', paddingTop: 18 }}>
+                            <Link href='/bus'><h1> User mangement</h1></Link>
+                        </div>
+
+                    </div>
 
 
 

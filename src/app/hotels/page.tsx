@@ -81,7 +81,7 @@ export default function Hotels() {
         floated={false}
         shadow={false}
         className=" rounded-none"
-        // h-[370px]
+      // h-[370px]
       >
         <div className="flex items-center justify-center">
           <Typography variant="h4" color="blue-gray">
@@ -134,30 +134,30 @@ export default function Hotels() {
           <tbody>
             {hotelData
               ? hotelData?.data?.map((element: any) => (
-                  <tr>
-                    <td className="w-[5px]">{"Photo"}</td>
-                    <td className="w-[5px] grid-cols">
-                      <p className="font-bold">{element.hotelname}</p>
-                      <p>{element.ownerName}</p>
-                    </td>
-                    {/* <td className="w-[5px]">{element.ownerName}</td> */}
-                    <td className="w-[5px]">{element.contactno}</td>
-                    <td className="w-[5px]">{element.email}</td>
-                    <td className="w-[5px]">{element.adress}</td>
-                    <td className="w-[5px]">{element.street}</td>
-                    <td className="w-[5px]">{element.city}</td>
-                    <td className="w-[5px]">{element.pin}</td>
-                    <td className="w-[5px]">{"contries"}</td>
-                    <td className="">
-                      <Tooltip content="Edit User">
-                        <IconButton variant="text" color="blue-gray">
-                          <PencilIcon className="h-4 w-4" />
-                        </IconButton>
-                      </Tooltip>
-                    </td>
-                    
-                  </tr>
-                ))
+                <tr>
+                  <td className="w-[5px]">{"Photo"}</td>
+                  <td className="w-[5px] grid-cols">
+                    <p className="font-bold">{element.hotelname}</p>
+                    <p>{element.ownerName}</p>
+                  </td>
+                  {/* <td className="w-[5px]">{element.ownerName}</td> */}
+                  <td className="w-[5px]">{element.contactno}</td>
+                  <td className="w-[5px]">{element.email}</td>
+                  <td className="w-[5px]">{element.adress}</td>
+                  <td className="w-[5px]">{element.street}</td>
+                  <td className="w-[5px]">{element.city}</td>
+                  <td className="w-[5px]">{element.pin}</td>
+                  <td className="w-[5px]">{"contries"}</td>
+                  <td className="">
+                    <Tooltip content="Edit User">
+                      <IconButton variant="text" color="blue-gray">
+                        <PencilIcon className="h-4 w-4" />
+                      </IconButton>
+                    </Tooltip>
+                  </td>
+
+                </tr>
+              ))
               : "Data Not Found.."}
           </tbody>
         </table>
