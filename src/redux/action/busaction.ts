@@ -13,7 +13,7 @@ export const addBuses = (data: any) => async (dispatch: AppDispatch) => {
 
   //api call
   const res = await fetch(
-    "http://localhost:3000/api/demo/demo?action=ADD_BUS",
+    "http://localhost:3000/api/busapi/busapi?action=ADD_BUS",
     {
       method: "POST",
 
@@ -27,6 +27,7 @@ export const addBuses = (data: any) => async (dispatch: AppDispatch) => {
     console.log("inside if:::::::::", res);
 
     dispatch({ type: ADD_BUS_REQUEST_SUCCESS, payload: data });
+    alert("bus data add Successfully")
   } else {
     dispatch({ type: ADD_BUS_REQUEST_FAIL, payload: null });
   }

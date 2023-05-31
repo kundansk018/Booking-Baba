@@ -32,7 +32,7 @@ export default function AddBus() {
   const [ticketprice, setTicketPrice] = useState<String>("");
   const [operator, setOperator] = useState<String>("");
   // const [status, setStatus] = useState("");
-  const [file, setFile] = useState("");
+  //const [file, setFile] = useState("");
   const [arrivalDate, setArrivalDate] = useState("");
   const [arrivalTime, setArrivalTime] = useState("");
   const [departureTime, setDepartureTime] = useState("");
