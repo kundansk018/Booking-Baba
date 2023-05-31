@@ -40,7 +40,7 @@ export default function page() {
         <CardBody>
           <Tabs value={type} className="overflow-visible ">
             <TabsHeader
-              className="relative z-0"
+              className=" z-0"
               indicatorProps={{
                 className: "bg-[#4fb291] shadow-none ",
               }}

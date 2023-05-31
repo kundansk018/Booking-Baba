@@ -1,6 +1,5 @@
 "use client";
 import React, { useEffect, useState } from "react";
-// import { Button, Card, IconButton, Typography } from "@material-tailwind/react";
 
 import { useRouter } from "next/navigation";
 
@@ -20,8 +19,8 @@ import {
   Tabs,
   TabsHeader,
   Tab,
-  IconButton,
   Tooltip,
+  IconButton,
 } from "@material-tailwind/react";
 
 import { useAppDispatch } from "@/redux/store";
@@ -84,13 +83,21 @@ export default function Hotels() {
       // h-[370px]
       >
         <div className="flex items-center justify-center">
-          <Typography variant="h4" color="blue-gray">
-            Hotels list
+          <Typography className="font-castoro" variant="h5" color="black">
+            Hotels List
           </Typography>
         </div>
         <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
-          <Tabs value="all" className="w-full md:w-max">
-            <TabsHeader>
+          <Tabs
+            value="all"
+            className="w-full sm:w-max text-black   font-castoro"
+          >
+            <TabsHeader
+              className=" z-0"
+              indicatorProps={{
+                className: "bg-[#4fb291] shadow-none ",
+              }}
+            >
               {TABS.map(({ label, value }) => (
                 <Tab key={value} value={value}>
                   &nbsp;&nbsp;{label}&nbsp;&nbsp;
@@ -105,8 +112,7 @@ export default function Hotels() {
             />
           </div>
           <Button
-            className="flex items-center gap-3"
-            color="blue"
+            className="flex items-center gap-3 bg-[#4fb291]"
             size="md"
             onClick={() => router.push("/hotels/add-step1")}
           >
@@ -115,39 +121,47 @@ export default function Hotels() {
         </div>
       </CardHeader>
       <CardBody className="overflow-scroll px-1 mt-0">
-        <table className="mt-1 w-full min-w-max table-auto text-left">
-          <thead className="bg-blue-gray-100 py-2 font-bold text-black flex-col">
+        <table className="mt-1 w-full min-w-max table-auto text-left text-sm text-black   font-signika">
+          <thead className="bg-blue-gray-100 py-2 font-bold flex-col">
             <tr>
-              <th className="w-[5px]">Hotel Photos</th>
-              <th className="w-[5px]">Hotel Name/Owner</th>
-              {/* <th className="w-[5px]">Hotel Owner</th> */}
-              <th className="w-[5px]">Contact No</th>
-              <th className="w-[5px]">Email</th>
-              <th className="w-[5px]">Adress Line1</th>
-              <th className="w-[5px]">Adress Line2 & Street</th>
-              <th className="w-[5px]">City </th>
-              <th className="w-[5px]">PinCode</th>
-              <th className="w-[5px]">Country</th>
-              <th className="w-[5px]">Actions</th>
+              <th className="w-[5px] p-2 ">Hotel Photos</th>
+              <th className="w-[5px] p-2">Hotel Name</th>
+              <th className="w-[5px] p-2">Hotel Owner</th>
+              <th className="w-[5px] p-2">Contact No</th>
+              <th className="w-[5px] p-2">Email</th>
+              <th className="w-[5px] p-2">Address </th>
+              <th className="w-[5px] p-2">Address Street</th>
+              <th className="w-[5px] p-2">City </th>
+              <th className="w-[5px] p-2">PinCode</th>
+              <th className="w-[5px] p-2">Country</th>
+              <th className="w-[5px] p-2">Actions</th>
             </tr>
           </thead>
           <tbody>
             {hotelData
               ? hotelData.data.map((element: any) => (
-                <tr>
-                  <td className="w-[5px]">{"Photo"}</td>
-                  <td className="w-[5px]">{element.hotelname}</td>
-                  <td className="w-[5px]">{element.ownerName}</td>
-                  <td className="w-[5px]">{element.contactno}</td>
-                  <td className="w-[5px]">{element.email}</td>
-                  <td className="w-[5px]">{element.adress}</td>
-                  <td className="w-[5px]">{element.street}</td>
-                  <td className="w-[5px]">{element.city}</td>
-                  <td className="w-[5px]">{element.pin}</td>
-                  <td className="w-[5px]">{"contries"}</td>
-                  <td className="w-[5px]">{"Action btn"}</td>
-                </tr>
-              ))
+                  <>
+                    <tr className="border-b">
+                      <td className="w-[5px] p-2">{"Photo"}</td>
+                      <td className="w-[5px] p-2">{element.hotelname}</td>
+                      <td className="w-[5px] p-2">{element.ownerName}</td>
+                      <td className="w-[5px] p-2">{element.contactno}</td>
+                      <td className="w-[5px] p-2">{element.email}</td>
+                      <td className="w-[5px] p-2">{element.adress}</td>
+                      <td className="w-[5px] p-2">{element.street}</td>
+                      <td className="w-[5px] p-2">{element.city}</td>
+                      <td className="w-[5px] p-2">{element.pin}</td>
+                      <td className="w-[5px] p-2">{"contries"}</td>
+                      <td className="w-[5px] p-2">
+                        <Tooltip content="Edit User">
+                          <IconButton variant="text" color="blue-gray">
+                            <PencilIcon className="h-4 w-4" />
+                          </IconButton>
+                        </Tooltip>
+                      </td>
+                    </tr>
+                  </>
+                ))
               : "Data Not Found.."}
           </tbody>
         </table>

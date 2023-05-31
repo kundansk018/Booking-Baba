@@ -54,7 +54,7 @@ export default function AdminPage() {
                             src="/image/userm.jpg" alt="nature image" />
                         <div className='flex-1 bg-black text-white  flex justify-center'
                             style={{ position: "absolute", zIndex: 100, backgroundColor: "rgba(0,0,0,0.6)", height: 60, bottom: 0, width: '100%', paddingTop: 18 }}>
-                            <Link href='/bus'><h1> User mangement</h1></Link>
+                            <Link href='/usermanagement'><h1> User mangement</h1></Link>
                         </div>
 
                     </div>
