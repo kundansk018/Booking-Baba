@@ -50,15 +50,15 @@ export async function updateBus(
   response: NextApiResponse
 ) {
   const buses = await db.collection("Bus Details");
-  //const updateBus = await buses.findOne(request.body._id);
+  const updateBus = await buses.findOne(request.body._id);
   const res = await buses.updateOne(
-    { id: request.body._id },
+    { updateBus },
     {
       $set: {
         busname: request.body.busname,
         busnumber: request.body.busnumber,
         from: request.body.from,
-        to: request.body.from,
+        to: request.body.to,
         arrivalTime: request.body.arrivalTime,
         arrivalDate: request.body.arrivalDate,
         pickUpPoint: request.body.pickUpPoint,

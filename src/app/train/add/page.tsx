@@ -2,45 +2,26 @@
 
 import BBButton from "@/app/components/BBButton";
 import BBInput from "@/app/components/BBInput";
-import { useCountries } from "use-react-countries";
 import "../../styles/hotel.css";
 
-import {
-  Card,
-  Typography,
-  Select,
-  Option,
-  Checkbox,
-  List,
-} from "@material-tailwind/react";
-import { Input } from "postcss";
 import { useEffect, useState } from "react";
-import BBCheckbox from "@/app/components/BBCheckbox";
 import { useAppDispatch } from "@/redux/store";
-import { addHotels } from "@/redux/action/hotelaction";
 import { useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
 import BBErrorDialog from "@/app/components/BBErrorDialog";
+import { addTrain } from "@/redux/action/trainAction";
 
 export default function AddTrain() {
-  const [trainname, settrainname] = useState<String>("");
-  const [adress, setAdress] = useState<String>("");
-  const [street, setStreet] = useState<String>("");
-  const [contactno, setContactNo] = useState<String>("");
-  const [email, setEmail] = useState<String>("");
-  const [ownerName, setOwnerName] = useState<String>("");
-  const [city, setCity] = useState("");
-  const [pin, setPin] = useState("");
-  const [file, setFile] = useState("");
-  const [pool, setPool] = useState<boolean>(true);
-  const [wifi, setWifi] = useState<boolean>(true);
-  const [kids, setKids] = useState<boolean>(true);
-  const [lunch, setLunch] = useState<boolean>(true);
-  const [dinner, setDinner] = useState<boolean>(true);
-  const [price, setPrice] = useState("");
-  const { countries } = useCountries();
-  const [location, setLocation] = useState("");
-  const [room, setRoom] = useState("");
+  const [trainNo, setTrainNo] = useState<string>("");
+  const [trainName, setTrainName] = useState<string>("");
+  const [from_Stn, setFrom_Stn] = useState<string>("");
+  const [to_Stn, setTo_Stn] = useState<string>("");
+  const [contactno, setContactNo] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [fare, setFare] = useState<string>("");
+  const [seats, setSeats] = useState<string>("");
+  const [coach, setCoach] = useState<any>("");
+  //const [type, setType] = useState<string>("");
 
   const dispatch = useAppDispatch();
   const [errorDialogMessage, setErrorDialogMessage] = useState([]);
@@ -48,49 +29,33 @@ export default function AddTrain() {
   const router = useRouter();
 
   //name type adress location  services wifi dinner kunch swiimmingparling gym kids
-  const hotelData: any = useSelector((state: any) => state.hotel.hotelDetails);
-  console.log("hotel data is ..", hotelData);
+  const trainData: any = useSelector((state: any) => state.train.trainDetails);
+  console.log("Train data is ..", trainData);
 
-  useEffect(() => {
-    navigator.geolocation.getCurrentPosition((position) => {
-      setLocation(position.coords.latitude + ", " + position.coords.longitude);
-      if (hotelData) {
-        router.push("/train");
-      }
-    });
-  }, [hotelData]);
+  // useEffect(() => {
+  //   if (trainData) {
+  //     router.push("/train");
+  //   }
+  // }, [trainData]);
 
-  const addHotelDetails = () => {
+  const addTrainDetails = () => {
     let data = {
-      trainname: trainname,
-      ownerName: ownerName,
+      trainNo: trainNo,
+      trainname: trainName,
+      from_Stn: from_Stn,
+      to_Stn: to_Stn,
       contactno: contactno,
       email: email,
-      file: file,
-      adress: adress,
-      street: street,
-      city: city,
-      pin: pin,
-      countries: countries,
-      price: price,
-      location: location,
-      room: room,
-      dinner: dinner,
-      lunch: lunch,
-      pool: pool,
-      kids: kids,
-      wifi: wifi,
+      fare: fare,
+      seats: seats,
+      coach: coach,
     };
 
     let isErrorFound = false;
     let error: any = [];
-    if (!trainname || !trainname.trim()) {
+    if (!trainName || !trainName.trim()) {
       isErrorFound = true;
       error.push("Please enter Hotel Name");
-    }
-    if (!ownerName || !ownerName.trim()) {
-      isErrorFound = true;
-      error.push("Please enter Owner Name");
     }
 
     if (!contactno || !contactno.trim()) {
@@ -102,27 +67,24 @@ export default function AddTrain() {
       isErrorFound = true;
       error.push("Please enter valid email address");
     }
-
-    if (!file || !file.trim()) {
+    if (!from_Stn || !from_Stn.trim()) {
       isErrorFound = true;
-      error.push("Please Select File");
+      error.push("Please enter valid station Name");
     }
-
-    if (!pin || !pin.trim()) {
+    if (!to_Stn || !to_Stn.trim()) {
       isErrorFound = true;
-      error.push("Please enter Address");
+      error.push("Please enter valid station Name");
     }
-
-    if (!room || !room.trim()) {
+    if (!seats || !seats.trim()) {
       isErrorFound = true;
-      error.push("Please enter Address");
+      error.push("Please enter Seats");
     }
     if (isErrorFound) {
       setErrorDialogMessage(error);
       setShowErrorDialog(true);
       return;
     } else {
-      dispatch(addHotels(data));
+      dispatch(addTrain(data));
     }
   };
 
@@ -136,153 +98,97 @@ export default function AddTrain() {
           <div className="flex  flex-col mx-5 w-[300px] ">
             <BBInput
               containerProps={{ className: "mb-4" }}
-              label="Train Name"
-              value={trainname + ""}
-              onChange={(e) => settrainname(e.target.value)}
+              label="Train No"
+              value={trainNo}
+              onChange={(e) => setTrainNo(e.target.value)}
             />
-            {/* <BBInput
+            <BBInput
               containerProps={{ className: "mb-4" }}
-              label="Hotel Owner"
-              value={ownerName + ""}
-              onChange={(e) => setOwnerName(e.target.value)}
-            /> */}
+              label="Train Name"
+              value={trainName}
+              onChange={(e) => setTrainName(e.target.value)}
+            />
             <BBInput
               containerProps={{ className: "mb-4" }}
               type="number"
               label="Contact No"
-              value={contactno + ""}
+              value={contactno}
               onChange={(e) => setContactNo(e.target.value)}
             />
-            <BBInput
-              containerProps={{ className: "mb-4" }}
-              type="email"
-              label="Email"
-              value={email + ""}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <BBInput
-              containerProps={{ className: "w-[300px]" }}
-              type="file"
-              label="Hotel Photos"
-              value={file}
-              onChange={(e) => setFile(e.target.value)}
-            />
           </div>
+          {/* <div>
+            <BBTypography
+              variant="small"
+              color="blue-gray"
+              className="font-signika mb-0 font-medium"
+              text="Type"
+            />
+            <Radio
+              label="AC"
+              name="type"
+              color="blue"
+              value={type}
+              onChange={(e) => setType(e.target.value)}
+            />
+            <Radio
+              label="Non -AC"
+              name="type"
+              color="blue"
+              value={type}
+              onChange={(e) => setType(e.target.value)}
+            />
+          </div> */}
           <div className="flex  flex-col mx-5 w-[300px]">
             <BBInput
               containerProps={{ className: "mb-4" }}
-              label="Adress Line1"
-              value={adress + ""}
-              onChange={(e) => setAdress(e.target.value)}
+              label="From Station"
+              value={from_Stn}
+              onChange={(e) => setFrom_Stn(e.target.value)}
             />
             <BBInput
               containerProps={{ className: "mb-4" }}
-              label="Adress Line2 & Street"
-              value={street + ""}
-              onChange={(e) => setStreet(e.target.value)}
+              label="To Station"
+              value={to_Stn}
+              onChange={(e) => setTo_Stn(e.target.value)}
             />
             <BBInput
               containerProps={{ className: "mb-4" }}
-              label="City"
-              value={city}
-              onChange={(e) => setCity(e.target.value)}
+              label="No of Coaches"
+              value={coach}
+              onChange={(e) => setCoach(e.target.value)}
             />
-            <BBInput
-              containerProps={{ className: "mb-4" }}
-              label="PinCode"
-              value={pin}
-              onChange={(e) => setPin(e.target.value)}
-            />
-            <Select
-              containerProps={{ className: "mb-4" }}
-              label="Country"
-              menuProps={{ className: "h-48" }}
-            >
-              {countries.map(({ name }: any) => (
-                <Option key={name} value={name}>
-                  {name}
-                </Option>
-              ))}
-            </Select>
           </div>
 
           <div className="flex  flex-col mx-5 w-[300px] ">
             <BBInput
               containerProps={{ className: "mb-4" }}
-              label="Price"
-              value={price + ""}
-              onChange={(e) => setPrice(e.target.value)}
+              label="Fare"
+              value={fare}
+              onChange={(e) => setFare(e.target.value)}
             />
-            <BBInput
-              containerProps={{ className: "mb-4" }}
-              label="Latitude & Longitude"
-              value={location}
-              onChange={(e) => setLocation}
-            />
+
             <BBInput
               containerProps={{ className: "mb-4" }}
               type="number"
-              label="Room"
-              value={room + ""}
-              onChange={(e) => setRoom(e.target.value)}
+              label="Seats"
+              value={seats + ""}
+              onChange={(e) => setSeats(e.target.value)}
+            />
+            <BBInput
+              containerProps={{ className: "mb-4" }}
+              type="email"
+              label="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
         </div>
-
-        <List className=" flex flex-row justify-center">
-          <h3> Services:</h3>
-
-          <BBCheckbox
-            containerProps={{ className: "hover:before:opacity-0" }}
-            ripple={false}
-            id="1"
-            onChange={(e) => setDinner(!dinner)}
-            checked={dinner}
-            label="Dinner"
-          />
-
-          <BBCheckbox
-            containerProps={{ className: "hover:before:opacity-0" }}
-            ripple={false}
-            id="2"
-            onChange={(e) => setLunch(!lunch)}
-            checked={lunch}
-            label="Lunch"
-          />
-
-          <BBCheckbox
-            containerProps={{ className: "hover:before:opacity-0" }}
-            ripple={false}
-            id="3"
-            onChange={(e) => setPool(!pool)}
-            checked={pool}
-            label="Swimming Pool"
-          />
-
-          <BBCheckbox
-            containerProps={{ className: "hover:before:opacity-0" }}
-            ripple={false}
-            id="4"
-            onChange={(e) => setKids(!kids)}
-            checked={kids}
-            label="kids"
-          />
-
-          <BBCheckbox
-            containerProps={{ className: "hover:before:opacity-0" }}
-            ripple={false}
-            id="5"
-            onChange={(e) => setWifi(!wifi)}
-            checked={wifi}
-            label="WiFi"
-          />
-        </List>
         <div className="flex justify-center mt-4">
           <BBButton
             color=""
             label="ADD "
             size="lg"
-            onClick={addHotelDetails}
+            onClick={addTrainDetails}
             className="h-12 bg-blackblue w-[500px] "
           />
         </div>

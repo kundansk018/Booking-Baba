@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 // import { Button, Card, IconButton, Typography } from "@material-tailwind/react";
 import BBButton from "../components/BBButton";
 import { useRouter } from "next/navigation";
@@ -24,6 +24,9 @@ import {
   IconButton,
   Tooltip,
 } from "@material-tailwind/react";
+import { useSelector } from "react-redux";
+import { TRAIN_REQUEST_SUCCESS } from "@/redux/constant";
+import { useAppDispatch } from "@/redux/store";
 
 const TABS = [
   {
@@ -40,155 +43,42 @@ const TABS = [
   },
 ];
 
-const TABLE_HEAD = ["Member", "Function", "Status", "Employed", ""];
-
-const TABLE_ROWS = [
-  {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-3.jpg",
-    name: "John Michael",
-    email: "john@creative-tim.com",
-    job: "Manager",
-    org: "Organization",
-    online: true,
-    date: "23/04/18",
-  },
-  {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-2.jpg",
-    name: "Alexa Liras",
-    email: "alexa@creative-tim.com",
-    job: "Programator",
-    org: "Developer",
-    online: false,
-    date: "23/04/18",
-  },
-  {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-1.jpg",
-    name: "Laurent Perrier",
-    email: "laurent@creative-tim.com",
-    job: "Executive",
-    org: "Projects",
-    online: false,
-    date: "19/09/17",
-  },
-  {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-4.jpg",
-    name: "Michael Levi",
-    email: "michael@creative-tim.com",
-    job: "Programator",
-    org: "Developer",
-    online: true,
-    date: "24/12/08",
-  },
-  {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-5.jpg",
-    name: "Richard Gran",
-    email: "richard@creative-tim.com",
-    job: "Manager",
-    org: "Executive",
-    online: false,
-    date: "04/10/21",
-  },
-  {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-3.jpg",
-    name: "John Michael",
-    email: "john@creative-tim.com",
-    job: "Manager",
-    org: "Organization",
-    online: true,
-    date: "23/04/18",
-  },
-  {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-2.jpg",
-    name: "Alexa Liras",
-    email: "alexa@creative-tim.com",
-    job: "Programator",
-    org: "Developer",
-    online: false,
-    date: "23/04/18",
-  },
-  {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-1.jpg",
-    name: "Laurent Perrier",
-    email: "laurent@creative-tim.com",
-    job: "Executive",
-    org: "Projects",
-    online: false,
-    date: "19/09/17",
-  },
-  {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-4.jpg",
-    name: "Michael Levi",
-    email: "michael@creative-tim.com",
-    job: "Programator",
-    org: "Developer",
-    online: true,
-    date: "24/12/08",
-  },
-  {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-5.jpg",
-    name: "Richard Gran",
-    email: "richard@creative-tim.com",
-    job: "Manager",
-    org: "Executive",
-    online: false,
-    date: "04/10/21",
-  },
-  {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-3.jpg",
-    name: "John Michael",
-    email: "john@creative-tim.com",
-    job: "Manager",
-    org: "Organization",
-    online: true,
-    date: "23/04/18",
-  },
-  {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-2.jpg",
-    name: "Alexa Liras",
-    email: "alexa@creative-tim.com",
-    job: "Programator",
-    org: "Developer",
-    online: false,
-    date: "23/04/18",
-  },
-  {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-1.jpg",
-    name: "Laurent Perrier",
-    email: "laurent@creative-tim.com",
-    job: "Executive",
-    org: "Projects",
-    online: false,
-    date: "19/09/17",
-  },
-  {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-4.jpg",
-    name: "Michael Levi",
-    email: "michael@creative-tim.com",
-    job: "Programator",
-    org: "Developer",
-    online: true,
-    date: "24/12/08",
-  },
-  {
-    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-5.jpg",
-    name: "Richard Gran",
-    email: "richard@creative-tim.com",
-    job: "Manager",
-    org: "Executive",
-    online: false,
-    date: "04/10/21",
-  },
-];
-
 export default function Train() {
+  const trainData: any = useSelector((state: any) => state.train.trainDetails);
+  console.log("Train data is ..", trainData);
   const router = useRouter();
+  const dispatch = useAppDispatch();
+
+  const [train, setTrain] = useState<any>("");
+
+  useEffect(() => {
+    const getHotel = async () => {
+      const response: any = await fetch(
+        `http://localhost:3000/api/trainApi/trainApi?action=GET_TRAINS`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      const trainData = await response.json();
+
+      dispatch({ type: TRAIN_REQUEST_SUCCESS, payload: trainData });
+
+      console.log("get trains api.. ", trainData);
+      setTrain(trainData);
+    };
+
+    getHotel();
+  }, []);
+
+  console.log("Train data is dhdrt..", train);
+
   return (
     <Card className="mx-3 h-[500px] w-[98%] mt-[2%]">
-      <CardHeader
-        floated={false}
-        shadow={false}
-        className=" rounded-none"
-      >
+      <CardHeader floated={false} shadow={false} className=" rounded-none">
         <div className="flex items-center justify-center">
           <Typography variant="h4" color="blue-gray">
             Trains list
@@ -224,19 +114,29 @@ export default function Train() {
         <table className="mt-1 w-full min-w-max table-auto text-left">
           <thead>
             <tr>
-              <th>Train Photos</th>
+              <th>Train Number</th>
               <th>Train Name</th>
-              <th>Contact No</th>
-              <th>Email</th>
-              <th>Adress Line1</th>
-              <th>Adress Line2 & Street</th>
-              <th>City </th>
-              <th>PinCode</th>
-              <th>Country</th>
+              <th>From Station</th>
+              <th>To Station</th>
+              <th>Fare </th>
+              <th>Seats</th>
+              <th>Coach</th>
             </tr>
           </thead>
           <tbody>
-            
+            {train
+              ? train.data.map((element: any) => (
+                  <tr>
+                    <td className="w-[5px]">{element.trainNo}</td>
+                    <td className="w-[5px]">{element.trainname}</td>
+                    <td className="w-[5px]">{element.from_Stn}</td>
+                    <td className="w-[5px]">{element.to_Stn}</td>
+                    <td className="w-[5px]">{element.fare}</td>
+                    <td className="w-[5px]">{element.seats}</td>
+                    <td className="w-[5px]">{element.coach}</td>
+                  </tr>
+                ))
+              : "Data Not Found.."}
           </tbody>
         </table>
       </CardBody>
