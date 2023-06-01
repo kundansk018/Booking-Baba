@@ -3,13 +3,15 @@ import {
   ADD_BUS_REQUEST,
   ADD_BUS_REQUEST_FAIL,
   ADD_BUS_REQUEST_SUCCESS,
+  REQUEST_COMPLETED,
+  REQUEST_STARTED,
 } from "../constant";
 import { AppDispatch } from "../store";
 
 
 export const addBuses = (data: any) => async (dispatch: AppDispatch) => {
   console.log("data in action: ", data);
-  dispatch({ type: ADD_BUS_REQUEST, payload: null });
+  dispatch({ type: REQUEST_STARTED, payload: null });
 
   //api call
   const res = await fetch(
@@ -31,4 +33,5 @@ export const addBuses = (data: any) => async (dispatch: AppDispatch) => {
   } else {
     dispatch({ type: ADD_BUS_REQUEST_FAIL, payload: null });
   }
+  dispatch({ type: REQUEST_COMPLETED, payload: null });
 };

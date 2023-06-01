@@ -31,15 +31,19 @@ export default function AddBus() {
   const [seats, setSeats] = useState<String>("");
   const [ticketprice, setTicketPrice] = useState<String>("");
   const [operator, setOperator] = useState<String>("");
+  const [busstops, setBusStops] = useState<String>("");
+  const [noofstop, setNoOfStop] = useState("");
+  const [bookingseats, setBookingSeats] = useState("");
+  const [travelagencyname, setTravelAgencyName] = useState("");
   // const [status, setStatus] = useState("");
-  //const [file, setFile] = useState("");
+  // const [file, setFile] = useState("");
   const [arrivalDate, setArrivalDate] = useState("");
   const [arrivalTime, setArrivalTime] = useState("");
   const [departureTime, setDepartureTime] = useState("");
   const [pickUpPoint, setPickUpPoint] = useState("");
   const [busType, setBusType] = useState("");
   const [currentStatus, setCurrentStatus] = useState("");
-
+  // const [photos, setPhotos] = useState<String>("");
   const [wifi, setWifi] = useState<boolean>(true);
   const [cpoint, setCpoint] = useState<boolean>(true);
   const [system, setSystem] = useState<boolean>(true);
@@ -66,6 +70,11 @@ export default function AddBus() {
       operator,
       currentStatus,
       busType,
+      busstops,
+      noofstop,
+      bookingseats,
+      travelagencyname,
+
     };
 
     let isErrorFound = false;
@@ -115,6 +124,12 @@ export default function AddBus() {
       isErrorFound = true;
       error.push("Please enter pickup point");
     }
+
+    if (!busstops || !busstops.trim()) {
+      isErrorFound = true;
+      error.push("Please enter busstops point");
+    }
+
     if (!busType || !busType.trim()) {
       isErrorFound = true;
       error.push("Please enter bus type ");
@@ -159,18 +174,36 @@ export default function AddBus() {
             value={busnumber + ""}
             onChange={(e) => setBusnumber(e.target.value)}
           />
+          {/* <BBInput
+            containerProps={{ className: "mb-4" }}
+            type="file"
+            label="file"
+            value={file + ""}
+            onChange={(e) => setFile(e.target.value)}
+          /> */}
 
           <BBDropdown
-            options={[{ label: "Nashik" }, { label: "Pune" }]}
+            options={[{ label: "Window-Seats" }, { label: "Non_Window-Seats" },]}
+            value={bookingseats}
+            onPress={(value: any) => {
+              setBookingSeats(value);
+            }}
+            label="Booking Seats"
+          />
+
+          <br />
+          <BBDropdown
+            options={[{ label: "Nashik" }, { label: "Pune" },]}
             value={from}
             onPress={(value: any) => {
               setFrom(value);
             }}
             label="From"
           />
+
           <br />
           <BBDropdown
-            options={[{ label: "Nashik" }, { label: "Pune" }]}
+            options={[{ label: "Nashik" }, { label: "Pune" },]}
             value={to}
             onPress={(value: any) => {
 
@@ -180,13 +213,19 @@ export default function AddBus() {
           />
           <br />
 
-          <BBInput
-            containerProps={{ className: "mb-4" }}
-            label="Arrival Date"
-            value={arrivalDate}
-            onChange={(e) => setArrivalDate(e.target.value)}
-            type="date"
+          <BBDropdown
+            options={[{ label: "Sai-Travel-Agency" }, { label: "Chhatrapati-Travel-Agency" },]}
+            value={travelagencyname}
+            onPress={(value: any) => {
+
+              setTravelAgencyName(value);
+            }}
+            label="Travel Agency Name"
           />
+          <br />
+
+
+
         </div>
 
         <div className="flex  flex-col mx-5 w-[300px]">
@@ -205,7 +244,13 @@ export default function AddBus() {
             value={arrivalTime}
             onChange={(e) => setArrivalTime(e.target.value)}
           />
-
+          <BBInput
+            containerProps={{ className: "mb-4" }}
+            label="Arrival Date"
+            value={arrivalDate}
+            onChange={(e) => setArrivalDate(e.target.value)}
+            type="date"
+          />
           <BBInput
             containerProps={{ className: "mb-4" }}
             type="text"
@@ -233,6 +278,7 @@ export default function AddBus() {
               { label: "CBS" },
               { label: "New CBS" },
               { label: "mahamarg" },
+
             ]}
             value={pickUpPoint}
             onPress={(value: any) => {
@@ -241,9 +287,37 @@ export default function AddBus() {
             label="PickUp Point"
           />
           <br />
+          <BBDropdown
+            options={[
+              { label: "Nashik New CBS" },
+              { label: "Sinner" },
+              { label: "Shirdi" },
+              { label: "Nimgoan" },
+              { label: "Shirdi Local" },
+              { label: "New Pune Mahamarge" },
+              { label: "Devpure" },
+              { label: "Pune Shivaji Nager" },
+
+
+            ]}
+            value={busstops}
+            onPress={(value: any) => {
+              setBusStops(value);
+            }}
+            label=" View Bus Stops"
+          />
+          <br />
 
           <BBDropdown
-            options={[{ label: "Non-Sleeper" }, { label: "Sleeper" }]}
+            options={[
+              { label: "Ac-Shivneri" },
+              { label: "Semi-Luxury" },
+              { label: "Night Express" },
+              { label: "Ordinary-Express" },
+              { label: "Day Ordinary" },
+              { label: "Ac-Volvo" },
+              { label: "Non-Ac-Shivneri" },
+            ]}
             value={busType}
             onPress={(value: any) => {
               setBusType(value);
@@ -261,19 +335,23 @@ export default function AddBus() {
             label="CurrentStatus"
           />
           <br />
+          <BBDropdown
+            options={[{ label: "1" }, { label: "2" }, { label: "3" }, { label: "4" }, { label: "5" },]}
+            value={noofstop}
+            onPress={(value: any) => {
+              setNoOfStop(value);
+            }}
+            label="No Of Bus Stop"
+          />
+          <br />
 
-          {/* <BBInput
-            containerProps={{ className: "w-[300px]" }}
-            type="file"
-            label=""
-            value={file}
-            onChange={(e) => setFile(e.target.value)}
-          /> */}
+
         </div>
       </div>
 
       <List className=" flex flex-row justify-center">
         <h3> Facilities:</h3>
+
 
         <BBCheckbox
           containerProps={{ className: "hover:before:opacity-0" }}
@@ -284,14 +362,14 @@ export default function AddBus() {
           label="Charging Point"
         />
 
-        <BBCheckbox
+        {/* <BBCheckbox
           containerProps={{ className: "hover:before:opacity-0" }}
           ripple={false}
           id="2"
           onChange={(e) => setSystem(!system)}
           checked={system}
           label="Entertainment Systems"
-        />
+        /> */}
 
         <BBCheckbox
           containerProps={{ className: "hover:before:opacity-0" }}
@@ -320,6 +398,7 @@ export default function AddBus() {
           className="h-12 bg-blackblue w-[500px] "
         />
       </div>
+
       <BBErrorDialog
         dialogHeader="Error"
         dialogMessage={errorDialogMessage}
