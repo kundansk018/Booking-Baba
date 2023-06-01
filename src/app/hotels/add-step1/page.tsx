@@ -212,9 +212,9 @@ const remove_food_facilities = (selectedList: any, removedItem: any) => {
 
   return (
     <>
-      <div className="bg-white h-[40%] pb-4 mt-5 m-auto w-[65%] justify-center rounded-lg">
-        <div className="flex justify-center h-12 bg-[#1B6CA8] text-white px-5  text-2xl">
-          <h1 className="mt-2">Add Hotel</h1>
+      <div className="bg-white h-[40%] pb-4 mt-5 m-auto w-[60%] justify-center rounded-lg">
+        <div className="flex justify-center h-12 bg-GreenBlue text-white px-5  text-3xl">
+          <h1>Add Hotel</h1>
         </div>
         <div className="flex  flex-row justify-center m-6">
           <div className="flex  flex-col mx-4 w-[300px] ">
@@ -295,7 +295,7 @@ const remove_food_facilities = (selectedList: any, removedItem: any) => {
               type="date"
               onChange={(e) => setDate(e.target.value)}
             />
-
+            
           </div>
 
           <div className="flex  flex-col mx-4 w-[300px] ">
@@ -345,8 +345,6 @@ const remove_food_facilities = (selectedList: any, removedItem: any) => {
                 displayValue="name"
               />
             </div>
-           
-            
           </div>
         </div>
 
@@ -406,7 +404,6 @@ const remove_food_facilities = (selectedList: any, removedItem: any) => {
             onClick={addHotelDetails}
             className="h-12 bg-blackblue w-[500px] "
           />
-
         </div>
       </div>
 

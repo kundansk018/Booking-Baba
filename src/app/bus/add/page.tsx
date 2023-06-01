@@ -155,10 +155,10 @@ export default function AddBus() {
 
   return (
     <div className="bg-white h-full mt-5 p-5 m-auto w-full justify-center rounded-lg">
-      <div className="flex justify-center  text-3xl">
-        <h1>
-          <b>Add Bus</b>
-        </h1>
+      <div className="flex items-center justify-center">
+        <Typography className="px-4 font-castoro" variant="h3" color="black">
+          Add Bus
+        </Typography>
       </div>
       <div className="flex flex-row justify-center m-6">
         <div className="flex  flex-col mx-5 w-[300px] ">
@@ -183,7 +183,8 @@ export default function AddBus() {
           /> */}
 
           <BBDropdown
-            options={[{ label: "Window-Seats" }, { label: "Non_Window-Seats" },]}
+          
+            options={[{ label: "Window-Seats" }, { label: "Non_Window-Seats" }]}
             value={bookingseats}
             onPress={(value: any) => {
               setBookingSeats(value);
@@ -191,9 +192,9 @@ export default function AddBus() {
             label="Booking Seats"
           />
 
-          <br />
+
           <BBDropdown
-            options={[{ label: "Nashik" }, { label: "Pune" },]}
+            options={[{ label: "Nashik" }, { label: "Pune" }]}
             value={from}
             onPress={(value: any) => {
               setFrom(value);
@@ -201,31 +202,28 @@ export default function AddBus() {
             label="From"
           />
 
-          <br />
           <BBDropdown
-            options={[{ label: "Nashik" }, { label: "Pune" },]}
+            options={[{ label: "Nashik" }, { label: "Pune" }]}
             value={to}
             onPress={(value: any) => {
-
               setTo(value);
             }}
             label="To"
           />
-          <br />
+     
 
           <BBDropdown
-            options={[{ label: "Sai-Travel-Agency" }, { label: "Chhatrapati-Travel-Agency" },]}
+            options={[
+              { label: "Sai-Travel-Agency" },
+              { label: "Chhatrapati-Travel-Agency" },
+            ]}
             value={travelagencyname}
             onPress={(value: any) => {
-
               setTravelAgencyName(value);
             }}
             label="Travel Agency Name"
           />
-          <br />
-
-
-
+     
         </div>
 
         <div className="flex  flex-col mx-5 w-[300px]">
@@ -278,7 +276,6 @@ export default function AddBus() {
               { label: "CBS" },
               { label: "New CBS" },
               { label: "mahamarg" },
-
             ]}
             value={pickUpPoint}
             onPress={(value: any) => {
@@ -297,8 +294,6 @@ export default function AddBus() {
               { label: "New Pune Mahamarge" },
               { label: "Devpure" },
               { label: "Pune Shivaji Nager" },
-
-
             ]}
             value={busstops}
             onPress={(value: any) => {
@@ -336,7 +331,13 @@ export default function AddBus() {
           />
           <br />
           <BBDropdown
-            options={[{ label: "1" }, { label: "2" }, { label: "3" }, { label: "4" }, { label: "5" },]}
+            options={[
+              { label: "1" },
+              { label: "2" },
+              { label: "3" },
+              { label: "4" },
+              { label: "5" },
+            ]}
             value={noofstop}
             onPress={(value: any) => {
               setNoOfStop(value);
@@ -344,14 +345,11 @@ export default function AddBus() {
             label="No Of Bus Stop"
           />
           <br />
-
-
         </div>
       </div>
 
       <List className=" flex flex-row justify-center">
         <h3> Facilities:</h3>
-
 
         <BBCheckbox
           containerProps={{ className: "hover:before:opacity-0" }}
