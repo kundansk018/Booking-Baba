@@ -21,6 +21,7 @@ import { addHotels, savePreviousData } from "@/redux/action/hotelaction";
 import { useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
 import BBErrorDialog from "@/app/components/BBErrorDialog";
+import Multiselect from "multiselect-react-dropdown";
 
 export default function AddHotels() {
   const [hotelname, setHotelname] = useState<String>("");
@@ -39,6 +40,7 @@ export default function AddHotels() {
   const [dinner, setDinner] = useState<boolean>(true);
   // const [price, setPrice] = useState("");
   const [country, setCountry] = useState("")
+  const [date, setDate] = useState("")
 
   const [location, setLocation] = useState("");
   // const [room, setRoom] = useState("");
@@ -75,7 +77,7 @@ export default function AddHotels() {
       city: city,
       pin: pin,
       country: country,
-      // price: price,
+      date: date,
       location: location,
       // room: room,
       dinner: dinner,
@@ -132,13 +134,89 @@ export default function AddHotels() {
 
   }
 
+  const food_facilities = [
+
+    { name: 'Pure Veg', id: 1 },
+    { name: 'Veg & Non-Veg', id: 2 },
+    { name: 'Kids Meals', id: 3 },
+    { name: '24-hour Coffe Shop', id: 4 },
+    { name: 'Dinning Area', id: 5 },
+    { name: 'Bar', id: 6 },
+  
+]
+const select_food_facilities= (selectedList: any, selectedItem: any) => {
+  console.log(selectedList)
+  console.log(selectedItem)
+}
+const remove_food_facilities = (selectedList: any, removedItem: any) => {
+
+}
+
+  const Basic_Facilities = [
+
+    { name: '24-hour Room Service', id: 1 },
+    { name: 'Free Parking', id: 2 },
+    { name: 'Air Conditioning', id: 3 },
+    { name: 'Elevator/Lift', id: 4 },
+    { name: 'Power Backup', id: 5 },
+    { name: 'Laundry Service', id: 6 },
+    { name: 'Express check-in/check-out', id: 6 },
+    { name: 'Smoking Rooms', id: 7 },
+    { name: 'Newspaper', id: 8 },
+    { name: 'Free Wi-Fi', id: 9 },
+     { name: 'HouseKeeping', id: 10 },
+     { name: 'Emergency Exits', id: 10 },
+]
+
+  const selectBasic_Facilities = (selectedList: any, selectedItem: any) => {
+    console.log(selectedList)
+    console.log(selectedItem)
+  }
+  const removeBasic_Facilities = (selectedList: any, removedItem: any) => {
+
+  }
+
+  const general_services = [
+
+    { name: 'Doctor on Call', id: 1 },
+    { name: 'Luggage Storage', id: 2 },
+    { name: 'Wheechair Accessible', id: 3 },
+    { name: 'Multilingual Staff', id: 4 },
+    { name: 'Wake-Up Call', id: 5 },
+  ]
+
+  const select_general_services = (selectedList: any, selectedItem: any) => {
+    console.log(selectedList)
+    console.log(selectedItem)
+  }
+  const remove_general_services = (selectedList: any, removedItem: any) => {
+
+  }
+  const safety = [
+
+    { name: 'CCTV', id: 1 },
+    { name: 'Fire Extinguishers', id: 2 },
+    { name: 'Security Alarms', id: 3 },
+    { name: 'First-aid Services', id: 4 },
+  
+   
+]
+
+  const select_safety = (selectedList: any, selectedItem: any) => {
+    console.log(selectedList)
+    console.log(selectedItem)
+  }
+  const remove_safety = (selectedList: any, removedItem: any) => {
+
+  }
+
   return (
     <>
-      <div className="bg-white h-[40%] pb-4 mt-5 m-auto w-[60%] justify-center rounded-lg">
-        <div className="flex justify-center h-12 bg-[#4fb291] text-white px-5  text-3xl">
-          <h1>Add Hotel</h1>
+      <div className="bg-white h-[40%] pb-4 mt-5 m-auto w-[65%] justify-center rounded-lg">
+        <div className="flex justify-center h-12 bg-[#1B6CA8] text-white px-5  text-2xl">
+          <h1 className="mt-2">Add Hotel</h1>
         </div>
-        <div className="flex flex-row justify-center m-6">
+        <div className="flex  flex-row justify-center m-6">
           <div className="flex  flex-col mx-4 w-[300px] ">
             <BBInput
               containerProps={{ className: "mb-4" }}
@@ -210,10 +288,69 @@ export default function AddHotels() {
               value={country}
               onChange={(e) => setCountry(e.target.value)}
             />
+            <BBInput
+              containerProps={{ className: "mb-4" }}
+              label="Established Date"
+              value={date}
+              type="date"
+              onChange={(e) => setDate(e.target.value)}
+            />
+
+          </div>
+
+          <div className="flex  flex-col mx-4 w-[300px] ">
+            <div className="my-2 w-60">
+              <Multiselect
+                placeholder="Select Basic Facilities"
+                options={Basic_Facilities}
+                onSelect={selectBasic_Facilities}
+                onRemove={removeBasic_Facilities}
+                displayValue="name"
+              />
+            </div>
+
+            <div className="my-2 w-60">
+              <Multiselect
+                placeholder="Select FooD & Drinks"
+                options={food_facilities}
+                onSelect={select_food_facilities}
+                onRemove={remove_food_facilities}
+                displayValue="name"
+              />
+            </div>
+            <div className="my-2 w-60">
+              <Multiselect
+                placeholder="Select General Services"
+                options={general_services}
+                onSelect={select_general_services}
+                onRemove={remove_general_services}
+                displayValue="name"
+              />
+            </div>
+            <div className="my-2 w-60">
+              <Multiselect
+                placeholder="Select FooD & Drinks"
+                options={food_facilities}
+                onSelect={select_food_facilities}
+                onRemove={remove_food_facilities}
+                displayValue="name"
+              />
+            </div>
+            <div className="my-2 w-60">
+              <Multiselect
+                placeholder="Select Safety & Security"
+                options={safety}
+                onSelect={select_safety}
+                onRemove={remove_safety}
+                displayValue="name"
+              />
+            </div>
+           
+            
           </div>
         </div>
 
-        <List className=" flex flex-row justify-center">
+        {/* <List className=" flex flex-row justify-center">
           <h3> Services:</h3>
 
           <BBCheckbox
@@ -260,7 +397,7 @@ export default function AddHotels() {
             checked={wifi}
             label="WiFi"
           />
-        </List>
+        </List> */}
         <div className="flex justify-center mt-4">
           <BBButton
             color=""

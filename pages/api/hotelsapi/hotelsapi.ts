@@ -27,8 +27,12 @@ export default async function handler(
             return await gethotel(request, response);
 
         case "updateHotels":
-            return await updatehotel(request ,response);
+            return await updatehotel(request, response);
 
+            case "getHotelDetails":
+                return await getHotelById(request, response);
+
+                
         default:
             return response
                 .status(404)
@@ -52,10 +56,16 @@ export async function gethotel(request: NextApiRequest, response: NextApiRespons
 export async function updatehotel(request: NextApiRequest, response: NextApiResponse) {
     const hotels = await db.collection("Hotels_Details");
     const res = await hotels.updateOne(
-        {_id: new ObjectId(request.body.id)},
+        { _id: new ObjectId(request.body.id) },
         {
             $set: request.body.data
         }
     )
+    return response.status(200).json({ data: res });
+}
+
+export async function getHotelById(request: NextApiRequest, response: NextApiResponse) {
+    const hotels = await db.collection("Hotels_Details");
+    const res = await hotels.findOne({ _id: new ObjectId(request.body.id) });
     return response.status(200).json({ data: res });
 }
