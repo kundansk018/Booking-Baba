@@ -23,6 +23,7 @@ import {
   Tab,
   Tooltip,
   IconButton,
+  Avatar,
 } from "@material-tailwind/react";
 import { useSelector } from "react-redux";
 import { TRAIN_REQUEST_SUCCESS } from "@/redux/constant";
@@ -128,8 +129,9 @@ export default function Train() {
       {/* <CardBody className="relative overflow-scroll px-1 mt-0"> */}
       <div className="mx-3 h-[500px] w-[98%] mt-[1%] bg-white relative overflow-scroll px-1 mt-0">
         <table className="relative font-roboto w-full min-w-max table-auto text-left text-sm text-black">
-          <thead className="z-1 bg- font-bold flex-col">
-            <tr className="z-1 sticky top-0 bg-GreenBlue text-white w-full">
+          <thead className="z-10 bg- font-bold flex-col">
+            <tr className="z-10 sticky top-0 bg-GreenBlue text-white w-full">
+              <th className="w-[5px] p-2">Train photo</th>
               <th className="w-[5px] p-2">Train Number</th>
               <th className="w-[5px] p-2">Train Name</th>
               <th className="w-[5px] p-2">From Station</th>
@@ -140,11 +142,18 @@ export default function Train() {
               <th className="w-[5px] p-2">Admin Action</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="-z-10">
             {train
               ? train.data.map((element: any) => (
                   <>
                     <tr className="border-b">
+                      <td className="w-[5px] p-2">
+                        <Avatar
+                          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4Rb78i6mV3XF1VxsVX_f6FvUggBNCIw4-xw&usqp=CAU"
+                          alt="imagee"
+                          size="md"
+                        />
+                      </td>
                       <td className="w-[5px] p-2">{element.trainNo}</td>
                       <td className="w-[5px] p-2 font-semibold">
                         {element.trainname}
