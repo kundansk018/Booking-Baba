@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import {
   MagnifyingGlassIcon,
   ChevronUpDownIcon,
+  TrashIcon,
 } from "@heroicons/react/24/outline";
 import { PencilIcon, UserPlusIcon } from "@heroicons/react/24/solid";
 import {
@@ -128,6 +129,7 @@ export default function Train() {
               <th>Fare </th>
               <th>Seats</th>
               <th>Coach</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>
@@ -141,6 +143,20 @@ export default function Train() {
                     <td className="w-[5px]">{element.fare}</td>
                     <td className="w-[5px]">{element.seats}</td>
                     <td className="w-[5px]">{element.coach}</td>
+                    <td className="w-[5px]">
+                      <Tooltip content="Edit User">
+                        <IconButton variant="text" color="blue-gray">
+                          <PencilIcon className="h-4 w-4" />
+                        </IconButton>
+                      </Tooltip>
+                      <Tooltip content="Edit User">
+                        <IconButton variant="text" color="blue-gray">
+                        <TrashIcon
+                        className=" w-5 text-red-500" 
+                      />                        </IconButton>
+                      </Tooltip>
+                      
+                    </td>
                   </tr>
                 ))
               : "Data Not Found.."}
@@ -149,14 +165,4 @@ export default function Train() {
       </CardBody>
     </Card>
   );
-}
-
-{
-  /* <td className="">
-  <Tooltip content="Edit User">
-    <IconButton variant="text" color="blue-gray">
-      <PencilIcon className="h-4 w-4" />
-    </IconButton>
-  </Tooltip>
-</td>; */
 }

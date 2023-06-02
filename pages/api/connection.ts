@@ -5,8 +5,8 @@ const getDB = async () => {
     // "mongodb+srv://yogranipawar:Rani1234@cluster0.qn3szdm.mongodb.net/?retryWrites=true&w=majority"
     //"mongodb+srv://adeshphad:adeshphad@booking-baba.oqow5b3.mongodb.net/?retryWrites=true&w=majority";
 
-    "mongodb+srv://kbsavale:bookingbaba123@cluster0.zzkhcsh.mongodb.net/";
-  // "mongodb+srv://jadhavbhushan228:mongo123@cluster0.i1rukeq.mongodb.net/?retryWrites=true&w=majority"
+    // "mongodb+srv://kbsavale:bookingbaba123@cluster0.zzkhcsh.mongodb.net/";
+    "mongodb+srv://jadhavbhushan228:mongo123@cluster0.i1rukeq.mongodb.net/?retryWrites=true&w=majority";
   //"mongodb+srv://adeshphad:adeshphad@booking-baba.oqow5b3.mongodb.net/?retryWrites=true&w=majority";
 
   const options: any = {

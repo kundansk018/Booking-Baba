@@ -7,6 +7,7 @@ import {
   MagnifyingGlassIcon,
   ChevronUpDownIcon,
   PencilIcon,
+  TrashIcon,
 } from "@heroicons/react/24/outline";
 import { UserPlusIcon } from "@heroicons/react/24/solid";
 import {
@@ -152,9 +153,14 @@ export default function Hotels() {
                       <td className="w-[5px] p-2">{element.pin}</td>
                       <td className="w-[5px] p-2">{"contries"}</td>
                       <td className="w-[5px] p-2">
-                        <Tooltip content="Edit User">
+                        <Tooltip content="Edit Hotel">
                           <IconButton variant="text" color="blue-gray">
                             <PencilIcon className="h-4 w-4" />
+                          </IconButton>
+                        </Tooltip>
+                        <Tooltip content="Delete">
+                          <IconButton variant="text" color="blue-gray">
+                            <TrashIcon className=" w-5 text-red-500" />{" "}
                           </IconButton>
                         </Tooltip>
                       </td>
@@ -167,14 +173,4 @@ export default function Hotels() {
       </CardBody>
     </Card>
   );
-}
-
-{
-  /* <td className="">
-  <Tooltip content="Edit User">
-    <IconButton variant="text" color="blue-gray">
-      <PencilIcon className="h-4 w-4" />
-    </IconButton>
-  </Tooltip>
-</td>; */
 }

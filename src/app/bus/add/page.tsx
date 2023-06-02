@@ -20,6 +20,7 @@ import { type } from "os";
 import BBErrorDialog from "@/app/components/BBErrorDialog";
 import { useAppDispatch } from "@/redux/store";
 import { addBuses } from "@/redux/action/busaction";
+import { useRouter } from "next/navigation";
 
 export default function AddBus() {
   const dispatch = useAppDispatch();
@@ -48,6 +49,7 @@ export default function AddBus() {
   const [cpoint, setCpoint] = useState<boolean>(true);
   const [system, setSystem] = useState<boolean>(true);
   const [lights, setLights] = useState<boolean>(true);
+  const router = useRouter();
 
   const [showErrorDialog, setShowErrorDialog] = useState(false);
 
@@ -138,18 +140,13 @@ export default function AddBus() {
       isErrorFound = true;
       error.push("Please enter current status");
     }
-    // if (!file || !file.trim()) {
-    //   isErrorFound = true;
-    //   error.push("Please upload file");
-    // }
-
     if (isErrorFound) {
       setErrorDialogMessage(error);
       setShowErrorDialog(true);
       return;
     } else {
       dispatch(addBuses(data));
-      console.log("else called");
+      router.push("/bus");
     }
   };
 
@@ -206,7 +203,6 @@ export default function AddBus() {
             options={[{ label: "Nashik" }, { label: "Pune" },]}
             value={to}
             onPress={(value: any) => {
-
               setTo(value);
             }}
             label="To"
