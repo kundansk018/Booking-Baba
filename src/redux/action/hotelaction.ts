@@ -78,7 +78,7 @@ export const getHotelById = (id: string) => async (dispatch: AppDispatch) => {
         "content-type": "application/json",
       },
     }
-  );
+  );  
   if (res.ok === true) {
     console.log("updtae response", res);
     let hotel_records = await res.json();
