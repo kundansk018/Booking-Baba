@@ -66,7 +66,7 @@ export default function AdminPage() {
           </div>
         </div>{" "}
         <div className="flex flex-row flex-1 h-70 mt-5 rounded-lg"
-          onClick={() => router.push("/train")}>>
+          onClick={() => router.push("/train")}>
           <div className="flex-1 bg-black text-white mr-5 relative rounded-lg">
             <img
               className="h-60 w-full rounded-lg "

@@ -1,14 +1,15 @@
 "use client";
 import React, { useEffect, useState } from "react";
 
-
 import { useRouter } from "next/navigation";
 
+//import axios from "axios";
+
 import {
-    MagnifyingGlassIcon,
-    ChevronUpDownIcon,
-    PencilIcon,
-    TrashIcon,
+  MagnifyingGlassIcon,
+  ChevronUpDownIcon,
+  PencilIcon,
+  TrashIcon,
 } from "@heroicons/react/24/outline";
 import { UserPlusIcon } from "@heroicons/react/24/solid";
 import {
@@ -26,10 +27,23 @@ import {
 } from "@material-tailwind/react";
 
 import { useAppDispatch } from "@/redux/store";
-import { ADD_BUS_DATA } from "@/redux/constant";
 import { useSelector } from "react-redux";
+import { ADD_BUS_REQUEST_SUCCESS } from "@/redux/constant";
+import { deleteBusAction } from "@/redux/action/busaction";
 
 const TABS = [
+  {
+    label: "All",
+    value: "all",
+  },
+  {
+    label: "Monitored",
+    value: "monitored",
+  },
+  {
+    label: "Unmonitored",
+    value: "unmonitored",
+  },
   {
     label: "All",
     value: "all",
@@ -48,7 +62,6 @@ export default function Bus() {
   const busData: any = useSelector((state: any) => state.bus.busDetails);
   console.log("bus data is ..==>>>>", busData?.data);
   const dispatch = useAppDispatch();
-
   const [bus, setBus] = useState<any>("");
   console.log(" using usestate bus data is ..", busData);
 
@@ -66,7 +79,7 @@ export default function Bus() {
 
       const busData = await response.json();
 
-      dispatch({ type: ADD_BUS_DATA, payload: busData });
+      dispatch({ type: ADD_BUS_REQUEST_SUCCESS, payload: busData });
 
       console.log("get bus api.. ", busData);
       setBus(busData);
@@ -77,7 +90,7 @@ export default function Bus() {
 
   const router = useRouter();
   return (
-    <div>
+    <div className="tracking-wide	">
       <Card className="w-full">
         <div className="flex p-1 px-2 items-center justify-between rounded-none">
           <div className="flex items-center justify-center">
@@ -126,24 +139,24 @@ export default function Bus() {
 
       {/* <Card className="mx-3 h-[500px] w-[98%] mt-[2%]"> */}
       {/* <CardBody className="relative overflow-scroll px-1 mt-0"> */}
-      <div className="mx-3 h-[500px] w-[98%] mt-[1%] bg-white relative overflow-scroll px-1 mt-0">
+      <div className="mx-3 h-[500px] w-[98%] mt-[1%]  bg-white relative overflow-scroll px-1 mt-0">
         <table className="relative font-roboto w-full min-w-max table-auto text-left text-sm text-black">
-          <thead className="z-1 bg-blue-gray-100 font-bold flex-col">
-            <tr className="z-1 sticky top-0 bg-blue-gray-100 w-full">
+          <thead className="z-1  font-semibold flex-col">
+            <tr className="z-1 bg-GreenBlue text-white sticky top-0  w-full">
               {/* <th className="w-[5px]">Bus Photos</th> */}
               {/* <th className="w-[5px]">file</th> */}
-              <th className="w-[5px] p-2">Bus Name</th>
               <th className="w-[5px] p-2">Bus Number</th>
+              <th className="w-[5px] p-2">Bus Name</th>
               <th className="w-[5px] p-2">From</th>
               <th className="w-[5px] p-2">To</th>
               <th className="w-[5px] p-2">Arrival Time</th>
-              <th className="w-[5px] p-2">Available Date</th>
+              <th className="w-[5px] p-2 ">Available Date</th>
               <th className="w-[5px] p-2">PickUpPoint</th>
               <th className="w-[5px] p-2">Seats</th>
               <th className="w-[5px] p-2">Ticket Price</th>
               <th className="w-[5px] p-2">Operator</th>
               <th className="w-[5px] p-2">Bus Type</th>
-              <th className="w-[5px]"> Bus Stop</th>
+              <th className="w-[5px] p-2"> Bus Stop</th>
               <th className="w-[5px] p-2">Admin Action</th>
             </tr>
           </thead>
@@ -153,23 +166,25 @@ export default function Bus() {
                   <>
                     <tr className="border-b">
                       {/* <td className="w-[5px]">{element.photos}</td> */}
-                      <td className="w-[5px]">{element.busname}</td>
-                      <td className="w-[5px]">{element.busnumber}</td>
-                      <td className="w-[5px]">{element.from}</td>
-                      <td className="w-[5px]">{element.to}</td>
-                      <td className="w-[5px]">{element.arrivalTime}</td>
-                      <td className="w-[5px]">{element.arrivalDate}</td>
-                      <td className="w-[5px]">{element.pickUpPoint}</td>
-                      <td className="w-[5px]">{element.seats}</td>
-                      <td className="w-[5px]">{element.ticketprice}</td>
-                      <td className="w-[5px]">{element.operator}</td>
-                      <td className="w-[5px]">{element.currentStatus}</td>
+                      <td className="w-[5px] p-2">{element.busnumber}</td>
+                      <td className="w-[5px] p-2 font-semibold">
+                        {element.busname}
+                      </td>
+                      <td className="w-[5px] p-2">{element.from}</td>
+                      <td className="w-[5px] p-2">{element.to}</td>
+                      <td className="w-[5px] p-2">{element.arrivalTime}</td>
+                      <td className="w-[5px] p-2">{element.arrivalDate}</td>
+                      <td className="w-[5px] p-2">{element.pickUpPoint}</td>
+                      <td className="w-[5px] p-2">{element.seats}</td>
+                      <td className="w-[5px] p-2">{element.ticketprice}</td>
+                      <td className="w-[5px] p-2">{element.operator}</td>
+                      <td className="w-[5px] p-2">{element.currentStatus}</td>
 
-                      <td className="w-[5px]">{element.busType}</td>
-                      {/* <td className="w-[5px]">{element.busstops}</td> */}
-                      {/* <td className="w-[5px]">{element.noofstop}</td> */}
-                      {/* <td className="w-[5px]">{element.bookingseats}</td> */}
-                      {/* <td className="w-[5px]">{element.travelagencyname}</td> */}
+                      <td className="w-[5px] p-2">{element.busType}</td>
+                      {/* <td className="w-[5px] p-2">{element.busstops}</td> */}
+                      {/* <td className="w-[5px] p-2">{element.noofstop}</td> */}
+                      {/* <td className="w-[5px] p-2">{element.bookingseats}</td> */}
+                      {/* <td className="w-[5px] p-2">{element.travelagencyname}</td> */}
                       <td className="w-[5px] p-2 z-0">
                         <Tooltip content="Update Bus">
                           <IconButton variant="text" color="blue-gray">

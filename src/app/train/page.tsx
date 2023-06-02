@@ -77,7 +77,7 @@ export default function Train() {
   console.log("Train data is dhdrt..", train);
 
   return (
-    <div>
+    <div className="tracking-wide	">
       <Card className="w-full">
         <div className="flex p-1 px-2 items-center justify-between rounded-none">
           <div className="flex items-center justify-center">
@@ -128,8 +128,8 @@ export default function Train() {
       {/* <CardBody className="relative overflow-scroll px-1 mt-0"> */}
       <div className="mx-3 h-[500px] w-[98%] mt-[1%] bg-white relative overflow-scroll px-1 mt-0">
         <table className="relative font-roboto w-full min-w-max table-auto text-left text-sm text-black">
-          <thead className="z-1 bg-blue-gray-100 font-bold flex-col">
-            <tr className="z-1 sticky top-0 bg-blue-gray-100 w-full">
+          <thead className="z-1 bg- font-bold flex-col">
+            <tr className="z-1 sticky top-0 bg-GreenBlue text-white w-full">
               <th className="w-[5px] p-2">Train Number</th>
               <th className="w-[5px] p-2">Train Name</th>
               <th className="w-[5px] p-2">From Station</th>

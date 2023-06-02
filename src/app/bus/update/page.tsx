@@ -58,13 +58,6 @@ export default function UpdateBusInfo() {
           type="text"
         />
       </div>
-
-      {/* <BBButton
-        color=""
-        label="Update"
-        size="lg"
-        className="text-white px-4 py-2 rounded-md bg-blackblue"
-      ></BBButton> */}
     </div>
   );
 }

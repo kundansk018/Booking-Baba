@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import getDB from "../connection";
+import { ObjectId } from "mongodb";
 
 let db: any = undefined;
 
@@ -24,6 +25,7 @@ export default async function handler(
       return await updateBus(request, response);
 
     case "DELETE_BUS":
+      console.log("Action >>>>>>>>>>>>>>>>>>>>>>>>>>>>", request.body);
       return await deleteBus(request, response);
 
     case "GET_ALL_BUSES":
@@ -50,10 +52,10 @@ export async function updateBus(
   response: NextApiResponse
 ) {
   const buses = await db.collection("Bus Details");
-  const updateBus = await buses.findOne(request.body._id);
   const res = await buses.updateOne(
-    { updateBus },
+    { _id: new ObjectId(request.body._id) },
     {
+      //$set: request.body,
       $set: {
         busname: request.body.busname,
         busnumber: request.body.busnumber,
@@ -79,7 +81,9 @@ export async function deleteBus(
   response: NextApiResponse
 ) {
   const buses = await db.collection("Bus Details");
-  const res = await buses.deleteOne(request.body);
+  const res = await buses.deleteOne({
+    _id: new ObjectId(request.body),
+  });
   return response.status(200).json({ data: res });
 }
 

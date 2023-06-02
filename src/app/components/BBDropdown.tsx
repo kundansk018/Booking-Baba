@@ -8,6 +8,7 @@ interface Props {
   onChange?: (e: any) => any; // for function type
   color?: any;
   onPress?: (event: any) => any;
+  containerProps?: any;
 }
 
 export default function BBDropdown(props: Props) {
@@ -19,6 +20,8 @@ export default function BBDropdown(props: Props) {
       label={props.label}
       onChange={(e: any) => (props.onChange ? props.onChange("") : null)}
       value={props.value}
+      containerProps={
+        props.containerProps}
     >
       {props.options.map((ele: any) => (
 

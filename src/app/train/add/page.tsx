@@ -4,24 +4,31 @@ import BBButton from "@/app/components/BBButton";
 import BBInput from "@/app/components/BBInput";
 import "../../styles/hotel.css";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useAppDispatch } from "@/redux/store";
 import { useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
 import BBErrorDialog from "@/app/components/BBErrorDialog";
 import { addTrain } from "@/redux/action/trainAction";
+import BBDropdown from "@/app/components/BBDropdown";
 
 export default function AddTrain() {
   const [trainNo, setTrainNo] = useState<string>("");
   const [trainName, setTrainName] = useState<string>("");
   const [from_Stn, setFrom_Stn] = useState<string>("");
   const [to_Stn, setTo_Stn] = useState<string>("");
-  const [contactno, setContactNo] = useState<string>("");
-  const [email, setEmail] = useState<string>("");
   const [fare, setFare] = useState<string>("");
   const [seats, setSeats] = useState<string>("");
   const [coach, setCoach] = useState<any>("");
-  //const [type, setType] = useState<string>("");
+  const [depTime, setDepTime] = useState<string>("");
+  const [arrivalTime, setArrivalTime] = useState<string>("");
+  const [duration, setDuration] = useState<string>("");
+  const [classType, setClassType] = useState<string>("");
+  const [trainType, setTrainType] = useState<string>("");
+  const [operationDays, setOperationDays] = useState<string>("");
+  const [trainRoute, setTrainRoute] = useState<string>("");
+  const [trainDesc, setTrainDesc] = useState<string>("");
+  const [trainImage, setTrainImage] = useState<string>("");
 
   const dispatch = useAppDispatch();
   const [errorDialogMessage, setErrorDialogMessage] = useState([]);
@@ -44,11 +51,18 @@ export default function AddTrain() {
       trainname: trainName,
       from_Stn: from_Stn,
       to_Stn: to_Stn,
-      contactno: contactno,
-      email: email,
+      depTime: depTime,
+      arrivalTime: arrivalTime,
       fare: fare,
       seats: seats,
       coach: coach,
+      duration: duration,
+      classType: classType,
+      trainType: trainType,
+      operationDays: operationDays,
+      trainRoute: trainRoute,
+      trainDesc: trainDesc,
+      trainImage: trainImage,
     };
 
     let isErrorFound = false;
@@ -58,12 +72,12 @@ export default function AddTrain() {
       error.push("Please enter Hotel Name");
     }
 
-    if (!contactno || !contactno.trim()) {
+    if (!arrivalTime || !arrivalTime.trim()) {
       isErrorFound = true;
       error.push("Please enter Contact No");
     }
 
-    if (!email || !email.trim()) {
+    if (!depTime || !depTime.trim()) {
       isErrorFound = true;
       error.push("Please enter valid email address");
     }
@@ -85,6 +99,7 @@ export default function AddTrain() {
       return;
     } else {
       dispatch(addTrain(data));
+      router.push("/train");
     }
   };
 
@@ -110,58 +125,88 @@ export default function AddTrain() {
             />
             <BBInput
               containerProps={{ className: "mb-4" }}
-              type="number"
-              label="Contact No"
-              value={contactno}
-              onChange={(e) => setContactNo(e.target.value)}
+              type="time"
+              label="Arrival Time"
+              value={arrivalTime}
+              onChange={(e) => setArrivalTime(e.target.value)}
+            />
+            <BBInput
+              containerProps={{ className: "mb-4" }}
+              type="time"
+              label="Departure Time"
+              value={depTime}
+              onChange={(e) => setDepTime(e.target.value)}
+            />
+            <BBInput
+              containerProps={{ className: "mb-4" }}
+              type="text"
+              label="Duration"
+              value={duration}
+              onChange={(e) => setDuration(e.target.value)}
             />
           </div>
-          {/* <div>
-            <BBTypography
-              variant="small"
-              color="blue-gray"
-              className="font-signika mb-0 font-medium"
-              text="Type"
-            />
-            <Radio
-              label="AC"
-              name="type"
-              color="blue"
-              value={type}
-              onChange={(e) => setType(e.target.value)}
-            />
-            <Radio
-              label="Non -AC"
-              name="type"
-              color="blue"
-              value={type}
-              onChange={(e) => setType(e.target.value)}
-            />
-          </div> */}
+
           <div className="flex  flex-col mx-5 w-[300px]">
-            <BBInput
+            <BBDropdown
               containerProps={{ className: "mb-4" }}
-              label="From Station"
+              options={[
+                { label: "Mumbai" },
+                { label: "Pune" },
+                { label: "Nashik" },
+              ]}
               value={from_Stn}
-              onChange={(e) => setFrom_Stn(e.target.value)}
+              onPress={(value: any) => {
+                setFrom_Stn(value);
+              }}
+              label="Source Station"
             />
-            <BBInput
+
+            <BBDropdown
               containerProps={{ className: "mb-4" }}
-              label="To Station"
+              options={[
+                { label: "Mumbai" },
+                { label: "Pune" },
+                { label: "Nashik" },
+              ]}
               value={to_Stn}
-              onChange={(e) => setTo_Stn(e.target.value)}
+              onPress={(value: any) => {
+                setTo_Stn(value);
+              }}
+              label="Destination Station"
             />
+
             <BBInput
               containerProps={{ className: "mb-4" }}
               label="No of Coaches"
               value={coach}
               onChange={(e) => setCoach(e.target.value)}
             />
+            <BBInput
+              containerProps={{ className: "mb-4" }}
+              label="Train Route"
+              value={trainRoute}
+              onChange={(e) => setTrainRoute(e.target.value)}
+            />
+            <BBInput
+              containerProps={{ className: "mb-4" }}
+              type="text"
+              label="Train Description"
+              value={trainDesc}
+              onChange={(e) => setTrainDesc(e.target.value)}
+            />
+            <BBInput
+              containerProps={{ className: "mb-4" }}
+              type="file"
+              label="Train Image"
+              value={trainImage}
+              onChange={(e) => setTrainImage(e.target.value)}
+            />
           </div>
 
           <div className="flex  flex-col mx-5 w-[300px] ">
             <BBInput
               containerProps={{ className: "mb-4" }}
+              type="number"
               label="Fare"
               value={fare}
               onChange={(e) => setFare(e.target.value)}
@@ -174,12 +219,40 @@ export default function AddTrain() {
               value={seats + ""}
               onChange={(e) => setSeats(e.target.value)}
             />
+            <BBDropdown
+              containerProps={{ className: "mb-4" }}
+              options={[
+                { label: "Economy" },
+                { label: "Business" },
+                { label: "First Class" },
+              ]}
+              value={classType}
+              onPress={(value: any) => {
+                setClassType(value);
+              }}
+              label="Class Types"
+            />
+
+            <BBDropdown
+              containerProps={{ className: "mb-4" }}
+              options={[
+                { label: "Express" },
+                { label: "Superfast" },
+                { label: "Local" },
+              ]}
+              value={trainType}
+              onPress={(value: any) => {
+                setTrainType(value);
+              }}
+              label="Train Type"
+            />
+
             <BBInput
               containerProps={{ className: "mb-4" }}
-              type="email"
-              label="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              type="text"
+              label="Operation Days"
+              value={operationDays}
+              onChange={(e) => setOperationDays(e.target.value)}
             />
           </div>
         </div>
