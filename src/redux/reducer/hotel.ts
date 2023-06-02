@@ -4,15 +4,16 @@ import {
   ADD_HOTELS_SUCCESS,
   PREVIOUS_HOTEL_DATA,
   ADD_HOTELS_DATA,
-
   UPDATE_HOTEL_DETAILS,
+  SAVE_HOTEL_DETAILS,
 
 } from "../constant";
 export const initialState = {
   loading: false,
   hotelDetails: undefined,
   previousHotelData: null,
-  updateHotelDetails:null
+  updateHotelDetails: null,
+  updateHotelData: null
 
 };
 
@@ -55,11 +56,19 @@ export const HotelReducer = (state = initialState, action: any) => {
 
       }
     };
+    case SAVE_HOTEL_DETAILS: {
+      return {
+        ...state,
+        loading: false,
+        updateHotelDetails: action.payload,
+
+      }
+    };
     case UPDATE_HOTEL_DETAILS: {
       return {
         ...state,
         loading: false,
-        updateHotelDetails : action.payload,
+        updateHotelData: action.payload,
 
       }
     };

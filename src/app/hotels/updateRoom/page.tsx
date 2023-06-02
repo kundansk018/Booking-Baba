@@ -1,7 +1,7 @@
 "use client";
 import BBButton from "@/app/components/BBButton";
 import BBCheckbox from "@/app/components/BBCheckbox";
-import { addHotels } from "@/redux/action/hotelaction";
+import { addHotels, getHotelById, updateHotel } from "@/redux/action/hotelaction";
 import { useAppDispatch } from "@/redux/store";
 import { essential_Kit, options_view, room_amenities } from "@/utils/Data";
 import { PlusIcon, TrashIcon } from "@heroicons/react/24/solid";
@@ -11,17 +11,9 @@ import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
-export default function Page() {
+export default function UpdateRoom({params}:any) {
 
-  let data = [
-    { lable: 'Single Bed', value: 1 },
-    { lable: 'Double Bed', value: 2 },
-    { lable: 'Triple Bed', value: 3 },
-    { lable: 'King Bed', value: 4 },
-    { lable: 'Queen Bed', value: 5 },
-
-  ]
- const { previousHotelData, loading }: any = useSelector((state: any) => state.hotel);
+    const { previousHotelData, loading }: any = useSelector((state: any) => state.hotel);
   // console.log("hotel data is ..", previoushotelData);
   const router = useRouter();
   const dispatch = useAppDispatch();
@@ -33,6 +25,54 @@ export default function Page() {
   const [view, setView] = useState([])
   const [amenities, setAmenities] = useState([])
   const [essentialKit, setEssentialKit] = useState([])
+
+  let data = [
+    { lable: 'Single Bed', value: 1 },
+    { lable: 'Double Bed', value: 2 },
+    { lable: 'Triple Bed', value: 3 },
+    { lable: 'King Bed', value: 4 },
+    { lable: 'Queen Bed', value: 5 },
+
+  ]
+
+  const [selectOptionview, setselectOptionview] = useState("Select Room View")
+  const selectOption_view = (selectedList: any, selectedItem?: any) => {
+    setView(selectedList)
+    let names = selectedList.map((element: any) => element.name)
+    setselectOptionview(names.toString())
+  }
+  const removeOption_view = (selectedList: any, removedItem: any) => {
+    setView(selectedList)
+    let names = selectedList.map((element: any) => element.name)
+    setselectOptionview(names.toString())
+  }
+
+
+  const [selectRoom_Amenities, setselectRoomAmenities] = useState("Select BedRoom Amenities")
+  const selectRoomAmenities = (selectedList: any, selectedItem?: any) => {
+    setAmenities(selectedList)
+    let names = selectedList.map((element: any) => element.name)
+    setselectRoomAmenities(names.toString())
+  }
+  const removeRoomAmenities = (selectedList: any, removedItem: any) => {
+    setAmenities(selectedList)
+    let names = selectedList.map((element: any) => element.name)
+    setselectRoomAmenities(names.toString())
+  }
+
+  const [selectEssentialKit, setselectEssentialKit] = useState("Select Essential Kit")
+  const selectEssential_Kit = (selectedList: any, selectedItem?: any) => {
+    setEssentialKit(selectedList)
+    let names = selectedList.map((element: any) => element.name)
+    setselectEssentialKit(names.toString())
+  }
+  const removeEssential_Kit = (selectedList: any, removedItem: any) => {
+    setEssentialKit(selectedList)
+    let names = selectedList.map((element: any) => element.name)
+    setselectEssentialKit(names.toString())
+  }
+
+
 
   const [roomDetails, setRoomDetails] = useState([
     { id: 1, no_of_bed: 0, price: "", isAC: false, no_rooms: "" },
@@ -71,18 +111,18 @@ export default function Page() {
     console.log(data);
   };
 
-  const addHotelsDetails = () => {
+  const updateHotelsDetails = () => {
     let data = { ...previousHotelData }
-    data.rooms = roomDetails
+    data.rooms= roomDetails
     data.view = view
     data.amenities = amenities
     data.essentialKit = essentialKit
     // data["rooms"]=roomDetails
     console.log(data)
-    dispatch(addHotels(data));
+    dispatch(updateHotel(data));
     router.push("/hotels")
   }
-
+console.log(previousHotelData)
   const deleteRoom = (index: number) => {
     let data = [...roomDetails]
     data.splice(index, 1)
@@ -90,60 +130,32 @@ export default function Page() {
 
   }
 
+  useEffect(() => {
+    let hotel_data = previousHotelData
+   
+    if (hotel_data) {
+      const {roomDetails,view,amenities,essentialKit} = hotel_data
+      setRoomDetails(roomDetails)
+      selectOption_view(view || [])
+      selectRoomAmenities(amenities || [])
+      selectEssential_Kit(essentialKit || [])
 
-
-  const [selectOptionview, setselectOptionview] = useState("Select Room View")
-  const selectOption_view = (selectedList: any, selectedItem: any) => {
-    setView(selectedList)
-    let names = selectedList.map((element: any) => element.name)
-    setselectOptionview(names.toString())
-  }
-  const removeOption_view = (selectedList: any, removedItem: any) => {
-    setView(selectedList)
-    let names = selectedList.map((element: any) => element.name)
-    setselectOptionview(names.toString())
-  }
-
-
-  const [selectRoom_Amenities, setselectRoomAmenities] = useState("Select BedRoom Amenities")
-  const selectRoomAmenities = (selectedList: any, selectedItem: any) => {
-    setAmenities(selectedList)
-    let names = selectedList.map((element: any) => element.name)
-    setselectRoomAmenities(names.toString())
-  }
-  const removeRoomAmenities = (selectedList: any, removedItem: any) => {
-    setAmenities(selectedList)
-    let names = selectedList.map((element: any) => element.name)
-    setselectRoomAmenities(names.toString())
-  }
-
-  const [selectEssentialKit, setselectEssentialKit] = useState("Select Essential Kit")
-  const selectEssential_Kit = (selectedList: any, selectedItem: any) => {
-    setEssentialKit(selectedList)
-    let names = selectedList.map((element: any) => element.name)
-    setselectEssentialKit(names.toString())
-  }
-  const removeEssential_Kit = (selectedList: any, removedItem: any) => {
-    setEssentialKit(selectedList)
-    let names = selectedList.map((element: any) => element.name)
-    setselectEssentialKit(names.toString())
-  }
-
-
-
-
-
-  return (
+    }
+  }, [])
+  useEffect(() => {
+    dispatch(getHotelById(params.id))
+  }, [])
+ return (
     loading ? <Spinner /> :
       <div className="bg-white h-full  mt-5 m-auto w-[60%] justify-center pb-1">
         <div className="flex flex-row h-12  bg-[#1B6CA8] text-white px-5  text-xl  justify-between">
-          <p className="mt-2">Add Hotel Rooms</p>
+          <p className="mt-4">Update Hotel Rooms</p>
           <PlusIcon className=" w-6" onClick={addMore} />
 
         </div>
         <div className="flex flex-col justify-center mt-5 align-middle">
 
-          {roomDetails.map((element: any, index: number) => (
+          {roomDetails&& roomDetails.length>0&&roomDetails.map((element: any, index: number) => (
             <div className="m-auto">
 
               <div className=" flex flex-row  justify-between">
@@ -242,7 +254,7 @@ export default function Page() {
           color=""
           label="ADD"
           size="lg"
-          onClick={addHotelsDetails}
+          onClick={updateHotelsDetails}
           className="h-12 bg-blackblue w-[300px]  flex justify-center m-auto mb-5"
         />
       </div>

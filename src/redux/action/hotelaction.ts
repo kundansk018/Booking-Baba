@@ -5,11 +5,12 @@ import {
   ADD_HOTELS_SUCCESS,
   PREVIOUS_HOTEL_DATA,
   REQUEST_COMPLETED,
-  REQUEST_STARTED,
+  REQUEST_STARTED, SAVE_HOTEL_DETAILS,
   UPDATE_HOTEL_DETAILS,
 } from "../constant";
 import { AppDispatch } from "../store";
-
+ 
+/*.................Add hotels..........*/
 export const addHotels = (data: any) => async (dispatch: AppDispatch) => {
   console.log("data in action: ", data);
   dispatch({ type: REQUEST_STARTED, payload: null });
@@ -65,6 +66,9 @@ export const savePreviousData =
 //   }
 // };
 
+
+
+  /*................. get Hotel By Id..........*/
 export const getHotelById = (id: string) => async (dispatch: AppDispatch) => {
   dispatch({ type: REQUEST_STARTED, payload: null });
   let data = { id: id };
@@ -74,6 +78,33 @@ export const getHotelById = (id: string) => async (dispatch: AppDispatch) => {
       method: "POST",
 
       body: JSON.stringify(data),
+      headers: {
+        "content-type": "application/json",
+      },
+    }
+  );  
+  if (res.ok === true) {
+    console.log("updtae response", res)
+    let hotel_records = await res.json()
+    dispatch({ type: SAVE_HOTEL_DETAILS, payload: hotel_records })
+  }
+  dispatch({ type: REQUEST_COMPLETED, payload: null });
+
+}
+
+   
+  /*................. update Hotel By Id..........*/
+export const  updateHotel = (data: any) => async (dispatch: AppDispatch) => {
+
+  dispatch({ type: REQUEST_STARTED, payload: null });
+  let param = { "id": data._id,"data":data }
+  const res = await fetch(
+
+    "http://localhost:3000/api/hotelsapi/hotelsapi?action=updateHotels",
+    {
+      method: "POST",
+
+      body: JSON.stringify(param),
       headers: {
         "content-type": "application/json",
       },

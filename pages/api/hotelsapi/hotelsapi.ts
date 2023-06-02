@@ -53,6 +53,13 @@ export async function gethotel(request: NextApiRequest, response: NextApiRespons
     return response.status(200).json({ data: res });
 }
 
+export async function getHotelById(request: NextApiRequest, response: NextApiResponse) {
+    const hotels = await db.collection("Hotels_Details");
+    const res = await hotels.findOne({ _id: new ObjectId(request.body.id) });
+    return response.status(200).json({ data: res });
+}
+
+
 export async function updatehotel(request: NextApiRequest, response: NextApiResponse) {
     const hotels = await db.collection("Hotels_Details");
     const res = await hotels.updateOne(
@@ -64,8 +71,3 @@ export async function updatehotel(request: NextApiRequest, response: NextApiResp
     return response.status(200).json({ data: res });
 }
 
-export async function getHotelById(request: NextApiRequest, response: NextApiResponse) {
-    const hotels = await db.collection("Hotels_Details");
-    const res = await hotels.findOne({ _id: new ObjectId(request.body.id) });
-    return response.status(200).json({ data: res });
-}

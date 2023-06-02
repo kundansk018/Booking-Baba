@@ -28,6 +28,7 @@ import {
 import { useAppDispatch } from "@/redux/store";
 import { ADD_HOTELS_DATA } from "@/redux/constant";
 import { useSelector } from "react-redux";
+import { getHotelById } from "@/redux/action/hotelaction";
 
 const TABS = [
   {
@@ -142,6 +143,9 @@ export default function Hotels() {
               <th className="w-[5px] p-2">Admin Actions</th>
             </tr>
           </thead>
+          <tbody>
+            {hotel
+              ? hotel.data.map((element: any) => (
           <tbody className="-z-50">
             {hotel
               ? hotel.data.map((element: any) => (
@@ -168,9 +172,10 @@ export default function Hotels() {
                       <td className="w-[5px] p-2">{element.city}</td>
                       <td className="w-[5px] p-2">{element.country}</td>
                       <td className="w-[5px] p-2">{element.pin}</td>
-                      <td className="w-[5px] p-2 z-0">
-                        <Tooltip content="Edit Hotel">
-                          <IconButton variant="text" color="blue-gray">
+                      <td className="w-[5px] p-2">{"contries"}</td>
+                      <td className="w-[5px] p-2">
+                        <Tooltip content="Update Hotel Details" >
+                          <IconButton onClick={()=>router.push('/hotels/update/'+element._id)} variant="text" color="blue-gray">
                             <PencilIcon className="h-4 w-4" />
                           </IconButton>
                         </Tooltip>

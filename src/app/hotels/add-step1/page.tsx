@@ -22,8 +22,68 @@ import { useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
 import BBErrorDialog from "@/app/components/BBErrorDialog";
 import Multiselect from "multiselect-react-dropdown";
+import { Basic_Facilities, Safety, food_facilities, general_services } from "@/utils/Data";
+
+
+
 
 export default function AddHotels() {
+
+
+  const [selectedFoodName, setSelectedFoodName] = useState("Select foods & drinks")
+  const select_food_facilities = (selectedList: any, selectedItem: any) => {
+    setFood(selectedList)
+    let names = selectedList.map((element: any) => element.name)
+    setSelectedFoodName(names.toString())
+
+  }
+  const remove_food_facilities = (selectedList: any, removedItem: any) => {
+    setFood(selectedList)
+    console.log(selectedList)
+    let names = selectedList.map((element: any) => element.name)
+    setSelectedFoodName(names.toString())
+  }
+
+
+  const [selectedFoodBasics, setSelectedFoodBasics] = useState("Select foods & drinks")
+  const selectBasic_Facilities = (selectedList: any, selectedItem: any) => {
+    setBasics(selectedList)
+    let names = selectedList.map((element: any) => element.name)
+    setSelectedFoodBasics(names.toString())
+    console.log(selectedList)
+  }
+  const removeBasic_Facilities = (selectedList: any, removedItem: any) => {
+    setBasics(selectedList)
+    let names = selectedList.map((element: any) => element.name)
+    setSelectedFoodBasics(names.toString())
+
+  }
+
+  const [selectedGeneral, setSelectedGeneral] = useState("Select General Servicess")
+  const select_general_services = (selectedList: any, selectedItem: any) => {
+    setGeneral(selectedList)
+    let names = selectedList.map((element: any) => element.name)
+    setSelectedGeneral(names.toString())
+  }
+  const remove_general_services = (selectedList: any, removedItem: any) => {
+    setGeneral(selectedList)
+    let names = selectedList.map((element: any) => element.name)
+    setSelectedGeneral(names.toString())
+  }
+
+  const [selectedSafety, setSelectedSafety] = useState("Select Safety & Security")
+  const select_safety = (selectedList: any, selectedItem: any) => {
+    setSafety(selectedList)
+    let names = selectedList.map((element: any) => element.name)
+    setSelectedSafety(names.toString())
+
+  }
+  const remove_safety = (selectedList: any, removedItem: any) => {
+    setSafety(selectedList)
+    let names = selectedList.map((element: any) => element.name)
+    setSelectedSafety(names.toString())
+  }
+
   const [hotelname, setHotelname] = useState<String>("");
   const [adress, setAdress] = useState<String>("");
   const [street, setStreet] = useState<String>("");
@@ -38,12 +98,15 @@ export default function AddHotels() {
   const [kids, setKids] = useState<boolean>(true);
   const [lunch, setLunch] = useState<boolean>(true);
   const [dinner, setDinner] = useState<boolean>(true);
-  // const [price, setPrice] = useState("");
   const [country, setCountry] = useState("")
   const [date, setDate] = useState("")
-
   const [location, setLocation] = useState("");
-  // const [room, setRoom] = useState("");
+
+  const [food, setFood] = useState([])
+  const [basics, setBasics] = useState([])
+  const [generalService, setGeneral] = useState([])
+  const [safety, setSafety] = useState([])
+
 
   const dispatch = useAppDispatch();
   const [errorDialogMessage, setErrorDialogMessage] = useState([]);
@@ -63,8 +126,6 @@ export default function AddHotels() {
     });
   }, []);
 
-
-
   const addHotelDetails = () => {
     let data = {
       hotelname: hotelname,
@@ -79,13 +140,17 @@ export default function AddHotels() {
       country: country,
       date: date,
       location: location,
-      // room: room,
       dinner: dinner,
       lunch: lunch,
       pool: pool,
       kids: kids,
-      wifi: wifi
+      wifi: wifi,
+      food: food,
+      basics: basics,
+      generalService: generalService,
+      safety: safety
     };
+
 
     let isErrorFound = false;
     let error: any = [];
@@ -118,10 +183,6 @@ export default function AddHotels() {
       error.push("Please enter Address");
     }
 
-    // if (!room || !room.trim()) {
-    //   isErrorFound = true;
-    //   error.push("Please enter Address");
-    // }
     if (isErrorFound) {
       setErrorDialogMessage(error);
       setShowErrorDialog(true);
@@ -134,81 +195,7 @@ export default function AddHotels() {
 
   }
 
-  const food_facilities = [
 
-    { name: 'Pure Veg', id: 1 },
-    { name: 'Veg & Non-Veg', id: 2 },
-    { name: 'Kids Meals', id: 3 },
-    { name: '24-hour Coffe Shop', id: 4 },
-    { name: 'Dinning Area', id: 5 },
-    { name: 'Bar', id: 6 },
-  
-]
-const select_food_facilities= (selectedList: any, selectedItem: any) => {
-  console.log(selectedList)
-  console.log(selectedItem)
-}
-const remove_food_facilities = (selectedList: any, removedItem: any) => {
-
-}
-
-  const Basic_Facilities = [
-
-    { name: '24-hour Room Service', id: 1 },
-    { name: 'Free Parking', id: 2 },
-    { name: 'Air Conditioning', id: 3 },
-    { name: 'Elevator/Lift', id: 4 },
-    { name: 'Power Backup', id: 5 },
-    { name: 'Laundry Service', id: 6 },
-    { name: 'Express check-in/check-out', id: 6 },
-    { name: 'Smoking Rooms', id: 7 },
-    { name: 'Newspaper', id: 8 },
-    { name: 'Free Wi-Fi', id: 9 },
-     { name: 'HouseKeeping', id: 10 },
-     { name: 'Emergency Exits', id: 10 },
-]
-
-  const selectBasic_Facilities = (selectedList: any, selectedItem: any) => {
-    console.log(selectedList)
-    console.log(selectedItem)
-  }
-  const removeBasic_Facilities = (selectedList: any, removedItem: any) => {
-
-  }
-
-  const general_services = [
-
-    { name: 'Doctor on Call', id: 1 },
-    { name: 'Luggage Storage', id: 2 },
-    { name: 'Wheechair Accessible', id: 3 },
-    { name: 'Multilingual Staff', id: 4 },
-    { name: 'Wake-Up Call', id: 5 },
-  ]
-
-  const select_general_services = (selectedList: any, selectedItem: any) => {
-    console.log(selectedList)
-    console.log(selectedItem)
-  }
-  const remove_general_services = (selectedList: any, removedItem: any) => {
-
-  }
-  const safety = [
-
-    { name: 'CCTV', id: 1 },
-    { name: 'Fire Extinguishers', id: 2 },
-    { name: 'Security Alarms', id: 3 },
-    { name: 'First-aid Services', id: 4 },
-  
-   
-]
-
-  const select_safety = (selectedList: any, selectedItem: any) => {
-    console.log(selectedList)
-    console.log(selectedItem)
-  }
-  const remove_safety = (selectedList: any, removedItem: any) => {
-
-  }
 
   return (
     <>
@@ -280,6 +267,7 @@ const remove_food_facilities = (selectedList: any, removedItem: any) => {
               containerProps={{ className: "mb-4" }}
               label="PinCode"
               value={pin}
+              type='nunmber'
               onChange={(e) => setPin(e.target.value)}
             />
             <BBInput
@@ -299,103 +287,61 @@ const remove_food_facilities = (selectedList: any, removedItem: any) => {
           </div>
 
           <div className="flex  flex-col mx-4 w-[300px] ">
-            <div className="my-2 w-60">
+            <div className="my-2 w-60  font-sm ">
               <Multiselect
-                placeholder="Select Basic Facilities"
+                placeholder={selectedFoodBasics || "Select Basic Facilities"}
                 options={Basic_Facilities}
                 onSelect={selectBasic_Facilities}
                 onRemove={removeBasic_Facilities}
                 displayValue="name"
+                avoidHighlightFirstOption={true}
+                showCheckbox={true}
+                hideSelectedList={true}
+              />
+            </div>
+
+            <div className="my-2 ">
+              <Multiselect
+                // placeholder={food?food[0]?.name  :"Select FooD & Drinks"}
+                placeholder={selectedFoodName || "Select Food & Drinks"}
+                options={food_facilities}
+                onSelect={select_food_facilities}
+                onRemove={remove_food_facilities}
+                displayValue="name"
+                avoidHighlightFirstOption={true}
+                showCheckbox={true}
+                hideSelectedList={true}
+              />
+            </div>
+            <div className="my-2 w-60">
+              <Multiselect
+                placeholder={selectedGeneral || "Select General Services"}
+                options={general_services}
+                onSelect={select_general_services}
+                onRemove={remove_general_services}
+                displayValue="name"
+                avoidHighlightFirstOption={true}
+                showCheckbox={true}
+                hideSelectedList={true}
               />
             </div>
 
             <div className="my-2 w-60">
               <Multiselect
-                placeholder="Select FooD & Drinks"
-                options={food_facilities}
-                onSelect={select_food_facilities}
-                onRemove={remove_food_facilities}
-                displayValue="name"
-              />
-            </div>
-            <div className="my-2 w-60">
-              <Multiselect
-                placeholder="Select General Services"
-                options={general_services}
-                onSelect={select_general_services}
-                onRemove={remove_general_services}
-                displayValue="name"
-              />
-            </div>
-            <div className="my-2 w-60">
-              <Multiselect
-                placeholder="Select FooD & Drinks"
-                options={food_facilities}
-                onSelect={select_food_facilities}
-                onRemove={remove_food_facilities}
-                displayValue="name"
-              />
-            </div>
-            <div className="my-2 w-60">
-              <Multiselect
-                placeholder="Select Safety & Security"
-                options={safety}
+                placeholder={selectedSafety || "Select Safety & Security"}
+                options={Safety}
                 onSelect={select_safety}
                 onRemove={remove_safety}
                 displayValue="name"
+                avoidHighlightFirstOption={true}
+                showCheckbox={true}
+                hideSelectedList={true}
               />
             </div>
           </div>
         </div>
 
-        {/* <List className=" flex flex-row justify-center">
-          <h3> Services:</h3>
 
-          <BBCheckbox
-            containerProps={{ className: "hover:before:opacity-0" }}
-            ripple={false}
-            id="1"
-            onChange={(e) => setDinner(!dinner)}
-            checked={dinner}
-            label="Dinner"
-          />
-
-          <BBCheckbox
-            containerProps={{ className: "hover:before:opacity-0" }}
-            ripple={false}
-            id="2"
-            onChange={(e) => setLunch(!lunch)}
-            checked={lunch}
-            label="Lunch"
-          />
-
-          <BBCheckbox
-            containerProps={{ className: "hover:before:opacity-0" }}
-            ripple={false}
-            id="3"
-            onChange={(e) => setPool(!pool)}
-            checked={pool}
-            label="Swimming Pool"
-          />
-
-          <BBCheckbox
-            containerProps={{ className: "hover:before:opacity-0" }}
-            ripple={false}
-            id="4"
-            onChange={(e) => setKids(!kids)}
-            checked={kids}
-            label="kids"
-          />
-
-          <BBCheckbox
-            containerProps={{ className: "hover:before:opacity-0" }}
-            ripple={false}
-            id="5"
-            onChange={(e) => setWifi(!wifi)}
-            checked={wifi}
-            label="WiFi"
-          />
-        </List> */}
         <div className="flex justify-center mt-4">
           <BBButton
             color=""
