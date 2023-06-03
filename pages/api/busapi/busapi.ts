@@ -31,6 +31,9 @@ export default async function handler(
     case "GET_ALL_BUSES":
       return await getAllBuses(request, response);
 
+    case "GET_BUS_BY_ID":
+      return await getBusById(request, response);
+
     default:
       return response
         .status(404)
@@ -93,5 +96,10 @@ export async function getAllBuses(
 ) {
   const buses = await db.collection("Bus Details");
   const res = await buses.find().toArray();
+  return response.status(200).json({ data: res });
+}
+export async function getBusById(request: NextApiRequest, response: NextApiResponse) {
+  const bus = await db.collection("Bus Details");
+  const res = await bus.findOne({ _id: new ObjectId(request.body._id) });
   return response.status(200).json({ data: res });
 }

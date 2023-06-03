@@ -30,21 +30,9 @@ import {
 import { useAppDispatch } from "@/redux/store";
 import { useSelector } from "react-redux";
 import { ADD_BUS_REQUEST_SUCCESS } from "@/redux/constant";
-import { deleteBusAction } from "@/redux/action/busaction";
+import { deleteBusAction, updateBusAction } from "@/redux/action/busaction";
 
 const TABS = [
-  {
-    label: "All",
-    value: "all",
-  },
-  {
-    label: "Monitored",
-    value: "monitored",
-  },
-  {
-    label: "Unmonitored",
-    value: "unmonitored",
-  },
   {
     label: "All",
     value: "all",
@@ -88,6 +76,16 @@ export default function Bus() {
 
     getBus();
   }, []);
+
+  const deleteBus = (id: string) => {
+    dispatch(deleteBusAction(id))
+  }
+
+  const updateBus = (id: string) => {
+    router.push("/bus/updatebus/" + id)
+
+  }
+
 
   const router = useRouter();
   return (
@@ -168,53 +166,53 @@ export default function Bus() {
           <tbody>
             {bus
               ? bus.data.map((element: any) => (
-                  <>
-                    <tr className="border-b">
-                      <td className="w-[5px] p-2">
-                        <Avatar
-                          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTI5KPcBp9vKBWRnMlYxr8AXUbQO6GiHvrBQZ5FJiVx6w9kmarHbNLCGzgnMqHkrjl7-zE&usqp=CAU"
-                          alt="imagee"
-                          size="md"
-                        />
-                      </td>
-                      <td className="w-[5px] p-2">{element.busnumber}</td>
-                      <td className="w-[5px] p-2 font-semibold">
-                        {element.busname}
-                      </td>
-                      <td className="w-[5px] p-2">{element.from}</td>
-                      <td className="w-[5px] p-2">{element.to}</td>
-                      <td className="w-[5px] p-2">{element.arrivalDate}</td>
-                      <td className="w-[5px] p-2">{element.arrivalTime}</td>
-                      <td className="w-[5px] p-2">{element.pickUpPoint}</td>
-                      <td className="w-[5px] p-2">{element.seats}</td>
-                      <td className="w-[5px] p-2">{element.ticketprice}</td>
-                      <td className="w-[5px] p-2">{element.operator}</td>
-                      <td className="w-[5px] p-2">{element.currentStatus}</td>
-                      <td className="w-[5px] p-2">{element.busType}</td>
-                      <td className="w-[5px] p-2">{element.busstops}</td>
-                      <td className="w-[5px] p-2">{element.noofstop}</td>
-                      <td className="w-[5px] p-2">{element.bookingseats}</td>
-                      <td className="w-[5px] p-2">
-                        {element.travelagencyname}
-                      </td>
-                      <td className="w-[5px] p-2 ">
-                        <Tooltip content="Update Bus">
-                          <IconButton variant="text" color="blue-gray">
-                            <PencilIcon className="h-4 w-4" />
-                          </IconButton>
-                        </Tooltip>
-                        <Tooltip content="Delete Bus">
-                          <IconButton variant="text" color="blue-gray">
-                            <TrashIcon
-                              className=" w-4 text-red-500"
-                              onClick={() => alert("Bus Deleted")}
-                            />
-                          </IconButton>
-                        </Tooltip>
-                      </td>
-                    </tr>
-                  </>
-                ))
+                <>
+                  <tr className="border-b">
+                    <td className="w-[5px] p-2">
+                      <Avatar
+                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTI5KPcBp9vKBWRnMlYxr8AXUbQO6GiHvrBQZ5FJiVx6w9kmarHbNLCGzgnMqHkrjl7-zE&usqp=CAU"
+                        alt="imagee"
+                        size="md"
+                      />
+                    </td>
+                    <td className="w-[5px] p-2">{element.busnumber}</td>
+                    <td className="w-[5px] p-2 font-semibold">
+                      {element.busname}
+                    </td>
+                    <td className="w-[5px] p-2">{element.from}</td>
+                    <td className="w-[5px] p-2">{element.to}</td>
+                    <td className="w-[5px] p-2">{element.arrivalDate}</td>
+                    <td className="w-[5px] p-2">{element.arrivalTime}</td>
+                    <td className="w-[5px] p-2">{element.pickUpPoint}</td>
+                    <td className="w-[5px] p-2">{element.seats}</td>
+                    <td className="w-[5px] p-2">{element.ticketprice}</td>
+                    <td className="w-[5px] p-2">{element.operator}</td>
+                    <td className="w-[5px] p-2">{element.currentStatus}</td>
+                    <td className="w-[5px] p-2">{element.busType}</td>
+                    <td className="w-[5px] p-2">{element.busstops}</td>
+                    <td className="w-[5px] p-2">{element.noofstop}</td>
+                    <td className="w-[5px] p-2">{element.bookingseats}</td>
+                    <td className="w-[5px] p-2">
+                      {element.travelagencyname}
+                    </td>
+                    <td className="w-[5px] p-2 ">
+                      <Tooltip content="Update Bus">
+                        <IconButton onClick={() => updateBus(element._id)} variant="text" color="blue-gray">
+                          <PencilIcon className="h-4 w-4" />
+                        </IconButton>
+                      </Tooltip>
+                      <Tooltip content="Delete Bus">
+                        <IconButton onClick={() => deleteBus(element._id)} variant="text" color="blue-gray">
+                          <TrashIcon
+                            className=" w-4 text-red-500"
+                            onClick={() => alert("Bus Deleted")}
+                          />
+                        </IconButton>
+                      </Tooltip>
+                    </td>
+                  </tr>
+                </>
+              ))
               : "Data Not Found.."}
           </tbody>
         </table>

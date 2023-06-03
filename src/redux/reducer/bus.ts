@@ -2,20 +2,26 @@ import {
   ADD_BUS_REQUEST_FAIL,
   ADD_BUS_REQUEST_SUCCESS,
   DELETE_BUS_REQUEST_SUCCESS,
+  UPDATE_BUS_DETAILS,
 } from "../constant";
 
 export const initialState = {
   busDetails: null,
+  updateBusDetails: null
 };
 
 export const BusReducer = (state = initialState, action: any) => {
   switch (action.type) {
-    // case ADD_BUS_REQUEST:
-    //   return {
-    //     ...state,
-    //     loading: true,
-    //     busDetails: undefined,
-    //   };
+
+
+    case UPDATE_BUS_DETAILS:
+      return {
+        ...state,
+        loading: false,
+        updateBusDetails: action.payload,
+      };
+
+
 
     case ADD_BUS_REQUEST_SUCCESS: {
       console.log("data in bus reducer: ", action.payload);
