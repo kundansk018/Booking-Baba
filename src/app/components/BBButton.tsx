@@ -6,7 +6,7 @@ interface button {
   type?: "button" | "submit" | "reset" | undefined;
   onClick: (e: any) => void; // for function type
   size: "sm" | "lg" | "md";
-  color: any;
+  color?: any;
   className?: string;
 }
 
@@ -15,7 +15,7 @@ export default function BBButton(props: button) {
     <Button
       type={props.type}
       onClick={props.onClick}
-      color={props.color}
+      color={props.color||'blue'}
       size={props.size}
       className={props.className}
     >

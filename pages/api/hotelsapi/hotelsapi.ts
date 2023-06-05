@@ -64,6 +64,7 @@ export async function getHotelById(request: NextApiRequest, response: NextApiRes
 
 export async function updatehotel(request: NextApiRequest, response: NextApiResponse) {
     const hotels = await db.collection("Hotels_Details");
+    console.log("Data ",request.body.data)
     const res = await hotels.updateOne(
         { _id: new ObjectId(request.body.id) },
         {

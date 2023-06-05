@@ -1,7 +1,7 @@
 "use client";
 import BBButton from "@/app/components/BBButton";
-import BBCheckbox from "@/app/components/BBCheckbox";
-import { addHotels, getHotelById, updateHotel } from "@/redux/action/hotelaction";
+
+import { updateHotel } from "@/redux/action/hotelaction";
 import { useAppDispatch } from "@/redux/store";
 import { essential_Kit, options_view, room_amenities } from "@/utils/Data";
 import { PlusIcon, TrashIcon } from "@heroicons/react/24/solid";
@@ -14,17 +14,17 @@ import { useSelector } from "react-redux";
 export default function UpdateRoom({params}:any) {
 
     const { previousHotelData, loading }: any = useSelector((state: any) => state.hotel);
-  // console.log("hotel data is ..", previoushotelData);
+  console.log("hotel data is ..", previousHotelData);
   const router = useRouter();
   const dispatch = useAppDispatch();
-  // useEffect(() => {
-  //   if (previoushotelData) {
-  //     // router.push('/hotels')
-  //   }
-  // }, [previoushotelData]);
-  const [view, setView] = useState([])
-  const [amenities, setAmenities] = useState([])
-  const [essentialKit, setEssentialKit] = useState([])
+
+  // const [view, setView] = useState([])
+  // const [amenities, setAmenities] = useState([])
+  // const [essentialKit, setEssentialKit] = useState([])
+  const [roomDetails, setRoomDetails] = useState([
+    { id: 1, no_of_bed: 0, price: "", isAC: false, no_rooms: "" ,view:[], amenities:[],essentialKit:[]},
+  ]);
+
 
   let data = [
     { lable: 'Single Bed', value: 1 },
@@ -34,51 +34,48 @@ export default function UpdateRoom({params}:any) {
     { lable: 'Queen Bed', value: 5 },
 
   ]
-
-  const [selectOptionview, setselectOptionview] = useState("Select Room View")
-  const selectOption_view = (selectedList: any, selectedItem?: any) => {
-    setView(selectedList)
-    let names = selectedList.map((element: any) => element.name)
-    setselectOptionview(names.toString())
+  const selectOption_view = (index:number,selectedList: any, selectedItem: any) => {
+    let data = [...roomDetails];
+    data[index].view = selectedList;
+    setRoomDetails(data);
   }
-  const removeOption_view = (selectedList: any, removedItem: any) => {
-    setView(selectedList)
-    let names = selectedList.map((element: any) => element.name)
-    setselectOptionview(names.toString())
+ const getSelectedViews=(index:number)=>{
+   let names = roomDetails[index]?.view?.map((element: any) => element.name)
+   if(names && names.length>0)
+   return names.toString()
+   else
+   return "Select Room View"
   }
+ 
+ 
+  const selectRoomAmenities = (index:number,selectedList: any, selectedItem: any) => {
+    let data = [...roomDetails];
+    data[index].amenities= selectedList;
+    setRoomDetails(data);
+   }
+  const getSelectedAmenities=(index:number)=>{
+    let names = roomDetails[index]?.amenities?.map((element: any) => element.name)
+    if(names && names.length>0)
+    return names.toString()
+    else
+    return "Select BedRoom Amenities"
+   }
 
-
-  const [selectRoom_Amenities, setselectRoomAmenities] = useState("Select BedRoom Amenities")
-  const selectRoomAmenities = (selectedList: any, selectedItem?: any) => {
-    setAmenities(selectedList)
-    let names = selectedList.map((element: any) => element.name)
-    setselectRoomAmenities(names.toString())
+  
+  const selectEssential_Kit = (index:number,selectedList: any, selectedItem: any) => {
+    let data = [...roomDetails];
+    data[index].essentialKit= selectedList;
+    setRoomDetails(data);
   }
-  const removeRoomAmenities = (selectedList: any, removedItem: any) => {
-    setAmenities(selectedList)
-    let names = selectedList.map((element: any) => element.name)
-    setselectRoomAmenities(names.toString())
-  }
-
-  const [selectEssentialKit, setselectEssentialKit] = useState("Select Essential Kit")
-  const selectEssential_Kit = (selectedList: any, selectedItem?: any) => {
-    setEssentialKit(selectedList)
-    let names = selectedList.map((element: any) => element.name)
-    setselectEssentialKit(names.toString())
-  }
-  const removeEssential_Kit = (selectedList: any, removedItem: any) => {
-    setEssentialKit(selectedList)
-    let names = selectedList.map((element: any) => element.name)
-    setselectEssentialKit(names.toString())
-  }
-
-
-
-  const [roomDetails, setRoomDetails] = useState([
-    { id: 1, no_of_bed: 0, price: "", isAC: false, no_rooms: "" },
-  ]);
-
-  const setOptionValue = (index: number, value: number) => {
+ const getSelectedKit=(index:number)=>{
+  let names = roomDetails[index]?.essentialKit?.map((element: any) => element.name)
+    if(names && names.length>0)
+    return names.toString()
+    else
+    return "Select Essential Kit"
+ }
+   
+ const setOptionValue = (index: number, value: number) => {
     let data = [...roomDetails];
     data[index].no_of_bed = value;
     setRoomDetails(data);
@@ -106,7 +103,7 @@ export default function UpdateRoom({params}:any) {
 
   const addMore = () => {
     let data = [...roomDetails];
-    data.push({ id: data.length + 1, no_of_bed: 0, price: "", isAC: false, no_rooms: "" });
+    data.push({ id: data.length + 1, no_of_bed: 0, price: "", isAC: false, no_rooms: "",view:[], amenities:[],essentialKit:[] });
     setRoomDetails(data);
     console.log(data);
   };
@@ -114,37 +111,36 @@ export default function UpdateRoom({params}:any) {
   const updateHotelsDetails = () => {
     let data = { ...previousHotelData }
     data.rooms= roomDetails
-    data.view = view
-    data.amenities = amenities
-    data.essentialKit = essentialKit
-    // data["rooms"]=roomDetails
+   debugger;
+  // data["rooms"]=roomDetails
     console.log(data)
     dispatch(updateHotel(data));
-    router.push("/hotels")
+    // router.push("/hotels")
   }
-console.log(previousHotelData)
+
   const deleteRoom = (index: number) => {
     let data = [...roomDetails]
     data.splice(index, 1)
     setRoomDetails(data)
 
   }
+  const getSelectedBde=(no_of_bed:any)=>{
+   let filterData=data.filter((element)=> element.value==no_of_bed)
+   if(filterData.length>0){
+    return filterData[0].lable
+   }
+  }
 
   useEffect(() => {
     let hotel_data = previousHotelData
    
     if (hotel_data) {
-      const {roomDetails,view,amenities,essentialKit} = hotel_data
-      setRoomDetails(roomDetails)
-      selectOption_view(view || [])
-      selectRoomAmenities(amenities || [])
-      selectEssential_Kit(essentialKit || [])
-
+    // const {view,amenities,essentialKit} = hotel_data
+      setRoomDetails(hotel_data.rooms||roomDetails)
+    
     }
-  }, [])
-  useEffect(() => {
-    dispatch(getHotelById(params.id))
-  }, [])
+  }, [previousHotelData])
+ 
  return (
     loading ? <Spinner /> :
       <div className="bg-white h-full  mt-5 m-auto w-[60%] justify-center pb-1">
@@ -156,7 +152,7 @@ console.log(previousHotelData)
         <div className="flex flex-col justify-center mt-5 align-middle">
 
           {roomDetails&& roomDetails.length>0&&roomDetails.map((element: any, index: number) => (
-            <div className="m-auto">
+            <div className="m-auto" key={index}>
 
               <div className=" flex flex-row  justify-between">
                 <p className="font-medium ">  Add Room {element.id} </p>
@@ -166,7 +162,7 @@ console.log(previousHotelData)
 
                 <div className="flex  flex-col mx-4 w-[300px]">
                   <div className="my-2 w-72">
-                    <Select label="Select Bed">
+                    <Select label="Select Bed" value={ getSelectedBde(element.no_of_bed)}>
                       {data.map((item: any) => (
                         <Option value={item.value} onClick={() => setOptionValue(index, item.value)}>
                           {item.lable}
@@ -209,10 +205,10 @@ console.log(previousHotelData)
                 <div className="flex  flex-col mx-4 w-[300px]">
                   <div className="my-2 w-72">
                     <Multiselect
-                      placeholder={selectOptionview ||"Select Room View"}
+                      placeholder={getSelectedViews(index)}
                       options={options_view}
-                      onSelect={selectOption_view}
-                      onRemove={removeOption_view}
+                      onSelect={(selectedList, selectedItem)=>selectOption_view(index,selectedList, selectedItem)}
+                      onRemove={(selectedList, selectedItem)=>selectOption_view(index,selectedList, selectedItem)}
                       displayValue="name"
                       avoidHighlightFirstOption={true}
                       showCheckbox={true}
@@ -221,10 +217,10 @@ console.log(previousHotelData)
                   </div>
                   <div className="my-2 w-72">
                     <Multiselect
-                      placeholder={selectRoom_Amenities || "Select BedRoom Amenities"}
+                      placeholder={getSelectedAmenities(index)}
                       options={room_amenities}
-                      onSelect={selectRoomAmenities}
-                      onRemove={removeRoomAmenities}
+                      onSelect={(selectedList, selectedItem) => selectRoomAmenities(index,selectedList, selectedItem)}
+                      onRemove={(selectedList, selectedItem) => selectRoomAmenities(index,selectedList, selectedItem)}
                       displayValue="name"
                       avoidHighlightFirstOption={true}
                       showCheckbox={true}
@@ -233,10 +229,10 @@ console.log(previousHotelData)
                   </div>
                   <div className="my-2 w-72">
                     <Multiselect
-                      placeholder={selectEssentialKit ||"Select Essential Kit"}
+                      placeholder={getSelectedKit(index)}
                       options={essential_Kit}
-                      onSelect={selectEssential_Kit}
-                      onRemove={removeEssential_Kit}
+                      onSelect={(selectedList, selectedItem) =>selectEssential_Kit(index,selectedList, selectedItem)}
+                      onRemove={(selectedList, selectedItem) =>selectEssential_Kit(index,selectedList, selectedItem)}
                       displayValue="name"
                       avoidHighlightFirstOption={true}
                       showCheckbox={true}
@@ -251,8 +247,7 @@ console.log(previousHotelData)
         </div>
         <></>
         <BBButton
-          color=""
-          label="ADD"
+          label="Update"
           size="lg"
           onClick={updateHotelsDetails}
           className="h-12 bg-blackblue w-[300px]  flex justify-center m-auto mb-5"

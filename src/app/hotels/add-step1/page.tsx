@@ -29,6 +29,28 @@ import { Basic_Facilities, Safety, food_facilities, general_services } from "@/u
 
 export default function AddHotels() {
 
+  const [hotelname, setHotelname] = useState<String>("");
+  const [adress, setAdress] = useState<String>("");
+  const [street, setStreet] = useState<String>("");
+  const [contactno, setContactNo] = useState<String>("");
+  const [email, setEmail] = useState<String>("");
+  const [ownerName, setOwnerName] = useState<String>("");
+  const [city, setCity] = useState("");
+  const [pin, setPin] = useState("");
+  const [file, setFile] = useState("");
+  const [pool, setPool] = useState<boolean>(true);
+  const [wifi, setWifi] = useState<boolean>(true);
+  const [kids, setKids] = useState<boolean>(true);
+  const [lunch, setLunch] = useState<boolean>(true);
+  const [dinner, setDinner] = useState<boolean>(true);
+  const [country, setCountry] = useState("")
+  const [date, setDate] = useState("")
+  const [location, setLocation] = useState("");
+
+  const [food, setFood] = useState([])
+  const [basics, setBasics] = useState([])
+  const [generalService, setGeneral] = useState([])
+  const [safety, setSafety] = useState([])
 
   const [selectedFoodName, setSelectedFoodName] = useState("Select foods & drinks")
   const select_food_facilities = (selectedList: any, selectedItem: any) => {
@@ -83,30 +105,6 @@ export default function AddHotels() {
     let names = selectedList.map((element: any) => element.name)
     setSelectedSafety(names.toString())
   }
-
-  const [hotelname, setHotelname] = useState<String>("");
-  const [adress, setAdress] = useState<String>("");
-  const [street, setStreet] = useState<String>("");
-  const [contactno, setContactNo] = useState<String>("");
-  const [email, setEmail] = useState<String>("");
-  const [ownerName, setOwnerName] = useState<String>("");
-  const [city, setCity] = useState("");
-  const [pin, setPin] = useState("");
-  const [file, setFile] = useState("");
-  const [pool, setPool] = useState<boolean>(true);
-  const [wifi, setWifi] = useState<boolean>(true);
-  const [kids, setKids] = useState<boolean>(true);
-  const [lunch, setLunch] = useState<boolean>(true);
-  const [dinner, setDinner] = useState<boolean>(true);
-  const [country, setCountry] = useState("")
-  const [date, setDate] = useState("")
-  const [location, setLocation] = useState("");
-
-  const [food, setFood] = useState([])
-  const [basics, setBasics] = useState([])
-  const [generalService, setGeneral] = useState([])
-  const [safety, setSafety] = useState([])
-
 
   const dispatch = useAppDispatch();
   const [errorDialogMessage, setErrorDialogMessage] = useState([]);

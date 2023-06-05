@@ -9,7 +9,7 @@ import { useAppDispatch } from "@/redux/store";
 
 import { useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
-import { getHotelById, savePreviousData } from "@/redux/action/hotelaction";
+import { getHotelById, savePreviousData, updateHotel } from "@/redux/action/hotelaction";
 import Multiselect from "multiselect-react-dropdown";
 import {
   Basic_Facilities,
@@ -129,6 +129,7 @@ export default function UpdateHotel({ params }: any) {
         generalService,
         safety,
       } = hotel_data;
+
       setAdress(adress);
       setHotelname(hotelname);
       setOwnerName(ownerName);
@@ -145,18 +146,36 @@ export default function UpdateHotel({ params }: any) {
       select_general_services(generalService || []);
       // setSafety(safety)
       select_safety(safety || []);
+
       // setFile(file)
     }
-  }, []);
+  }, [hotelState.updateHotelDetails])
 
-  console.log(hotelState.updateHotelDetails);
+
 
   const updateHotelDetails = () => {
+    let param = {
+      _id: params.id,
+      adress,
+      hotelname,
+      ownerName,
+      contactno,
+      email,
+      street,
+      city,
+      pin,
+      food,
+      basics,
+      generalService,
+      safety,
+    }
     let hotel_data = hotelState.updateHotelDetails?.data;
-
-    dispatch(savePreviousData(hotel_data));
-
-    router.push("/hotels/updateRoom");
+    dispatch(updateHotel(param))
+    setTimeout(()=>{
+      dispatch(savePreviousData(hotel_data));
+      router.push("/hotels/updateRoom");
+    },500)
+  
   };
 
   return (

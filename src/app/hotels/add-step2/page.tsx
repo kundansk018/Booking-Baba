@@ -30,12 +30,12 @@ export default function Page() {
   //     // router.push('/hotels')
   //   }
   // }, [previoushotelData]);
-  const [view, setView] = useState([])
+  // const [view, setView] = useState([])
   const [amenities, setAmenities] = useState([])
   const [essentialKit, setEssentialKit] = useState([])
 
   const [roomDetails, setRoomDetails] = useState([
-    { id: 1, no_of_bed: 0, price: "", isAC: false, no_rooms: "" },
+    { id: 1, no_of_bed: 0, price: "", isAC: false, no_rooms: "",view:[], amenities:[],essentialKit:[]},
   ]);
 
   const setOptionValue = (index: number, value: number) => {
@@ -66,7 +66,7 @@ export default function Page() {
 
   const addMore = () => {
     let data = [...roomDetails];
-    data.push({ id: data.length + 1, no_of_bed: 0, price: "", isAC: false, no_rooms: "" });
+    data.push({ id: data.length + 1, no_of_bed: 0, price: "", isAC: false, no_rooms: "",view:[], amenities:[],essentialKit:[]});
     setRoomDetails(data);
     console.log(data);
   };
@@ -74,11 +74,13 @@ export default function Page() {
   const addHotelsDetails = () => {
     let data = { ...previousHotelData }
     data.rooms = roomDetails
-    data.view = view
-    data.amenities = amenities
-    data.essentialKit = essentialKit
+    // data.view = view
+    // data.amenities = amenities
+    // data.essentialKit = essentialKit
     // data["rooms"]=roomDetails
+
     console.log(data)
+    
     dispatch(addHotels(data));
     router.push("/hotels")
   }
@@ -90,46 +92,46 @@ export default function Page() {
 
   }
 
-
-
-  const [selectOptionview, setselectOptionview] = useState("Select Room View")
-  const selectOption_view = (selectedList: any, selectedItem: any) => {
-    setView(selectedList)
-    let names = selectedList.map((element: any) => element.name)
-    setselectOptionview(names.toString())
+  const selectOption_view = (index:number,selectedList: any, selectedItem: any) => {
+    let data = [...roomDetails];
+    data[index].view = selectedList;
+    setRoomDetails(data);
   }
-  const removeOption_view = (selectedList: any, removedItem: any) => {
-    setView(selectedList)
-    let names = selectedList.map((element: any) => element.name)
-    setselectOptionview(names.toString())
+ const getSelectedViews=(index:number)=>{
+   let names = roomDetails[index]?.view.map((element: any) => element.name)
+   if(names && names.length>0)
+   return names.toString()
+   else
+   return "Select Room View"
   }
+ 
+ 
+  const selectRoomAmenities = (index:number,selectedList: any, selectedItem: any) => {
+    let data = [...roomDetails];
+    data[index].amenities= selectedList;
+    setRoomDetails(data);
+   }
+  const getSelectedAmenities=(index:number)=>{
+    let names = roomDetails[index]?.amenities.map((element: any) => element.name)
+    if(names && names.length>0)
+    return names.toString()
+    else
+    return "Select BedRoom Amenities"
+   }
 
-
-  const [selectRoom_Amenities, setselectRoomAmenities] = useState("Select BedRoom Amenities")
-  const selectRoomAmenities = (selectedList: any, selectedItem: any) => {
-    setAmenities(selectedList)
-    let names = selectedList.map((element: any) => element.name)
-    setselectRoomAmenities(names.toString())
+  
+  const selectEssential_Kit = (index:number,selectedList: any, selectedItem: any) => {
+    let data = [...roomDetails];
+    data[index].essentialKit= selectedList;
+    setRoomDetails(data);
   }
-  const removeRoomAmenities = (selectedList: any, removedItem: any) => {
-    setAmenities(selectedList)
-    let names = selectedList.map((element: any) => element.name)
-    setselectRoomAmenities(names.toString())
-  }
-
-  const [selectEssentialKit, setselectEssentialKit] = useState("Select Essential Kit")
-  const selectEssential_Kit = (selectedList: any, selectedItem: any) => {
-    setEssentialKit(selectedList)
-    let names = selectedList.map((element: any) => element.name)
-    setselectEssentialKit(names.toString())
-  }
-  const removeEssential_Kit = (selectedList: any, removedItem: any) => {
-    setEssentialKit(selectedList)
-    let names = selectedList.map((element: any) => element.name)
-    setselectEssentialKit(names.toString())
-  }
-
-
+ const getSelectedKit=(index:number)=>{
+  let names = roomDetails[index]?.essentialKit.map((element: any) => element.name)
+    if(names && names.length>0)
+    return names.toString()
+    else
+    return "Select Essential Kit"
+ }
 
 
 
@@ -197,10 +199,10 @@ export default function Page() {
                 <div className="flex  flex-col mx-4 w-[300px]">
                   <div className="my-2 w-72">
                     <Multiselect
-                      placeholder={selectOptionview ||"Select Room View"}
+                      placeholder={getSelectedViews(index)}
                       options={options_view}
-                      onSelect={selectOption_view}
-                      onRemove={removeOption_view}
+                      onSelect={(selectedList, selectedItem)=>selectOption_view(index,selectedList, selectedItem)}
+                      onRemove={(selectedList, selectedItem)=>selectOption_view(index,selectedList, selectedItem)}
                       displayValue="name"
                       avoidHighlightFirstOption={true}
                       showCheckbox={true}
@@ -209,10 +211,10 @@ export default function Page() {
                   </div>
                   <div className="my-2 w-72">
                     <Multiselect
-                      placeholder={selectRoom_Amenities || "Select BedRoom Amenities"}
+                      placeholder={getSelectedAmenities(index)}
                       options={room_amenities}
-                      onSelect={selectRoomAmenities}
-                      onRemove={removeRoomAmenities}
+                      onSelect={(selectedList, selectedItem) =>selectRoomAmenities(index,selectedList, selectedItem)}
+                      onRemove={(selectedList, selectedItem) =>selectRoomAmenities(index,selectedList, selectedItem)}
                       displayValue="name"
                       avoidHighlightFirstOption={true}
                       showCheckbox={true}
@@ -221,10 +223,10 @@ export default function Page() {
                   </div>
                   <div className="my-2 w-72">
                     <Multiselect
-                      placeholder={selectEssentialKit ||"Select Essential Kit"}
+                      placeholder={getSelectedKit(index)}
                       options={essential_Kit}
-                      onSelect={selectEssential_Kit}
-                      onRemove={removeEssential_Kit}
+                      onSelect={(selectedList, selectedItem)=>selectEssential_Kit(index,selectedList,selectedItem)}
+                      onRemove={(selectedList, selectedItem)=>selectEssential_Kit(index,selectedList,selectedItem)}
                       displayValue="name"
                       avoidHighlightFirstOption={true}
                       showCheckbox={true}
