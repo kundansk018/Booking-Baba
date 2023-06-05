@@ -29,8 +29,8 @@ import {
 
 import { useAppDispatch } from "@/redux/store";
 import { useSelector } from "react-redux";
-import { ADD_BUS_REQUEST_SUCCESS } from "@/redux/constant";
-import { deleteBusAction, updateBusAction } from "@/redux/action/busaction";
+import { BUS_REQUEST_SUCCESS } from "@/redux/constant";
+import { deleteBusAction } from "@/redux/action/busaction";
 
 const TABS = [
   {
@@ -51,6 +51,7 @@ export default function Bus() {
   const busData: any = useSelector((state: any) => state.bus.busDetails);
   console.log("bus data is ..==>>>>", busData?.data);
   const dispatch = useAppDispatch();
+  //const [counter, setCounter] = useState(0);
   const [bus, setBus] = useState<any>("");
   console.log(" using usestate bus data is ..", busData);
 
@@ -68,7 +69,7 @@ export default function Bus() {
 
       const busData = await response.json();
 
-      dispatch({ type: ADD_BUS_REQUEST_SUCCESS, payload: busData });
+      dispatch({ type: BUS_REQUEST_SUCCESS, payload: busData });
 
       console.log("get bus api.. ", busData);
       setBus(busData);

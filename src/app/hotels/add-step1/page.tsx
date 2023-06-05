@@ -193,6 +193,10 @@ export default function AddHotels() {
       router.push("/hotels/add-step2")
     }
 
+
+    
+
+
   }
 
 

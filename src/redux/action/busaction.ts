@@ -1,11 +1,10 @@
 import React from "react";
 import {
-  ADD_BUS_REQUEST_FAIL,
-  ADD_BUS_REQUEST_SUCCESS,
-  DELETE_BUS_REQUEST_SUCCESS,
+  BUS_BY_ID_REQUEST_SUCCESS,
+  BUS_REQUEST_FAIL,
+  BUS_REQUEST_SUCCESS,
   REQUEST_COMPLETED,
   REQUEST_STARTED,
-  UPDATE_BUS_DETAILS,
 } from "../constant";
 import { AppDispatch } from "../store";
 // import axios from "axios";
@@ -29,10 +28,10 @@ export const addBuses = (data: any) => async (dispatch: AppDispatch) => {
   if (res.ok === true) {
     console.log("inside if:::::::::", res);
 
-    dispatch({ type: ADD_BUS_REQUEST_SUCCESS, payload: data });
+    dispatch({ type: BUS_REQUEST_SUCCESS, payload: data });
     alert("bus data add Successfully");
   } else {
-    dispatch({ type: ADD_BUS_REQUEST_FAIL, payload: null });
+    dispatch({ type: BUS_REQUEST_FAIL, payload: null });
   }
   dispatch({ type: REQUEST_COMPLETED, payload: null });
 };
@@ -55,18 +54,16 @@ export const deleteBusAction = (id: any) => async (dispatch: AppDispatch) => {
 
   if (res.ok === true) {
     console.log("inside if:::::::::", JSON.stringify(res.body));
-    dispatch({ type: DELETE_BUS_REQUEST_SUCCESS, payload: res });
+    dispatch({ type: BUS_REQUEST_SUCCESS, payload: res });
     alert("bus data Deleted Successfully");
   } else {
-    dispatch({ type: ADD_BUS_REQUEST_FAIL, payload: null });
+    dispatch({ type: BUS_REQUEST_FAIL, payload: null });
   }
   dispatch({ type: REQUEST_COMPLETED, payload: null });
 };
 
-
-export const updateBusAction = (id: any) => async (dispatch: AppDispatch) => {
-  console.log("id in action: ", id);
-  alert(id);
+export const updateBusAction = (data: any) => async (dispatch: AppDispatch) => {
+  console.log("id in action: ", data);
   dispatch({ type: REQUEST_STARTED, payload: null });
 
   // api call
@@ -75,28 +72,27 @@ export const updateBusAction = (id: any) => async (dispatch: AppDispatch) => {
     {
       method: "POST",
 
-      body: id.toString(),
-      headers: {},
+      body: JSON.stringify(data),
+      headers: {
+        "content-type": "application/json",
+      },
     }
   );
 
   if (res.ok === true) {
     console.log("inside if:::::::::", JSON.stringify(res.body));
-    dispatch({ type: ADD_BUS_REQUEST_SUCCESS, payload: res });
-    alert("bus data Updated Successfully");
+    dispatch({ type: BUS_REQUEST_SUCCESS, payload: res });
+    alert("bus data Deleted Successfully");
   } else {
-    dispatch({ type: ADD_BUS_REQUEST_FAIL, payload: null });
+    dispatch({ type: BUS_REQUEST_FAIL, payload: null });
   }
   dispatch({ type: REQUEST_COMPLETED, payload: null });
 };
 
-
 export const getBusById = (id: any) => async (dispatch: AppDispatch) => {
-
   dispatch({ type: REQUEST_STARTED, payload: null });
-  let data = { "_id": id }
+  let data = { _id: id };
   const res = await fetch(
-
     "http://localhost:3000/api/busapi/busapi?action=GET_BUS_BY_ID",
     {
       method: "POST",
@@ -108,10 +104,9 @@ export const getBusById = (id: any) => async (dispatch: AppDispatch) => {
     }
   );
   if (res.ok === true) {
-    console.log("updtae response", res)
-    let bus_records = await res.json()
-    dispatch({ type: UPDATE_BUS_DETAILS, payload: bus_records })
+    console.log("updtae response", res);
+    let bus_records = await res.json();
+    dispatch({ type: BUS_BY_ID_REQUEST_SUCCESS, payload: bus_records });
   }
   dispatch({ type: REQUEST_COMPLETED, payload: null });
-
-}
+};

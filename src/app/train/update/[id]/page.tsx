@@ -2,17 +2,15 @@
 
 import BBButton from "@/app/components/BBButton";
 import BBInput from "@/app/components/BBInput";
-import "../../styles/hotel.css";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAppDispatch } from "@/redux/store";
 import { useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
-import BBErrorDialog from "@/app/components/BBErrorDialog";
-import { addTrain } from "@/redux/action/trainAction";
+import { getTrainById, updateTrainAction } from "@/redux/action/trainAction";
 import BBDropdown from "@/app/components/BBDropdown";
 
-export default function AddTrain() {
+export default function updateTrain({ params }: any) {
   const [trainNo, setTrainNo] = useState<string>("");
   const [trainName, setTrainName] = useState<string>("");
   const [from_Stn, setFrom_Stn] = useState<string>("");
@@ -31,83 +29,86 @@ export default function AddTrain() {
   const [trainImage, setTrainImage] = useState<string>("");
 
   const dispatch = useAppDispatch();
-  const [errorDialogMessage, setErrorDialogMessage] = useState([]);
-  const [showErrorDialog, setShowErrorDialog] = useState(false);
   const router = useRouter();
 
-  //name type adress location  services wifi dinner kunch swiimmingparling gym kids
-  const trainData: any = useSelector((state: any) => state.train.trainDetails);
+  const trainData: any = useSelector((state: any) => state.train.getTrainById);
   console.log("Train data is ..", trainData);
+  console.log("id", params.id);
 
-  // useEffect(() => {
-  //   if (trainData) {
-  //     router.push("/train");
-  //   }
-  // }, [trainData]);
+  useEffect(() => {
+    dispatch(getTrainById(params.id));
+  }, []);
 
-  const addTrainDetails = () => {
+  useEffect(() => {
+    let train_Data = trainData?.data;
+    if (train_Data) {
+      const {
+        trainNo,
+        trainName,
+        from_Stn,
+        to_Stn,
+        depTime,
+        arrivalTime,
+        fare,
+        seats,
+        coach,
+        duration,
+        classType,
+        trainType,
+        operationDays,
+        trainRoute,
+        trainDesc,
+        //trainImage,
+      } = train_Data;
+      setTrainNo(trainNo);
+      setTrainName(trainName);
+      setFrom_Stn(from_Stn);
+      setTo_Stn(to_Stn);
+      setFare(fare);
+      setSeats(seats);
+      setCoach(coach);
+      setDepTime(depTime);
+      setArrivalTime(arrivalTime);
+      setDuration(duration);
+      setClassType(classType);
+      setTrainType(trainType);
+      setOperationDays(operationDays);
+      setTrainRoute(trainRoute);
+      setTrainDesc(trainDesc);
+      //setTrainImage(trainImage);
+    }
+  }, [trainData]);
+
+  console.log("trainNo", trainNo);
+
+  const updateTrain = () => {
     let data = {
-      trainNo: trainNo,
-      trainName: trainName,
-      from_Stn: from_Stn,
-      to_Stn: to_Stn,
-      depTime: depTime,
-      arrivalTime: arrivalTime,
-      fare: fare,
-      seats: seats,
-      coach: coach,
-      duration: duration,
-      classType: classType,
-      trainType: trainType,
-      operationDays: operationDays,
-      trainRoute: trainRoute,
-      trainDesc: trainDesc,
-      trainImage: trainImage,
+      _id: params.id,
+      trainNo,
+      trainName,
+      from_Stn,
+      to_Stn,
+      depTime,
+      arrivalTime,
+      fare,
+      seats,
+      coach,
+      duration,
+      classType,
+      trainType,
+      operationDays,
+      trainRoute,
+      trainDesc,
     };
-
-    let isErrorFound = false;
-    let error: any = [];
-    if (!trainName || !trainName.trim()) {
-      isErrorFound = true;
-      error.push("Please enter Hotel Name");
-    }
-
-    if (!arrivalTime || !arrivalTime.trim()) {
-      isErrorFound = true;
-      error.push("Please enter Contact No");
-    }
-
-    if (!depTime || !depTime.trim()) {
-      isErrorFound = true;
-      error.push("Please enter valid email address");
-    }
-    if (!from_Stn || !from_Stn.trim()) {
-      isErrorFound = true;
-      error.push("Please enter valid station Name");
-    }
-    if (!to_Stn || !to_Stn.trim()) {
-      isErrorFound = true;
-      error.push("Please enter valid station Name");
-    }
-    if (!seats || !seats.trim()) {
-      isErrorFound = true;
-      error.push("Please enter Seats");
-    }
-    if (isErrorFound) {
-      setErrorDialogMessage(error);
-      setShowErrorDialog(true);
-      return;
-    } else {
-      dispatch(addTrain(data));
-      router.push("/train");
-    }
+    dispatch(updateTrainAction(data));
+    router.push("/train");
   };
 
   return (
     <>
       <div className="bg-white h-full mt-5 p-5 m-auto w-[70%] justify-center rounded-lg">
         <div className="flex justify-center  text-3xl">
-          <h1>Add Train</h1>
+          <h1>Update Train</h1>
         </div>
         <div className="flex flex-row justify-center m-6">
           <div className="flex  flex-col mx-5 w-[300px] ">
@@ -181,21 +182,12 @@ export default function AddTrain() {
               value={coach}
               onChange={(e) => setCoach(e.target.value)}
             />
-
-            <BBDropdown
+            <BBInput
               containerProps={{ className: "mb-4" }}
-              options={[
-                { label: "Mumbai" },
-                { label: "Pune" },
-                { label: "Nashik" },
-              ]}
-              value={trainRoute}
-              onPress={(value: any) => {
-                setTrainRoute(value);
-              }}
               label="Train Route"
+              value={trainRoute}
+              onChange={(e) => setTrainRoute(e.target.value)}
             />
-
             <BBInput
               containerProps={{ className: "mb-4" }}
               type="text"
@@ -229,7 +221,6 @@ export default function AddTrain() {
               onChange={(e) => setSeats(e.target.value)}
             />
             <BBDropdown
-              containerProps={{ className: "mb-4" }}
               options={[
                 { label: "Economy" },
                 { label: "Business" },
@@ -241,9 +232,8 @@ export default function AddTrain() {
               }}
               label="Class Types"
             />
-
+            <br />
             <BBDropdown
-              containerProps={{ className: "mb-4" }}
               options={[
                 { label: "Express" },
                 { label: "Superfast" },
@@ -255,6 +245,7 @@ export default function AddTrain() {
               }}
               label="Train Type"
             />
+            <br />
 
             <BBInput
               containerProps={{ className: "mb-4" }}
@@ -268,20 +259,13 @@ export default function AddTrain() {
         <div className="flex justify-center mt-4">
           <BBButton
             color=""
-            label="ADD "
+            label="Update "
             size="lg"
-            onClick={addTrainDetails}
+            onClick={() => updateTrain()}
             className="h-12 bg-blackblue w-[500px] "
           />
         </div>
       </div>
-
-      <BBErrorDialog
-        dialogHeader="Error"
-        dialogMessage={errorDialogMessage}
-        open={showErrorDialog}
-        onOkClick={() => setShowErrorDialog(false)}
-      />
     </>
   );
 }

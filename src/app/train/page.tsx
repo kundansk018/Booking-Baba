@@ -28,6 +28,7 @@ import {
 import { useSelector } from "react-redux";
 import { TRAIN_REQUEST_SUCCESS } from "@/redux/constant";
 import { useAppDispatch } from "@/redux/store";
+import { deleteTrainAction } from "@/redux/action/trainAction";
 
 const TABS = [
   {
@@ -49,31 +50,51 @@ export default function Train() {
   console.log("Train data is ..", trainData);
   const router = useRouter();
   const dispatch = useAppDispatch();
+  const [counter, setCounter] = useState<any>(0);
 
   const [train, setTrain] = useState<any>("");
 
   useEffect(() => {
-    const getHotel = async () => {
-      const response: any = await fetch(
-        `http://localhost:3000/api/trainApi/trainApi?action=GET_TRAINS`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-
-      const trainData = await response.json();
-
-      dispatch({ type: TRAIN_REQUEST_SUCCESS, payload: trainData });
-
-      console.log("get trains api.. ", trainData);
-      setTrain(trainData);
-    };
-
     getHotel();
-  }, []);
+  }, [counter]);
+
+  const getHotel = async () => {
+    const response: any = await fetch(
+      `http://localhost:3000/api/trainApi/trainApi?action=GET_TRAINS`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    const trainData = await response.json();
+
+    dispatch({ type: TRAIN_REQUEST_SUCCESS, payload: trainData });
+
+    console.log("get trains api.. ", trainData);
+    setTrain(trainData);
+  };
+
+  const addTrain = () => {
+    router.push("/train/add");
+    getHotel();
+    setCounter(counter + 1);
+  };
+
+  const deleteTrain = (id: any) => {
+    dispatch(deleteTrainAction(id));
+    getHotel();
+    setCounter(counter + 1);
+  };
+
+  const updateTrain = (id: any) => {
+    console.log("id:::::::::)", id);
+    router.push("/train/update/" + id);
+    getHotel();
+    setCounter(counter + 1);
+  };
 
   console.log("Train data is dhdrt..", train);
 
@@ -117,7 +138,7 @@ export default function Train() {
             <Button
               className="flex items-center gap-3 bg-blackblue"
               size="md"
-              onClick={() => router.push("/train/add")}
+              onClick={() => addTrain()}
             >
               <UserPlusIcon strokeWidth={2} className="h-4 w-4" /> Add New Train
             </Button>
@@ -145,41 +166,42 @@ export default function Train() {
           <tbody className="-z-10">
             {train
               ? train.data.map((element: any) => (
-                  <>
-                    <tr className="border-b">
-                      <td className="w-[5px] p-2">
-                        <Avatar
-                          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4Rb78i6mV3XF1VxsVX_f6FvUggBNCIw4-xw&usqp=CAU"
-                          alt="imagee"
-                          size="md"
-                        />
-                      </td>
-                      <td className="w-[5px] p-2">{element.trainNo}</td>
-                      <td className="w-[5px] p-2 font-semibold">
-                        {element.trainname}
-                      </td>
-                      <td className="w-[5px] p-2">{element.from_Stn}</td>
-                      <td className="w-[5px] p-2">{element.to_Stn}</td>
-                      <td className="w-[5px] p-2">{element.fare}</td>
-                      <td className="w-[5px] p-2">{element.seats}</td>
-                      <td className="w-[5px] p-2">{element.coach}</td>
-                      <td className="w-[5px] p-2 z-0">
-                        <Tooltip content="Edit Train">
-                          <IconButton variant="text" color="blue-gray">
-                            <PencilIcon className="h-4 w-4" />
-                          </IconButton>
-                        </Tooltip>
-                        <Tooltip content="Delete Train">
-                          <IconButton variant="text" color="blue-gray">
-                            <TrashIcon
-                              className=" w-4 text-red-500"
-                              onClick={() => alert("Train Deleted")}
-                            />
-                          </IconButton>
-                        </Tooltip>
-                      </td>
-                    </tr>
-                  </>
+                  <tr key={element._id}>
+                    <td className="w-[5px] p-2">
+                      <Avatar
+                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4Rb78i6mV3XF1VxsVX_f6FvUggBNCIw4-xw&usqp=CAU"
+                        alt="imagee"
+                        size="md"
+                      />
+                    </td>
+                    <td className="w-[5px]">{element.trainNo}</td>
+                    <td className="w-[5px]">{element.trainName}</td>
+                    <td className="w-[5px]">{element.from_Stn}</td>
+                    <td className="w-[5px]">{element.to_Stn}</td>
+                    <td className="w-[5px]">{element.fare}</td>
+                    <td className="w-[5px]">{element.seats}</td>
+                    <td className="w-[5px]">{element.coach}</td>
+                    <td className="w-[5px]">
+                      <Tooltip content="Edit Train Details">
+                        <IconButton
+                          onClick={() => updateTrain(element._id)}
+                          variant="text"
+                          color="blue-gray"
+                        >
+                          <PencilIcon className="h-4 w-4" />
+                        </IconButton>
+                      </Tooltip>
+                      <Tooltip content="Delete">
+                        <IconButton
+                          onClick={() => deleteTrain(element._id)}
+                          variant="text"
+                          color="blue-gray"
+                        >
+                          <TrashIcon className=" w-5 text-red-500" />{" "}
+                        </IconButton>
+                      </Tooltip>
+                    </td>
+                  </tr>
                 ))
               : "Data Not Found.."}
           </tbody>

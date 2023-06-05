@@ -41,7 +41,6 @@ export const HotelReducer = (state = initialState, action: any) => {
         loading: false,
       };
 
-
     case ADD_HOTELS_DATA:
       return {
         ...state,
