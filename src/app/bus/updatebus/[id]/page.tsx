@@ -117,11 +117,6 @@ export default function UpdateBus({ params }: any) {
 
     }, [busState])
 
-    console.log("///////////////", busState.updateBusDetails)
-
-
-
-
     return (
         <div className="bg-white h-[550px] mt-5 p-5 m-auto w-[90%] justify-center rounded-lg">
             <div className="flex items-center justify-center ">
