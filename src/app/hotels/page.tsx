@@ -169,7 +169,6 @@ export default function Hotels() {
                     <td className="w-[5px] p-2">{element.city}</td>
                     <td className="w-[5px] p-2">{element.country}</td>
                     <td className="w-[5px] p-2">{element.pin}</td>
-                    <td className="w-[5px] p-2">{"contries"}</td>
                     <td className="w-[5px] p-2">
                       <Tooltip content="Update Hotel Details" >
                         <IconButton onClick={() => router.push('/hotels/update/' + element._id)} variant="text" color="blue-gray">
