@@ -28,7 +28,8 @@ import {
 import { useAppDispatch } from "@/redux/store";
 import { ADD_HOTELS_DATA } from "@/redux/constant";
 import { useSelector } from "react-redux";
-import { getHotelById, getHotels } from "@/redux/action/hotelaction";
+import { deleteHotelById, getHotelById, getHotels } from "@/redux/action/hotelaction";
+import { data } from "autoprefixer";
 
 const TABS = [
   {
@@ -50,14 +51,23 @@ export default function Hotels() {
   // console.log("hotel data is ..==>>>>", hotelData?.data);
   const dispatch = useAppDispatch();
 
-  const [hotel, setHotel] = useState<any>("");
+  // const [hotel, setHotel] = useState<any>("");
   console.log(" using usestate hotel data is ..", hotelData);
 
   useEffect(() => {
     dispatch(getHotels());
+
   }, [])
 
+  const deleteHotel = (id:string) => {
+  dispatch(deleteHotelById(id)).then(()=>{
+    dispatch(getHotels());
+  })
+
+  }
+
   const router = useRouter();
+
   return (
     <div className="tracking-wide">
       <Card className="w-full">
@@ -126,7 +136,7 @@ export default function Hotels() {
           </thead>
           <tbody>
             {hotelData
-              ? hotelData.map((element: any) => (
+              ? hotelData?.map((element: any) => (
                 <>
                   <tr className="border-b">
                     <td className="w-[5px] p-2">
@@ -157,7 +167,8 @@ export default function Hotels() {
                         </IconButton>
                       </Tooltip>
                       <Tooltip content="Delete Hotels">
-                        <IconButton variant="text" color="blue-gray">
+                        <IconButton variant="text" color="blue-gray"
+                          onClick={() => deleteHotel(element._id)}>
                           <TrashIcon
                             className=" w-4 text-red-500"
                             onClick={() => alert("Hotel Deleted")}

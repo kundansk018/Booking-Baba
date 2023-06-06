@@ -9,6 +9,7 @@ export const Config={
     addHotels : 'hotelsapi/hotelsapi?action=addHotels',
     getHotels:'hotelsapi/hotelsapi?action=getHotels',
     getHotelById:'hotelsapi/hotelsapi?action=getHotelDetails',
-    updateHotel:'hotelsapi/hotelsapi?action=updateHotels'
+    updateHotel:'hotelsapi/hotelsapi?action=updateHotels',
+    deleteHotel:'hotelsapi/hotelsapi?action=delete'
 
   }

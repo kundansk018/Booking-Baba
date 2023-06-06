@@ -30,6 +30,9 @@ export default async function handler(
     case "getHotelDetails":
       return await getHotelById(request, response);
 
+      case "delete":
+        return await deleteHotelById(request, response);
+
     default:
       return response
         .status(404)
@@ -74,3 +77,9 @@ export async function updatehotel(request: NextApiRequest, response: NextApiResp
     return response.status(200).json({ data: res });
 }
 
+export async function deleteHotelById(request:NextApiRequest,response:NextApiResponse){
+  const hotels=await db.collection("Hotels_Details");
+  const res=await hotels.deleteOne({ _id: new ObjectId(request.body.id) })
+  return response.status(200).json({data:res})
+
+}

@@ -83,7 +83,7 @@ export default function Login() {
             label="Enter Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-          />
+          />  
         </div>
 
         <div className="flex flex-row justify-between items-center">

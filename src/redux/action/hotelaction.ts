@@ -4,6 +4,7 @@ import {
   ADD_HOTELS_DATA,
   ADD_HOTELS_FAIL,
   ADD_HOTELS_SUCCESS,
+  DELETE_HOTEL,
   PREVIOUS_HOTEL_DATA,
   REQUEST_COMPLETED,
   REQUEST_STARTED, SAVE_HOTEL_DETAILS,
@@ -11,7 +12,7 @@ import {
 } from "../constant";
 import { AppDispatch } from "../store";
 import { ENDPOINTS } from "@/config/config";
-import { addHotelsInfo, getHotel, hotelsById, updateHotelIfo } from "@/service/services";
+import { addHotelsInfo, deleteHotel, getHotel, hotelsById, updateHotelIfo } from "@/service/services";
 
 /*.................Add hotels..........*/
 export const addHotels = (data: any) => async (dispatch: AppDispatch) => {
@@ -91,3 +92,16 @@ try{
   }
   dispatch({ type: REQUEST_COMPLETED, payload: null });
 };
+
+/*....................delete hotel...................*/
+
+export const deleteHotelById=(id:string)=> async (dispatch:AppDispatch)=>{
+debugger
+let param={ "id": id}
+  const res = await deleteHotel(param)
+  if(res&&res.status==200){
+    console.log(res)
+    dispatch({type:DELETE_HOTEL,payload:res.data})
+  }
+
+}

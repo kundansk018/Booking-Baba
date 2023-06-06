@@ -6,6 +6,7 @@ import {
   ADD_HOTELS_DATA,
   UPDATE_HOTEL_DETAILS,
   SAVE_HOTEL_DETAILS,
+  DELETE_HOTEL,
 
 } from "../constant";
 export const initialState = {
@@ -46,6 +47,7 @@ export const HotelReducer = (state = initialState, action: any) => {
         ...state,
         loading: false,
         hotelDetails: action.payload,
+
       };
 
     case PREVIOUS_HOTEL_DATA: {
@@ -71,7 +73,14 @@ export const HotelReducer = (state = initialState, action: any) => {
 
       }
     };
+    case DELETE_HOTEL: {
+      return {
+        ...state,
+        loading: false,
+        deletedStatus: action.payload,
 
+      }
+    };
 
     default: {
       return state;

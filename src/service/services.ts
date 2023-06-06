@@ -7,6 +7,11 @@ let headers = {
     }
 }
 
+ interface IPropsDelete{
+id:string
+}
+
+
 export const addHotelsInfo = (data: any) => {
     let url = `${ENDPOINTS.addHotels}`
     return client.post(url, data, headers)
@@ -27,5 +32,10 @@ export const updateHotelIfo = (data: any) => {
     debugger
     let url = `${ENDPOINTS.updateHotel}`
     return client.post(url, data, headers)
+}
+
+export const deleteHotel=(data:IPropsDelete)=>{
+    let url =`${ENDPOINTS.deleteHotel}`
+    return client.post(url,data,headers)
 }
 
