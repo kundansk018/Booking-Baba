@@ -70,9 +70,9 @@ export default function Hotels() {
 
   return (
     <div className="tracking-wide">
-      <Card className="w-full">
+      <Card className="w-full mt-[0.5%]">
         <div className="flex p-1 px-2 items-center justify-between rounded-none">
-          <div className="flex items-center justify-center">
+          <div className="flex items-center justify-center ">
             <Typography
               className="px-4 font-castoro"
               variant="h3"
@@ -117,9 +117,7 @@ export default function Hotels() {
         </div>
       </Card>
 
-      {/* <Card className="mx-3 h-[500px] w-[98%] mt-[2%]"> */}
-      {/* <CardBody className="relative overflow-scroll px-1 mt-0"> */}
-      <div className="mx-3 h-[500px] w-[98%] mt-[1%] bg-white relative overflow-scroll px-1 mt-0">
+      <div className="mx-3 h-[500px] w-[98%] mt-[0.5%] bg-white relative overflow-scroll px-1">
         <table className="relative font-roboto w-full min-w-max table-auto text-left text-sm text-black">
           <thead className="z-10 bg-blue-gray-100 font-bold flex-col">
             <tr className="z-10 sticky top-0 bg-GreenBlue text-white w-full ">
@@ -137,54 +135,61 @@ export default function Hotels() {
           <tbody>
             {hotelData
               ? hotelData?.map((element: any) => (
-                <>
-                  <tr className="border-b">
-                    <td className="w-[5px] p-2">
-                      <Avatar
-                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjnWFevA5oNiWzj1bPoiiq71JaH6LhsIrmEQ&usqp=CAU"
-                        alt="imagee"
-                        size="md"
-                      />
-                    </td>
+                  <>
+                    <tr className="border-b">
+                      <td className="w-[5px] p-2">
+                        <Avatar
+                          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjnWFevA5oNiWzj1bPoiiq71JaH6LhsIrmEQ&usqp=CAU"
+                          alt="imagee"
+                          size="md"
+                        />
+                      </td>
 
-                    <td className="w-[5px] p-2">
-                      <tr className="font-semibold">{element.hotelname}</tr>
-                      {element.email}
-                    </td>
-                    <td className="w-[5px] p-2">{element.ownerName}</td>
-                    <td className="w-[5px] p-2">{element.contactno}</td>
-                    <td className="w-[5px] p-2">
-                      <tr>{element.adress}</tr>
-                      {element.street}
-                    </td>
-                    <td className="w-[5px] p-2">{element.city}</td>
-                    <td className="w-[5px] p-2">{element.country}</td>
-                    <td className="w-[5px] p-2">{element.pin}</td>
-                    <td className="w-[5px] p-2">
-                      <Tooltip content="Update Hotel Details" >
-                        <IconButton onClick={() => router.push('/hotels/update/' + element._id)} variant="text" color="blue-gray">
-                          <PencilIcon className="h-4 w-4" />
-                        </IconButton>
-                      </Tooltip>
-                      <Tooltip content="Delete Hotels">
-                        <IconButton variant="text" color="blue-gray"
-                          onClick={() => deleteHotel(element._id)}>
-                          <TrashIcon
-                            className=" w-4 text-red-500"
-                            onClick={() => alert("Hotel Deleted")}
-                          />
-                        </IconButton>
-                      </Tooltip>
-                    </td>
-                  </tr>
-                </>
-              ))
+                      <td className="w-[5px] p-2">
+                        <tr className="font-semibold">{element.hotelname}</tr>
+                        {element.email}
+                      </td>
+                      <td className="w-[5px] p-2">{element.ownerName}</td>
+                      <td className="w-[5px] p-2">{element.contactno}</td>
+                      <td className="w-[5px] p-2">
+                        <tr>{element.adress}</tr>
+                        {element.street}
+                      </td>
+                      <td className="w-[5px] p-2">{element.city}</td>
+                      <td className="w-[5px] p-2">{element.country}</td>
+                      <td className="w-[5px] p-2">{element.pin}</td>
+                      <td className="w-[5px] p-2">
+                        <Tooltip content="Update Hotel Details">
+                          <IconButton
+                            onClick={() =>
+                              router.push("/hotels/update/" + element._id)
+                            }
+                            variant="text"
+                            color="blue-gray"
+                          >
+                            <PencilIcon className="h-4 w-4" />
+                          </IconButton>
+                        </Tooltip>
+                        <Tooltip content="Delete Hotels">
+                          <IconButton
+                            variant="text"
+                            color="blue-gray"
+                            onClick={() => deleteHotel(element._id)}
+                          >
+                            <TrashIcon
+                              className=" w-4 text-red-500"
+                              onClick={() => alert("Hotel Deleted")}
+                            />
+                          </IconButton>
+                        </Tooltip>
+                      </td>
+                    </tr>
+                  </>
+                ))
               : "Data Not Found.."}
           </tbody>
         </table>
       </div>
-      {/* </CardBody> */}
-      {/* </Card> */}
     </div>
   );
 }

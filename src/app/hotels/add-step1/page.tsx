@@ -22,13 +22,14 @@ import { useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
 import BBErrorDialog from "@/app/components/BBErrorDialog";
 import Multiselect from "multiselect-react-dropdown";
-import { Basic_Facilities, Safety, food_facilities, general_services } from "@/utils/Data";
-
-
-
+import {
+  Basic_Facilities,
+  Safety,
+  food_facilities,
+  general_services,
+} from "@/utils/Data";
 
 export default function AddHotels() {
-
   const [hotelname, setHotelname] = useState<String>("");
   const [adress, setAdress] = useState<String>("");
   const [street, setStreet] = useState<String>("");
@@ -43,68 +44,72 @@ export default function AddHotels() {
   const [kids, setKids] = useState<boolean>(true);
   const [lunch, setLunch] = useState<boolean>(true);
   const [dinner, setDinner] = useState<boolean>(true);
-  const [country, setCountry] = useState("")
-  const [date, setDate] = useState("")
+  const [country, setCountry] = useState("");
+  const [date, setDate] = useState("");
   const [location, setLocation] = useState("");
 
-  const [food, setFood] = useState([])
-  const [basics, setBasics] = useState([])
-  const [generalService, setGeneral] = useState([])
-  const [safety, setSafety] = useState([])
+  const [food, setFood] = useState([]);
+  const [basics, setBasics] = useState([]);
+  const [generalService, setGeneral] = useState([]);
+  const [safety, setSafety] = useState([]);
 
-  const [selectedFoodName, setSelectedFoodName] = useState("Select foods & drinks")
+  const [selectedFoodName, setSelectedFoodName] = useState(
+    "Select foods & drinks"
+  );
   const select_food_facilities = (selectedList: any, selectedItem: any) => {
-    setFood(selectedList)
-    let names = selectedList.map((element: any) => element.name)
-    setSelectedFoodName(names.toString())
-
-  }
+    setFood(selectedList);
+    let names = selectedList.map((element: any) => element.name);
+    setSelectedFoodName(names.toString());
+  };
   const remove_food_facilities = (selectedList: any, removedItem: any) => {
-    setFood(selectedList)
-    console.log(selectedList)
-    let names = selectedList.map((element: any) => element.name)
-    setSelectedFoodName(names.toString())
-  }
+    setFood(selectedList);
+    console.log(selectedList);
+    let names = selectedList.map((element: any) => element.name);
+    setSelectedFoodName(names.toString());
+  };
 
-
-  const [selectedFoodBasics, setSelectedFoodBasics] = useState("Select foods & drinks")
+  const [selectedFoodBasics, setSelectedFoodBasics] = useState(
+    "Select foods & drinks"
+  );
   const selectBasic_Facilities = (selectedList: any, selectedItem: any) => {
-    setBasics(selectedList)
-    let names = selectedList.map((element: any) => element.name)
-    setSelectedFoodBasics(names.toString())
-    console.log(selectedList)
-  }
+    setBasics(selectedList);
+    let names = selectedList.map((element: any) => element.name);
+    setSelectedFoodBasics(names.toString());
+    console.log(selectedList);
+  };
   const removeBasic_Facilities = (selectedList: any, removedItem: any) => {
-    setBasics(selectedList)
-    let names = selectedList.map((element: any) => element.name)
-    setSelectedFoodBasics(names.toString())
+    setBasics(selectedList);
+    let names = selectedList.map((element: any) => element.name);
+    setSelectedFoodBasics(names.toString());
+  };
 
-  }
-
-  const [selectedGeneral, setSelectedGeneral] = useState("Select General Servicess")
+  const [selectedGeneral, setSelectedGeneral] = useState(
+    "Select General Servicess"
+  );
   const select_general_services = (selectedList: any, selectedItem: any) => {
-    setGeneral(selectedList)
-    let names = selectedList.map((element: any) => element.name)
-    setSelectedGeneral(names.toString())
-  }
+    setGeneral(selectedList);
+    let names = selectedList.map((element: any) => element.name);
+    setSelectedGeneral(names.toString());
+  };
   const remove_general_services = (selectedList: any, removedItem: any) => {
-    setGeneral(selectedList)
-    let names = selectedList.map((element: any) => element.name)
-    setSelectedGeneral(names.toString())
-  }
+    setGeneral(selectedList);
+    let names = selectedList.map((element: any) => element.name);
+    setSelectedGeneral(names.toString());
+  };
 
-  const [selectedSafety, setSelectedSafety] = useState("Select Safety & Security")
+  const [selectedSafety, setSelectedSafety] = useState(
+    "Select Safety & Security"
+  );
   const select_safety = (selectedList: any, selectedItem: any) => {
-    setSafety(selectedList)
-    let names = selectedList.map((element: any) => element.name)
-    setSelectedSafety(names.toString())
-
-  }
+    setSafety(selectedList);
+    let names = selectedList.map((element: any) => element.name);
+    setSelectedSafety(names.toString());
+  };
   const remove_safety = (selectedList: any, removedItem: any) => {
-    setSafety(selectedList)
-    let names = selectedList.map((element: any) => element.name)
-    setSelectedSafety(names.toString())
-  }
+    setSafety(selectedList);
+    let names = selectedList.map((element: any) => element.name);
+    setSelectedSafety(names.toString());
+  };
 
   const dispatch = useAppDispatch();
   const [errorDialogMessage, setErrorDialogMessage] = useState([]);
@@ -146,9 +151,8 @@ export default function AddHotels() {
       food: food,
       basics: basics,
       generalService: generalService,
-      safety: safety
+      safety: safety,
     };
-
 
     let isErrorFound = false;
     let error: any = [];
@@ -186,23 +190,15 @@ export default function AddHotels() {
       setShowErrorDialog(true);
       return;
     } else {
-
       dispatch(savePreviousData(data));
-      router.push("/hotels/add-step2")
+      router.push("/hotels/add-step2");
     }
-
-
-    
-
-
-  }
-
-
+  };
 
   return (
     <>
       <div className="bg-white h-[40%] pb-4 mt-5 m-auto w-[60%] justify-center rounded-lg">
-        <div className="flex justify-center h-12 bg-GreenBlue text-white px-5  text-3xl">
+        <div className="flex justify-center h-12 bg-GreenBlue items-center text-white px-5  text-3xl">
           <h1>Add Hotel</h1>
         </div>
         <div className="flex  flex-row justify-center m-6">
@@ -243,7 +239,8 @@ export default function AddHotels() {
             <BBInput
               containerProps={{ className: "" }}
               label="Latitude & Longitude"
-              value={location} onChange={(e) => setLocation(location)}
+              value={location}
+              onChange={(e) => setLocation(location)}
             />
           </div>
           <div className="flex  flex-col mx-5 w-[300px]">
@@ -269,7 +266,7 @@ export default function AddHotels() {
               containerProps={{ className: "mb-4" }}
               label="PinCode"
               value={pin}
-              type='nunmber'
+              type="nunmber"
               onChange={(e) => setPin(e.target.value)}
             />
             <BBInput
@@ -285,7 +282,6 @@ export default function AddHotels() {
               type="date"
               onChange={(e) => setDate(e.target.value)}
             />
-            
           </div>
 
           <div className="flex  flex-col mx-4 w-[300px] ">
@@ -342,7 +338,6 @@ export default function AddHotels() {
             </div>
           </div>
         </div>
-
 
         <div className="flex justify-center mt-4">
           <BBButton

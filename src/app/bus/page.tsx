@@ -91,7 +91,7 @@ export default function Bus() {
   const router = useRouter();
   return (
     <div className="tracking-wide	">
-      <Card className="w-full">
+      <Card className="w-full mt-[0.5%]">
         <div className="flex p-1 px-2 items-center justify-between rounded-none">
           <div className="flex items-center justify-center">
             <Typography
@@ -137,9 +137,7 @@ export default function Bus() {
         </div>
       </Card>
 
-      {/* <Card className="mx-3 h-[500px] w-[98%] mt-[2%]"> */}
-      {/* <CardBody className="relative overflow-scroll px-1 mt-0"> */}
-      <div className="mx-3 h-[500px] w-[98%] mt-[1%]  bg-white relative overflow-scroll px-1 mt-0">
+      <div className="mx-3 h-[500px] w-[98%] mt-[0.5%]  bg-white relative overflow-scroll px-1">
         <table className="relative font-roboto w-full min-w-max table-auto text-left text-sm text-black">
           <thead className="z-10 font-semibold flex-col">
             <tr className="z-10 bg-GreenBlue text-white sticky top-0  w-full">
@@ -167,59 +165,65 @@ export default function Bus() {
           <tbody>
             {bus
               ? bus.data.map((element: any) => (
-                <>
-                  <tr className="border-b">
-                    <td className="w-[5px] p-2">
-                      <Avatar
-                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTI5KPcBp9vKBWRnMlYxr8AXUbQO6GiHvrBQZ5FJiVx6w9kmarHbNLCGzgnMqHkrjl7-zE&usqp=CAU"
-                        alt="imagee"
-                        size="md"
-                      />
-                    </td>
-                    <td className="w-[5px] p-2">{element.busnumber}</td>
-                    <td className="w-[5px] p-2 font-semibold">
-                      {element.busname}
-                    </td>
-                    <td className="w-[5px] p-2">{element.from}</td>
-                    <td className="w-[5px] p-2">{element.to}</td>
-                    <td className="w-[5px] p-2">{element.arrivalDate}</td>
-                    <td className="w-[5px] p-2">{element.arrivalTime}</td>
-                    <td className="w-[5px] p-2">{element.pickUpPoint}</td>
-                    <td className="w-[5px] p-2">{element.seats}</td>
-                    <td className="w-[5px] p-2">{element.ticketprice}</td>
-                    <td className="w-[5px] p-2">{element.operator}</td>
-                    <td className="w-[5px] p-2">{element.currentStatus}</td>
-                    <td className="w-[5px] p-2">{element.busType}</td>
-                    <td className="w-[5px] p-2">{element.busstops}</td>
-                    <td className="w-[5px] p-2">{element.noofstop}</td>
-                    <td className="w-[5px] p-2">{element.bookingseats}</td>
-                    <td className="w-[5px] p-2">
-                      {element.travelagencyname}
-                    </td>
-                    <td className="w-[5px] p-2 ">
-                      <Tooltip content="Update Bus">
-                        <IconButton onClick={() => updateBus(element._id)} variant="text" color="blue-gray">
-                          <PencilIcon className="h-4 w-4" />
-                        </IconButton>
-                      </Tooltip>
-                      <Tooltip content="Delete Bus">
-                        <IconButton onClick={() => deleteBus(element._id)} variant="text" color="blue-gray">
-                          <TrashIcon
-                            className=" w-4 text-red-500"
-                            onClick={() => alert("Bus Deleted")}
-                          />
-                        </IconButton>
-                      </Tooltip>
-                    </td>
-                  </tr>
-                </>
-              ))
+                  <>
+                    <tr className="border-b">
+                      <td className="w-[5px] p-2">
+                        <Avatar
+                          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTI5KPcBp9vKBWRnMlYxr8AXUbQO6GiHvrBQZ5FJiVx6w9kmarHbNLCGzgnMqHkrjl7-zE&usqp=CAU"
+                          alt="imagee"
+                          size="md"
+                        />
+                      </td>
+                      <td className="w-[5px] p-2">{element.busnumber}</td>
+                      <td className="w-[5px] p-2 font-semibold">
+                        {element.busname}
+                      </td>
+                      <td className="w-[5px] p-2">{element.from}</td>
+                      <td className="w-[5px] p-2">{element.to}</td>
+                      <td className="w-[5px] p-2">{element.arrivalDate}</td>
+                      <td className="w-[5px] p-2">{element.arrivalTime}</td>
+                      <td className="w-[5px] p-2">{element.pickUpPoint}</td>
+                      <td className="w-[5px] p-2">{element.seats}</td>
+                      <td className="w-[5px] p-2">{element.ticketprice}</td>
+                      <td className="w-[5px] p-2">{element.operator}</td>
+                      <td className="w-[5px] p-2">{element.currentStatus}</td>
+                      <td className="w-[5px] p-2">{element.busType}</td>
+                      <td className="w-[5px] p-2">{element.busstops}</td>
+                      <td className="w-[5px] p-2">{element.noofstop}</td>
+                      <td className="w-[5px] p-2">{element.bookingseats}</td>
+                      <td className="w-[5px] p-2">
+                        {element.travelagencyname}
+                      </td>
+                      <td className="w-[5px] p-2 ">
+                        <Tooltip content="Update Bus">
+                          <IconButton
+                            onClick={() => updateBus(element._id)}
+                            variant="text"
+                            color="blue-gray"
+                          >
+                            <PencilIcon className="h-4 w-4" />
+                          </IconButton>
+                        </Tooltip>
+                        <Tooltip content="Delete Bus">
+                          <IconButton
+                            onClick={() => deleteBus(element._id)}
+                            variant="text"
+                            color="blue-gray"
+                          >
+                            <TrashIcon
+                              className=" w-4 text-red-500"
+                              onClick={() => alert("Bus Deleted")}
+                            />
+                          </IconButton>
+                        </Tooltip>
+                      </td>
+                    </tr>
+                  </>
+                ))
               : "Data Not Found.."}
           </tbody>
         </table>
       </div>
-      {/* </CardBody> */}
-      {/* </Card> */}
     </div>
   );
 }

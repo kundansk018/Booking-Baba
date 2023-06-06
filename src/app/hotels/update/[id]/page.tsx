@@ -181,7 +181,7 @@ export default function UpdateHotel({ params }: any) {
   return (
     <>
       <div className="bg-white h-[40%] pb-4 mt-5 m-auto w-[60%] justify-center rounded-lg">
-        <div className="flex justify-center h-12 bg-[#4fb291] text-white px-5  text-2xl">
+        <div className="flex justify-center h-12 bg-GreenBlue items-center text-white px-5  text-2xl">
           <h1>Update Hotel Details</h1>
         </div>
         <div className="flex flex-row justify-center m-6">
