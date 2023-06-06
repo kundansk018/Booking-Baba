@@ -28,7 +28,7 @@ import {
 import { useAppDispatch } from "@/redux/store";
 import { ADD_HOTELS_DATA } from "@/redux/constant";
 import { useSelector } from "react-redux";
-import { getHotelById } from "@/redux/action/hotelaction";
+import { getHotelById, getHotels } from "@/redux/action/hotelaction";
 
 const TABS = [
   {
@@ -47,34 +47,15 @@ const TABS = [
 
 export default function Hotels() {
   const hotelData: any = useSelector((state: any) => state.hotel.hotelDetails);
-  console.log("hotel data is ..==>>>>", hotelData?.data);
+  // console.log("hotel data is ..==>>>>", hotelData?.data);
   const dispatch = useAppDispatch();
 
   const [hotel, setHotel] = useState<any>("");
   console.log(" using usestate hotel data is ..", hotelData);
 
   useEffect(() => {
-    const getHotel = async () => {
-      const response: any = await fetch(
-        `http://localhost:3000/api/hotelsapi/hotelsapi?action=getHotels`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-
-      const hotelData = await response.json();
-
-      dispatch({ type: ADD_HOTELS_DATA, payload: hotelData });
-
-      console.log("get hotels api.. ", hotelData);
-      setHotel(hotelData);
-    };
-
-    getHotel();
-  }, []);
+    dispatch(getHotels());
+  }, [])
 
   const router = useRouter();
   return (
@@ -144,8 +125,8 @@ export default function Hotels() {
             </tr>
           </thead>
           <tbody>
-            {hotel
-              ? hotel.data.map((element: any) => (
+            {hotelData
+              ? hotelData.map((element: any) => (
                 <>
                   <tr className="border-b">
                     <td className="w-[5px] p-2">

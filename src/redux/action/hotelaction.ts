@@ -1,6 +1,7 @@
 import React from "react";
 import {
   ADD_HOTELS,
+  ADD_HOTELS_DATA,
   ADD_HOTELS_FAIL,
   ADD_HOTELS_SUCCESS,
   PREVIOUS_HOTEL_DATA,
@@ -9,34 +10,24 @@ import {
   UPDATE_HOTEL_DETAILS,
 } from "../constant";
 import { AppDispatch } from "../store";
- 
+import { ENDPOINTS } from "@/config/config";
+import { addHotelsInfo, getHotel, hotelsById, updateHotelIfo } from "@/service/services";
+
 /*.................Add hotels..........*/
 export const addHotels = (data: any) => async (dispatch: AppDispatch) => {
   console.log("data in action: ", data);
+  try{
   dispatch({ type: REQUEST_STARTED, payload: null });
-
-  // dispatch({ type: ADD_HOTELS, payload: null });
-
-  //api call
-  const res = await fetch(
-    "http://localhost:3000/api/hotelsapi/hotelsapi?action=addHotels",
-    {
-      method: "POST",
-
-      body: JSON.stringify(data),
-      headers: {
-        "content-type": "application/json",
-      },
-    }
-  );
-  if (res.ok === true) {
-    console.log("inside if:::::::::", res);
-
-    let hotel_records = await res.json();
-    dispatch({ type: ADD_HOTELS_SUCCESS, payload: data });
+  const res = await addHotelsInfo(data)
+  if (res && res.status === 200) {
+    dispatch({ type: ADD_HOTELS_SUCCESS, payload: res.data });
   } else {
     dispatch({ type: ADD_HOTELS_FAIL, payload: null });
   }
+}
+catch(error){
+  console.log(error)
+}
   dispatch({ type: REQUEST_COMPLETED, payload: null });
 };
 
@@ -46,55 +37,57 @@ export const savePreviousData =
   };
 
 
-  /*................. get Hotel By Id..........*/
-export const getHotelById = (id: string) => async (dispatch: AppDispatch) => {
-  dispatch({ type: REQUEST_STARTED, payload: null });
-  let data = { id: id };
-  const res = await fetch(
-    "http://localhost:3000/api/hotelsapi/hotelsapi?action=getHotelDetails",
-    {
-      method: "POST",
+  /*..................get Hotels...............*/
 
-      body: JSON.stringify(data),
-      headers: {
-        "content-type": "application/json",
-      },
-    }
-  );  
-  if (res.ok === true) {
-    console.log("updtae response", res)
-    let hotel_records = await res.json()
-    dispatch({ type: SAVE_HOTEL_DETAILS, payload: hotel_records })
-  }
-  dispatch({ type: REQUEST_COMPLETED, payload: null });
+export const getHotels =()=> async (dispatch:AppDispatch)=>{
+  
+try{
+  dispatch({ type: REQUEST_STARTED, payload: null });
+  const res =await getHotel()
+  if(res &&res.status==200){
+ dispatch({ type: ADD_HOTELS_DATA, payload: res.data?.data});
+ }
+}
+catch(error){
+console.log(error)
+}
+dispatch({ type: REQUEST_COMPLETED, payload: null });
 
 }
 
-   
-  /*................. update Hotel By Id..........*/
-export const  updateHotel = (data: any) => async (dispatch: AppDispatch) => {
 
+
+/*................. get Hotel By Id..........*/
+export const getHotelById = (id: string) => async (dispatch: AppDispatch) => {
+  try{
   dispatch({ type: REQUEST_STARTED, payload: null });
-  let param = { "id": data._id,"data":data }
-  // delete param.data._id
-  console.log(param)
-  debugger
-  const res = await fetch(
+  let data = { id: id };
+  const res = await hotelsById(data)
+  if (res && res.status === 200) {
+    dispatch({ type: SAVE_HOTEL_DETAILS, payload: res.data })
+    dispatch({ type: REQUEST_COMPLETED, payload: null });
+  }
+}
+catch(error){
+  console.log(error)
+}
+}
 
-    "http://localhost:3000/api/hotelsapi/hotelsapi?action=updateHotels",
-    {
-      method: "POST",
 
-      body: JSON.stringify(param),
-      headers: {
-        "content-type": "application/json",
-      },
-    }
-  );  
-  if (res.ok === true) {
-    console.log("updtae response", res);
-    let hotel_records = await res.json();
-    dispatch({ type: UPDATE_HOTEL_DETAILS, payload: hotel_records });
+/*................. update Hotel By Id..........*/
+export const updateHotel = (data: any) => async (dispatch: AppDispatch) => {
+try{
+  dispatch({ type: REQUEST_STARTED, payload: null });
+  let param = { "id": data._id, "data": data }
+  delete data._id
+  const res = await updateHotelIfo(param)
+  if (res && res.status === 200) {
+    dispatch({ type: UPDATE_HOTEL_DETAILS, payload: res.data });
+  }else{
+    console.log(res)
+  }}
+  catch(error){
+    console.log(error)
   }
   dispatch({ type: REQUEST_COMPLETED, payload: null });
 };
