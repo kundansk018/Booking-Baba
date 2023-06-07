@@ -141,50 +141,42 @@ export default function UpdateRoom({params}:any) {
     }
   }, [previousHotelData])
  
- return loading ? (
-   <Spinner />
- ) : (
-   <div className="bg-white h-full  mt-5 m-auto w-[60%] justify-center pb-1">
-     <div className="flex flex-row h-12  bg-[#1B6CA8] items-center text-white px-5  text-xl  justify-between">
-       <p className="mt-4">Update Hotel Rooms</p>
-       <PlusIcon className=" w-6" onClick={addMore} />
-     </div>
-     <div className="flex flex-col justify-center mt-5 align-middle">
-       {roomDetails &&
-         roomDetails.length > 0 &&
-         roomDetails.map((element: any, index: number) => (
-           <div className="m-auto" key={index}>
-             <div className=" flex flex-row  justify-between">
-               <p className="font-medium "> Add Room {element.id} </p>
-               <TrashIcon
-                 className=" w-5 text-red-500"
-                 onClick={() => deleteRoom(index)}
-               />
-             </div>
-             <div className=" flex flex-row  justify-center">
-               <div className="flex  flex-col mx-4 w-[300px]">
-                 <div className="my-2 w-72">
-                   <Select
-                     label="Select Bed"
-                     value={getSelectedBde(element.no_of_bed)}
-                   >
-                     {data.map((item: any) => (
-                       <Option
-                         value={item.value}
-                         onClick={() => setOptionValue(index, item.value)}
-                       >
-                         {item.lable}
-                       </Option>
-                     ))}
-                   </Select>
-                 </div>
-                 <div className="my-2 w-72">
-                   <Input
-                     label="Price"
-                     value={element.price}
-                     onChange={(e) => setPriceValue(index, e.target.value)}
-                   />
-                 </div>
+ return (
+    loading ? <Spinner /> :
+      <div className="bg-white h-full  mt-5 m-auto w-[700px] justify-center pb-1">
+        <div className="flex flex-row h-12  bg-[#1B6CA8] text-white px-5  text-xl  justify-between">
+          <p className="mt-4">Update Hotel Rooms</p>
+          <PlusIcon className=" w-6" onClick={addMore} />
+
+        </div>
+        <div className="flex flex-col justify-center mt-5 align-middle">
+
+          {roomDetails&& roomDetails.length>0&&roomDetails.map((element: any, index: number) => (
+            <div className="m-auto" key={index}>
+
+              <div className=" flex flex-row  justify-between">
+                <p className="font-medium ">  Add Room {element.id} </p>
+                <TrashIcon className=" w-5 text-red-500" onClick={() => deleteRoom(index)} />
+              </div>
+              <div className=" flex flex-row  justify-center">
+
+                <div className="flex  flex-col mx-4 w-[300px]">
+                  <div className="my-2 w-72">
+                    <Select label="Select Bed" value={ getSelectedBde(element.no_of_bed)}>
+                      {data.map((item: any) => (
+                        <Option value={item.value} onClick={() => setOptionValue(index, item.value)}>
+                          {item.lable}
+                        </Option>
+                      ))}
+                    </Select>
+                  </div>
+                  <div className="my-2 w-72">
+                    <Input
+                      label="Price"
+                      value={element.price}
+                      onChange={(e) => setPriceValue(index, e.target.value)}
+                    />
+                  </div>
 
                  <div className="my-2 w-72">
                    <Input

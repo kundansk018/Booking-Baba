@@ -12,7 +12,7 @@ import {
 } from "../constant";
 import { AppDispatch } from "../store";
 import { ENDPOINTS } from "@/config/config";
-import { addHotelsInfo, deleteHotel, getHotel, hotelsById, updateHotelIfo } from "@/service/services";
+import { addHotelsInfo, deleteHotel, getHotel, hotelsById, updateHotelInfo } from "@/service/services";
 
 /*.................Add hotels..........*/
 export const addHotels = (data: any) => async (dispatch: AppDispatch) => {
@@ -81,7 +81,7 @@ try{
   dispatch({ type: REQUEST_STARTED, payload: null });
   let param = { "id": data._id, "data": data }
   delete data._id
-  const res = await updateHotelIfo(param)
+  const res = await updateHotelInfo(param)
   if (res && res.status === 200) {
     dispatch({ type: UPDATE_HOTEL_DETAILS, payload: res.data });
   }else{

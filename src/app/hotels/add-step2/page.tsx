@@ -137,7 +137,7 @@ export default function Page() {
 
   return (
     loading ? <Spinner /> :
-      <div className="bg-white h-full  mt-5 m-auto w-[60%] justify-center pb-1">
+      <div className="bg-white h-full  mt-5 m-auto w-[700px] justify-center pb-1">
         <div className="flex flex-row h-12  bg-[#1B6CA8] text-white px-5  text-xl  justify-between">
           <p className="mt-2">Add Hotel Rooms</p>
           <PlusIcon className=" w-6" onClick={addMore} />

@@ -41,9 +41,17 @@ export default function UpdateHotel({ params }: any) {
   const [generalService, setGeneral] = useState([]);
   const [safety, setSafety] = useState([]);
 
-  const [selectedFoodName, setSelectedFoodName] = useState(
-    "Select foods & drinks"
-  );
+  const [selectedFoodName, setSelectedFoodName] = useState("Select foods & drinks");
+  const [selectedFoodBasics, setSelectedFoodBasics] = useState("Select foods & drinks");
+  const [selectedGeneral, setSelectedGeneral] = useState("Select General Servicess");
+  const [selectedSafety, setSelectedSafety] = useState("Select Safety & Security");
+
+  const dispatch = useAppDispatch();
+  const [errorDialogMessage, setErrorDialogMessage] = useState([]);
+  const [showErrorDialog, setShowErrorDialog] = useState(false);
+  const router = useRouter();
+  const hotelState = useSelector((state: any) => state.hotel);
+
 
   const select_food_facilities = (selectedList: any, selectedItem?: any) => {
     setFood(selectedList);
@@ -57,9 +65,7 @@ export default function UpdateHotel({ params }: any) {
     setSelectedFoodName(names.toString());
   };
 
-  const [selectedFoodBasics, setSelectedFoodBasics] = useState(
-    "Select foods & drinks"
-  );
+
   const selectBasic_Facilities = (selectedList: any, selectedItem?: any) => {
     setBasics(selectedList);
     let names = selectedList.map((element: any) => element.name);
@@ -72,9 +78,7 @@ export default function UpdateHotel({ params }: any) {
     setSelectedFoodBasics(names.toString());
   };
 
-  const [selectedGeneral, setSelectedGeneral] = useState(
-    "Select General Servicess"
-  );
+
   const select_general_services = (selectedList: any, selectedItem?: any) => {
     setGeneral(selectedList);
     let names = selectedList.map((element: any) => element.name);
@@ -86,9 +90,7 @@ export default function UpdateHotel({ params }: any) {
     setSelectedGeneral(names.toString());
   };
 
-  const [selectedSafety, setSelectedSafety] = useState(
-    "Select Safety & Security"
-  );
+
   const select_safety = (selectedList: any, selectedItem?: any) => {
     setSafety(selectedList);
     let names = selectedList.map((element: any) => element.name);
@@ -99,14 +101,6 @@ export default function UpdateHotel({ params }: any) {
     let names = selectedList.map((element: any) => element.name);
     setSelectedSafety(names.toString());
   };
-
-  const dispatch = useAppDispatch();
-  const [errorDialogMessage, setErrorDialogMessage] = useState([]);
-  const [showErrorDialog, setShowErrorDialog] = useState(false);
-  const router = useRouter();
-  const hotelState = useSelector((state: any) => state.hotel);
-
-  // console.log("hotel data is ..", hotelState);
 
   useEffect(() => {
     dispatch(getHotelById(params.id));
@@ -151,8 +145,6 @@ export default function UpdateHotel({ params }: any) {
     }
   }, [hotelState.updateHotelDetails])
 
-
-
   const updateHotelDetails = () => {
     let param = {
       _id: params.id,
@@ -170,18 +162,17 @@ export default function UpdateHotel({ params }: any) {
       safety,
     }
     let hotel_data = hotelState.updateHotelDetails?.data;
-    dispatch(updateHotel(param))
-    setTimeout(()=>{
+    dispatch(updateHotel(param)).then(() => {
       dispatch(savePreviousData(hotel_data));
       router.push("/hotels/updateRoom");
-    },500)
-  
+    })
+
   };
 
   return (
     <>
-      <div className="bg-white h-[40%] pb-4 mt-5 m-auto w-[60%] justify-center rounded-lg">
-        <div className="flex justify-center h-12 bg-GreenBlue items-center text-white px-5  text-2xl">
+      <div className="bg-white h-[40%] pb-4 mt-5 m-auto w-[750px] justify-center rounded-lg">
+        <div className="flex justify-center h-12 bg-[#4fb291] text-white px-5  text-2xl">
           <h1>Update Hotel Details</h1>
         </div>
         <div className="flex flex-row justify-center m-6">

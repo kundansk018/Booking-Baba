@@ -193,12 +193,11 @@ export default function AddHotels() {
       dispatch(savePreviousData(data));
       router.push("/hotels/add-step2");
     }
-  };
-
+  }
   return (
     <>
-      <div className="bg-white h-[40%] pb-4 mt-5 m-auto w-[60%] justify-center rounded-lg">
-        <div className="flex justify-center h-12 bg-GreenBlue items-center text-white px-5  text-3xl">
+      <div className="bg-white h-[40%] pb-4 mt-5 m-auto w-[800px] justify-center rounded-lg">
+        <div className="flex justify-center h-12 bg-GreenBlue text-white px-5  text-3xl">
           <h1>Add Hotel</h1>
         </div>
         <div className="flex  flex-row justify-center m-6">
@@ -282,6 +281,7 @@ export default function AddHotels() {
               type="date"
               onChange={(e) => setDate(e.target.value)}
             />
+
           </div>
 
           <div className="flex  flex-col mx-4 w-[300px] ">

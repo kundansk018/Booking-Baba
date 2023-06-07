@@ -73,6 +73,17 @@ export default function Navigationbar() {
           About Us
         </a>
       </Typography>
+      <Typography
+        as="li"
+        variant="small"
+        // color="blue-gray"
+        className="p-1 font-normal"
+        onClick={() => router.push("/user")}
+      >
+        <a href="#" className="flex items-center text-xl mt-1">
+          User Dashboard
+        </a>
+      </Typography>
     </ul>
   );
 
