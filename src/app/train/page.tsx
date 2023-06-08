@@ -167,43 +167,43 @@ export default function Train() {
           <tbody className="-z-10">
             {trainData
               ? trainData?.items?.map((element: any) => (
-                  <tr key={element._id}>
-                    <td className="w-[5px] p-2">
-                      <Avatar
-                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4Rb78i6mV3XF1VxsVX_f6FvUggBNCIw4-xw&usqp=CAU"
-                        alt="imagee"
-                        size="md"
-                      />
-                    </td>
-                    <td className="w-[5px]  p-2">{element.trainNo}</td>
-                    <td className="w-[5px]  p-2">{element.trainName}</td>
-                    <td className="w-[5px]  p-2">{element.from_Stn}</td>
-                    <td className="w-[5px]  p-2">{element.to_Stn}</td>
-                    <td className="w-[5px]  p-2">{element.fare}</td>
-                    <td className="w-[5px]  p-2">{element.seats}</td>
-                    <td className="w-[5px]  p-2">{element.coach}</td>
-                    <td className="w-[5px]  p-2">
-                      <Tooltip content="Edit Train Details">
-                        <IconButton
-                          onClick={() => updateTrain(element._id)}
-                          variant="text"
-                          color="blue-gray"
-                        >
-                          <PencilIcon className="h-4 w-4" />
-                        </IconButton>
-                      </Tooltip>
-                      <Tooltip content="Delete">
-                        <IconButton
-                          onClick={() => deleteTrain(element._id)}
-                          variant="text"
-                          color="blue-gray"
-                        >
-                          <TrashIcon className=" w-5 text-red-500" />{" "}
-                        </IconButton>
-                      </Tooltip>
-                    </td>
-                  </tr>
-                ))
+                <tr key={element._id}>
+                  <td className="w-[5px] p-2">
+                    <Avatar
+                      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4Rb78i6mV3XF1VxsVX_f6FvUggBNCIw4-xw&usqp=CAU"
+                      alt="imagee"
+                      size="md"
+                    />
+                  </td>
+                  <td className="w-[5px]  p-2">{element.trainNo}</td>
+                  <td className="w-[5px]  p-2">{element.trainName}</td>
+                  <td className="w-[5px]  p-2">{element.from_Stn}</td>
+                  <td className="w-[5px]  p-2">{element.to_Stn}</td>
+                  <td className="w-[5px]  p-2">{element.fare}</td>
+                  <td className="w-[5px]  p-2">{element.seats}</td>
+                  <td className="w-[5px]  p-2">{element.coach}</td>
+                  <td className="w-[5px]  p-2">
+                    <Tooltip content="Edit Train Details">
+                      <IconButton
+                        onClick={() => updateTrain(element._id)}
+                        variant="text"
+                        color="blue-gray"
+                      >
+                        <PencilIcon className="h-4 w-4" />
+                      </IconButton>
+                    </Tooltip>
+                    <Tooltip content="Delete">
+                      <IconButton
+                        onClick={() => deleteTrain(element._id)}
+                        variant="text"
+                        color="blue-gray"
+                      >
+                        <TrashIcon className=" w-5 text-red-500" />{" "}
+                      </IconButton>
+                    </Tooltip>
+                  </td>
+                </tr>
+              ))
               : "Data Not Found.."}
           </tbody>
         </table>

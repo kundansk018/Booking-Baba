@@ -3,25 +3,18 @@ import React, { useEffect, useState } from "react";
 
 import { useRouter } from "next/navigation";
 
-//import axios from "axios";
 
 import {
   MagnifyingGlassIcon,
-  ChevronUpDownIcon,
   PencilIcon,
   TrashIcon,
 } from "@heroicons/react/24/outline";
 import { UserPlusIcon } from "@heroicons/react/24/solid";
 import {
   Card,
-  CardHeader,
   Input,
   Typography,
   Button,
-  CardBody,
-  Tabs,
-  TabsHeader,
-  Tab,
   Tooltip,
   IconButton,
   Avatar,
@@ -29,8 +22,8 @@ import {
 
 import { useAppDispatch } from "@/redux/store";
 import { useSelector } from "react-redux";
-import { BUS_REQUEST_SUCCESS } from "@/redux/constant";
-import { deleteBusAction } from "@/redux/action/busaction";
+import { deleteBusAction, getBus, updateBusAction } from "@/redux/action/busaction";
+import { Pagination } from "react-bootstrap";
 
 const TABS = [
   {
@@ -49,44 +42,59 @@ const TABS = [
 
 export default function Bus() {
   const busData: any = useSelector((state: any) => state.bus.busDetails);
-  console.log("bus data is ..==>>>>", busData?.data);
+  console.log("bus data is ..==>>>>", busData);
   const dispatch = useAppDispatch();
-  //const [counter, setCounter] = useState(0);
-  const [bus, setBus] = useState<any>("");
+  const [counter, setCounter] = useState<any>(0);
+  const [page, setPage] = useState<any>(1);
+  const [totalItems, setTotalItems] = useState<any>();
+  const [items, setItems] = useState<any>([]);
+  const [totalPages, setTotalPages] = useState<any>();
+
+
   console.log(" using usestate bus data is ..", busData);
 
   useEffect(() => {
-    const getBus = async () => {
-      const response: any = await fetch(
-        `http://localhost:3000/api/busapi/busapi?action=GET_ALL_BUSES`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+    getAllBuses()
+  }, [counter, page]);
 
-      const busData = await response.json();
-
-      dispatch({ type: BUS_REQUEST_SUCCESS, payload: busData });
-
-      console.log("get bus api.. ", busData);
-      setBus(busData);
-    };
-
-    getBus();
+  useEffect(() => {
+    if (busData) {
+      const { page, totalItems, totalPages, items } = busData;
+      setPage(page);
+      setTotalItems(totalItems);
+      setTotalPages(totalPages);
+      setItems(items);
+    }
   }, []);
+  console.log("totalPages => ", items);
+
+  const getAllBuses = () => {
+    dispatch(getBus(page));
+  };
+
+  const handlePageChange = (newPage: any) => {
+    setPage(newPage);
+  };
+
+
 
   const deleteBus = (id: string) => {
     dispatch(deleteBusAction(id))
+    setCounter(counter + 1)
+    getAllBuses()
   }
+
 
   const updateBus = (id: string) => {
     router.push("/bus/updatebus/" + id)
-
+    setCounter(counter + 1)
+    getAllBuses()
   }
-
+  const addBus = () => {
+    router.push("/bus/add")
+    setCounter(counter + 1)
+    getAllBuses()
+  }
 
   const router = useRouter();
   return (
@@ -98,28 +106,43 @@ export default function Bus() {
               className="px-4 font-castoro"
               variant="h3"
               color="black"
+
             >
               Bus List
             </Typography>
           </div>
-          <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
-            {/* <Tabs
-            value="all"
-            className="w-full sm:w-max text-black   font-castoro"
-          >
-            <TabsHeader
-              className=" z-0"
-              indicatorProps={{
-                className: "bg-[#4fb291] shadow-none ",
-              }}
-            >
-              {TABS.map(({ label, value }) => (
-                <Tab key={value} value={value}>
-                  &nbsp;&nbsp;{label}&nbsp;&nbsp;
-                </Tab>
+          <div className=" table table-hover " style={{ margin: "1%" }}>
+            <Pagination className="flex gap-5">
+              <Pagination.First
+                onClick={() => handlePageChange(1)}
+                disabled={page === 1}
+              />
+              <Pagination.Prev
+                onClick={() => handlePageChange(page - 1)}
+                disabled={page === 1}
+              />
+              {Array.from(Array(totalPages).keys()).map((pageIndex, index) => (
+                <Pagination.Item
+                  key={index}
+                  active={pageIndex === page}
+                  onClick={() => handlePageChange(pageIndex)}
+                  disabled={page === 1}
+                >
+                  {pageIndex}
+                </Pagination.Item>
               ))}
-            </TabsHeader>
-          </Tabs> */}
+              <Pagination.Next
+                onClick={() => handlePageChange(page + 1)}
+                disabled={page === totalPages - 1}
+              />
+              <Pagination.Last
+                onClick={() => handlePageChange(totalPages)}
+                disabled={page === totalPages}
+              />
+            </Pagination>
+          </div>
+          <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
+
             <div className="w-full md:w-72">
               <Input
                 label="Search"
@@ -129,7 +152,7 @@ export default function Bus() {
             <Button
               className="flex items-center gap-3 bg-blackblue"
               size="md"
-              onClick={() => router.push("/bus/add")}
+              onClick={() => addBus()}
             >
               <UserPlusIcon strokeWidth={2} className="h-4 w-4" /> Add New Bus
             </Button>
@@ -137,12 +160,11 @@ export default function Bus() {
         </div>
       </Card>
 
-      <div className="mx-3 h-[500px] w-[98%] mt-[0.5%]  bg-white relative overflow-scroll px-1">
+      <div className="mx-3 h-[500px] w-[98%] mt-[1%]  bg-white relative overflow-scroll px-1 mt-0">
         <table className="relative font-roboto w-full min-w-max table-auto text-left text-sm text-black">
           <thead className="z-10 font-semibold flex-col">
             <tr className="z-10 bg-GreenBlue text-white sticky top-0  w-full">
               <th className="w-[5px] p-2">Bus Photos</th>
-              {/* <th className="w-[5px]">file</th> */}
               <th className="w-[5px] p-2">Bus Number</th>
               <th className="w-[5px] p-2">Bus Name</th>
               <th className="w-[5px] p-2">From</th>
@@ -152,8 +174,8 @@ export default function Bus() {
               <th className="w-[5px] p-2">Rest Point</th>
               <th className="w-[5px] p-2">Seats</th>
               <th className="w-[5px] p-2">Ticket Price</th>
-              <th className="w-[5px] p-2">Operator</th>
-              <th className="w-[5px] p-2">Current Status</th>
+              {/* <th className="w-[5px] p-2">Operator</th> */}
+              {/* <th className="w-[5px] p-2">Current Status</th> */}
               <td className="w-[5px] p-2">Bus Type</td>
               <th className="w-[5px] p-2">Bus Stops</th>
               <td className="w-[5px] p-2">No. of Stops</td>
@@ -163,67 +185,63 @@ export default function Bus() {
             </tr>
           </thead>
           <tbody>
-            {bus
-              ? bus.data.map((element: any) => (
-                  <>
-                    <tr className="border-b">
-                      <td className="w-[5px] p-2">
-                        <Avatar
-                          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTI5KPcBp9vKBWRnMlYxr8AXUbQO6GiHvrBQZ5FJiVx6w9kmarHbNLCGzgnMqHkrjl7-zE&usqp=CAU"
-                          alt="imagee"
-                          size="md"
-                        />
-                      </td>
-                      <td className="w-[5px] p-2">{element.busnumber}</td>
-                      <td className="w-[5px] p-2 font-semibold">
-                        {element.busname}
-                      </td>
-                      <td className="w-[5px] p-2">{element.from}</td>
-                      <td className="w-[5px] p-2">{element.to}</td>
-                      <td className="w-[5px] p-2">{element.arrivalDate}</td>
-                      <td className="w-[5px] p-2">{element.arrivalTime}</td>
-                      <td className="w-[5px] p-2">{element.pickUpPoint}</td>
-                      <td className="w-[5px] p-2">{element.seats}</td>
-                      <td className="w-[5px] p-2">{element.ticketprice}</td>
-                      <td className="w-[5px] p-2">{element.operator}</td>
-                      <td className="w-[5px] p-2">{element.currentStatus}</td>
-                      <td className="w-[5px] p-2">{element.busType}</td>
-                      <td className="w-[5px] p-2">{element.busstops}</td>
-                      <td className="w-[5px] p-2">{element.noofstop}</td>
-                      <td className="w-[5px] p-2">{element.bookingseats}</td>
-                      <td className="w-[5px] p-2">
-                        {element.travelagencyname}
-                      </td>
-                      <td className="w-[5px] p-2 ">
-                        <Tooltip content="Update Bus">
-                          <IconButton
-                            onClick={() => updateBus(element._id)}
-                            variant="text"
-                            color="blue-gray"
-                          >
-                            <PencilIcon className="h-4 w-4" />
-                          </IconButton>
-                        </Tooltip>
-                        <Tooltip content="Delete Bus">
-                          <IconButton
-                            onClick={() => deleteBus(element._id)}
-                            variant="text"
-                            color="blue-gray"
-                          >
-                            <TrashIcon
-                              className=" w-4 text-red-500"
-                              onClick={() => alert("Bus Deleted")}
-                            />
-                          </IconButton>
-                        </Tooltip>
-                      </td>
-                    </tr>
-                  </>
-                ))
-              : "Data Not Found.."}
+            {busData
+              ? busData?.items?.map((element: any) => (
+                <>
+                  <tr className="border-b">
+                    <td className="w-[5px] p-2">
+                      <Avatar
+                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTI5KPcBp9vKBWRnMlYxr8AXUbQO6GiHvrBQZ5FJiVx6w9kmarHbNLCGzgnMqHkrjl7-zE&usqp=CAU"
+                        alt="imagee"
+                        size="md"
+                      />
+                    </td>
+                    <td className="w-[5px] p-2">{element.busnumber}</td>
+                    <td className="w-[5px] p-2 font-semibold">
+                      {element.busname}
+                    </td>
+                    <td className="w-[5px] p-2">{element.from}</td>
+                    <td className="w-[5px] p-2">{element.to}</td>
+                    <td className="w-[5px] p-2">{element.arrivalDate}</td>
+                    <td className="w-[5px] p-2">{element.arrivalTime}</td>
+                    <td className="w-[5px] p-2">{element.pickUpPoint}</td>
+                    <td className="w-[5px] p-2">{element.seats}</td>
+                    <td className="w-[5px] p-2">{element.ticketprice}</td>
+                    {/* <td className="w-[5px] p-2">{element.operator}</td> */}
+                    {/* <td className="w-[5px] p-2">{element.currentStatus}</td> */}
+                    <td className="w-[5px] p-2">{element.busType}</td>
+                    <td className="w-[5px] p-2">{element.busstops}</td>
+                    <td className="w-[5px] p-2">{element.noofstop}</td>
+                    <td className="w-[5px] p-2">{element.bookingseats}</td>
+                    <td className="w-[5px] p-2">
+                      {element.travelagencyname}
+                    </td>
+                    <td className="w-[5px] p-2 ">
+                      <Tooltip content="Update Bus">
+                        <IconButton onClick={() => updateBus(element._id)}
+                          variant="text" color="blue-gray">
+                          <PencilIcon className="h-4 w-4" />
+                        </IconButton>
+                      </Tooltip>
+                      <Tooltip content="Delete Bus">
+                        <IconButton onClick={() => deleteBus(element._id)}
+                          variant="text" color="blue-gray">
+                          <TrashIcon
+                            className=" w-4 text-red-500"
+                            onClick={() => alert("Bus Deleted")}
+                          />
+                        </IconButton>
+                      </Tooltip>
+                    </td>
+                  </tr>
+                </>
+              ))
+              : "Data not found"}
           </tbody>
         </table>
       </div>
+
+
     </div>
   );
 }

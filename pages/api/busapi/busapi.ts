@@ -11,25 +11,33 @@ export default async function handler(
   db = await getDB();
 
   const {
-    body,
+
     query: { action: action },
-    method,
-    headers,
   } = request;
 
   switch (action) {
     case "ADD_BUS":
       return await addBus(request, response);
 
+
     case "UPDATE_BUS":
       return await updateBus(request, response);
 
     case "DELETE_BUS":
-      console.log("Action >>>>>>>>>>>>>>>>>>>>>>>>>>>>", request.body);
       return await deleteBus(request, response);
 
     case "GET_ALL_BUSES":
       return await getAllBuses(request, response);
+
+
+    case "SEARCH":
+      return await search(request, response);
+
+
+
+    // case "GET_BUS":
+    //   return await getBus(request, response);
+
 
     case "GET_BUS_BY_ID":
       return await getBusById(request, response);
@@ -50,6 +58,18 @@ export async function addBus(
   return response.status(200).json({ data: res });
 }
 
+
+export async function search(
+  request: NextApiRequest,
+  response: NextApiResponse
+) {
+  const { from, to } = request.body;
+  const buses = await db.collection("Bus Details");
+  const res = await buses.find(from, to).toArray();
+  return response.status(200).json({ data: res });
+}
+
+
 export async function updateBus(
   request: NextApiRequest,
   response: NextApiResponse
@@ -58,7 +78,7 @@ export async function updateBus(
   const res = await buses.updateOne(
     { _id: new ObjectId(request.body._id) },
     {
-      //$set: request.body,
+      // $set: request.body.data,
       $set: {
         busname: request.body.busname,
         busnumber: request.body.busnumber,
@@ -73,6 +93,11 @@ export async function updateBus(
         operator: request.body.operator,
         currentStatus: request.body.currentStatus,
         busType: request.body.busType,
+        busstops: request.body.busstops,
+        noofstop: request.body.noofstop,
+        bookingseats: request.body.bookingseats,
+        travelagencyname: request.body.travelagencyname,
+
       },
     }
   );
@@ -90,14 +115,85 @@ export async function deleteBus(
   return response.status(200).json({ data: res });
 }
 
-export async function getAllBuses(
+
+export async function getBus(
   request: NextApiRequest,
   response: NextApiResponse
 ) {
-  const buses = await db.collection("Bus Details");
-  const res = await buses.find().toArray();
-  return response.status(200).json({ data: res });
+  const page: number = parseInt(request.body.page as string) || 1;
+  //console.log("page Number", request.body.page);
+  const itemsPerPage: number = 3;
+
+  try {
+    const startIndex: number = (page - 1) * itemsPerPage;
+
+    const endIndex: number = startIndex + itemsPerPage;
+
+    const items = await db
+      .collection("Bus Details")
+      .find()
+      .skip(startIndex)
+      .limit(itemsPerPage)
+      .toArray();
+
+    const totalItems: number = await db
+      .collection("Bus Details")
+      .countDocuments();
+
+    const totalPages: number = Math.ceil(totalItems / itemsPerPage);
+
+    response.status(200).json({
+      page,
+      totalPages,
+      totalItems,
+      items,
+    });
+  } catch (error) {
+    console.log("error fetching data from mongodb", error);
+    response.status(500).json({ message: "internal server error" });
+  }
 }
+
+
+export async function getAllBuses(
+
+  request: NextApiRequest,
+  response: NextApiResponse
+) {
+  const page: number = parseInt(request.body.page as string) || 1;
+  //console.log("page Number", request.body.page);
+  const itemsPerPage: number = 3;
+
+  try {
+    const startIndex: number = (page - 1) * itemsPerPage;
+
+    const endIndex: number = startIndex + itemsPerPage;
+
+    const items = await db
+      .collection("Bus Details")
+      .find()
+      .skip(startIndex)
+      .limit(itemsPerPage)
+      .toArray();
+
+    const totalItems: number = await db
+      .collection("Bus Details")
+      .countDocuments();
+
+    const totalPages: number = Math.ceil(totalItems / itemsPerPage);
+
+    response.status(200).json({
+      page,
+      totalPages,
+      totalItems,
+      items,
+    });
+  } catch (error) {
+    console.log("error fetching data from mongodb", error);
+    response.status(500).json({ message: "internal server error" });
+  }
+}
+
 export async function getBusById(request: NextApiRequest, response: NextApiResponse) {
   const bus = await db.collection("Bus Details");
   const res = await bus.findOne({ _id: new ObjectId(request.body._id) });

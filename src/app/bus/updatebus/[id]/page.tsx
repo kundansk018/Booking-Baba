@@ -2,8 +2,6 @@
 
 import BBButton from "@/app/components/BBButton";
 import BBInput from "@/app/components/BBInput";
-// import "../../styles/hotel.css";
-
 import {
   Card,
   Typography,
@@ -12,16 +10,14 @@ import {
   Checkbox,
   List,
 } from "@material-tailwind/react";
-import { Input } from "postcss";
 import { useEffect, useState } from "react";
 import BBCheckbox from "@/app/components/BBCheckbox";
 import BBDropdown from "@/app/components/BBDropdown";
-import { type } from "os";
 import BBErrorDialog from "@/app/components/BBErrorDialog";
 import { useAppDispatch } from "@/redux/store";
 import {
   addBuses,
-  getBusById,
+  getBusesById,
   updateBusAction,
 } from "@/redux/action/busaction";
 import { useRouter } from "next/navigation";
@@ -48,7 +44,6 @@ export default function UpdateBus({ params }: any) {
   const [pickUpPoint, setPickUpPoint] = useState("");
   const [busType, setBusType] = useState("");
   const [currentStatus, setCurrentStatus] = useState("");
-  // const [photos, setPhotos] = useState<string>("");
   const [wifi, setWifi] = useState<boolean>(true);
   const [cpoint, setCpoint] = useState<boolean>(true);
   const [system, setSystem] = useState<boolean>(true);
@@ -64,16 +59,36 @@ export default function UpdateBus({ params }: any) {
   console.log("Bus Id Is>>>>>>>>>>>>>>>>>", params.id);
 
   useEffect(() => {
-    dispatch(getBusById(params.id));
+    dispatch(getBusesById(params.id));
   }, []);
 
-  console.log("Bus Data Is???????????????", busState);
-  const updatebus = (e: any) => {
-    updateBusAction(e);
-  };
-
+  console.log("Bus Data Is???????????????", busState)
+  const updatebus = () => {
+    let data = {
+      _id: params.id,
+      busname,
+      busnumber,
+      from,
+      to,
+      arrivalTime,
+      arrivalDate,
+      pickUpPoint,
+      departureTime,
+      seats,
+      ticketprice,
+      operator,
+      currentStatus,
+      busType,
+      busstops,
+      noofstop,
+      bookingseats,
+      travelagencyname,
+    };
+    dispatch(updateBusAction(data))
+    router.push("/bus")
+  }
   useEffect(() => {
-    let bus_data = busState?.data;
+    let bus_data = busState?.data
     if (bus_data) {
       const {
         busname,
@@ -94,38 +109,42 @@ export default function UpdateBus({ params }: any) {
         busType,
         currentStatus,
         // photos,
-        wifi,
-      } = bus_data;
-      setBusname(busname);
-      setFrom(from);
-      setTo(to);
-      setBusnumber(busnumber);
-      setSeats(seats);
-      setTicketPrice(ticketprice);
-      setOperator(operator);
-      setBusStops(busstops);
-      setNoOfStop(noofstop);
-      setBookingSeats(bookingseats);
-      setTravelAgencyName(travelagencyname);
-      setArrivalDate(arrivalDate);
-      setArrivalTime(arrivalTime);
-      setDepartureTime(departureTime);
-      setPickUpPoint(pickUpPoint);
-      setBusType(busType);
-      setCurrentStatus(currentStatus);
+        // wifi,
+
+      } = bus_data
+      setBusname(busname)
+      setFrom(from)
+      setTo(to)
+      setBusnumber(busnumber)
+      setSeats(seats)
+      setTicketPrice(ticketprice)
+      setOperator(operator)
+      setBusStops(busstops)
+      setNoOfStop(noofstop)
+      setBookingSeats(bookingseats)
+      setTravelAgencyName(travelagencyname)
+      setArrivalDate(arrivalDate)
+      setArrivalTime(arrivalTime)
+      setDepartureTime(departureTime)
+      setPickUpPoint(pickUpPoint)
+      setBusType(busType)
+      setCurrentStatus(currentStatus)
       // setPhotos(photos)
       // setWifi(wifi)
+
     }
-  }, [busState]);
+
+  }, [busState])
+
+  // console.log("///////////////", busState.updateBusDetails)
+
+
+
 
   return (
     <div className="bg-white h-[550px] mt-5 p-5 m-auto w-[90%] justify-center rounded-lg">
       <div className="flex items-center justify-center ">
-        <Typography
-          className="  font-castoro text-black"
-          variant="h3"
-          color="black"
-        >
+        <Typography className="  font-castoro text-black" variant="h3" color="black">
           Update Bus
         </Typography>
       </div>
@@ -356,7 +375,7 @@ export default function UpdateBus({ params }: any) {
             color=""
             label="UPDATE "
             size="lg"
-            onClick={(e) => updatebus(e)}
+            onClick={(e) => updatebus()}
             className="h-10 bg-blackblue w-[500px] "
           />
         </div>

@@ -7,7 +7,6 @@ export const ENDPOINTS = {
   addHotels: "hotelsapi/hotelsapi?action=addHotels",
   getHotels: "hotelsapi/hotelsapi?action=getHotels",
   getHotelById: "hotelsapi/hotelsapi?action=getHotelDetails",
-
   deleteHotel: "hotelsapi/hotelsapi?action=delete",
   updateHotel: "hotelsapi/hotelsapi?action=updateHotels",
 
@@ -16,4 +15,12 @@ export const ENDPOINTS = {
   deleteTrain: "trainApi/trainApi?action=DELETE_TRAIN",
   getTrain: "trainApi/trainApi?action=GET_TRAINS",
   getTrainById: "trainApi/trainApi?action=GET_TRAIN_BY_ID",
+
+  addBus: 'busapi/busapi?action=ADD_BUS',
+  getAllBuses: 'busapi/busapi?action=GET_ALL_BUSES',
+  getBusById: 'busapi/busapi?action=GET_BUS_BY_ID',
+  updateBus: 'busapi/busapi?action=UPDATE_BUS',
+  deleteBus: 'busapi/busapi?action=DELETE_BUS',
+  search: 'busapi/busapi?action=SEARCH',
+
 };

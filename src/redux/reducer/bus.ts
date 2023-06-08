@@ -2,6 +2,7 @@ import {
   BUS_BY_ID_REQUEST_SUCCESS,
   BUS_REQUEST_FAIL,
   BUS_REQUEST_SUCCESS,
+  BUS_UPDATE_REQUEST_SUCCESS
 } from "../constant";
 
 export const initialState = {
@@ -11,7 +12,25 @@ export const initialState = {
 
 export const BusReducer = (state = initialState, action: any) => {
   switch (action.type) {
+
+
+    case BUS_BY_ID_REQUEST_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        getBusById: action.payload,
+      };
+
+
+    case BUS_UPDATE_REQUEST_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+      };
+
+
     case BUS_REQUEST_SUCCESS: {
+      console.log("data in bus reducer: ", action.payload);
       return {
         ...state,
         loading: false,
@@ -19,17 +38,11 @@ export const BusReducer = (state = initialState, action: any) => {
       };
     }
 
+
     case BUS_REQUEST_FAIL:
       return {
         ...state,
         loading: false,
-      };
-
-    case BUS_BY_ID_REQUEST_SUCCESS:
-      return {
-        ...state,
-        loading: false,
-        getBusById: action.payload,
       };
 
     default: {
