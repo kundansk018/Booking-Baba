@@ -1,34 +1,22 @@
 "use client";
 import React, { useEffect, useState } from "react";
-// import { Button, Card, IconButton, Typography } from "@material-tailwind/react";
-import BBButton from "../components/BBButton";
 import { useRouter } from "next/navigation";
+import { Pagination } from "react-bootstrap";
 
-import {
-  MagnifyingGlassIcon,
-  ChevronUpDownIcon,
-  TrashIcon,
-} from "@heroicons/react/24/outline";
+import { MagnifyingGlassIcon, TrashIcon } from "@heroicons/react/24/outline";
 import { PencilIcon, UserPlusIcon } from "@heroicons/react/24/solid";
 import {
   Card,
-  CardHeader,
   Input,
   Typography,
   Button,
-  CardBody,
-  Chip,
-  Tabs,
-  TabsHeader,
-  Tab,
   Tooltip,
   IconButton,
   Avatar,
 } from "@material-tailwind/react";
 import { useSelector } from "react-redux";
-import { TRAIN_REQUEST_SUCCESS } from "@/redux/constant";
 import { useAppDispatch } from "@/redux/store";
-import { deleteTrainAction } from "@/redux/action/trainAction";
+import { deleteTrainAction, getTrains } from "@/redux/action/trainAction";
 
 const TABS = [
   {
@@ -47,56 +35,58 @@ const TABS = [
 
 export default function Train() {
   const trainData: any = useSelector((state: any) => state.train.trainDetails);
-  console.log("Train data is ..", trainData);
+  console.log("trainData", trainData);
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const [counter, setCounter] = useState<any>(0);
+  const [counter, setCounter] = useState<any>(1);
+  const [train, setTrain] = useState([]);
 
-  const [train, setTrain] = useState<any>("");
+  const [page, setPage] = useState<any>(1);
+  const [totalItems, setTotalItems] = useState<any>();
+  const [items, setItems] = useState<any>([]);
+  const [totalPages, setTotalPages] = useState<any>();
 
   useEffect(() => {
-    getHotel();
-  }, [counter]);
+    getAllTrains();
+  }, [counter, page]);
 
-  const getHotel = async () => {
-    const response: any = await fetch(
-      `http://localhost:3000/api/trainApi/trainApi?action=GET_TRAINS`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
+  useEffect(() => {
+    if (trainData) {
+      const { page, totalItems, totalPages, items } = trainData;
+      setPage(page);
+      setTotalItems(totalItems);
+      setTotalPages(totalPages);
+      setItems(items);
+    }
+  }, []);
+  console.log("totalPages => ", totalPages);
 
-    const trainData = await response.json();
+  const getAllTrains = () => {
+    dispatch(getTrains(page));
+  };
 
-    dispatch({ type: TRAIN_REQUEST_SUCCESS, payload: trainData });
-
-    console.log("get trains api.. ", trainData);
-    setTrain(trainData);
+  const handlePageChange = (newPage: any) => {
+    setPage(newPage);
   };
 
   const addTrain = () => {
     router.push("/train/add");
-    getHotel();
     setCounter(counter + 1);
+    getAllTrains();
   };
 
   const deleteTrain = (id: any) => {
     dispatch(deleteTrainAction(id));
-    getHotel();
+    getAllTrains();
     setCounter(counter + 1);
   };
 
   const updateTrain = (id: any) => {
     console.log("id:::::::::)", id);
     router.push("/train/update/" + id);
-    getHotel();
+    getAllTrains();
     setCounter(counter + 1);
   };
-
-  console.log("Train data is dhdrt..", train);
 
   return (
     <div className="tracking-wide	">
@@ -111,24 +101,37 @@ export default function Train() {
               Train List
             </Typography>
           </div>
-          <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
-            {/* <Tabs
-            value="all"
-            className="w-full sm:w-max text-black   font-castoro"
-          >
-            <TabsHeader
-              className=" z-0"
-              indicatorProps={{
-                className: "bg-[#4fb291] shadow-none ",
-              }}
-            >
-              {TABS.map(({ label, value }) => (
-                <Tab key={value} value={value}>
-                  &nbsp;&nbsp;{label}&nbsp;&nbsp;
-                </Tab>
+          <div className=" table table-hover " style={{ margin: "1%" }}>
+            <Pagination className="flex gap-5">
+              <Pagination.First
+                onClick={() => handlePageChange(1)}
+                disabled={page === 1}
+              />
+              <Pagination.Prev
+                onClick={() => handlePageChange(page - 1)}
+                disabled={page === 1}
+              />
+              {Array.from(Array(totalPages).keys()).map((pageIndex, index) => (
+                <Pagination.Item
+                  key={index}
+                  active={pageIndex === page}
+                  onClick={() => handlePageChange(pageIndex)}
+                  disabled={page === 1}
+                >
+                  {pageIndex}
+                </Pagination.Item>
               ))}
-            </TabsHeader>
-          </Tabs> */}
+              <Pagination.Next
+                onClick={() => handlePageChange(page + 1)}
+                disabled={page === totalPages - 1}
+              />
+              <Pagination.Last
+                onClick={() => handlePageChange(totalPages)}
+                disabled={page === totalPages}
+              />
+            </Pagination>
+          </div>
+          <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
             <div className="w-full md:w-72">
               <Input
                 label="Search"
@@ -162,8 +165,8 @@ export default function Train() {
             </tr>
           </thead>
           <tbody className="-z-10">
-            {train
-              ? train.data.map((element: any) => (
+            {trainData
+              ? trainData?.items?.map((element: any) => (
                   <tr key={element._id}>
                     <td className="w-[5px] p-2">
                       <Avatar
@@ -172,14 +175,14 @@ export default function Train() {
                         size="md"
                       />
                     </td>
-                    <td className="w-[5px]">{element.trainNo}</td>
-                    <td className="w-[5px]">{element.trainName}</td>
-                    <td className="w-[5px]">{element.from_Stn}</td>
-                    <td className="w-[5px]">{element.to_Stn}</td>
-                    <td className="w-[5px]">{element.fare}</td>
-                    <td className="w-[5px]">{element.seats}</td>
-                    <td className="w-[5px]">{element.coach}</td>
-                    <td className="w-[5px]">
+                    <td className="w-[5px]  p-2">{element.trainNo}</td>
+                    <td className="w-[5px]  p-2">{element.trainName}</td>
+                    <td className="w-[5px]  p-2">{element.from_Stn}</td>
+                    <td className="w-[5px]  p-2">{element.to_Stn}</td>
+                    <td className="w-[5px]  p-2">{element.fare}</td>
+                    <td className="w-[5px]  p-2">{element.seats}</td>
+                    <td className="w-[5px]  p-2">{element.coach}</td>
+                    <td className="w-[5px]  p-2">
                       <Tooltip content="Edit Train Details">
                         <IconButton
                           onClick={() => updateTrain(element._id)}

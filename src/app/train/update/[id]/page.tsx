@@ -32,7 +32,7 @@ export default function updateTrain({ params }: any) {
   const router = useRouter();
 
   const trainData: any = useSelector((state: any) => state.train.getTrainById);
-  console.log("Train data is ..", trainData);
+  console.log("Train data is in update page ..", trainData);
   console.log("id", params.id);
 
   useEffect(() => {

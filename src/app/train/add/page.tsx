@@ -69,17 +69,17 @@ export default function AddTrain() {
     let error: any = [];
     if (!trainName || !trainName.trim()) {
       isErrorFound = true;
-      error.push("Please enter Hotel Name");
+      error.push("Please enter Train Name");
     }
 
     if (!arrivalTime || !arrivalTime.trim()) {
       isErrorFound = true;
-      error.push("Please enter Contact No");
+      error.push("Please enter valid Arrival Time");
     }
 
     if (!depTime || !depTime.trim()) {
       isErrorFound = true;
-      error.push("Please enter valid email address");
+      error.push("Please enter valid Departure Time");
     }
     if (!from_Stn || !from_Stn.trim()) {
       isErrorFound = true;

@@ -48,6 +48,7 @@ export async function addTrain(
   const res = await trains.insertOne(request.body);
   return response.status(200).json({ data: res });
 }
+
 export async function updateTrain(
   request: NextApiRequest,
   response: NextApiResponse
@@ -97,10 +98,38 @@ export async function getTrains(
   request: NextApiRequest,
   response: NextApiResponse
 ) {
-  const trains = await db.collection("Train Details");
-  const res = await trains.find().toArray();
-  console.log("ress ", res);
-  return response.status(200).json({ data: res });
+  const page: number = parseInt(request.body.page as string) || 1;
+  //console.log("page Number", request.body.page);
+  const itemsPerPage: number = 3;
+
+  try {
+    const startIndex: number = (page - 1) * itemsPerPage;
+
+    const endIndex: number = startIndex + itemsPerPage;
+
+    const items = await db
+      .collection("Train Details")
+      .find()
+      .skip(startIndex)
+      .limit(itemsPerPage)
+      .toArray();
+
+    const totalItems: number = await db
+      .collection("Train Details")
+      .countDocuments();
+
+    const totalPages: number = Math.ceil(totalItems / itemsPerPage);
+
+    response.status(200).json({
+      page,
+      totalPages,
+      totalItems,
+      items,
+    });
+  } catch (error) {
+    console.log("error fetching data from mongodb", error);
+    response.status(500).json({ message: "internal server error" });
+  }
 }
 
 export async function getTrainById(
@@ -111,3 +140,13 @@ export async function getTrainById(
   const res = await trains.findOne({ _id: new ObjectId(request.body._id) });
   return response.status(200).json({ data: res });
 }
+
+// export async function getTrains(
+//   request: NextApiRequest,
+//   response: NextApiResponse
+// ) {
+//   const trains = await db.collection("Train Details");
+//   const res = await trains.find().toArray();
+//   console.log("ress ", res);
+//   return response.status(200).json({ data: res });
+// }
