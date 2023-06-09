@@ -33,6 +33,9 @@ export default async function handler(
     case "GET_TRAIN_BY_ID":
       return await getTrainById(request, response);
 
+      case "SEARCH_TRAINS":
+      return await searchTrains(request, response);
+
     default:
       return response
         .status(404)
@@ -141,12 +144,12 @@ export async function getTrainById(
   return response.status(200).json({ data: res });
 }
 
-// export async function getTrains(
-//   request: NextApiRequest,
-//   response: NextApiResponse
-// ) {
-//   const trains = await db.collection("Train Details");
-//   const res = await trains.find().toArray();
-//   console.log("ress ", res);
-//   return response.status(200).json({ data: res });
-// }
+export async function searchTrains(
+  request: NextApiRequest,
+  response: NextApiResponse
+) {
+  const { from_Stn, to_Stn} = request.body;
+  const trains = await db.collection("Train Details");
+  const res = await trains.find({ from_Stn, to_Stn}).toArray();
+  return response.status(200).json({ data: res });
+}

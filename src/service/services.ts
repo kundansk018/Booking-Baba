@@ -50,14 +50,24 @@ export const addtrainInfo = (data: any) => {
 };
 
 export const getAllTrains = (page: any) => {
-  let url = `${ENDPOINTS.getTrain}`;
-  return client.post(url, page, headers);
-};
+    let url = `${ENDPOINTS.getTrain}`;
+    return client.post(url, page, headers);
+  };
+
+export const updateHotelIfo = (data: any) => {
+    debugger
+    let url = `${ENDPOINTS.updateHotel}`
+    return client.post(url, data, headers)
+}
 
 export const trainById = (data: any) => {
   let url = `${ENDPOINTS.getTrainById}`;
   return client.post(url, data, headers);
 };
+export const TrainSearch=(data:any)=>{
+    let url =`${ENDPOINTS.searchTrain}`
+    return client.post(url,data,headers)
+}
 
 export const updateTrainInfo = (data: any) => {
   //debugger;
@@ -95,6 +105,5 @@ export const getAllBuses = (page: any) => {
 export const search = (page: any) => {
   let url = `${ENDPOINTS.search}`
   return client.post(url, page, headers)
-
 }
 

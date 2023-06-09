@@ -9,6 +9,7 @@ import {
 } from "../constant";
 import { AppDispatch } from "../store";
 import {
+  TrainSearch,
   addtrainInfo,
   deleteTrain,
   getAllTrains,
@@ -99,6 +100,21 @@ export const getTrainById = (id: any) => async (dispatch: AppDispatch) => {
     dispatch({ type: TRAIN_BY_ID_REQUEST_SUCCESS, payload: res.data });
   } else {
     alert("Train Not present");
+    dispatch({ type: TRAIN_REQUEST_FAIL, payload: null });
+  }
+  dispatch({ type: REQUEST_COMPLETED, payload: null });
+};
+
+export const getTrainBySearch = (data: any) => async (dispatch: AppDispatch) => {
+  dispatch({ type: REQUEST_STARTED, payload: null });
+  // console.log("hefhebfje",data)
+
+  const res = await TrainSearch(data);
+  if (res && res.status === 200) {
+    console.log("response is..", res);
+    dispatch({ type: TRAIN_BY_ID_REQUEST_SUCCESS, payload: res.data });
+  } else {
+    alert("Train is not present");
     dispatch({ type: TRAIN_REQUEST_FAIL, payload: null });
   }
   dispatch({ type: REQUEST_COMPLETED, payload: null });

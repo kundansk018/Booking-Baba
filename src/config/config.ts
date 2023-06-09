@@ -15,6 +15,7 @@ export const ENDPOINTS = {
   deleteTrain: "trainApi/trainApi?action=DELETE_TRAIN",
   getTrain: "trainApi/trainApi?action=GET_TRAINS",
   getTrainById: "trainApi/trainApi?action=GET_TRAIN_BY_ID",
+  searchTrain : 'trainApi/trainApi?action=SEARCH_TRAINS',
 
   addBus: 'busapi/busapi?action=ADD_BUS',
   getAllBuses: 'busapi/busapi?action=GET_ALL_BUSES',
