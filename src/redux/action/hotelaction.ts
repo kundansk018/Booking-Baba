@@ -60,18 +60,21 @@ export const getHotels = () => async (dispatch: AppDispatch) => {
 
 /*................. get Hotel By Id..........*/
 export const getHotelById = (id: string) => async (dispatch: AppDispatch) => {
-  try {
-    dispatch({ type: REQUEST_STARTED, payload: null });
-    let data = { id: id };
-    const res = await hotelsById(data);
-    if (res && res.status === 200) {
-      dispatch({ type: SAVE_HOTEL_DETAILS, payload: res.data });
-      dispatch({ type: REQUEST_COMPLETED, payload: null });
-    }
-  } catch (error) {
-    console.log(error);
+  try{
+  dispatch({ type: REQUEST_STARTED, payload: null });
+  let data = { id: id };
+  const res = await hotelsById(data)
+  if (res && res.status === 200) {
+    console.log(res.data)
+    dispatch({ type: SAVE_HOTEL_DETAILS, payload: res.data })
+    dispatch({ type: REQUEST_COMPLETED, payload: null });
   }
-};
+}
+catch(error){
+  console.log(error)
+}
+}
+
 
 /*................. update Hotel By Id..........*/
 export const updateHotel = (data: any) => async (dispatch: AppDispatch) => {

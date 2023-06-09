@@ -14,7 +14,8 @@ export const initialState = {
   hotelDetails: undefined,
   previousHotelData: null,
   updateHotelDetails: null,
-  updateHotelData: null
+  updateHotelData: null,
+
 
 };
 
@@ -58,6 +59,7 @@ export const HotelReducer = (state = initialState, action: any) => {
       }
     };
     case SAVE_HOTEL_DETAILS: {
+      console.log("data in typereducer: ", action.payload);
       return {
         ...state,
         loading: false,

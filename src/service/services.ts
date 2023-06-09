@@ -54,7 +54,7 @@ export const getAllTrains = (page: any) => {
     return client.post(url, page, headers);
   };
 
-export const updateHotelIfo = (data: any) => {
+export const updateHotelInfo = (data: any) => {
     debugger
     let url = `${ENDPOINTS.updateHotel}`
     return client.post(url, data, headers)

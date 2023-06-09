@@ -32,6 +32,7 @@
     "react-indian-state-region-selector": "^6.1.0",
     "react-loader-spinner": "^5.3.4",
     "react-redux": "^8.0.5",
+    "react-simple-star-rating": "^5.1.7",
     "react-use-country-region": "^1.0.0",
     "tailwindcss": "3.3.2",
     "typescript": "5.0.4",

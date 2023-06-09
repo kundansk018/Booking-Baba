@@ -21,6 +21,7 @@ module.exports = withMT({
         darkgreen: "#1BA89E",
         GreenBlue: "#1B6CA8",
         blackblue: "#243f56",
+        purple:"#4338ca"
       },
       fontFamily: {
         Signika: ["Signika", "sans-serif"],
