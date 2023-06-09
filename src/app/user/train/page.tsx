@@ -3,6 +3,7 @@ import BBButton from "@/app/components/BBButton";
 import BBInput from "@/app/components/BBInput";
 import { getTrainBySearch } from "@/redux/action/trainAction";
 import { useAppDispatch } from "@/redux/store";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 import { useState } from "react";
@@ -12,6 +13,7 @@ export default function BookTrain() {
   const [to, setTo] = useState("");
   const [date, setDate] = useState(getDefaultDate());
   const dispatch = useAppDispatch();
+  const router = useRouter();
 
   function getDefaultDate() {
     const today = new Date();
@@ -30,11 +32,6 @@ export default function BookTrain() {
     return `${year}-${month}-${day}`;
   }
 
-  if (from && to) {
-    let data = { from, to };
-    dispatch(getTrainBySearch);
-  }
-
   const handleSubmit = (e: any) => {
     e.preventDefault();
     alert("123");
@@ -42,11 +39,11 @@ export default function BookTrain() {
       let data = { from_Stn: from, to_Stn: to };
       console.log("Searching for trains:", data);
       dispatch(getTrainBySearch(data));
+      router.push("/user/train/list");
     }
   };
 
   return (
-   
     <div className="card pt-4 pr-96 pl-96 ">
       <div className="card width-[50%] bg-white flex flex-col items-center justify-center h-[550px] ">
         <h1 className="text-3xl font-Signika mb-4">Train Ticket Booking</h1>

@@ -6,6 +6,7 @@ import {
   TRAIN_REQUEST_FAIL,
   TRAIN_BY_ID_REQUEST_SUCCESS,
   TRAIN_UPDATE_REQUEST_SUCCESS,
+  USER_TRAIN_SEARCH_SUCCESS,
 } from "../constant";
 import { AppDispatch } from "../store";
 import {
@@ -112,7 +113,7 @@ export const getTrainBySearch = (data: any) => async (dispatch: AppDispatch) => 
   const res = await TrainSearch(data);
   if (res && res.status === 200) {
     console.log("response is..", res);
-    dispatch({ type: TRAIN_BY_ID_REQUEST_SUCCESS, payload: res.data });
+    dispatch({ type: USER_TRAIN_SEARCH_SUCCESS, payload: res.data });
   } else {
     alert("Train is not present");
     dispatch({ type: TRAIN_REQUEST_FAIL, payload: null });
