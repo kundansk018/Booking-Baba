@@ -6,55 +6,123 @@ import Image from "next/image";
 
 import { useRouter } from "next/navigation";
 import react, { useEffect } from "react";
-import { Carousel } from "@material-tailwind/react";
+import {
+  Button,
+  Card,
+  CardBody,
+  CardFooter,
+  CardHeader,
+  Carousel,
+  Navbar,
+  Typography,
+} from "@material-tailwind/react";
+import BBMainCarousel from "./components/BBMainCarousel";
+import h1 from "../images/hotel/h1.jpg";
+import bus1 from "../images/Buses/bus1.png";
+import rail from "../images/Trains/rail.jpg";
+import Navigationbar from "./components/Navbar";
 
 export default function Home() {
   const router = useRouter();
 
   useEffect(() => {
     setTimeout(() => {
-      router.push("/auth");
-    }, 10000);
+      () => {
+        router.push("/auth");
+      };
+    }, 100000);
   });
 
   return (
-    <main
-      className="flex min-h-screen flex-col items-center justify-between "
-      style={{ backgroundImage: `url("../images/booking.png")` }}
-    >
-      {/* <Image
-        className="h-full w-full"
-        src={booking}
-        alt="Multi-services-booking"
-      /> */}
+    <div className="">
+      <Navigationbar />
+      <BBMainCarousel />
+      <div className="flex flex-col gap-4">
+        <div>
+          <Card className="flex flex-row mx-6 w-full h-auto ">
+            <CardHeader
+              floated={false}
+              color="blue-gray"
+              className=" h-[400px] w-[600px] "
+            >
+              <Image
+                className="h-[400px] object-cover"
+                src={h1}
+                alt="Multi-services-booking"
+              />
+            </CardHeader>
+            <CardBody>
+              <Typography variant="h5" color="blue-gray" className="mb-2">
+                Hotel Booking
+              </Typography>
+              <Typography>
+                Search best prices on hotels,home and much more...
+              </Typography>
+              <Button onClick={() => router.push("/user/hotels")}>
+                Book Now
+              </Button>
+            </CardBody>
+            {/* <CardFooter className=" pt-0">
+            </CardFooter> */}
+          </Card>
+        </div>
 
-      {/* <Link href="/auth">
-        <h1>Sign Up</h1>
-      </Link> */}
+        <div>
+          <Card className="flex flex-row mx-6 w-full h-auto ">
+            <CardHeader
+              floated={false}
+              color="blue-gray"
+              className=" h-[400px] w-[600px] "
+            >
+              <Image
+                className="h-[400px] object-cover"
+                src={rail}
+                alt="Multi-services-booking"
+              />
+            </CardHeader>
+            <CardBody>
+              <Typography variant="h5" color="blue-gray" className="mb-2">
+                Train Booking
+              </Typography>
+              <Typography>
+                Make Your Train Booking Smoother with Baba-Booking
+              </Typography>
+              <Button onClick={() => router.push("/user/train")}>
+                Book Now
+              </Button>
+            </CardBody>
+            {/* <CardFooter className="pt-0">
+            </CardFooter> */}
+          </Card>
+        </div>
 
-      {/* <h1>Loading...</h1> */}
-
-      {/* <Link href="/AdminDashboard">
-        <h1>Dashboard</h1>
-      </Link> */}
-
-      <Carousel transition={{ duration: 2 }} className="rounded-xl">
-        <img
-          src="https://images.unsplash.com/photo-1497436072909-60f360e1d4b1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2560&q=80"
-          alt="image 1"
-          className="h-full w-full object-cover"
-        />
-        <img
-          src="https://images.unsplash.com/photo-1493246507139-91e8fad9978e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2940&q=80"
-          alt="image 2"
-          className="h-full w-full object-cover"
-        />
-        <img
-          src="https://images.unsplash.com/photo-1518623489648-a173ef7824f3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2762&q=80"
-          alt="image 3"
-          className="h-full w-full object-cover"
-        />
-      </Carousel>
-    </main>
+        <div>
+          <Card className="flex flex-row mx-6 w-full h-auto ">
+            <CardHeader
+              floated={false}
+              color="blue-gray"
+              className="relative h-30"
+            >
+              <Image
+                className="h-[400px] object-cover"
+                src={bus1}
+                alt="Multi-services-booking"
+              />
+            </CardHeader>
+            <CardBody>
+              <Typography variant="h5" color="blue-gray" className="mb-2">
+                Bus Booking
+              </Typography>
+              <Typography>
+                Make Your Bus Booking Smoother with Baba-Booking
+              </Typography>
+              <Button onClick={() => router.push("/user/bus")}>Book Now</Button>
+            </CardBody>
+            {/* <CardFooter className="pt-0">
+            </CardFooter> */}
+          </Card>
+        </div>
+      </div>
+    </div>
   );
 }

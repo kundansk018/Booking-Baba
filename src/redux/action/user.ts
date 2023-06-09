@@ -6,6 +6,8 @@ import {
   SIGNUP_REQUEST_SUCCESS,
   REQUEST_STARTED,
   REQUEST_COMPLETED,
+  RESET_REQUEST_FAIL,
+  RESET_REQUEST_SUCCESS,
 } from "../constant";
 import { AppDispatch } from "../store";
 
@@ -58,6 +60,31 @@ export const login = (data: any) => async (dispatch: AppDispatch) => {
   } else {
     alert("Email Not Registered. Please Sign Up ...");
     dispatch({ type: LOGIN_REQUEST_FAIL, payload: null });
+  }
+  dispatch({ type: REQUEST_COMPLETED, payload: null });
+
+  //fail
+};
+
+export const reset = (data: any) => async (dispatch: AppDispatch) => {
+  console.log("data in action RESET: ", data);
+  dispatch({ type: REQUEST_STARTED, payload: null });
+
+  //api call
+  const res = await fetch("http://localhost:3000/api/user/auth?action=RESET", {
+    method: "POST",
+
+    body: JSON.stringify(data),
+    headers: {
+      "content-type": "application/json",
+    },
+  });
+  if (res.ok === true) {
+    console.log("inside if:::::::::", res);
+    dispatch({ type: RESET_REQUEST_SUCCESS, payload: res });
+  } else {
+    alert("Email Not Registered. Please Sign Up ...");
+    dispatch({ type: RESET_REQUEST_FAIL, payload: null });
   }
   dispatch({ type: REQUEST_COMPLETED, payload: null });
 

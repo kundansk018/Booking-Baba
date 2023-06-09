@@ -31,6 +31,9 @@ export default async function handler(
     case "LOGIN":
       return await login(request, response);
 
+    case "RESET":
+      return await reset(request, response);
+
     case "demo":
       return await demo(request, response);
 
@@ -101,6 +104,28 @@ export async function login(
   const res = await login.findOne({
     email: request.body.email,
     password: request.body.password,
+  });
+  console.log(res);
+  if (res === null) {
+    return response
+      .status(401)
+      .json({ data: "Email id is not registered. Please Sign up." });
+  } else {
+    console.log("res in auth.ts", res);
+    return response.status(200).json({ data: res });
+  }
+}
+
+export async function reset(
+  request: NextApiRequest,
+  response: NextApiResponse
+) {
+  console.log("datta", {
+    email: request.body.email,
+  });
+  const reset = await db.collection(USER_COLLECTION);
+  const res = await reset.findOne({
+    email: request.body.email,
   });
   console.log(res);
   if (res === null) {

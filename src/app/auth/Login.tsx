@@ -83,19 +83,18 @@ export default function Login() {
             label="Enter Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-          />  
+          />
         </div>
 
         <div className="flex flex-row justify-between items-center">
           <Checkbox label="Remember Me" color="blue" className=" left-0" />
-          <a
-            href="#"
+          <h1
+            onClick={() => router.push("auth/resetpassword")}
             className="font-medium text-blue-500 transition-colors hover:text-blue-700"
           >
             Forget Password?
-          </a>
+          </h1>
         </div>
-
         <BBButton
           color=""
           label="Login"

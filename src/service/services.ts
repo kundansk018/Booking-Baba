@@ -37,12 +37,10 @@ export const deleteHotel = (data: IPropsDelete) => {
   return client.post(url, data, headers);
 };
 
-
 export const deleteTrain = (data: any) => {
   let url = `${ENDPOINTS.deleteTrain}`;
   return client.post(url, data, headers);
 };
-
 
 export const addtrainInfo = (data: any) => {
   let url = `${ENDPOINTS.addTrain}`;
@@ -50,24 +48,18 @@ export const addtrainInfo = (data: any) => {
 };
 
 export const getAllTrains = (page: any) => {
-    let url = `${ENDPOINTS.getTrain}`;
-    return client.post(url, page, headers);
-  };
-
-export const updateHotelInfo = (data: any) => {
-    debugger
-    let url = `${ENDPOINTS.updateHotel}`
-    return client.post(url, data, headers)
-}
+  let url = `${ENDPOINTS.getTrain}`;
+  return client.post(url, page, headers);
+};
 
 export const trainById = (data: any) => {
   let url = `${ENDPOINTS.getTrainById}`;
   return client.post(url, data, headers);
 };
-export const TrainSearch=(data:any)=>{
-    let url =`${ENDPOINTS.searchTrain}`
-    return client.post(url,data,headers)
-}
+export const TrainSearch = (data: any) => {
+  let url = `${ENDPOINTS.searchTrain}`;
+  return client.post(url, data, headers);
+};
 
 export const updateTrainInfo = (data: any) => {
   //debugger;
@@ -77,33 +69,27 @@ export const updateTrainInfo = (data: any) => {
 
 //bus servicess//
 export const addBus = (data: any) => {
-  let url = `${ENDPOINTS.addBus}`
-  return client.post(url, data, headers)
-
-}
+  let url = `${ENDPOINTS.addBus}`;
+  return client.post(url, data, headers);
+};
 export const updateBus = (data: any) => {
-  let url = `${ENDPOINTS.updateBus}`
-  return client.post(url, data, headers)
-
-}
+  let url = `${ENDPOINTS.updateBus}`;
+  return client.post(url, data, headers);
+};
 export const getBusById = (data: any) => {
-  let url = `${ENDPOINTS.getBusById}`
-  return client.post(url, data, headers)
-
-}
+  let url = `${ENDPOINTS.getBusById}`;
+  return client.post(url, data, headers);
+};
 export const deleteBus = (data: any) => {
-  let url = `${ENDPOINTS.deleteBus}`
-  return client.post(url, data, headers)
-
-}
+  let url = `${ENDPOINTS.deleteBus}`;
+  return client.post(url, data, headers);
+};
 export const getAllBuses = (page: any) => {
-  let url = `${ENDPOINTS.getAllBuses}`
-  return client.post(url, page, headers)
-
-}
+  let url = `${ENDPOINTS.getAllBuses}`;
+  return client.post(url, page, headers);
+};
 
 export const search = (page: any) => {
-  let url = `${ENDPOINTS.search}`
-  return client.post(url, page, headers)
-}
-
+  let url = `${ENDPOINTS.search}`;
+  return client.post(url, page, headers);
+};

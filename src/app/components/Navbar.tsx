@@ -25,15 +25,12 @@ export default function Navigationbar() {
     // <ul className="mb-4 mt-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
     <ul className="mb-4 mt-2 flex flex-col gap-2 lg:flex-row lg:gap-6">
       <Typography
-
         as="li"
         variant="small"
         // color="blue-gray"
         className="p-1 font-normal"
-        onClick={() => router.push("/auth")}//
-
+        onClick={() => router.push("/auth")} //
       >
-
         <a href="#" className="flex items-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -92,7 +89,7 @@ export default function Navigationbar() {
       style={{
         boxShadow: "0 0 20px grey",
       }}
-      className=" z-50 flex flex-1 m-auto w-[100%] h-[54px] sticky top-0 bg-[#8b5cf6]"
+      className=" z-50 flex flex-1 m-auto w-[100%] h-[54px] sticky top-0 bg-darkgreen bg-opacity-50"
     >
       <div className="container flex items-center justify-between text-white">
         <Typography

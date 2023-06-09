@@ -2,20 +2,19 @@ import {
   LOGIN_REQUEST,
   LOGIN_REQUEST_FAIL,
   LOGIN_REQUEST_SUCCESS,
- 
+  RESET_REQUEST_SUCCESS,
   SIGNUP_REQUEST,
   SIGNUP_REQUEST_FAIL,
   SIGNUP_REQUEST_SUCCESS,
 } from "../constant";
 
-
 export const initialState = {
   loading: false,
   userDetails: undefined,
   createdUser: undefined,
+  resetPassword: undefined,
 
   loginDetails: undefined,
- 
 };
 
 export const UserReducer = (state = initialState, action: any) => {
@@ -33,6 +32,15 @@ export const UserReducer = (state = initialState, action: any) => {
         ...state,
         loading: false,
         createdUser: action.payload,
+      };
+    }
+
+    case RESET_REQUEST_SUCCESS: {
+      console.log("data in typereducer: ", action.payload);
+      return {
+        ...state,
+        loading: false,
+        resetPassword: action.payload,
       };
     }
 

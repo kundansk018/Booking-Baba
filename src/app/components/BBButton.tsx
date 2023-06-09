@@ -4,7 +4,7 @@ import React from "react";
 interface button {
   label: string;
   type?: "button" | "submit" | "reset" | undefined;
-  onClick: (e: any) => void; // for function type
+  onClick?: (e: any) => void; // for function type
   size: "sm" | "lg" | "md";
   color?: any;
   className?: string;
@@ -15,7 +15,7 @@ export default function BBButton(props: button) {
     <Button
       type={props.type}
       onClick={props.onClick}
-      color={props.color||'blue'}
+      color={props.color || "blue"}
       size={props.size}
       className={props.className}
     >
