@@ -15,7 +15,7 @@ export default function updateTrain({ params }: any) {
   const [trainName, setTrainName] = useState<string>("");
   const [from_Stn, setFrom_Stn] = useState<string>("");
   const [to_Stn, setTo_Stn] = useState<string>("");
-  const [fare, setFare] = useState<string>("");
+  const [fare, setFare] = useState<any>("");
   const [seats, setSeats] = useState<string>("");
   const [coach, setCoach] = useState<any>("");
   const [depTime, setDepTime] = useState<string>("");
@@ -114,6 +114,7 @@ export default function updateTrain({ params }: any) {
           <div className="flex  flex-col mx-5 w-[300px] ">
             <BBInput
               containerProps={{ className: "mb-4" }}
+              type="number"
               label="Train No"
               value={trainNo}
               onChange={(e) => setTrainNo(e.target.value)}
@@ -154,6 +155,7 @@ export default function updateTrain({ params }: any) {
                 { label: "Mumbai" },
                 { label: "Pune" },
                 { label: "Nashik" },
+                { label: "Nagpur" },
               ]}
               value={from_Stn}
               onPress={(value: any) => {
@@ -168,6 +170,7 @@ export default function updateTrain({ params }: any) {
                 { label: "Mumbai" },
                 { label: "Pune" },
                 { label: "Nashik" },
+                { label: "Nagpur" },
               ]}
               value={to_Stn}
               onPress={(value: any) => {
@@ -178,15 +181,29 @@ export default function updateTrain({ params }: any) {
 
             <BBInput
               containerProps={{ className: "mb-4" }}
+              type="number"
               label="No of Coaches"
               value={coach}
               onChange={(e) => setCoach(e.target.value)}
             />
-            <BBInput
+            <BBDropdown
               containerProps={{ className: "mb-4" }}
-              label="Train Route"
+              options={[
+                { label: "Mumbai To Nashik" },
+                { label: "Mumbai To Nagpur" },
+                { label: "Mumbai To Pune" },
+                { label: "Pune To Nagpur" },
+                { label: "Pune To Mumbai" },
+                { label: "Pune To Nashik" },
+                { label: "Nashik To Pune" },
+                { label: "Nashik To Mumbai" },
+                { label: "Nashik To Nagpur" },
+              ]}
               value={trainRoute}
-              onChange={(e) => setTrainRoute(e.target.value)}
+              onPress={(value: any) => {
+                setTrainRoute(value);
+              }}
+              label="Train Route"
             />
             <BBInput
               containerProps={{ className: "mb-4" }}
@@ -205,12 +222,18 @@ export default function updateTrain({ params }: any) {
           </div>
 
           <div className="flex  flex-col mx-5 w-[300px] ">
-            <BBInput
+            <BBDropdown
               containerProps={{ className: "mb-4" }}
-              type="number"
-              label="Fare"
+              options={[
+                { label: "Economy-140" },
+                { label: "Business-250" },
+                { label: "First Class-400" },
+              ]}
               value={fare}
-              onChange={(e) => setFare(e.target.value)}
+              onPress={(value: any) => {
+                setFare(value);
+              }}
+              label="Fare"
             />
 
             <BBInput
@@ -247,12 +270,18 @@ export default function updateTrain({ params }: any) {
             />
             <br />
 
-            <BBInput
+            <BBDropdown
               containerProps={{ className: "mb-4" }}
-              type="text"
-              label="Operation Days"
-              value={operationDays}
-              onChange={(e) => setOperationDays(e.target.value)}
+              options={[
+                { label: "Daily" },
+                { label: "Mon to Fri" },
+                { label: "Mon To Sat" },
+              ]}
+              value={trainType}
+              onPress={(value: any) => {
+                setOperationDays(value);
+              }}
+              label="Operational Days"
             />
           </div>
         </div>

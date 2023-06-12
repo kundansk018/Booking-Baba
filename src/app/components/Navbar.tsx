@@ -6,6 +6,7 @@ import {
   Typography,
   Button,
   IconButton,
+  Collapse,
 } from "@material-tailwind/react";
 import { useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
@@ -99,7 +100,7 @@ export default function Navigationbar() {
       <div className="container flex items-center justify-between text-white">
         <Typography
           as="a"
-          href="#"
+          href="/"
           className="mr-4 cursor-pointer  font-medium mx-[20] fixed left-5 top-3 "
         >
           <b className="m-[20] text-2xl">Booking Baba</b>

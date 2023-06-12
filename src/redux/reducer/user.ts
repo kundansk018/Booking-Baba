@@ -44,11 +44,20 @@ export const UserReducer = (state = initialState, action: any) => {
       };
     }
 
-    // case SIGNUP_REQUEST_FAIL:
-    //   return {
-    //     ...state,
-    //     loading: false,
-    //   };
+    case RESET_REQUEST_SUCCESS: {
+      console.log("data in typereducer: ", action.payload);
+      return {
+        ...state,
+        loading: false,
+        resetPassword: action.payload,
+      };
+    }
+
+    case SIGNUP_REQUEST_FAIL:
+      return {
+        ...state,
+        loading: false,
+      };
 
     default: {
       return state;

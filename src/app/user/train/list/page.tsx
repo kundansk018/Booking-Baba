@@ -35,52 +35,6 @@ export default function page() {
             Available Trains
           </Typography>
         </div>
-        {/* <div className=" table table-hover " style={{ margin: "1%" }}>
-            <Pagination className="flex gap-5">
-              <Pagination.First
-                onClick={() => handlePageChange(1)}
-                disabled={page === 1}
-              />
-              <Pagination.Prev
-                onClick={() => handlePageChange(page - 1)}
-                disabled={page === 1}
-              />
-              {Array.from(Array(totalPages).keys()).map((pageIndex, index) => (
-                <Pagination.Item
-                  key={index}
-                  active={pageIndex === page}
-                  onClick={() => handlePageChange(pageIndex)}
-                  disabled={page === 1}
-                >
-                  {pageIndex}
-                </Pagination.Item>
-              ))}
-              <Pagination.Next
-                onClick={() => handlePageChange(page + 1)}
-                disabled={page === totalPages - 1}
-              />
-              <Pagination.Last
-                onClick={() => handlePageChange(totalPages)}
-                disabled={page === totalPages}
-              />
-            </Pagination>
-          </div> */}
-        {/* <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
-            <div className="w-full md:w-72">
-              <Input
-                label="Search"
-                icon={<MagnifyingGlassIcon className="h-5 w-5" />}
-              />
-            </div>
-            <Button
-              className="flex items-center gap-3 bg-blackblue"
-              size="md"
-              //   onClick={() => addTrain()}
-            >
-              <UserPlusIcon strokeWidth={2} className="h-4 w-4" /> Add New Train
-            </Button>
-          </div> */}
-        {/* </div> */}
       </Card>
 
       <div className="mx-3 h-[500px] w-[98%] mt-[0.5%] bg-white relative overflow-scroll px-1">
@@ -92,6 +46,8 @@ export default function page() {
               <th className="w-[5px] p-2">Train Name</th>
               <th className="w-[5px] p-2">From Station</th>
               <th className="w-[5px] p-2">To Station</th>
+              <th className="w-[5px] p-2">Arrival Time</th>
+              <th className="w-[5px] p-2">Departure Time</th>
               <th className="w-[5px] p-2">Fare </th>
               <th className="w-[5px] p-2">Seats</th>
               <th className="w-[5px] p-2">Coach</th>
@@ -114,6 +70,8 @@ export default function page() {
                     <td className="w-[5px]  p-2">{element.trainName}</td>
                     <td className="w-[5px]  p-2">{element.from_Stn}</td>
                     <td className="w-[5px]  p-2">{element.to_Stn}</td>
+                    <td className="w-[5px]  p-2">{element.arrivalTime}</td>
+                    <td className="w-[5px]  p-2">{element.depTime}</td>
                     <td className="w-[5px]  p-2">{element.fare}</td>
                     <td className="w-[5px]  p-2">{element.seats}</td>
                     <td className="w-[5px]  p-2">{element.coach}</td>

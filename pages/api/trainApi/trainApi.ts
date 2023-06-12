@@ -33,7 +33,7 @@ export default async function handler(
     case "GET_TRAIN_BY_ID":
       return await getTrainById(request, response);
 
-      case "SEARCH_TRAINS":
+    case "SEARCH_TRAINS":
       return await searchTrains(request, response);
 
     default:
@@ -148,8 +148,19 @@ export async function searchTrains(
   request: NextApiRequest,
   response: NextApiResponse
 ) {
-  const { from_Stn, to_Stn} = request.body;
+  const { from_Stn, to_Stn } = request.body;
   const trains = await db.collection("Train Details");
-  const res = await trains.find({ from_Stn, to_Stn}).toArray();
+  const res = await trains
+    .find({
+      // $or: [
+      //   {
+      from_Stn,
+      // },
+      // {
+      to_Stn,
+      //   },
+      // ],
+    })
+    .toArray();
   return response.status(200).json({ data: res });
 }

@@ -42,11 +42,6 @@ export const deleteHotel = (data: IPropsDelete) => {
   return client.post(url, data, headers);
 };
 
-export const deleteTrain = (data: any) => {
-  let url = `${ENDPOINTS.deleteTrain}`;
-  return client.post(url, data, headers);
-};
-
 export const addtrainInfo = (data: any) => {
   let url = `${ENDPOINTS.addTrain}`;
   return client.post(url, data, headers);
@@ -57,11 +52,10 @@ export const getAllTrains = (page: any) => {
   return client.post(url, page, headers);
 };
 
-export const updateHotelIfo = (data: any) => {
-  debugger
-  let url = `${ENDPOINTS.updateHotel}`
-  return client.post(url, data, headers)
-}
+export const deleteTrain = (data: any) => {
+  let url = `${ENDPOINTS.deleteTrain}`;
+  return client.post(url, data, headers);
+};
 
 export const trainById = (data: any) => {
   let url = `${ENDPOINTS.getTrainById}`;
