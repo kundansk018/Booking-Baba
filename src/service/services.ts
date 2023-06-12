@@ -57,14 +57,20 @@ export const getAllTrains = (page: any) => {
   return client.post(url, page, headers);
 };
 
+export const updateHotelIfo = (data: any) => {
+  debugger
+  let url = `${ENDPOINTS.updateHotel}`
+  return client.post(url, data, headers)
+}
+
 export const trainById = (data: any) => {
   let url = `${ENDPOINTS.getTrainById}`;
   return client.post(url, data, headers);
 };
 export const TrainSearch = (data: any) => {
-  let url = `${ENDPOINTS.searchTrain}`;
-  return client.post(url, data, headers);
-};
+  let url = `${ENDPOINTS.searchTrain}`
+  return client.post(url, data, headers)
+}
 
 export const updateTrainInfo = (data: any) => {
   //debugger;
@@ -94,7 +100,8 @@ export const getAllBuses = (page: any) => {
   return client.post(url, page, headers);
 };
 
-export const search = (page: any) => {
-  let url = `${ENDPOINTS.search}`;
-  return client.post(url, page, headers);
-};
+export const busSearch = (data: any) => {
+  let url = `${ENDPOINTS.busSearch}`
+  return client.post(url, data, headers)
+}
+

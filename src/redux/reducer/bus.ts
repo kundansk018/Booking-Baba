@@ -2,16 +2,31 @@ import {
   BUS_BY_ID_REQUEST_SUCCESS,
   BUS_REQUEST_FAIL,
   BUS_REQUEST_SUCCESS,
-  BUS_UPDATE_REQUEST_SUCCESS
+  BUS_UPDATE_REQUEST_SUCCESS,
+  USER_SEARCH_REQUEST_SUCCESS
 } from "../constant";
 
 export const initialState = {
   busDetails: null,
   getBusById: null,
+  userBusDetails: null,
 };
 
 export const BusReducer = (state = initialState, action: any) => {
+  // debugger
   switch (action.type) {
+
+
+    case USER_SEARCH_REQUEST_SUCCESS: {
+      //debugger
+      console.log("hnrfhyeth", action.payload)
+      return {
+        ...state,
+        loading: false,
+        userBusDetails: action.payload,
+      };
+
+    }
 
 
     case BUS_BY_ID_REQUEST_SUCCESS:
@@ -44,6 +59,7 @@ export const BusReducer = (state = initialState, action: any) => {
         ...state,
         loading: false,
       };
+
 
     default: {
       return state;

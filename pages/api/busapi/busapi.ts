@@ -65,7 +65,7 @@ export async function search(
 ) {
   const { from, to } = request.body;
   const buses = await db.collection("Bus Details");
-  const res = await buses.find(from, to).toArray();
+  const res = await buses.find({ from, to }).toArray();
   return response.status(200).json({ data: res });
 }
 

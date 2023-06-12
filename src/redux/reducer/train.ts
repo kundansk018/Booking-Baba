@@ -9,7 +9,7 @@ import {
 export const initialState = {
   trainDetails: null,
   getTrainById: null,
-  userTrainDeatils:null,
+  userTrainDeatils: null,
 };
 
 export const TrainReducer = (state = initialState, action: any) => {
@@ -43,12 +43,12 @@ export const TrainReducer = (state = initialState, action: any) => {
         loading: false,
         getTrainById: action.payload,
       };
-      case USER_TRAIN_SEARCH_SUCCESS:
-        return {
-          ...state,
-          loading: false,
-          userTrainDetails: action.payload,
-        };
+    case USER_TRAIN_SEARCH_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        userTrainDetails: action.payload,
+      };
 
     default: {
       return state;

@@ -30,7 +30,7 @@ export default function AddBus() {
   const [busnumber, setBusnumber] = useState<String>("");
   const [time, setTime] = useState<String>("");
   const [seats, setSeats] = useState<String>("");
-  const [ticketprice, setTicketPrice] = useState<String>("");
+  const [ticketprice, setTicketPrice] = useState<string>("");
   const [operator, setOperator] = useState<String>("");
   const [busstops, setBusStops] = useState<String>("");
   const [noofstop, setNoOfStop] = useState("");
@@ -198,7 +198,7 @@ export default function AddBus() {
 
             <BBDropdown
               containerProps={{ className: "mb-3" }}
-              options={[{ label: "Nashik" }, { label: "Pune" }]}
+              options={[{ label: "Nashik" }, { label: "Pune" }, { label: "Mumbai" }]}
               value={from}
               onPress={(value: any) => {
                 setFrom(value);
@@ -208,7 +208,7 @@ export default function AddBus() {
 
             <BBDropdown
               containerProps={{ className: "mb-3" }}
-              options={[{ label: "Nashik" }, { label: "Pune" }]}
+              options={[{ label: "Nashik" }, { label: "Pune" }, { label: "Mumbai" }]}
               value={to}
               onPress={(value: any) => {
                 setTo(value);
@@ -221,6 +221,8 @@ export default function AddBus() {
               options={[
                 { label: "Sai-Travel-Agency" },
                 { label: "Chhatrapati-Travel-Agency" },
+                { label: "Ajit-Travel-Agency" },
+                { label: "Adesh-Travel-Agency" },
               ]}
               value={travelagencyname}
               onPress={(value: any) => {
@@ -260,11 +262,19 @@ export default function AddBus() {
               value={seats + ""}
               onChange={(e) => setSeats(e.target.value)}
             />
-            <BBInput
+            {/* <div className="flex  flex-col mx-5 w-[300px]"> */}
+            <BBDropdown
               containerProps={{ className: "mb-3" }}
-              label="Ticket Price"
-              value={ticketprice + ""}
-              onChange={(e) => setTicketPrice(e.target.value)}
+              options={[
+                { label: "Non-Ac-500" },
+                { label: "Ac-1000" },
+                { label: "Express-1500" },
+              ]}
+              value={ticketprice}
+              onPress={(value: any) => {
+                setTicketPrice(value);
+              }}
+              label="Ticket Prise"
             />
             <BBInput
               containerProps={{ className: "mb-3" }}
@@ -292,12 +302,14 @@ export default function AddBus() {
               options={[
                 { label: "Nashik New CBS" },
                 { label: "Sinner" },
-                { label: "Shirdi" },
-                { label: "Nimgoan" },
-                { label: "Shirdi Local" },
-                { label: "New Pune Mahamarge" },
-                { label: "Devpure" },
-                { label: "Pune Shivaji Nager" },
+                { label: "Sangmaner" },
+                { label: "Chakan" },
+                { label: "Nashik Phata" },
+                { label: " Shivaji Nager" },
+                { label: "Igatpuri" },
+                { label: "Kasara" },
+                { label: "Kalyan" },
+                { label: "Thane" }, { label: "Mumbai" },
               ]}
               value={busstops}
               onPress={(value: any) => {
@@ -340,7 +352,7 @@ export default function AddBus() {
                 { label: "2" },
                 { label: "3" },
                 { label: "4" },
-                { label: "5" },
+                { label: "11" },
               ]}
               value={noofstop}
               onPress={(value: any) => {

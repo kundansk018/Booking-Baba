@@ -7,9 +7,10 @@ import {
   BUS_UPDATE_REQUEST_SUCCESS,
   REQUEST_COMPLETED,
   REQUEST_STARTED,
+  USER_SEARCH_REQUEST_SUCCESS,
 } from "../constant";
 import { AppDispatch } from "../store";
-import { addBus, deleteBus, getAllBuses, getBusById, updateBus } from "@/service/services";
+import { addBus, busSearch, deleteBus, getAllBuses, getBusById, updateBus } from "@/service/services";
 
 
 export const addBuses = (data: any) => async (dispatch: AppDispatch) => {
@@ -102,6 +103,21 @@ export const getBusesById = (id: any) => async (dispatch: AppDispatch) => {
   dispatch({ type: REQUEST_COMPLETED, payload: null });
 }
 
+
+export const getBusBySearch = (data: any) => async (dispatch: AppDispatch) => {
+  dispatch({ type: REQUEST_STARTED, payload: null });
+  // console.log("hefhebfje",data)
+
+  const res = await busSearch(data);
+  if (res && res.status === 200) {
+    console.log("response is..", res.data);
+    dispatch({ type: USER_SEARCH_REQUEST_SUCCESS, payload: res.data });
+  } else {
+    alert("Train is not present");
+    dispatch({ type: BUS_REQUEST_FAIL, payload: null });
+  }
+  dispatch({ type: REQUEST_COMPLETED, payload: null });
+};
 
 export const getBus = (data: any) => async (dispatch: AppDispatch) => {
   try {
