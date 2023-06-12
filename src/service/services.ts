@@ -11,6 +11,11 @@ interface IPropsDelete {
   id: string;
 }
 
+export const loginDetails = (data: any) => {
+  let url = `${ENDPOINTS.loginDetails}`;
+  return client.post(url, data, headers);
+};
+
 export const addHotelsInfo = (data: any) => {
   let url = `${ENDPOINTS.addHotels}`;
   return client.post(url, data, headers);

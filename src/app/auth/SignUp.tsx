@@ -40,6 +40,7 @@ function SignUp() {
 
   const signUpCredential = () => {
     let data = {
+      rollType: 2, //for admin
       firstName: firstName,
       lastName: lastName,
       mobileNumber: mobileNumber,

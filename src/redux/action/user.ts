@@ -10,6 +10,7 @@ import {
   RESET_REQUEST_SUCCESS,
 } from "../constant";
 import { AppDispatch } from "../store";
+import { loginDetails } from "@/service/services";
 
 export const signup = (data: any) => async (dispatch: AppDispatch) => {
   console.log("data in action: ", data);
@@ -46,15 +47,18 @@ export const login = (data: any) => async (dispatch: AppDispatch) => {
   dispatch({ type: REQUEST_STARTED, payload: null });
 
   //api call
-  const res = await fetch("http://localhost:3000/api/user/auth?action=LOGIN", {
-    method: "POST",
+  // const res = await fetch("http://localhost:3000/api/user/auth?action=LOGIN", {
+  //   method: "POST",
 
-    body: JSON.stringify(data),
-    headers: {
-      "content-type": "application/json",
-    },
-  });
-  if (res.ok === true) {
+  //   body: JSON.stringify(data),
+  //   headers: {
+  //     "content-type": "application/json",
+  //   },
+  // });
+
+  const res = await loginDetails(data);
+
+  if (res && res.status === 200) {
     console.log("inside if:::::::::", res);
     dispatch({ type: LOGIN_REQUEST_SUCCESS, payload: res });
   } else {

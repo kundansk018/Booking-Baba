@@ -4,7 +4,7 @@ import React, { useState } from "react";
 
 import { Button } from "react-bootstrap";
 
-export default function page(props: any) {
+export default function page() {
   const [image, setImage] = useState("");
   const [createObjectURL, setCreateObjectURL] = useState("");
 

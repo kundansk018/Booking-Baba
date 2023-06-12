@@ -8,9 +8,14 @@ import {
   IconButton,
 } from "@material-tailwind/react";
 import { useRouter } from "next/navigation";
+import { useSelector } from "react-redux";
 // import { useRouter } from "next/router";
 
 export default function Navigationbar() {
+  const userData: any = useSelector((state: any) => state.login.loginDetails);
+
+  const rollType: number = userData?.data.data.rollType;
+
   const [openNav, setOpenNav] = useState(false);
   const router = useRouter();
 
