@@ -23,7 +23,7 @@ export default function Navigationbar() {
 
   const navList = (
     // <ul className="mb-4 mt-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
-    <ul className="mb-4 mt-2 flex flex-col gap-2 lg:flex-row lg:gap-6">
+    <ul className="flex flex-col mt-[6px] gap-2 lg:flex-row lg:gap-6">
       <Typography
         as="li"
         variant="small"
@@ -31,7 +31,7 @@ export default function Navigationbar() {
         className="p-1 font-normal"
         onClick={() => router.push("/auth")} //
       >
-        <a href="#" className="flex items-center">
+        <a href="#" className="flex items-center hover:text-black">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -55,7 +55,7 @@ export default function Navigationbar() {
         className="p-1 font-normal"
         onClick={() => router.push("/help")}
       >
-        <a href="#" className="flex items-center text-xl mt-1">
+        <a href="#" className="flex items-center text-xl mt-1 hover:text-black">
           Help
         </a>
       </Typography>
@@ -66,7 +66,7 @@ export default function Navigationbar() {
         className="p-1 font-normal"
         onClick={() => router.push("/about")}
       >
-        <a href="#" className="flex items-center text-xl mt-1">
+        <a href="#" className="flex items-center text-xl mt-1 hover:text-black">
           About Us
         </a>
       </Typography>
@@ -77,7 +77,7 @@ export default function Navigationbar() {
         className="p-1 font-normal"
         onClick={() => router.push("/user")}
       >
-        <a href="#" className="flex items-center text-xl mt-1">
+        <a href="#" className="flex items-center text-xl mt-1 hover:text-black">
           User Dashboard
         </a>
       </Typography>
@@ -89,7 +89,7 @@ export default function Navigationbar() {
       style={{
         boxShadow: "0 0 20px grey",
       }}
-      className=" z-50 flex flex-1 m-auto w-[100%] h-[54px] sticky top-0 bg-darkgreen bg-opacity-50"
+      className=" z-50 flex flex-1 m-auto w-[100%] h-[54px] sticky top-0 bg-darkgreen"
     >
       <div className="container flex items-center justify-between text-white">
         <Typography
@@ -147,7 +147,7 @@ export default function Navigationbar() {
         </IconButton>
       </div>
       <MobileNav open={openNav}>
-        <div className="container mx-auto">{navList}</div>
+        <div className="container mr-0 bg-darkgreen text-white">{navList}</div>
       </MobileNav>
     </div>
   );

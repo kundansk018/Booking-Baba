@@ -180,20 +180,20 @@ export default function Train() {
         </table>
       </div>
       <div className="bg-white ">
-        <Pagination className="flex justify-center gap-5 p-3">
-          <div>
+        <Pagination className="flex justify-center gap-5 p-3 text-gray-700">
+          <div className="hover:text-black">
             <Pagination.First
               onClick={() => handlePageChange(1)}
               disabled={page === 1}
             />
           </div>
-          <div>
+          <div className="hover:text-black">
             <Pagination.Prev
               onClick={() => handlePageChange(page - 1)}
               disabled={page === 1}
             />
           </div>
-          <div className="flex">
+          <div className="flex hover:text-black">
             {Array.from(Array(totalPages).keys()).map((pageIndex, index) => (
               <Pagination.Item
                 key={index}
@@ -206,13 +206,13 @@ export default function Train() {
             ))}
           </div>
 
-          <div>
+          <div className="hover:text-black">
             <Pagination.Next
               onClick={() => handlePageChange(page + 1)}
               disabled={page === totalPages - 1}
             />
           </div>
-          <div>
+          <div className="hover:text-black">
             <Pagination.Last
               onClick={() => handlePageChange(totalPages)}
               disabled={page === totalPages}

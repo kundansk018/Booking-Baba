@@ -144,11 +144,15 @@ export default function UpdateBus({ params }: any) {
   return (
     <div className="bg-white h-[550px] mt-5 p-5 m-auto w-[90%] justify-center rounded-lg">
       <div className="flex items-center justify-center ">
-        <Typography className="  font-castoro text-black" variant="h3" color="black">
+        <Typography
+          className="  font-castoro text-black"
+          variant="h3"
+          color="black"
+        >
           Update Bus
         </Typography>
       </div>
-      <div className="h-[450px] overflow-y-scroll mt-1">
+      <div className="h-[450px] overflow-y-auto mt-1">
         <div className="flex  flex-wrap justify-center mx-6 mt-1 ">
           <div className="flex  flex-col mx-5 w-[300px] ">
             <BBInput
@@ -376,7 +380,7 @@ export default function UpdateBus({ params }: any) {
             label="UPDATE "
             size="lg"
             onClick={(e) => updatebus()}
-            className="h-10 bg-blackblue w-[500px] "
+            className="h-10 bg-blackblue w-[500px] hover:bg-GreenBlue"
           />
         </div>
 

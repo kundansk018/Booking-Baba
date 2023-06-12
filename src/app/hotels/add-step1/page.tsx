@@ -281,7 +281,6 @@ export default function AddHotels() {
               type="date"
               onChange={(e) => setDate(e.target.value)}
             />
-
           </div>
 
           <div className="flex  flex-col mx-4 w-[300px] ">
@@ -345,7 +344,7 @@ export default function AddHotels() {
             label="NEXT"
             size="lg"
             onClick={addHotelDetails}
-            className="h-12 bg-blackblue w-[500px] "
+            className="h-12 bg-blackblue w-[500px] hover:bg-GreenBlue"
           />
         </div>
       </div>

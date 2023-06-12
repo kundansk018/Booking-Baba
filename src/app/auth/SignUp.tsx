@@ -103,16 +103,16 @@ function SignUp() {
 
   return (
     <>
-      <form className="font-signika mt-0 flex flex-col gap-3">
-        <div>
+      <form className="font-signika mt-0 flex flex-col gap-2 ">
+        {/* <div>
           <BBTypography
             variant="small"
             color="blue-gray"
             className=" font-medium"
             text="Personal Details"
           />
-        </div>
-        <div className="flex items-center gap-2">
+        </div> */}
+        <div className="flex items-center gap-2 mt-2">
           <BBInput
             label="First Name"
             containerProps={{ className: "min-w-[30px]" }}
@@ -197,7 +197,7 @@ function SignUp() {
           label="Sign Up"
           size="lg"
           onClick={signUpCredential}
-          className="relative h-12 bg-blackblue"
+          className="relative h-12 bg-blackblue hover:bg-GreenBlue"
         />
       </form>
       <BBErrorDialog

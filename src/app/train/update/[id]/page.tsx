@@ -262,7 +262,7 @@ export default function updateTrain({ params }: any) {
             label="Update "
             size="lg"
             onClick={() => updateTrain()}
-            className="h-12 bg-blackblue w-[500px] "
+            className="h-12 bg-blackblue hover:bg-GreenBlue w-[500px] "
           />
         </div>
       </div>

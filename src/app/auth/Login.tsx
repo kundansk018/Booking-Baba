@@ -70,7 +70,7 @@ export default function Login() {
           />
         </div>
 
-        <div className="my-3">
+        <div className="my-2">
           <Typography
             variant="small"
             color="blue-gray"
@@ -90,7 +90,7 @@ export default function Login() {
           <Checkbox label="Remember Me" color="blue" className=" left-0" />
           <h1
             onClick={() => router.push("auth/resetpassword")}
-            className="font-medium text-blue-500 transition-colors hover:text-blue-700"
+            className="font-medium text-blue-500 transition-colors hover:text-GreenBlue hover:text-lg"
           >
             Forget Password?
           </h1>
@@ -100,7 +100,7 @@ export default function Login() {
           label="Login"
           size="lg"
           onClick={() => loginCredential()}
-          className="relative h-12 bg-blackblue"
+          className="relative h-12 bg-blackblue hover:bg-GreenBlue"
         />
       </form>
       <BBErrorDialog

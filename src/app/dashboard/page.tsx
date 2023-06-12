@@ -3,19 +3,21 @@ import Link from "next/link";
 import React from "react";
 import "../styles/dashboard.css";
 import { useRouter } from "next/navigation";
+import { Breadcrumb } from "react-bootstrap";
+import BBBreadcrumbs from "../components/BBBreadcrumbs ";
 
 export default function AdminPage() {
-  const router = useRouter()
+  const router = useRouter();
 
   return (
     <>
-      {/* <div className='back flex justify-center text-center font-semibold flex-1 bg-black text-black  h-20'>
-                <h1 className='text-4xl'> BOOKING-BABA</h1>
-            </div> */}
+      <div className=" flex justify-center text-center font-semibold flex-1  text-black mt-5"></div>
       <div className="m-10 mt-10 mb-3 rounded-lg">
         <div className="flex flex-row flex-1 h-70 mt-5 rounded-lg ">
-          <div className="flex-1 bg-black text-white mr-5 relative rounded-lg"
-            onClick={() => router.push("/hotels")}>
+          <div
+            className="flex-1 bg-black text-white mr-5 relative rounded-lg "
+            onClick={() => router.push("/hotels")}
+          >
             <img
               className="h-60 w-full rounded-lg "
               src="/image/hotel.jpg"
@@ -23,7 +25,7 @@ export default function AdminPage() {
             />
 
             <div
-              className="flex-1 bg-black text-white flex justify-center rounded-lg"
+              className="flex-1  text-white flex justify-center rounded-lg bg-black hover:text-lg"
               style={{
                 position: "absolute",
                 zIndex: 100,
@@ -34,21 +36,21 @@ export default function AdminPage() {
                 paddingTop: 18,
               }}
             >
-
               <h1>Hotels Booking</h1>
-
             </div>
           </div>
 
-          <div className="flex-1 bg-black text-white relative rounded-lg "
-            onClick={() => router.push("/bus")}>
+          <div
+            className="flex-1 bg-black text-white relative rounded-lg "
+            onClick={() => router.push("/bus")}
+          >
             <img
               className="h-60 w-full rounded-lg"
               src="/image/bus.jpg"
               alt="nature image"
             />
             <div
-              className="flex-1 bg-black text-white flex justify-center"
+              className="flex-1 bg-black text-white flex justify-center hover:text-lg"
               style={{
                 position: "absolute",
                 zIndex: 100,
@@ -59,23 +61,23 @@ export default function AdminPage() {
                 paddingTop: 18,
               }}
             >
-
               <h1> Travles Booking</h1>
-
             </div>
           </div>
         </div>{" "}
-        <div className="flex flex-row flex-1 h-70 mt-5 rounded-lg"
-        >
-          <div className="flex-1 bg-black text-white mr-5 relative rounded-lg"
-            onClick={() => router.push("/train")}>
+        <div className="flex flex-row flex-1 h-70 mt-5 rounded-lg">
+          <div
+            className="flex-1 bg-black text-white mr-5 relative rounded-lg"
+            onClick={() => router.push("/train")}
+          >
             <img
               className="h-60 w-full rounded-lg "
               src="/image/trr.jpg"
-              alt="nature image" />
+              alt="nature image"
+            />
 
             <div
-              className="flex-1 bg-black text-white  flex justify-center"
+              className="flex-1 bg-black text-white  flex justify-center hover:text-lg"
               style={{
                 position: "absolute",
                 zIndex: 100,
@@ -84,22 +86,23 @@ export default function AdminPage() {
                 bottom: 0,
                 width: "100%",
                 paddingTop: 18,
-              }}  >
-
+              }}
+            >
               <h1>Train Booking</h1>
-
             </div>
           </div>
 
-          <div className="flex-1 bg-black text-white  relative rounded-lg "
-            onClick={() => router.push("/usermanagement")}>
+          <div
+            className="flex-1 bg-black text-white  relative rounded-lg "
+            onClick={() => router.push("/usermanagement")}
+          >
             <img
               className="h-60 w-full rounded-lg"
               src="/image/userm.jpg"
               alt="nature image"
             />
             <div
-              className="flex-1 bg-black text-white  flex justify-center"
+              className="flex-1 bg-black text-white  flex justify-center hover:text-lg"
               style={{
                 position: "absolute",
                 zIndex: 100,
@@ -108,9 +111,9 @@ export default function AdminPage() {
                 bottom: 0,
                 width: "100%",
                 paddingTop: 18,
-              }} >
+              }}
+            >
               <h1> User mangement</h1>
-
             </div>
           </div>
         </div>

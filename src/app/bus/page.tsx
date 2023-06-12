@@ -128,7 +128,7 @@ export default function Bus() {
         </div>
       </Card>
 
-      <div className="mx-3 h-[450px] w-[98%] mt-[1%]  bg-white relative overflow-scroll px-1 mt-0">
+      <div className="mx-3 h-[450px] w-[98%] mt-[1%]  bg-white relative overflow-y-auto px-1 ">
         <table className="relative font-roboto w-full min-w-max table-auto text-left text-sm text-black">
           <thead className="z-10 font-semibold flex-col">
             <tr className="z-10 bg-GreenBlue text-white sticky top-0  w-full">
@@ -215,20 +215,20 @@ export default function Bus() {
         </table>
       </div>
       <div className="bg-white ">
-        <Pagination className="flex justify-center gap-5 p-3">
-          <div>
+        <Pagination className="flex justify-center gap-5 p-3 text-gray-700">
+          <div className="hover:text-black">
             <Pagination.First
               onClick={() => handlePageChange(1)}
               disabled={page === 1}
             />
           </div>
-          <div>
+          <div className="hover:text-black">
             <Pagination.Prev
               onClick={() => handlePageChange(page - 1)}
               disabled={page === 1}
             />
           </div>
-          <div className="flex">
+          <div className="flex hover:text-black">
             {Array.from(Array(totalPages).keys()).map((pageIndex, index) => (
               <Pagination.Item
                 key={index}
@@ -241,13 +241,13 @@ export default function Bus() {
             ))}
           </div>
 
-          <div>
+          <div className="hover:text-black">
             <Pagination.Next
               onClick={() => handlePageChange(page + 1)}
               disabled={page === totalPages - 1}
             />
           </div>
-          <div>
+          <div className="hover:text-black">
             <Pagination.Last
               onClick={() => handlePageChange(totalPages)}
               disabled={page === totalPages}

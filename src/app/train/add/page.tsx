@@ -105,7 +105,7 @@ export default function AddTrain() {
 
   return (
     <>
-      <div className="bg-white h-full mt-5 p-5 m-auto w-[70%] justify-center rounded-lg">
+      <div className="bg-white h-full mt-5 p-5 m-auto w-[85%] justify-center rounded-lg">
         <div className="flex justify-center  text-3xl">
           <h1>Add Train</h1>
         </div>
@@ -271,7 +271,7 @@ export default function AddTrain() {
             label="ADD "
             size="lg"
             onClick={addTrainDetails}
-            className="h-12 bg-blackblue w-[500px] "
+            className="h-12 bg-blackblue hover:bg-GreenBlue w-[500px] "
           />
         </div>
       </div>

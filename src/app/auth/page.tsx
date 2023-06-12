@@ -14,16 +14,16 @@ import {
   Avatar,
 } from "@material-tailwind/react";
 
-import { BanknotesIcon } from "@heroicons/react/24/solid";
+// import { BanknotesIcon } from "@heroicons/react/24/solid";
 
 import SignUp from "./SignUp";
 import Login from "./Login";
 
 export default function page() {
-  const [type, setType] = React.useState("login");
+  const [type, setType] = React.useState("signup");
 
   return (
-    <div className="flex justify-center items-center py-[10px]">
+    <div className="flex justify-center items-center py-[30px]">
       <Card className="w-full max-w-[24rem] ">
         <CardHeader
           color="red"
@@ -42,12 +42,12 @@ export default function page() {
             Booking Baba
           </Typography>
         </CardHeader>
-        <CardBody>
-          <Tabs value={type} className="overflow-visible ">
+        <CardBody className="">
+          <Tabs value={type} className="overflow-visible p-0">
             <TabsHeader
-              className=" z-0"
+              className="p-0 z-0"
               indicatorProps={{
-                className: "bg-[#4fb291] shadow-none ",
+                className: "bg-[#4fb291] shadow-none p-0",
               }}
             >
               <Tab
@@ -55,8 +55,8 @@ export default function page() {
                 onClick={() => setType("login")}
                 className={
                   type === "login"
-                    ? "text-white font-bold font-castoro"
-                    : "text-black font-bold  font-castoro"
+                    ? "text-white font-bold font-castoro pt-2"
+                    : "text-black font-bold  font-castoro pt-2"
                 }
               >
                 Log-In
@@ -65,8 +65,8 @@ export default function page() {
                 value="signup"
                 className={
                   type === "signup"
-                    ? "text-white font-bold font-castoro"
-                    : "text-black font-bold font-castoro"
+                    ? "text-white font-bold font-castoro pt-2"
+                    : "text-black font-bold font-castoro pt-2"
                 }
                 onClick={() => setType("signup")}
               >

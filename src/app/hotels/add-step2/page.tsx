@@ -135,118 +135,132 @@ export default function Page() {
 
 
 
-  return (
-    loading ? <Spinner /> :
-      <div className="bg-white h-full  mt-5 m-auto w-[700px] justify-center pb-1">
-        <div className="flex flex-row h-12  bg-[#1B6CA8] text-white px-5  text-xl  justify-between">
-          <p className="mt-2">Add Hotel Rooms</p>
-          <PlusIcon className=" w-6" onClick={addMore} />
-
-        </div>
-        <div className="flex flex-col justify-center mt-5 align-middle">
-
-          {roomDetails.map((element: any, index: number) => (
-            <div className="m-auto">
-
-              <div className=" flex flex-row  justify-between">
-                <p className="font-medium ">  Add Room {element.id} </p>
-                <TrashIcon className=" w-5 text-red-500" onClick={() => deleteRoom(index)} />
-              </div>
-              <div className=" flex flex-row  justify-center">
-
-                <div className="flex  flex-col mx-4 w-[300px]">
-                  <div className="my-2 w-72">
-                    <Select label="Select Bed">
-                      {data.map((item: any) => (
-                        <Option value={item.value} onClick={() => setOptionValue(index, item.value)}>
-                          {item.lable}
-                        </Option>
-                      ))}
-                    </Select>
-                  </div>
-                  <div className="my-2 w-72">
-                    <Input
-                      label="Price"
-                      value={element.price}
-                      onChange={(e) => setPriceValue(index, e.target.value)}
-                    />
-                  </div>
-
-                  <div className="my-2 w-72">
-                    <Input
-                      label="No of Rooms Available"
-                      value={element.no_rooms}
-                      onChange={(e) => setRoomsCount(index, e.target.value)}
-                    />
-                  </div>
-
-                  <div className="flex gap-10">
-                    <Radio
-                      checked={element.isAC}
-                      name={"air-condition" + element.id}
-                      label="AC"
-                      onClick={(e) => setAcStatus(index, true)}
-                    />
-                    <Radio
-                      checked={element.isAC}
-                      name={"air-condition" + element.id}
-                      label="Non AC"
-                      onClick={(e) => setAcStatus(index, false)}
-                    />
-                  </div>
-                </div>
-
-                <div className="flex  flex-col mx-4 w-[300px]">
-                  <div className="my-2 w-72">
-                    <Multiselect
-                      placeholder={getSelectedViews(index)}
-                      options={options_view}
-                      onSelect={(selectedList, selectedItem)=>selectOption_view(index,selectedList, selectedItem)}
-                      onRemove={(selectedList, selectedItem)=>selectOption_view(index,selectedList, selectedItem)}
-                      displayValue="name"
-                      avoidHighlightFirstOption={true}
-                      showCheckbox={true}
-                      hideSelectedList={true}
-                    />
-                  </div>
-                  <div className="my-2 w-72">
-                    <Multiselect
-                      placeholder={getSelectedAmenities(index)}
-                      options={room_amenities}
-                      onSelect={(selectedList, selectedItem) =>selectRoomAmenities(index,selectedList, selectedItem)}
-                      onRemove={(selectedList, selectedItem) =>selectRoomAmenities(index,selectedList, selectedItem)}
-                      displayValue="name"
-                      avoidHighlightFirstOption={true}
-                      showCheckbox={true}
-                      hideSelectedList={true}
-                    />
-                  </div>
-                  <div className="my-2 w-72">
-                    <Multiselect
-                      placeholder={getSelectedKit(index)}
-                      options={essential_Kit}
-                      onSelect={(selectedList, selectedItem)=>selectEssential_Kit(index,selectedList,selectedItem)}
-                      onRemove={(selectedList, selectedItem)=>selectEssential_Kit(index,selectedList,selectedItem)}
-                      displayValue="name"
-                      avoidHighlightFirstOption={true}
-                      showCheckbox={true}
-                      hideSelectedList={true}
-                    />
-                  </div>
-                </div>
-              </div>
-
-            </div>
-          ))}
-        </div>
-        <></>
-        <BBButton
-          color=""
-          label="ADD"
-          size="lg"
-          onClick={addHotelsDetails}
-          className="h-12 bg-blackblue w-[300px]  flex justify-center m-auto mb-5"
-        />
+  return loading ? (
+    <Spinner />
+  ) : (
+    <div className="bg-white h-full  mt-5 m-auto w-[700px] justify-center pb-1">
+      <div className="flex flex-row h-12  bg-[#1B6CA8] text-white px-5  text-xl  justify-between">
+        <p className="mt-2">Add Hotel Rooms</p>
+        <PlusIcon className=" w-6" onClick={addMore} />
       </div>
+      <div className="flex flex-col justify-center mt-5 align-middle">
+        {roomDetails.map((element: any, index: number) => (
+          <div className="m-auto">
+            <div className=" flex flex-row  justify-between">
+              <p className="font-medium "> Add Room {element.id} </p>
+              <TrashIcon
+                className=" w-5 text-red-500"
+                onClick={() => deleteRoom(index)}
+              />
+            </div>
+            <div className=" flex flex-row  justify-center">
+              <div className="flex  flex-col mx-4 w-[300px]">
+                <div className="my-2 w-72">
+                  <Select label="Select Bed">
+                    {data.map((item: any) => (
+                      <Option
+                        value={item.value}
+                        onClick={() => setOptionValue(index, item.value)}
+                      >
+                        {item.lable}
+                      </Option>
+                    ))}
+                  </Select>
+                </div>
+                <div className="my-2 w-72">
+                  <Input
+                    label="Price"
+                    value={element.price}
+                    onChange={(e) => setPriceValue(index, e.target.value)}
+                  />
+                </div>
+
+                <div className="my-2 w-72">
+                  <Input
+                    label="No of Rooms Available"
+                    value={element.no_rooms}
+                    onChange={(e) => setRoomsCount(index, e.target.value)}
+                  />
+                </div>
+
+                <div className="flex gap-10">
+                  <Radio
+                    checked={element.isAC}
+                    name={"air-condition" + element.id}
+                    label="AC"
+                    onClick={(e) => setAcStatus(index, true)}
+                  />
+                  <Radio
+                    checked={element.isAC}
+                    name={"air-condition" + element.id}
+                    label="Non AC"
+                    onClick={(e) => setAcStatus(index, false)}
+                  />
+                </div>
+              </div>
+
+              <div className="flex  flex-col mx-4 w-[300px]">
+                <div className="my-2 w-72">
+                  <Multiselect
+                    placeholder={getSelectedViews(index)}
+                    options={options_view}
+                    onSelect={(selectedList, selectedItem) =>
+                      selectOption_view(index, selectedList, selectedItem)
+                    }
+                    onRemove={(selectedList, selectedItem) =>
+                      selectOption_view(index, selectedList, selectedItem)
+                    }
+                    displayValue="name"
+                    avoidHighlightFirstOption={true}
+                    showCheckbox={true}
+                    hideSelectedList={true}
+                  />
+                </div>
+                <div className="my-2 w-72">
+                  <Multiselect
+                    placeholder={getSelectedAmenities(index)}
+                    options={room_amenities}
+                    onSelect={(selectedList, selectedItem) =>
+                      selectRoomAmenities(index, selectedList, selectedItem)
+                    }
+                    onRemove={(selectedList, selectedItem) =>
+                      selectRoomAmenities(index, selectedList, selectedItem)
+                    }
+                    displayValue="name"
+                    avoidHighlightFirstOption={true}
+                    showCheckbox={true}
+                    hideSelectedList={true}
+                  />
+                </div>
+                <div className="my-2 w-72">
+                  <Multiselect
+                    placeholder={getSelectedKit(index)}
+                    options={essential_Kit}
+                    onSelect={(selectedList, selectedItem) =>
+                      selectEssential_Kit(index, selectedList, selectedItem)
+                    }
+                    onRemove={(selectedList, selectedItem) =>
+                      selectEssential_Kit(index, selectedList, selectedItem)
+                    }
+                    displayValue="name"
+                    avoidHighlightFirstOption={true}
+                    showCheckbox={true}
+                    hideSelectedList={true}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+      <></>
+      <BBButton
+        color=""
+        label="ADD"
+        size="lg"
+        onClick={addHotelsDetails}
+        className="h-12 bg-blackblue hover:bg-GreenBlue w-[300px]  flex justify-center m-auto mb-5"
+      />
+    </div>
   );
 }

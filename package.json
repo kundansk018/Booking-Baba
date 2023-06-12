@@ -43,6 +43,7 @@
   "devDependencies": {
     "@types/formidable": "^2.0.6",
     "@types/react-datepicker": "^4.11.2",
-    "@types/uuid": "^9.0.1"
+    "@types/uuid": "^9.0.1",
+    "@types/validator": "^13.7.17"
   }
 }

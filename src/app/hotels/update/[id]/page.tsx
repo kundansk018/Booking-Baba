@@ -314,7 +314,7 @@ export default function UpdateHotel({ params }: any) {
             label="NEXT"
             size="lg"
             onClick={updateHotelDetails}
-            className="h-12 bg-blackblue w-[500px] "
+            className="h-12 bg-blackblue hover:bg-GreenBlue w-[500px] "
           />
         </div>
       </div>
