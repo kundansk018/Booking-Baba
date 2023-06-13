@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Spinner } from "@material-tailwind/react";
 import Navigationbar from "@/app/components/Navbar";
@@ -13,13 +13,19 @@ interface ContainerProps {
 const Container = (props: ContainerProps) => {
   // console.log("Window Location ", window.location.pathname);
   const loading: boolean = useSelector((state: any) => state.app.loading);
+  const [pathname, setPathname] = useState("");
 
+  // useEffect(() => {
+  //   setPathname(window?.location?.pathname);
+  //   console.log("Path Is::>>", window?.location?.pathname);
+  // }, []);
   return (
     <div className="relative">
       {!["/auth", "/"]?.includes(window?.location?.pathname) && (
         <Navigationbar />
       )}
 
+      {/* {!["/auth", "/"]?.includes(pathname) && <Navigationbar />} */}
       {props.children}
       <>
         {loading ? (
