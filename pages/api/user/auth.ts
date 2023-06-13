@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import getDB from "../connection";
+import { ObjectId } from "mongodb";
 
 let db: any = undefined;
 
@@ -36,6 +37,9 @@ export default async function handler(
 
     case "demo":
       return await demo(request, response);
+
+    case "updatepassword":
+      return await updatePwd(request, response);
 
     default:
       return response
@@ -142,4 +146,23 @@ export async function reset(
     console.log("res in auth.ts", res);
     return response.status(200).json({ data: res });
   }
+}
+
+export async function updatePwd(
+  request: NextApiRequest,
+  response: NextApiResponse
+) {
+  const pwdupdate = await db.collection(USER_COLLECTION);
+  const res = await pwdupdate.updateOne(
+    { _id: new ObjectId(request.body._id) },
+    {
+      // $set: request.body.data,
+      $set: {
+        password: request.body.password,
+      },
+    }
+  );
+  console.log("ressssss ", res);
+  console.log("ressssss id ", request.body);
+  return response.status(200).json({ data: res });
 }

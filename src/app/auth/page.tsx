@@ -43,7 +43,7 @@ export default function page() {
           </Typography>
         </CardHeader>
         <CardBody className="">
-          <Tabs value={type} className="overflow-visible p-0">
+          <Tabs value={type} className="overflow-auto p-2">
             <TabsHeader
               className="p-0 z-0"
               indicatorProps={{

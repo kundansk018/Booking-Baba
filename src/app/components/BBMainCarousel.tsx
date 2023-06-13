@@ -62,7 +62,13 @@ export default function BBMainCarousel() {
               and renews a weary spirit.
             </Typography>
             <div className="relative flex  gap-2">
-              <Button size="lg" color="white">
+              <Button
+                size="lg"
+                color="white"
+                onClick={() => {
+                  router.push("/auth");
+                }}
+              >
                 Start Exploring
               </Button>
             </div>
@@ -95,7 +101,13 @@ export default function BBMainCarousel() {
               and renews a weary spirit.
             </Typography>
             <div className=" flex gap-2">
-              <Button size="lg" color="white">
+              <Button
+                size="lg"
+                color="white"
+                onClick={() => {
+                  router.push("/auth");
+                }}
+              >
                 Start Exploring
               </Button>
             </div>
@@ -128,7 +140,13 @@ export default function BBMainCarousel() {
               and renews a weary spirit.
             </Typography>
             <div className="flex gap-2">
-              <Button size="lg" color="white">
+              <Button
+                size="lg"
+                color="white"
+                onClick={() => {
+                  router.push("/auth");
+                }}
+              >
                 Start Exploring
               </Button>
             </div>

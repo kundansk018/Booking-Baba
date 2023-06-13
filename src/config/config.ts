@@ -4,7 +4,10 @@ export const Config = {
 };
 
 export const ENDPOINTS = {
+  resetPwd: "user/auth?action=RESET",
+  updatePwd: "user/auth?action=updatepassword",
   loginDetails: "user/auth?action=LOGIN",
+
   addHotels: "hotelsapi/hotelsapi?action=addHotels",
   getHotels: "hotelsapi/hotelsapi?action=getHotels",
   getHotelById: "hotelsapi/hotelsapi?action=getHotelDetails",
@@ -16,13 +19,12 @@ export const ENDPOINTS = {
   deleteTrain: "trainApi/trainApi?action=DELETE_TRAIN",
   getTrain: "trainApi/trainApi?action=GET_TRAINS",
   getTrainById: "trainApi/trainApi?action=GET_TRAIN_BY_ID",
-  searchTrain: 'trainApi/trainApi?action=SEARCH_TRAINS',
+  searchTrain: "trainApi/trainApi?action=SEARCH_TRAINS",
 
-  addBus: 'busapi/busapi?action=ADD_BUS',
-  getAllBuses: 'busapi/busapi?action=GET_ALL_BUSES',
-  getBusById: 'busapi/busapi?action=GET_BUS_BY_ID',
-  updateBus: 'busapi/busapi?action=UPDATE_BUS',
-  deleteBus: 'busapi/busapi?action=DELETE_BUS',
-  busSearch: 'busapi/busapi?action=SEARCH',
-
+  addBus: "busapi/busapi?action=ADD_BUS",
+  getAllBuses: "busapi/busapi?action=GET_ALL_BUSES",
+  getBusById: "busapi/busapi?action=GET_BUS_BY_ID",
+  updateBus: "busapi/busapi?action=UPDATE_BUS",
+  deleteBus: "busapi/busapi?action=DELETE_BUS",
+  busSearch: "busapi/busapi?action=SEARCH",
 };

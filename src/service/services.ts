@@ -16,6 +16,17 @@ export const loginDetails = (data: any) => {
   return client.post(url, data, headers);
 };
 
+export const getEmailId = (data: any) => {
+  let url = `${ENDPOINTS.resetPwd}`;
+  return client.post(url, data, headers);
+};
+
+export const updatePwd = (data: any) => {
+  //debugger;
+  let url = `${ENDPOINTS.updatePwd}`;
+  return client.post(url, data, headers);
+};
+
 export const addHotelsInfo = (data: any) => {
   let url = `${ENDPOINTS.addHotels}`;
   return client.post(url, data, headers);
@@ -62,9 +73,9 @@ export const trainById = (data: any) => {
   return client.post(url, data, headers);
 };
 export const TrainSearch = (data: any) => {
-  let url = `${ENDPOINTS.searchTrain}`
-  return client.post(url, data, headers)
-}
+  let url = `${ENDPOINTS.searchTrain}`;
+  return client.post(url, data, headers);
+};
 
 export const updateTrainInfo = (data: any) => {
   //debugger;
@@ -95,7 +106,6 @@ export const getAllBuses = (page: any) => {
 };
 
 export const busSearch = (data: any) => {
-  let url = `${ENDPOINTS.busSearch}`
-  return client.post(url, data, headers)
-}
-
+  let url = `${ENDPOINTS.busSearch}`;
+  return client.post(url, data, headers);
+};

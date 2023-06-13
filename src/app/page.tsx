@@ -27,9 +27,7 @@ export default function Home() {
 
   useEffect(() => {
     setTimeout(() => {
-      () => {
-        router.push("/auth");
-      };
+      router.push("/auth");
     }, 100000);
   });
 
@@ -56,7 +54,7 @@ export default function Home() {
                 Hotel Booking
               </Typography>
               <Typography>
-                Search best prices on hotels,home and much more...
+                Search best prices on hotels,home and much more
               </Typography>
               <Button onClick={() => router.push("/user/hotels")}>
                 Book Now

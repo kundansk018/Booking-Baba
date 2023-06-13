@@ -3,6 +3,7 @@ import BBButton from "@/app/components/BBButton";
 import BBInput from "@/app/components/BBInput";
 import validator from "validator";
 import bus2 from "../../../images/Buses/carousel/bus2.png";
+import password from "../../../images/other/password.jpg";
 import {
   Card,
   CardBody,
@@ -11,7 +12,7 @@ import {
   Typography,
 } from "@material-tailwind/react";
 import { error } from "console";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useAppDispatch } from "@/redux/store";
 import { login, reset } from "@/redux/action/user";
 import { useSelector } from "react-redux";
@@ -28,6 +29,15 @@ const ResetPassword = () => {
   const userData: any = useSelector((state: any) => state.user.resetPassword);
   console.log("Reset Password data : ", userData);
 
+  const id = userData?.data?.data?._id;
+  console.log("Reset Password id     : ", id);
+
+  useEffect(() => {
+    if (id) {
+      router.push("auth/resetpassword/resetnow/" + id);
+    }
+  }, [userData]);
+
   const forgetpwd = () => {
     let data = {
       email: email,
@@ -41,9 +51,11 @@ const ResetPassword = () => {
     }
   };
 
+  //const resetnew = () => {};
+
   return (
     <div className="flex justify-center items-center py-[5px]">
-      <Card className="w-full m-10 max-w-[24rem]">
+      <Card className="flex flex-row flex-wrap w-auto  m-10 ">
         {/* <CardHeader className=" m-0 p-2 rounded-b-none place-items-center bg-GreenBlue">
           <Typography className="font-castoro text-white " variant="">
             BOOKING BABA
@@ -54,21 +66,14 @@ const ResetPassword = () => {
           <Typography className="font-castoro text-black " variant="">
             Forget password
           </Typography>
-          <img
-            src="https://imgproxy.epicpxls.com/mtuVm01fSxpp2DIr9Fi28z5u5BaB3P2zRm56G20M48Q/rs:fill:409:307:0/g:no/aHR0cHM6Ly9pdGVt/cy5lcGljcHhscy5j/b20vdXBsb2Fkcy9w/aG90by9hN2ZmNTZi/ZTM0NDAzNWYwODQ3/MTliOGIwZmI3OGY1/ZA.jpg"
-            alt="sdvv"
-            height={250}
-            width={250}
-            className=""
-          ></img>
+          <Image src={password} alt="fgg" height={250} width={250}></Image>
         </CardBody>
-        <Typography
-          className="font-castoro flex justify-center text-black "
-          variant=""
-        >
-          <p> Please Enter Registered email </p>
-        </Typography>
-        <CardFooter className="">
+
+        <CardFooter className="flex flex-col m-10 gap-5 lg:gap-5">
+          <Typography className="font-castoro text-black " variant="">
+            <p> Please Enter Registered email </p>
+          </Typography>
+
           <Typography
             variant="small"
             color="blue-gray"
@@ -86,24 +91,24 @@ const ResetPassword = () => {
             }}
           />
           <p className="text-red-500">{error}</p>
-        </CardFooter>
-        <div className="flex justify-around">
-          <BBButton
-            color=""
-            label="Back to login"
-            size="lg"
-            onClick={() => router.push("/auth")}
-            className=" m-0 p-3 w-[50%] rounded-t-none place-items-center bg-GreenBlue hover:bg-blackblue"
-          />
+          <div className="flex justify-around gap-2">
+            <BBButton
+              color=""
+              label="Back"
+              size="md"
+              onClick={() => router.push("/auth")}
+              className=" m-0 p-3 w-[50%] rounded-md place-items-center bg-GreenBlue hover:bg-blackblue"
+            />
 
-          <BBButton
-            color=""
-            label="send mail"
-            size="lg"
-            onClick={() => forgetpwd()}
-            className=" m-0 p-3 w-[50%] rounded-t-none place-items-center bg-GreenBlue hover:bg-blackblue"
-          />
-        </div>
+            <BBButton
+              color=""
+              label="Change Password"
+              size="md"
+              onClick={() => forgetpwd()}
+              className=" m-0 p-3 w-[50%] rounded-md place-items-center bg-GreenBlue hover:bg-blackblue"
+            />
+          </div>
+        </CardFooter>
       </Card>
     </div>
   );
