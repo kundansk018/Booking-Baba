@@ -32,6 +32,12 @@ export default async function handler(
 
       case "delete":
         return await deleteHotelById(request, response);
+        
+        case "searchByHotel":
+          return await serachByName(request,response);
+
+        case "sort":
+        return await sortHotelBy(request,response); 
 
     default:
       return response
@@ -82,4 +88,32 @@ export async function deleteHotelById(request:NextApiRequest,response:NextApiRes
   const res=await hotels.deleteOne({ _id: new ObjectId(request.body.id) })
   return response.status(200).json({data:res})
 
+}
+
+export async function serachByName(request:NextApiRequest,response:NextApiResponse){
+  const hotels=await db.collection("Hotels_Details");
+  let data=request.body.searchKey
+  // const res=await hotels.find().sort({hotelname:-1}).toArray()
+  const res=await hotels.find({$or:[{hotelname:{'$regex':data, '$options':'i'}},{city:{'$regex':data, '$options':'i'}}]}).toArray();
+
+response.status(200).json({data:res})
+}
+
+
+export async function sortHotelBy(request:NextApiRequest,response:NextApiResponse){
+  const hotels=await db.collection("Hotels_Details");
+  let {sortType}=request.body
+  let res=null;
+  if(sortType==="PRICE_LOW"){
+   res =await hotels.find().sort({min_order_price:1}).toArray()
+  }else if(sortType==="PRICE_HIGH"){
+    res =await hotels.find().sort({min_order_price:-1}).toArray()
+   }
+  
+  else{
+ res=await hotels.find().toArray()
+}
+  // const res=await hotels.find().sort({data:-1}).toArray()
+  
+   response.status(200).json({data:res})
 }

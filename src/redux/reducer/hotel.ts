@@ -7,6 +7,8 @@ import {
   UPDATE_HOTEL_DETAILS,
   SAVE_HOTEL_DETAILS,
   DELETE_HOTEL,
+  SEARCH_HOTELS,
+  SORT_By,
 
 } from "../constant";
 export const initialState = {
@@ -84,6 +86,19 @@ export const HotelReducer = (state = initialState, action: any) => {
       }
     };
 
+    case SEARCH_HOTELS:{
+      return {
+        ...state,
+        hotelDetails: action.payload,
+      }
+  }
+
+  case SORT_By:{
+    return{
+      ...state,
+      hotelDetails: action.payload,
+    }
+  }
     default: {
       return state;
     }

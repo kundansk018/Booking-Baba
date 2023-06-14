@@ -20,6 +20,7 @@ export default function BBDropdown(props: Props) {
       label={props.label}
       onChange={(e: any) => (props.onChange ? props.onChange("") : null)}
       value={props.value}
+
       containerProps={
         props.containerProps}
     >

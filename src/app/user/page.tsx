@@ -26,7 +26,7 @@ export default function page() {
               className="relative h-30"
             >
               <img
-                src="https://images.pexels.com/photos/338504/pexels-photo-338504.jpeg?cs=srgb&dl=pexels-thorsten-technoman-338504.jpg&fm=jpg"
+                src="/image/kkk.jpg"
                 alt="img-blur-shadow"
               />
             </CardHeader>
@@ -53,7 +53,7 @@ export default function page() {
               className="relative h-30"
             >
               <img
-                src="https://img.freepik.com/premium-photo/bus-parked-road_69593-7793.jpg"
+                src="/image/bus1.jpg"
                 alt="img-blur-shadow"
               />
             </CardHeader>
@@ -77,7 +77,7 @@ export default function page() {
             className="relative h-30"
           >
             <img
-              src="https://images.pexels.com/photos/325200/pexels-photo-325200.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+              src="/image/train2.jpg"
               alt="img-blur-shadow"
             />
           </CardHeader>

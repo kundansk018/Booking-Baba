@@ -14,12 +14,17 @@ const Container = (props: ContainerProps) => {
   // console.log("Window Location ", window.location.pathname);
   const loading: boolean = useSelector((state: any) => state.app.loading);
 
+  // useEffect(() => {
+  //   setPathname(window?.location?.pathname);
+  //   console.log("Path Is::>>", window?.location?.pathname);
+  // }, []);
   return (
     <div className="relative">
       {!["/auth", "/"]?.includes(window?.location?.pathname) && (
         <Navigationbar />
       )}
 
+      {/* {!["/auth", "/"]?.includes(pathname) && <Navigationbar />}  */}
       {props.children}
       <>
         {loading ? (

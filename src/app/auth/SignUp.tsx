@@ -48,8 +48,10 @@ function SignUp() {
       email: email,
       password: password,
     };
+    dispatch(signup(data));
     let isErrorFound = false;
     let error: any = [];
+    dispatch(signup(data));
     if (!firstName || !firstName.trim()) {
       isErrorFound = true;
       error.push("Please enter first name");
@@ -104,16 +106,16 @@ function SignUp() {
 
   return (
     <>
-      <form className="font-signika mt-0 flex flex-col gap-2 ">
-        {/* <div>
+      <form className="font-signika mt-0 flex flex-col gap-3">
+        <div>
           <BBTypography
             variant="small"
             color="blue-gray"
             className=" font-medium"
             text="Personal Details"
           />
-        </div> */}
-        <div className="flex items-center gap-2 mt-2">
+        </div>
+        <div className="flex items-center gap-2">
           <BBInput
             label="First Name"
             containerProps={{ className: "min-w-[30px]" }}
@@ -198,7 +200,7 @@ function SignUp() {
           label="Sign Up"
           size="lg"
           onClick={signUpCredential}
-          className="relative h-12 bg-blackblue hover:bg-GreenBlue"
+          className="relative h-12 bg-blackblue"
         />
       </form>
       <BBErrorDialog
@@ -211,4 +213,4 @@ function SignUp() {
   );
 }
 
-export default SignUp;
+export default SignUp

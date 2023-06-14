@@ -95,7 +95,7 @@ export default function Navigationbar() {
       style={{
         boxShadow: "0 0 20px grey",
       }}
-      className=" z-50 flex flex-1 m-auto w-[100%] h-[54px] sticky top-0 bg-darkgreen"
+      className=" z-50 flex flex-1 m-auto w-[100%] h-[54px] sticky top-0 bg-[#8075f5]"
     >
       <div className="container flex items-center justify-between text-white">
         <Typography

@@ -9,6 +9,8 @@ import {
   REQUEST_COMPLETED,
   REQUEST_STARTED,
   SAVE_HOTEL_DETAILS,
+  SEARCH_HOTELS,
+  SORT_By,
   UPDATE_HOTEL_DETAILS,
 } from "../constant";
 import { AppDispatch } from "../store";
@@ -18,8 +20,11 @@ import {
   deleteHotel,
   getHotel,
   hotelsById,
+  searchHotel,
+  sortHotelBy,
   updateHotelInfo,
 } from "@/service/services";
+import { hostname } from "os";
 
 /*.................Add hotels..........*/
 export const addHotels = (data: any) => async (dispatch: AppDispatch) => {
@@ -106,3 +111,32 @@ export const deleteHotelById =
       dispatch({ type: DELETE_HOTEL, payload: res.data });
     }
   };
+
+
+  export const searchHotelByName =(hotelname:any) =>async(dispatch:AppDispatch)=>{
+   let param={searchKey:hotelname}
+ const res =await searchHotel(param);
+ if(res && res.status==200){
+  console.log(res);
+  dispatch({type:SEARCH_HOTELS,payload:res.data?[res.data]:[]})
+ }
+};
+
+export const sortHotel =(data:any) =>async(dispatch:AppDispatch) =>{
+let type=null;
+debugger;
+if(data=='Low to High'){
+  type="PRICE_HIGH"
+}else if(data=='"High to Low'){
+    type='PRICE_LOW'   
+  }else{
+
+}
+  let param={sortType:type}
+  const res= await sortHotelBy(param);
+  if(res && res.status==200){
+    console.log("dtfgdty",res)
+    dispatch({type:SORT_By,payload:res.data?.data})
+  }
+}
+

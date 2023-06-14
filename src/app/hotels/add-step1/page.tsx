@@ -23,10 +23,11 @@ import { useSelector } from "react-redux";
 import BBErrorDialog from "@/app/components/BBErrorDialog";
 import Multiselect from "multiselect-react-dropdown";
 import {
-  Basic_Facilities,
+Basic_Facilities,
   Safety,
   food_facilities,
   general_services,
+  mode_of_payment,
 } from "@/utils/Data";
 
 export default function AddHotels() {
@@ -46,12 +47,14 @@ export default function AddHotels() {
   const [dinner, setDinner] = useState<boolean>(true);
   const [country, setCountry] = useState("");
   const [date, setDate] = useState("");
+  const[price,setPrice]=useState("");
   const [location, setLocation] = useState("");
 
   const [food, setFood] = useState([]);
   const [basics, setBasics] = useState([]);
   const [generalService, setGeneral] = useState([]);
   const [safety, setSafety] = useState([]);
+  const[payment ,setPayment]=useState([]);
 
   const [selectedFoodName, setSelectedFoodName] = useState(
     "Select foods & drinks"
@@ -110,6 +113,22 @@ export default function AddHotels() {
     let names = selectedList.map((element: any) => element.name);
     setSelectedSafety(names.toString());
   };
+  
+
+  const [selectPayment, setSelectPayment] = useState(
+    "Select Mode Of Payment"
+  );
+  const selectModePayment = (selectedList: any, selectedItem: any) => {
+    setPayment(selectedList);
+    let names = selectedList.map((element: any) => element.name);
+    setSelectPayment(names.toString());
+  };
+  const removeModePayment = (selectedList: any, removedItem: any) => {
+    setPayment(selectedList);
+    let names = selectedList.map((element: any) => element.name);
+    setSelectPayment(names.toString());
+  };
+  
 
   const dispatch = useAppDispatch();
   const [errorDialogMessage, setErrorDialogMessage] = useState([]);
@@ -152,6 +171,9 @@ export default function AddHotels() {
       basics: basics,
       generalService: generalService,
       safety: safety,
+      payment:payment,
+      min_order_price:price,
+
     };
 
     let isErrorFound = false;
@@ -284,6 +306,13 @@ export default function AddHotels() {
           </div>
 
           <div className="flex  flex-col mx-4 w-[300px] ">
+          <BBInput
+              containerProps={{ className: "mb-4" }}
+              label="Min Price"
+              value={price}
+              type="number"
+              onChange={(e) => setPrice(e.target.value)}
+            />
             <div className="my-2 w-60  font-sm ">
               <Multiselect
                 placeholder={selectedFoodBasics || "Select Basic Facilities"}
@@ -329,6 +358,18 @@ export default function AddHotels() {
                 options={Safety}
                 onSelect={select_safety}
                 onRemove={remove_safety}
+                displayValue="name"
+                avoidHighlightFirstOption={true}
+                showCheckbox={true}
+                hideSelectedList={true}
+              />
+            </div>
+            <div className="my-2 w-60">
+              <Multiselect
+                placeholder={selectPayment || "Select Mode Of Payment"}
+                options={mode_of_payment}
+                onSelect={selectModePayment}
+                onRemove={removeModePayment}
                 displayValue="name"
                 avoidHighlightFirstOption={true}
                 showCheckbox={true}

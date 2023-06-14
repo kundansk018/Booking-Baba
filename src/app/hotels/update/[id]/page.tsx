@@ -34,6 +34,7 @@ export default function UpdateHotel({ params }: any) {
   const [lunch, setLunch] = useState<boolean>(true);
   const [dinner, setDinner] = useState<boolean>(true);
   const [update, setUpdate] = useState("");
+  
 
   const [country, setCountry] = useState("");
   const [food, setFood] = useState([]);
@@ -122,6 +123,7 @@ export default function UpdateHotel({ params }: any) {
         basics,
         generalService,
         safety,
+        
       } = hotel_data;
 
       setAdress(adress);
@@ -160,6 +162,7 @@ export default function UpdateHotel({ params }: any) {
       basics,
       generalService,
       safety,
+      
     }
     let hotel_data = hotelState.updateHotelDetails?.data;
     dispatch(updateHotel(param)).then(() => {
@@ -314,7 +317,7 @@ export default function UpdateHotel({ params }: any) {
             label="NEXT"
             size="lg"
             onClick={updateHotelDetails}
-            className="h-12 bg-blackblue hover:bg-GreenBlue w-[500px] "
+            className="h-12 bg-blackblue w-[500px] "
           />
         </div>
       </div>

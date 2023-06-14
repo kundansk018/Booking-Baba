@@ -109,3 +109,13 @@ export const busSearch = (data: any) => {
   let url = `${ENDPOINTS.busSearch}`;
   return client.post(url, data, headers);
 };
+
+export const searchHotel=(hotelname:any) =>{
+  let url=`${ENDPOINTS.searchHotel}`;
+  return client.post(url,hotelname,headers);
+}
+
+export const sortHotelBy=(data:any)=>{
+  let url=`${ENDPOINTS.sortHotelBy}`
+  return client.post(url,data,headers);
+}

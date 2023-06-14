@@ -2,7 +2,7 @@
 
 import BBButton from "@/app/components/BBButton";
 import BBInput from "@/app/components/BBInput";
-import "../../styles/hotel.css";
+import "../../styles  /hotel.css";
 
 import { useState } from "react";
 import { useAppDispatch } from "@/redux/store";

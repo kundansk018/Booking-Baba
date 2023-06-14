@@ -11,10 +11,6 @@ import { useSelector } from 'react-redux';
 
 let bed_name = ['Single Bed', 'Double Bed', 'Triple Bed', 'King Bed', 'Queen Bed']
 
-
-
-
-
 export default function page({ params }: any) {
   const { updateHotelDetails }: any = useSelector((state: any) => state.hotel);
   const dispatch = useAppDispatch();
@@ -27,19 +23,31 @@ export default function page({ params }: any) {
   console.log(params)
   const data = updateHotelDetails?.data
 
+  const displayeModeOfPaymnet = (data: any) => {
+
+    let available_mode_payment = new Set()
+
+    data?.map((paymant: any) => available_mode_payment.add(paymant.name))
+
+    let name = (Array.from(available_mode_payment)).toString();
+    return name
+  }
+
+
   return (
     updateHotelDetails?.data ?
       <div className=''>
-        <div className='flex flex-col border border-gray-400 mx-3 my-3  p-5 rounded-lg'>
+        <div className='flex flex-col border border-gray-400 mx-3 my-3 rounded-lg'>
           <div className='h-[180px] w-80 mx-3 my-3  flex'>
-            <img src="https://img.freepik.com/free-photo/beautiful-luxury-outdoor-swimming-pool-hotel-resort_74190-7433.jpg"
+          <img  src="/image/hotel.jpg"
               alt="image-blur" />
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFNXwK0woZ3jdv4mkp06_08f-oflLjmku9Ng&usqp=CAU"
+               <img src="/image/hotel2.jpg"
               alt="image-blur" />
-            <img src="https://www.cvent.com/sites/default/files/styles/focus_scale_and_crop_800x450/public/image/2021-08/gold%20sign%20on%20exterior%20of%20hotel.jpg?h=140710cd&itok=VirV0yDB"
+            <img src="/image/hotel.jpg"
               alt="image-blur" />
-            <img src="https://media.istockphoto.com/id/119926339/photo/resort-swimming-pool.jpg?s=612x612&w=0&k=20&c=9QtwJC2boq3GFHaeDsKytF4-CavYKQuy1jBD2IRfYKc="
+           <img  src="/image/hotel2.jpg"
               alt="image-blur" />
+          
           </div>
           <div className='p-1 ml-10 '>
             <div className='flex justify-between'>
@@ -214,11 +222,13 @@ export default function page({ params }: any) {
               <div className='text-xl font-semibold'> Quick Information</div>
               <div >
                 <div className='text-gray-500 mt-4'>Mode of Payment</div>
-                <p className='mt-3'>Cash, Master Card, Visa Card, Debit Cards, Cheques, Credit Card, Amex Card</p>
+                <div className='mt-2'>
+                  {displayeModeOfPaymnet(data?.payment)}
+                </div>
               </div>
               <div >
                 <div className='text-gray-500 mt-4'>Year of Establishment</div>
-                <p className='mt-3'>01/05/2010</p>
+                <p className='mt-3'></p>
               </div>
             </div>
           </div>

@@ -73,5 +73,16 @@ const Basic_Facilities = [
     { name: 'Tissue', id: 8 },
   ]
 
-
-  export {Safety,general_services,food_facilities,Basic_Facilities,options_view,room_amenities,essential_Kit}
+  const mode_of_payment = [
+    { name: 'Cash', id: 1 },
+    { name: 'Credit Card', id: 2 },
+    { name: 'Debit Cards', id: 3 },
+    { name: 'UPI', id: 4 },
+    { name: 'BHIM', id: 5 },
+    { name: 'Paytm', id: 6 },
+    { name: 'G Pay', id: 6 },
+    { name: 'Amazon Pay', id: 7 },
+    { name: 'PhonePe', id: 8 },
+  ]
+  
+  export {Safety,general_services,food_facilities,Basic_Facilities,options_view,room_amenities,essential_Kit,mode_of_payment}
