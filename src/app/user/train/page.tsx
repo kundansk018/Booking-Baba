@@ -1,11 +1,9 @@
 "use client";
 import BBButton from "@/app/components/BBButton";
-import BBInput from "@/app/components/BBInput";
 import { getTrainBySearch } from "@/redux/action/trainAction";
 import { useAppDispatch } from "@/redux/store";
 import { useRouter } from "next/navigation";
 import React from "react";
-
 import { useState } from "react";
 import Select from "react-select";
 
@@ -41,17 +39,14 @@ export default function BookTrain() {
     { value: "Hydrabad", label: "Hydrabad" },
   ];
 
-  // function handleSelect(data: any) {
-  //   setSelectedOptions(data);
-  // }
-
   const handleSubmit = (e: any) => {
     e.preventDefault();
     if (fromStation || toStation) {
       let data = { from_Stn: fromStation.value, to_Stn: toStation.value };
       console.log("Searching for trains:", data);
-      dispatch(getTrainBySearch(data));
-      router.push("/user/train/list");
+      dispatch(getTrainBySearch(data)).then(() => {
+        router.push("/user/train/list");
+      });
     }
   };
 

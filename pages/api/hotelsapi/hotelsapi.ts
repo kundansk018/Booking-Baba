@@ -10,39 +10,24 @@ export default async function handler(
 ) {
   db = await getDB();
 
-  const {
-    body,
-    query: { action: action },
-    method,
-    headers,
-  } = request;
-
-  switch (action) {
-    case "addHotels":
-      return await addhotel(request, response);
-
-    case "getHotels":
-      return await gethotel(request, response);
-
-    case "updateHotels":
-      return await updatehotel(request, response);
-
-    case "getHotelDetails":
-      return await getHotelById(request, response);
-
-      case "delete":
+  switch (request.method) {
+    case "POST":
+      if (request.query?.action === "addHotels") {
+        return await addhotel(request, response);
+      } else if (request.query?.action === "getHotels") {
+        return await gethotel(request, response);
+      } else if (request.query?.action === "updateHotels") {
+        return await updatehotel(request, response);
+      } else if (request.query?.action === "getHotelDetails") {
+        return await getHotelById(request, response);
+      } else if (request.query?.action === "deleteHotel") {
         return await deleteHotelById(request, response);
-        
-        case "searchByHotel":
-          return await serachByName(request,response);
-
-        case "sort":
-        return await sortHotelBy(request,response); 
+      }
 
     default:
       return response
         .status(404)
-        .json({ message: "No Action Found For : " + action });
+        .json({ message: "No Action Found For : " + request.method });
   }
 }
 
@@ -64,30 +49,37 @@ export async function gethotel(
   return response.status(200).json({ data: res });
 }
 
-export async function getHotelById(request: NextApiRequest, response: NextApiResponse) {
-    const hotels = await db.collection("Hotels_Details");
-    const res = await hotels.findOne({ _id: new ObjectId(request.body.id) });
-    return response.status(200).json({ data: res });
+export async function getHotelById(
+  request: NextApiRequest,
+  response: NextApiResponse
+) {
+  const hotels = await db.collection("Hotels_Details");
+  const res = await hotels.findOne({ _id: new ObjectId(request.body.id) });
+  return response.status(200).json({ data: res });
 }
 
-
-export async function updatehotel(request: NextApiRequest, response: NextApiResponse) {
-    const hotels = await db.collection("Hotels_Details");
-    console.log("Data ",request.body.data)
-    const res = await hotels.updateOne(
-        { _id: new ObjectId(request.body.id) },
-        {
-            $set: request.body.data
-        }
-    )
-    return response.status(200).json({ data: res });
+export async function updatehotel(
+  request: NextApiRequest,
+  response: NextApiResponse
+) {
+  const hotels = await db.collection("Hotels_Details");
+  console.log("Data ", request.body.data);
+  const res = await hotels.updateOne(
+    { _id: new ObjectId(request.body.id) },
+    {
+      $set: request.body.data,
+    }
+  );
+  return response.status(200).json({ data: res });
 }
 
-export async function deleteHotelById(request:NextApiRequest,response:NextApiResponse){
-  const hotels=await db.collection("Hotels_Details");
-  const res=await hotels.deleteOne({ _id: new ObjectId(request.body.id) })
-  return response.status(200).json({data:res})
-
+export async function deleteHotelById(
+  request: NextApiRequest,
+  response: NextApiResponse
+) {
+  const hotels = await db.collection("Hotels_Details");
+  const res = await hotels.deleteOne({ _id: new ObjectId(request.body.id) });
+  return response.status(200).json({ data: res });
 }
 
 export async function serachByName(request:NextApiRequest,response:NextApiResponse){

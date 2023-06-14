@@ -12,31 +12,21 @@ export default async function handler(
 ) {
   db = await getDB();
 
-  const {
-    body,
-    query: { action: action },
-    method,
-    headers,
-  } = request;
-
-  switch (action) {
-    case "createUser":
-      return await createUser(request, response);
-
-    case "getUser":
-      return await getUser(request, response);
-
-    case "remove":
-      return await deleteUser(request, response);
-
-    case "LOGIN":
-      return await login(request, response);
-
-    case "RESET":
-      return await reset(request, response);
-
-    case "demo":
-      return await demo(request, response);
+  switch (request.method) {
+    case "POST":
+      if (request.query?.action === "SIGNUP") {
+        return await createUser(request, response);
+      } else if (request.query?.action === "LOGIN") {
+        return await login(request, response);
+      } else if (request.query?.action === "GET_ALL_USERS") {
+        return await getAllUsers(request, response);
+      } else if (request.query?.action === "GET_USER") {
+        return await getUser(request, response);
+      } else if (request.query?.action === "DELETE_USER") {
+        return await deleteUser(request, response);
+      } else if (request.query?.action === "RESET_PWD") {
+        return await reset(request, response);
+      }
 
     case "updatepassword":
       return await updatePwd(request, response);
@@ -44,14 +34,8 @@ export default async function handler(
     default:
       return response
         .status(404)
-        .json({ message: "No Action Found For : " + action });
+        .json({ message: "No Action Found For : " + request.method });
   }
-}
-
-export async function demo(req: NextApiRequest, res: NextApiResponse) {
-  const user = await db.collection("demo");
-  const response = await user.insertOne(req.body);
-  return res.status(200).json({ data: response });
 }
 
 export async function createUser(
@@ -70,7 +54,6 @@ export async function createUser(
       },
     ],
   });
-
   if (checkDetails) {
     return response
       .status(400)
@@ -89,12 +72,22 @@ export async function getUser(
   const res = await user.findOne({ firstName: request.body.firstName });
   return response.status(200).json({ data: res });
 }
+
+export async function getAllUsers(
+  request: NextApiRequest,
+  response: NextApiResponse
+) {
+  const user = await db.collection(USER_COLLECTION);
+  const res = await user.find({}).toArray();
+  return response.status(200).json({ data: res });
+}
+
 export async function deleteUser(
   request: NextApiRequest,
   response: NextApiResponse
 ) {
   const user = await db.collection(USER_COLLECTION);
-  const res = await user.DELETE({});
+  const res = await user.deleteOne({ _id: new ObjectId(request.body.id) });
   return response.status(200).json({ data: res });
 }
 
@@ -112,13 +105,10 @@ export async function login(
     password: request.body.password,
   });
   console.log(":::::::::::::::::::>", res);
-  if (res.rollType === 1) {
-    console.log("admin");
-  }
   if (res === null) {
-    return response
-      .status(401)
-      .json({ data: "Email id is not registered. Please Sign up." });
+    return response.status(401).json({
+      data: "Email id is not registered. Please Sign up Or Password Is Incorrect.",
+    });
   } else {
     console.log("res in auth.ts", res);
     return response.status(200).json({ data: res });

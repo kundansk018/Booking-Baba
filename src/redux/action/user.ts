@@ -8,8 +8,6 @@ import {
   REQUEST_COMPLETED,
   RESET_REQUEST_FAIL,
   RESET_REQUEST_SUCCESS,
-  PASSWORD_UPDATE_FAIL,
-  PASSWORD_UPDATE,
 } from "../constant";
 import { AppDispatch } from "../store";
 import { getEmailId, loginDetails, updatePwd } from "@/service/services";
@@ -18,17 +16,14 @@ export const signup = (data: any) => async (dispatch: AppDispatch) => {
   console.log("data in action: ", data);
   dispatch({ type: REQUEST_STARTED, payload: null });
 
-  const res = await fetch(
-    "http://localhost:3000/api/user/auth?action=createUser",
-    {
-      method: "POST",
+  const res = await fetch("http://localhost:3000/api/user/auth?action=SIGNUP", {
+    method: "POST",
 
-      body: JSON.stringify(data),
-      headers: {
-        "content-type": "application/json",
-      },
-    }
-  );
+    body: JSON.stringify(data),
+    headers: {
+      "content-type": "application/json",
+    },
+  });
   if (res.ok === true) {
     console.log("inside if:::::::::", res);
 
@@ -46,27 +41,22 @@ export const signup = (data: any) => async (dispatch: AppDispatch) => {
 
 export const login = (data: any) => async (dispatch: AppDispatch) => {
   console.log("data in action LOGIN: ", data);
-  dispatch({ type: REQUEST_STARTED, payload: null });
+  try {
+    dispatch({ type: REQUEST_STARTED, payload: null });
 
-  //api call
-  // const res = await fetch("http://localhost:3000/api/user/auth?action=LOGIN", {
-  //   method: "POST",
+    const res = await loginDetails(data);
 
-  //   body: JSON.stringify(data),
-  //   headers: {
-  //     "content-type": "application/json",
-  //   },
-  // });
-
-  const res = await loginDetails(data);
-
-  if (res && res.status === 200) {
-    console.log("inside if:::::::::", res);
-    dispatch({ type: LOGIN_REQUEST_SUCCESS, payload: res });
-  } else {
-    console.log("inside else:::::::::", res);
-    alert("Email Not Registered. Please Sign Up or incorrect password...");
-    dispatch({ type: LOGIN_REQUEST_FAIL, payload: null });
+    if (res && res.status === 200) {
+      console.log("inside if:::::::::", res);
+      dispatch({ type: LOGIN_REQUEST_SUCCESS, payload: res });
+    } else {
+      console.log("inside else:::::::::", res);
+      alert("Email Not Registered. Please Sign Up or incorrect password...");
+      dispatch({ type: LOGIN_REQUEST_FAIL, payload: null });
+    }
+  } catch (error) {
+    console.log(error);
+    alert("Email Not Registered. Please Sign Up ...");
   }
   dispatch({ type: REQUEST_COMPLETED, payload: null });
 

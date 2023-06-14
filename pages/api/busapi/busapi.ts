@@ -10,42 +10,26 @@ export default async function handler(
 ) {
   db = await getDB();
 
-  const {
-
-    query: { action: action },
-  } = request;
-
-  switch (action) {
-    case "ADD_BUS":
-      return await addBus(request, response);
-
-
-    case "UPDATE_BUS":
-      return await updateBus(request, response);
-
-    case "DELETE_BUS":
-      return await deleteBus(request, response);
-
-    case "GET_ALL_BUSES":
-      return await getAllBuses(request, response);
-
-
-    case "SEARCH":
-      return await search(request, response);
-
-
-
-    // case "GET_BUS":
-    //   return await getBus(request, response);
-
-
-    case "GET_BUS_BY_ID":
-      return await getBusById(request, response);
+  switch (request.method) {
+    case "POST":
+      if (request.query?.action === "ADD_BUS") {
+        return await addBus(request, response);
+      } else if (request.query?.action === "UPDATE_BUS") {
+        return await updateBus(request, response);
+      } else if (request.query?.action === "DELETE_BUS") {
+        return await deleteBus(request, response);
+      } else if (request.query?.action === "GET_ALL_BUSES") {
+        return await getAllBuses(request, response);
+      } else if (request.query?.action === "SEARCH_BUS") {
+        return await search(request, response);
+      } else if (request.query?.action === "GET_BUS_BY_ID") {
+        return await getBusById(request, response);
+      }
 
     default:
       return response
         .status(404)
-        .json({ message: "No Action Found For : " + action });
+        .json({ message: "No Action Found For : " + request.method });
   }
 }
 
@@ -58,7 +42,6 @@ export async function addBus(
   return response.status(200).json({ data: res });
 }
 
-
 export async function search(
   request: NextApiRequest,
   response: NextApiResponse
@@ -68,7 +51,6 @@ export async function search(
   const res = await buses.find({ from, to }).toArray();
   return response.status(200).json({ data: res });
 }
-
 
 export async function updateBus(
   request: NextApiRequest,
@@ -97,7 +79,6 @@ export async function updateBus(
         noofstop: request.body.noofstop,
         bookingseats: request.body.bookingseats,
         travelagencyname: request.body.travelagencyname,
-
       },
     }
   );
@@ -114,7 +95,6 @@ export async function deleteBus(
   });
   return response.status(200).json({ data: res });
 }
-
 
 export async function getBus(
   request: NextApiRequest,
@@ -154,9 +134,7 @@ export async function getBus(
   }
 }
 
-
 export async function getAllBuses(
-
   request: NextApiRequest,
   response: NextApiResponse
 ) {
@@ -194,7 +172,10 @@ export async function getAllBuses(
   }
 }
 
-export async function getBusById(request: NextApiRequest, response: NextApiResponse) {
+export async function getBusById(
+  request: NextApiRequest,
+  response: NextApiResponse
+) {
   const bus = await db.collection("Bus Details");
   const res = await bus.findOne({ _id: new ObjectId(request.body._id) });
   return response.status(200).json({ data: res });

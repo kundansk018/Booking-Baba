@@ -24,7 +24,7 @@ const Container = (props: ContainerProps) => {
         <Navigationbar />
       )}
 
-      {/* {!["/auth", "/"]?.includes(pathname) && <Navigationbar />}  */}
+      {/* {!["/auth", "/"]?.includes(pathname) && <Navigationbar />} */}
       {props.children}
       <>
         {loading ? (

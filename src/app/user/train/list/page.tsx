@@ -20,12 +20,14 @@ import { Pagination, Tooltip } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { deleteTrain } from "../../../../../pages/api/trainApi/trainApi";
 import BBButton from "@/app/components/BBButton";
+import { useRouter } from "next/navigation";
 
 export default function page() {
   const trainData: any = useSelector(
     (state: any) => state.train.userTrainDetails
   );
   console.log("Train data is in update page ..", trainData);
+  const router = useRouter();
 
   return (
     <div className="tracking-wide	">
@@ -80,7 +82,7 @@ export default function page() {
                     <td className="w-[5px]  p-2">
                       <BBButton
                         label="Book Ticket"
-                        onClick={console.log}
+                        onClick={() => router.push("/user/train/ticket")}
                         size="sm"
                         className=""
                         color=""

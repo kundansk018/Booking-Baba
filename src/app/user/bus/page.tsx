@@ -5,7 +5,6 @@ import BBInput from "@/app/components/BBInput";
 import { getBusBySearch } from "@/redux/action/busaction";
 import { useAppDispatch } from "@/redux/store";
 import { useRouter } from "next/navigation";
-
 import Select from "react-select";
 import React from "react";
 import { useState } from "react";
@@ -34,17 +33,17 @@ export default function BookBus() {
   }
   const options = [
     { value: "Nashik", label: "Nashik" },
-    { value: "Pune ", label: "Mumbai" },
-    { value: "Mumbai", label: "Pune" },
+    { value: "Pune", label: "Pune" },
+    { value: "Mumbai", label: "Mumbai" },
   ];
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
     if (from || to) {
       let data = { from: from.value, to: to.value };
-      alert("hhhhhhhhh");
-      dispatch(getBusBySearch(data));
-      router.push("/user/bus/list");
+      dispatch(getBusBySearch(data)).then(() => {
+        router.push("/user/bus/list");
+      });
     }
   };
 

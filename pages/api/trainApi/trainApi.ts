@@ -10,36 +10,26 @@ export default async function handler(
 ) {
   db = await getDB();
 
-  const {
-    body,
-    query: { action: action },
-    method,
-    headers,
-  } = request;
-
-  switch (action) {
-    case "ADD_TRAIN":
-      return await addTrain(request, response);
-
-    case "UPDATE_TRAIN":
-      return await updateTrain(request, response);
-
-    case "DELETE_TRAIN":
-      return await deleteTrain(request, response);
-
-    case "GET_TRAINS":
-      return await getTrains(request, response);
-
-    case "GET_TRAIN_BY_ID":
-      return await getTrainById(request, response);
-
-    case "SEARCH_TRAINS":
-      return await searchTrains(request, response);
+  switch (request.method) {
+    case "POST":
+      if (request.query?.action === "ADD_TRAIN") {
+        return await addTrain(request, response);
+      } else if (request.query?.action === "UPDATE_TRAIN") {
+        return await updateTrain(request, response);
+      } else if (request.query?.action === "DELETE_TRAIN") {
+        return await deleteTrain(request, response);
+      } else if (request.query?.action === "GET_TRAINS") {
+        return await getTrains(request, response);
+      } else if (request.query?.action === "GET_TRAIN_BY_ID") {
+        return await getTrainById(request, response);
+      } else if (request.query?.action === "SEARCH_TRAINS") {
+        return await searchTrains(request, response);
+      }
 
     default:
       return response
         .status(404)
-        .json({ message: "No Action Found For : " + action });
+        .json({ message: "No Action Found For : " + request.method });
   }
 }
 
@@ -148,18 +138,17 @@ export async function searchTrains(
   request: NextApiRequest,
   response: NextApiResponse
 ) {
-  const { from_Stn, to_Stn } = request.body;
   const trains = await db.collection("Train Details");
   const res = await trains
     .find({
-      // $or: [
-      //   {
-      from_Stn,
-      // },
-      // {
-      to_Stn,
-      //   },
-      // ],
+      $and: [
+        {
+          from_Stn: { $regex: request.body.from_Stn, $options: "i" },
+        },
+        {
+          to_Stn: { $regex: request.body.to_Stn, $options: "i" },
+        },
+      ],
     })
     .toArray();
   return response.status(200).json({ data: res });
