@@ -1,9 +1,14 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import getDB from "../connection";
 import { ObjectId } from "mongodb";
+import { FormidableError, parseForm } from "../../lib/parse-form";
 
 let db: any = undefined;
-
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+};
 export default async function handler(
   request: NextApiRequest,
   response: NextApiResponse
@@ -37,9 +42,31 @@ export async function addTrain(
   request: NextApiRequest,
   response: NextApiResponse
 ) {
-  const trains = await db.collection("Train Details");
-  const res = await trains.insertOne(request.body);
-  return response.status(200).json({ data: res });
+  try {
+    const { fields, files } = await parseForm(request);
+
+    const file = files?.trainImage;
+
+    let url = Array.isArray(file)
+      ? file.map((f) => f.newFilename)
+      : file.newFilename;
+    fields.imageUrl = url;
+    const trains = await db.collection("Train Details");
+    const res = await trains.insertOne(fields);
+
+    return response.status(200).json({ data: res, error: null });
+  } catch (e) {
+    if (e instanceof FormidableError) {
+      return response
+        .status(e.httpCode || 400)
+        .json({ data: null, error: e.message });
+    } else {
+      console.error(e);
+      return response
+        .status(500)
+        .json({ data: null, error: "Internal Server Error" });
+    }
+  }
 }
 
 export async function updateTrain(
@@ -50,7 +77,6 @@ export async function updateTrain(
   const res = await buses.updateOne(
     { _id: new ObjectId(request.body._id) },
     {
-      // $set: request.body.data,
       $set: {
         trainNo: request.body.trainNo,
         trainName: request.body.trainName,
@@ -91,31 +117,31 @@ export async function getTrains(
   request: NextApiRequest,
   response: NextApiResponse
 ) {
-  const page: number = parseInt(request.body.page as string) || 1;
-  //console.log("page Number", request.body.page);
-  const itemsPerPage: number = 3;
+  // const page: number = parseInt(request.body.page as string) || 1;
+  // //console.log("page Number", request.body.page);
+  // const itemsPerPage: number = 3;
 
   try {
-    const startIndex: number = (page - 1) * itemsPerPage;
+    // const startIndex: number = (page - 1) * itemsPerPage;
 
-    const endIndex: number = startIndex + itemsPerPage;
+    // const endIndex: number = startIndex + itemsPerPage;
 
     const items = await db
       .collection("Train Details")
       .find()
-      .skip(startIndex)
-      .limit(itemsPerPage)
+      // .skip(startIndex)
+      // .limit(itemsPerPage)
       .toArray();
 
     const totalItems: number = await db
       .collection("Train Details")
       .countDocuments();
 
-    const totalPages: number = Math.ceil(totalItems / itemsPerPage);
+    // const totalPages: number = Math.ceil(totalItems / itemsPerPage);
 
     response.status(200).json({
-      page,
-      totalPages,
+      // page,
+      // totalPages,
       totalItems,
       items,
     });

@@ -21,15 +21,26 @@ import h1 from "../images/hotel/h1.jpg";
 import bus1 from "../images/Buses/bus1.png";
 import rail from "../images/Trains/rail.jpg";
 import Navigationbar from "./components/Navbar";
+import { useSelector } from "react-redux";
 
 export default function Home() {
+  const userData: any = useSelector((state: any) => state.login.loginDetails);
+  console.log("8080 Page ..", userData);
+  console.log("8080 page Roll Type is ..", userData?.data.data.rollType);
+  let rollType = userData?.data.data.rollType;
   const router = useRouter();
 
   useEffect(() => {
-    setTimeout(() => {
-      router.push("/auth");
-    }, 100000);
-  });
+    if (rollType === 1) {
+      router.push("/dashboard");
+    } else if (rollType === 2) {
+      router.push("/user");
+    } else {
+      setTimeout(() => {
+        router.push("/auth");
+      }, 10000);
+    }
+  }, [userData]);
 
   return (
     <div className="">

@@ -1,8 +1,8 @@
 import { Checkbox, Typography } from "@material-tailwind/react";
 import React, { useEffect, useState } from "react";
-import BBInput from "../components/BBInput";
-import BBButton from "../components/BBButton";
-import BBErrorDialog from "../components/BBErrorDialog";
+import BBInput from "../app/components/BBInput";
+import BBButton from "../app/components/BBButton";
+import BBErrorDialog from "../app/components/BBErrorDialog";
 import { useAppDispatch } from "@/redux/store";
 import { login } from "@/redux/action/user";
 import { useSelector } from "react-redux";
@@ -21,32 +21,16 @@ export default function Login() {
   const rollType = userData?.data.data.rollType;
   const router: any = useRouter();
 
-  // useEffect(() => {
-  //   sample();
-  // }, []);
-
-  // const sample = () => {
-  //   if (userData) {
-  //     if (rollType === 1) {
-  //       console.log("called  if ");
-
-  //       router.push("/");
-  //     }
-  //     if (rollType != 1) {
-  //       console.log("called else if ");
-  //       router.push("/user");
-  //     }
-  //   }
-  // };
+  
 
   useEffect(() => {
     if (userData) {
       if (rollType === 1) {
         console.log("called  if ");
 
-        router.push("/");
+        router.push("/dashboard");
       }
-      if (rollType != 1) {
+     else if (rollType != 1) {
         console.log("called else if ");
         router.push("/user");
       }

@@ -12,6 +12,7 @@ interface IPropsDelete {
 }
 
 export const loginDetails = (data: any) => {
+  console.log("service in login details...");
   let url = `${ENDPOINTS.loginDetails}`;
   return client.post(url, data, headers);
 };
@@ -110,12 +111,12 @@ export const busSearch = (data: any) => {
   return client.post(url, data, headers);
 };
 
-export const searchHotel=(hotelname:any) =>{
-  let url=`${ENDPOINTS.searchHotel}`;
-  return client.post(url,hotelname,headers);
-}
+export const searchHotel = (hotelname: any) => {
+  let url = `${ENDPOINTS.searchHotel}`;
+  return client.post(url, hotelname, headers);
+};
 
-export const sortHotelBy=(data:any)=>{
-  let url=`${ENDPOINTS.sortHotelBy}`
-  return client.post(url,data,headers);
-}
+export const sortHotelBy = (data: any) => {
+  let url = `${ENDPOINTS.sortHotelBy}`;
+  return client.post(url, data, headers);
+};

@@ -37,6 +37,18 @@ export default function BookBus() {
     { value: "Mumbai", label: "Mumbai" },
   ];
 
+  const routeData = [
+    { value: "Nashik", label: "Nashik" },
+    { value: "Sinnar", label: "Sinnar" },
+    { value: "Sangamner", label: "Sangamner" },
+    { value: "Ghargaon", label: "Ghargaon" },
+    { value: "Alephata", label: "Alephata" },
+    { value: "Narayangaon", label: "Narayangaon" },
+    { value: "Manchar", label: "Manchar" },
+    { value: "Rajgurunagar", label: "Rajgurunagar" },
+    { value: "Nashik Phata", label: "Nashik Phata" },
+    { value: "Pune", label: "Pune" },
+  ];
   const handleSubmit = (e: any) => {
     e.preventDefault();
     if (from || to) {
@@ -47,6 +59,13 @@ export default function BookBus() {
     }
   };
 
+  const handleChangeFrom = (e: any) => {
+    console.log("from value is ", e.target.value);
+  };
+
+  const handleChangeTo = (e: any) => {
+    console.log("from value is ", e.target.value);
+  };
   return (
     <div className="card pt-2 pr-96 pl-96 ">
       <div className="card width-[50%] bg-white flex flex-col items-center justify-center h-[500px] ">
@@ -59,7 +78,7 @@ export default function BookBus() {
           <div className="mr-2   flex gap-5">
             <div className="dropdown-container ml-2 flex-1">
               <Select
-                options={options}
+                options={routeData}
                 value={from}
                 onChange={(value: any) => setFrom(value)}
                 isSearchable={true}
@@ -68,7 +87,7 @@ export default function BookBus() {
             </div>
             <div className="dropdown-container ml-2 flex-1">
               <Select
-                options={options}
+                options={routeData}
                 value={to}
                 onChange={(value: any) => setTo(value)}
                 isSearchable={true}

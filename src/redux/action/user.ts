@@ -25,12 +25,14 @@ export const signup = (data: any) => async (dispatch: AppDispatch) => {
     },
   });
   if (res.ok === true) {
-    console.log("inside if:::::::::", res);
+    console.log("inside if sign up api in user.ts page :::::::::>>>", res);
 
-    dispatch({ type: SIGNUP_REQUEST_SUCCESS, payload: data });
+   
+    dispatch({ type: SIGNUP_REQUEST_SUCCESS, payload: {success:true,message:"Registeration done"} });
+    
   } else {
     alert("Email is already Registered. Please log in...");
-    dispatch({ type: SIGNUP_REQUEST_FAIL, payload: null });
+    dispatch({ type: SIGNUP_REQUEST_FAIL, payload: {success:false,message:"Registeration failed"} });
   }
 
   dispatch({ type: REQUEST_COMPLETED, payload: null });

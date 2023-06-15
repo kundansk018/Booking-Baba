@@ -140,11 +140,12 @@ export default function Train() {
               ? trainData?.items?.map((element: any) => (
                   <tr key={element._id}>
                     <td className="w-[5px] p-2">
-                      <Avatar
+                      {/* <Avatar
                         src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4Rb78i6mV3XF1VxsVX_f6FvUggBNCIw4-xw&usqp=CAU"
                         alt="imagee"
                         size="md"
-                      />
+                      /> */}
+                      {element.imageUrl}
                     </td>
                     <td className="w-[5px]  p-2">{element.trainNo}</td>
                     <td className="w-[5px]  p-2">{element.trainName}</td>

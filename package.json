@@ -20,6 +20,7 @@
     "eslint": "8.41.0",
     "eslint-config-next": "13.4.3",
     "formidable": "^2.1.1",
+    "mime": "^3.0.0",
     "mongodb": "^5.5.0",
     "multiselect-react-dropdown": "^2.0.25",
     "mv": "^2.1.1",
@@ -42,6 +43,7 @@
   },
   "devDependencies": {
     "@types/formidable": "^2.0.6",
+    "@types/mime": "^3.0.1",
     "@types/react-datepicker": "^4.11.2",
     "@types/uuid": "^9.0.1",
     "@types/validator": "^13.7.17"

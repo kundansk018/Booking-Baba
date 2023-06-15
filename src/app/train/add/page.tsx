@@ -28,78 +28,79 @@ export default function AddTrain() {
   const [operationDays, setOperationDays] = useState<string>("");
   const [trainRoute, setTrainRoute] = useState<string>("");
   const [trainDesc, setTrainDesc] = useState<string>("");
-  const [trainImage, setTrainImage] = useState<string>("");
+  const [trainImage, setTrainImage] = useState<any>();
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
 
   const dispatch = useAppDispatch();
   const [errorDialogMessage, setErrorDialogMessage] = useState([]);
   const [showErrorDialog, setShowErrorDialog] = useState(false);
   const router = useRouter();
 
-  //name type adress location  services wifi dinner kunch swiimmingparling gym kids
-  const trainData: any = useSelector((state: any) => state.train.trainDetails);
-  console.log("Train data is ..", trainData);
 
-  // useEffect(() => {
-  //   if (trainData) {
-  //     router.push("/train");
-  //   }
-  // }, [trainData]);
 
-  const addTrainDetails = () => {
-    let data = {
-      trainNo: trainNo,
-      trainName: trainName,
-      from_Stn: from_Stn,
-      to_Stn: to_Stn,
-      depTime: depTime,
-      arrivalTime: arrivalTime,
-      fare: fare,
-      seats: seats,
-      coach: coach,
-      duration: duration,
-      classType: classType,
-      trainType: trainType,
-      operationDays: operationDays,
-      trainRoute: trainRoute,
-      trainDesc: trainDesc,
-      trainImage: trainImage,
-    };
-
-    let isErrorFound = false;
-    let error: any = [];
-    if (!trainName || !trainName.trim()) {
-      isErrorFound = true;
-      error.push("Please enter Train Name");
-    }
-
-    if (!arrivalTime || !arrivalTime.trim()) {
-      isErrorFound = true;
-      error.push("Please enter valid Arrival Time");
-    }
-
-    if (!depTime || !depTime.trim()) {
-      isErrorFound = true;
-      error.push("Please enter valid Departure Time");
-    }
-    if (!from_Stn || !from_Stn.trim()) {
-      isErrorFound = true;
-      error.push("Please enter valid station Name");
-    }
-    if (!to_Stn || !to_Stn.trim()) {
-      isErrorFound = true;
-      error.push("Please enter valid station Name");
-    }
-    if (!seats || !seats.trim()) {
-      isErrorFound = true;
-      error.push("Please enter Seats");
-    }
-    if (isErrorFound) {
-      setErrorDialogMessage(error);
-      setShowErrorDialog(true);
+  const onFileUploadChange = (e: any) => {
+    const fileInput = e?.target;
+    
+   
+    if (!fileInput.files) {
+      alert("No file was chosen");
       return;
-    } else {
-      dispatch(addTrain(data));
-      router.push("/train");
+    }
+
+    const trainImage = fileInput.files[0];
+
+    setTrainImage(trainImage);
+    setPreviewUrl(URL.createObjectURL(trainImage));
+  };
+
+  const onUploadFile = async (e: any) => {
+    e.preventDefault();
+
+    if (!trainImage) {
+      return;
+    }
+    try {
+      var formData = new FormData();
+
+      formData.append("trainNo", trainNo);
+      formData.append("trainName", trainName);
+      formData.append("from_Stn", from_Stn);
+      formData.append("to_Stn", to_Stn);
+      formData.append("fare", fare);
+      formData.append("seats", seats);
+      formData.append("coach", coach);
+      formData.append("depTime", depTime);
+      formData.append("arrivalTime", arrivalTime);
+      formData.append("duration", duration);
+      formData.append("classType", classType);
+      formData.append("operationDays", operationDays);
+      formData.append("trainRoute", trainRoute);
+      formData.append("trainDesc", trainDesc);
+      formData.append("trainImage", trainImage);
+
+      console.log("formData>>>>>>>>>>>", formData);
+
+      const res = await fetch("/api/trainApi/trainApi?action=ADD_TRAIN", {
+        method: "POST",
+        body: formData,
+      });
+      console.log("response>>>>>>>>>>>>>>", res);
+
+      const {
+        data,
+        error,
+      }: { data: { url: string | string[] } | null; error: string | null } =
+        await res.json();
+
+      if (error || !data) {
+        alert(error || "Sorry! something went wrong.");
+        return;
+      }
+
+      console.log("File was uploaded successfylly:", data);
+    } catch (error) {
+      console.error(error);
+      alert("Sorry! something went wrong inside catch");
     }
   };
 
@@ -222,8 +223,18 @@ export default function AddTrain() {
               containerProps={{ className: "mb-4" }}
               type="file"
               label="Train Image"
-              value={trainImage}
-              onChange={(e) => setTrainImage(e.target.value)}
+              // value="kjjjjs"
+              // onChange={(e) => setTrainImage(e.target.files[0])}
+              // onChange={() => {}}
+              onChange={
+                (e) => onFileUploadChange(e)
+
+                // {
+                //   if (e.target.files) {
+                //     setTrainImage(e.target.files[0]);
+                //   }
+                // }
+              }
             />
           </div>
 
@@ -297,7 +308,7 @@ export default function AddTrain() {
             color=""
             label="ADD "
             size="lg"
-            onClick={addTrainDetails}
+            onClick={(e) => onUploadFile(e)}
             className="h-12 bg-blackblue hover:bg-GreenBlue w-[500px] "
           />
         </div>

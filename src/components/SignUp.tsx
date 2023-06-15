@@ -1,13 +1,13 @@
 "use-client";
 import React, { useEffect, useState } from "react";
-import BBInput from "../components/BBInput";
+import BBInput from "../app/components/BBInput";
 
 import { Radio } from "@material-tailwind/react";
-import BBTypography from "../components/BBTypography";
-import BBButton from "../components/BBButton";
-import BBErrorDialog from "../components/BBErrorDialog";
+import BBTypography from "../app/components/BBTypography";
+import BBButton from "../app/components/BBButton";
+import BBErrorDialog from "../app/components/BBErrorDialog";
 import { useAppDispatch } from "@/redux/store";
-import { signup } from "@/redux/action/user";
+import { login, signup } from "@/redux/action/user";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
 
@@ -29,14 +29,39 @@ function SignUp() {
 
   const router = useRouter();
 
-  const userData: any = useSelector((state: any) => state.user.createdUser);
-  console.log("userData is ..", userData);
+  const signupStatus: any = useSelector((state: any) => state.user.createdUser);
+  console.log("signupStatus ..", signupStatus);
+  // console.log("Roll Type is ..", userData?.rollType);
+  // const rollType = userData?.rollType;
+
+  const userData: any = useSelector((state: any) => state.login.loginDetails);
+  console.log("userData in sign up page ..", userData);
+  console.log("Roll Type in sign up pagee ..", userData?.data.data.rollType);
+  const rollType = userData?.data.data.rollType;
+
+  // useEffect(() => {
+  //   if (userData) {
+  //     console.log("use effect inside ", userData);
+  //     router.push("/auth");
+  //   }
+  // }, [userData]);
 
   useEffect(() => {
-    if (userData) {
-      router.push("/dashboard");
+    if (signupStatus) {
+      if (signupStatus.success === true) {
+        //call login api
+        let data: any = {
+          email: email,
+          password: password,
+        };
+        console.log("data is signup email and pass >>>>>>>>>>>>>>", data);
+
+        dispatch(login(data));
+      } else {
+        console.log("inside else error  ");
+      }
     }
-  }, [userData]);
+  }, [signupStatus]);
 
   const signUpCredential = () => {
     let data = {
@@ -48,10 +73,8 @@ function SignUp() {
       email: email,
       password: password,
     };
-    dispatch(signup(data));
     let isErrorFound = false;
     let error: any = [];
-    dispatch(signup(data));
     if (!firstName || !firstName.trim()) {
       isErrorFound = true;
       error.push("Please enter first name");
@@ -106,16 +129,8 @@ function SignUp() {
 
   return (
     <>
-      <form className="font-signika mt-0 flex flex-col gap-3">
-        <div>
-          <BBTypography
-            variant="small"
-            color="blue-gray"
-            className=" font-medium"
-            text="Personal Details"
-          />
-        </div>
-        <div className="flex items-center gap-2">
+      <form className="font-signika mt-0 flex flex-col gap-2 ">
+        <div className="flex items-center gap-2 mt-2">
           <BBInput
             label="First Name"
             containerProps={{ className: "min-w-[30px]" }}
@@ -200,7 +215,7 @@ function SignUp() {
           label="Sign Up"
           size="lg"
           onClick={signUpCredential}
-          className="relative h-12 bg-blackblue"
+          className="relative h-12 bg-blackblue hover:bg-GreenBlue"
         />
       </form>
       <BBErrorDialog
@@ -213,4 +228,4 @@ function SignUp() {
   );
 }
 
-export default SignUp
+export default SignUp;

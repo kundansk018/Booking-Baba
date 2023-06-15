@@ -16,7 +16,7 @@ export default function page() {
     }
   };
 
-  let nameData: any = { name: "Sanket" };
+  // let nameData: any = { name: "Sanket" };
 
   let imgData: any = image;
 
@@ -50,13 +50,20 @@ export default function page() {
   return (
     <>
       <div className="px-10 flex justify-center f-column items-center h-[400] w-[100%]">
-        <input
-          style={{ marginTop: 200, marginBottom: 100, display: "block" }}
-          type="file"
-          onChange={uploadToClient}
-        />
-        <Button onClick={uploadToServer}> Upload </Button>
-        {extension === "mp4" ? (
+        <div>
+          <input
+            style={{ 
+              // marginTop: 200, marginBottom: 100,
+              //  display: "block" 
+              }}
+            type="file"
+            onChange={uploadToClient}
+          />
+        </div>
+        <div>
+          <Button onClick={uploadToServer}> Upload </Button>
+        </div>
+        {/* {extension === "mp4" ? (
           <video src={image}></video>
         ) : (
           <img
@@ -64,10 +71,8 @@ export default function page() {
             src={createObjectURL}
             alt="No Image"
           />
-        )}
+        )} */}
       </div>
-
-    
     </>
   );
 }

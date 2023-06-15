@@ -27,7 +27,7 @@ export const UserReducer = (state = initialState, action: any) => {
     //   };
 
     case SIGNUP_REQUEST_SUCCESS: {
-      console.log("data in typereducer: ", action.payload);
+      // console.log("data in typereducer: ", action.payload);
       return {
         ...state,
         loading: false,
@@ -67,12 +67,6 @@ export const UserReducer = (state = initialState, action: any) => {
 
 export const LoginReducer = (state = initialState, action: any) => {
   switch (action.type) {
-    // case LOGIN_REQUEST:
-    //   return {
-    //     ...state,
-    //     loading: true,
-    //   };
-
     case LOGIN_REQUEST_SUCCESS: {
       console.log("LOGIN data in typereducer: ", action.payload);
       return {

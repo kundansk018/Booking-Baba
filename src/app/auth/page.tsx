@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 
 import {
   Card,
@@ -14,13 +14,25 @@ import {
   Avatar,
 } from "@material-tailwind/react";
 
-// import { BanknotesIcon } from "@heroicons/react/24/solid";
-
-import SignUp from "./SignUp";
-import Login from "./Login";
+import SignUp from "../../components/SignUp";
+import Login from "../../components/Login";
+import { useSelector } from "react-redux";
+import { useRouter } from "next/navigation";
 
 export default function page() {
-  const [type, setType] = React.useState("signup");
+  const router = useRouter();
+
+  const [type, setType] = React.useState("login");
+
+  // const userData: any = useSelector((state: any) => state.user.createdUser);
+  // console.log("userData is in auth page ..", userData);
+
+  // useEffect(() => {
+  //   if (userData) {
+  //     console.log("use effect inside ", userData);
+  //     setType("login");
+  //   }
+  // }, [userData]);
 
   return (
     <div className="flex justify-center items-center py-[30px]">

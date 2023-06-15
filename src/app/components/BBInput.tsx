@@ -3,7 +3,7 @@ import React from "react";
 
 interface Props {
   label: string;
-  value: string;
+  value?: string;
   type?: string;
   className?: string;
   onChange: (e: any) => void; // for function type
