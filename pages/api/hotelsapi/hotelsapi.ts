@@ -22,7 +22,11 @@ export default async function handler(
         return await getHotelById(request, response);
       } else if (request.query?.action === "deleteHotel") {
         return await deleteHotelById(request, response);
-      }
+      }else if(request.query?.action==="searchByHotel"){
+      return await serachByName(request,response);
+    }else if(request.query?.action==="sort"){
+      return await sortHotelBy(request,response);
+    }
 
     default:
       return response

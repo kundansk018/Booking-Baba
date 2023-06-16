@@ -18,7 +18,7 @@ export default function UserHotelPage() {
     const [name, setName] = useState("")
     const [no, setNo] = useState("")
     const [uemail, setUEmail] = useState("")
-    const[sort ,setSort]=useState("")
+    const [sort, setSort] = useState("")
 
     const hotelData: any = useSelector((state: any) => state.hotel.hotelDetails);
     const dispatch = useAppDispatch();
@@ -27,7 +27,7 @@ export default function UserHotelPage() {
         dispatch(getHotels());
 
     }, [])
-    debugger
+
     const router = useRouter()
 
 
@@ -57,62 +57,78 @@ export default function UserHotelPage() {
         dispatch(searchHotelByName(searchKey));
     }
 
- const datasort=[
-    {label:"Low to High",value:"Low to High"},
-    {label:"High to Low",value:"Low to High"},
+    useEffect(() => {
+        if (searchKey == "") {
+            dispatch(getHotels());
+        }
 
- ]
- useEffect(()=>{
-  dispatch(sortHotel(sort));
- },[sort])
+
+    }, [searchKey])
+
+
+
+
+    const datasort = [
+        { label: "No Sort", value: "Select" },
+        { label: "Low to High", value: "Low to High" },
+        { label: "High to Low", value: "Low to High" },
+
+    ]
+
+    useEffect(() => {
+        if (sort == "Select") {
+            dispatch(getHotels());
+        }
+        dispatch(sortHotel(sort));
+    }, [sort])
 
     return (
         hotelData ?
             <div>
                 <div>
-                <div className='h-[180px]   my-5  border border-gray-500 flex'>
-            <img  src="/image/hotel.jpg"
-              alt="image-blur" />
-            <img src="/image/hotel1.jpg"
-              alt="image-blur" />
-            <img src="/image/hotel2.jpg"
-              alt="image-blur" />
-            <img  src="/image/hotel.jpg"
-              alt="image-blur" />
-              <img src="/image/hotel1.jpg"
-              alt="image-blur" />
-          </div>
+                    <div className='h-[180px]   my-5  border border-gray-500 flex'>
+                        <img src="/image/hotel.jpg"
+                            alt="image-blur" />
+                        <img src="/image/hotel1.jpg"
+                            alt="image-blur" />
+                        <img src="/image/hotel2.jpg"
+                            alt="image-blur" />
+                        <img src="/image/hotel.jpg"
+                            alt="image-blur" />
+                        <img src="/image/hotel1.jpg"
+                            alt="image-blur" />
+                    </div>
                 </div>
 
                 <div className='flex justify-between p-3'>
                     <div className='ml-5 '>
-                    <BBDropdown 
-                    label='Sort By'
-                     value={sort} 
-                    options={datasort}
-                    onPress={(value)=>{
-                       
-                 setSort(value)
-                    } } />
-                      </div>
-                
-                  <div className='flex justify-end '>
-                    <div className='mr-2'>
-                        <BBInput label='Select Location' value='pune' onChange={(e)=>{}} />
+                        <BBDropdown
+                            label='Sort By'
+                            value={sort}
+                            options={datasort}
+                            onPress={(value) => {
+                                setSort(value)
+                            }} />
+                    </div>
+
+                    <div className='flex justify-end '>
+                        <div className='mr-2'>
+                            <BBInput label='Select Location' value='pune' onChange={(e) => { }} />
                         </div>
-                    <div className='w-[600px]  '>
-                    <BBInput type='search' label='Search ..' value={searchKey}
-                        onChange={(e) => { setSearchKey(e.target.value) }} />
-                    </div>
-                    <div className=''> 
-                    <Button type='button' className='hover- border rounded-lg 
+                        <div className='w-[600px]  '>
+
+                            <BBInput type='search' label='Search ..' value={searchKey}
+                                onChange={(e) => { setSearchKey(e.target.value) }} />
+                        </div>
+                        <div className=''>
+                            <Button type='button' className='hover- border rounded-lg 
                     bg-[#8075f5] border-gray-500  ml-2 h-10 w-[70px]'
-                        onClick={() => searchByName(searchKey)}>
-                        Search</Button>
-                  </div>
-                 
+                                onClick={() => searchByName(searchKey)}>
+                                Search</Button>
+                        </div>
+
                     </div>
-                    </div>
+                </div>
 
                 <div className=' flex flex-row bg-white mx-3'>
                     <div>
@@ -149,7 +165,7 @@ export default function UserHotelPage() {
                     </div>
                     <div>
                         <div className=' border border-gray-400  mt-4 ml-4 w-[320px]  rounded-lg'>
-                            <div className='text-center mt-3'>  Are you looking for?</div>
+                            <div className='text-center mt-3 text-xl'>  Are you looking for?</div>
 
                             <div className='mx-5'>
                                 <BBInput containerProps={{ className: "mb-4 mt-3" }}
@@ -164,17 +180,17 @@ export default function UserHotelPage() {
 
                         <div className='border border-gray-400  mt-4 ml-4 w-[320px]  rounded-lg'>
                             <div className='ml-4'>
-                            <p className='mb-2'>All Option</p>
-                            <p className='mb-1'> 1 Star Hotels</p>
-                            <p className='mb-1'> 2 Star Hotels</p>
-                            <p className='mb-1'> 3 Star Hotels</p>
-                            <p className='mb-1'> 4 Star Hotels</p>
-                            <p className='mb-1'> 5 Star Hotels</p>
-                            <p className='mb-1'> Rs 500 & Below</p>
-                            <p className='mb-1'> Rs 501 To Rs 1000</p>
-                            <p className='mb-1'> Rs 1001 To Rs 2000</p>
-                            <p className='mb-1'>Rs 2001 To Rs 3000</p>
-                            <p className='mb-5'> Rs 3500 To Rs 4000</p>
+                                <p className='mb-2'>All Option</p>
+                                <p className='mb-1'> 1 Star Hotels</p>
+                                <p className='mb-1'> 2 Star Hotels</p>
+                                <p className='mb-1'> 3 Star Hotels</p>
+                                <p className='mb-1'> 4 Star Hotels</p>
+                                <p className='mb-1'> 5 Star Hotels</p>
+                                <p className='mb-1'> Rs 500 & Below</p>
+                                <p className='mb-1'> Rs 501 To Rs 1000</p>
+                                <p className='mb-1'> Rs 1001 To Rs 2000</p>
+                                <p className='mb-1'>Rs 2001 To Rs 3000</p>
+                                <p className='mb-5'> Rs 3500 To Rs 4000</p>
                             </div>
 
                         </div>

@@ -1,26 +1,38 @@
 'use client'
 
+import BBDropdown from '@/app/components/BBDropdown';
+import BBInput from '@/app/components/BBInput';
 import BBRating from '@/app/components/BBRating'
 import { getHotelById } from '@/redux/action/hotelaction';
 import { useAppDispatch } from '@/redux/store';
 import { CheckIcon, HandThumbUpIcon, HeartIcon, PhoneIcon, ShareIcon, TrashIcon } from '@heroicons/react/24/outline'
 import { ArrowUturnRightIcon, CheckCircleIcon } from '@heroicons/react/24/solid';
-import React, { useEffect } from 'react'
+import { Radio } from '@material-tailwind/react';
+import { useRouter } from 'next/navigation';
+import React, { useEffect, useState } from 'react'
+import { Button } from 'react-bootstrap';
+
 import { useSelector } from 'react-redux';
 
 
 let bed_name = ['Single Bed', 'Double Bed', 'Triple Bed', 'King Bed', 'Queen Bed']
 
 export default function page({ params }: any) {
+  const router = useRouter();
+
+  const [room, setRoom] = useState([])
+  const [roomType, setRoomType] = useState(0)
+  const [isAirCondition, setIsAirCondition] = useState<boolean>(true)
+  const [noofroom, setNoofRoom] = useState("");
+
   const { updateHotelDetails }: any = useSelector((state: any) => state.hotel);
   const dispatch = useAppDispatch();
-  console.log(" data::::::::>>>", updateHotelDetails);
+  // console.log(" data::::::::>>>", updateHotelDetails);
   useEffect(() => {
     dispatch(getHotelById(params.id));
-
   }, [])
 
-  console.log(params)
+  // console.log(params)
   const data = updateHotelDetails?.data
 
   const displayeModeOfPaymnet = (data: any) => {
@@ -33,21 +45,52 @@ export default function page({ params }: any) {
     return name
   }
 
+  const roomtype_list = [
+    { label: 'Single Bed', value: 1 },
+    { label: 'Double Bed', value: 2 },
+    { label: 'Triple Bed', value: 3 },
+    { label: 'King Bed', value: 4 },
+    { label: 'Queen Bed', value: 5 },
+
+  ]
+  const filterRoom = () => {
+    if (isAirCondition == true && roomType > 0) {
+
+      let filterData = data?.rooms.filter((element: any) => element.no_of_bed == roomType && roomType == element.isAC)
+      setRoom(filterData)
+    } else if (isAirCondition == false && roomType > 0) {
+
+      let filterData = data?.rooms.filter((element: any) => element.no_of_bed == roomType && roomType == element.isAC)
+      setRoom(filterData)
+    }
+    else {
+      let filterData = data?.rooms.filter((element: any) => element.no_of_bed == roomType)
+      setRoom(filterData)
+    }
+  }
+
+  const addMore = () => {
+
+  }
+ 
+  const bookNow = () => {
+    router.push('/user/hotels/bookHotel')
+  }
 
   return (
     updateHotelDetails?.data ?
       <div className=''>
         <div className='flex flex-col border border-gray-400 mx-3 my-3 rounded-lg'>
           <div className='h-[180px] w-80 mx-3 my-3  flex'>
-          <img  src="/image/hotel.jpg"
+            <img src="/image/hotel.jpg"
               alt="image-blur" />
-               <img src="/image/hotel2.jpg"
+            <img src="/image/hotel2.jpg"
               alt="image-blur" />
             <img src="/image/hotel.jpg"
               alt="image-blur" />
-           <img  src="/image/hotel2.jpg"
+            <img src="/image/hotel2.jpg"
               alt="image-blur" />
-          
+
           </div>
           <div className='p-1 ml-10 '>
             <div className='flex justify-between'>
@@ -69,7 +112,7 @@ export default function page({ params }: any) {
             </div>
             <p>{data?.email}</p>
 
-            <div className='flex h-8 mt-1 justify-between'>
+            <div className='flex h-8 mt-1 mb-3 justify-between'>
               <div className='flex'>
                 <div className='flex border rounded-md border-gray-400 hover:bg-blue-gray-50 shadow-md p-1 justify-center align-middle '>
                   <PhoneIcon className='h-5 w-6 mr-1' />
@@ -82,7 +125,7 @@ export default function page({ params }: any) {
                 <div className=' shadow-md  ml-5 w-10 border border-gray-400  rounded-md hover:bg-blue-gray-50 p-1'>
                   <HeartIcon className='h-6 w-6 m-auto' /></div>
               </div>
-              <div className=' shadow-md  ml-5 w-60 text-center bg-[#8b5cf6] text-white  rounded-md border border-gray-400  hover:bg-[maroon] p-1'>
+              <div className=' shadow-md h-8 ml-5 w-60 text-center bg-[#8b5cf6] text-white  rounded-md border border-gray-400  hover:bg-[maroon] p-1'>
                 <p>Enquire Now</p>
               </div>
 
@@ -148,11 +191,49 @@ export default function page({ params }: any) {
             <hr />
             <div>
               <div className='text-xl font-semibold mt-3'> Available Rooms</div>
-              {data?.rooms.map((room: any, index: any) => (
+              <div className='flex mt-5 justify-between'>
+                <div className=' w-[300px]'>
+                  <BBDropdown label='Types Of Room Avialable'
+                    value={roomType}
+                    returnType="value"
+                    options={roomtype_list}
+                    onClick={filterRoom}
+                    onPress={(value) => setRoomType(value)}
+                  />
+                </div>
+                <div className='mr-5 flex '>
+                  <p className='text-xl mt-1'>Select Room is -</p>
+                  <Radio
+                    label="AC"
+                    name="isAirCondition"
+                    color="blue"
+                    value={isAirCondition + ""}
+                    onClick={filterRoom}
+                    onChange={(value) => setIsAirCondition(true)}
+                  />
+                  <Radio
+                    label="NON-AC"
+                    name="isAirCondition"
+                    color="blue"
+                    value={isAirCondition + ""}
+                    onClick={filterRoom}
+                    onChange={(value) => setIsAirCondition(false)}
+                  />
+                  {/* <Button type='submit' className='hover- border rounded-lg 
+                    bg-[#8b5cf6] border-gray-500 text-white ml-2 h-8 mt-2 w-[70px]'
+                    onClick={filterRoom}>submit </Button> */}
+                </div>
+              </div>
+
+
+
+              {room.map((room: any, index: any) => (
                 <div className='p-1 ml-6' key={index}>
+
                   <p className='font-medium'> Room Type -{bed_name[room.no_of_bed - 1]}</p>
-                  <p> Price- {room.price}</p>
-                  <p>{room.no_rooms}, Available AC- {room.isAC ? "Yes" : 'No'}</p>
+
+                  <p className='font-medium'> Price- {room.price}  Total Room- {room.no_rooms}</p>
+                  {/* <p>{room.no_rooms}, Available AC- {room.isAC ? "Yes" : 'No'}</p> */}
 
                   <div className='flex justify-between mt-2'>
                     <div>
@@ -195,16 +276,30 @@ export default function page({ params }: any) {
                     </div>
 
                   </div>
+
                   <hr />
+
                 </div>
 
               ))}
+              <div className='flex mt-8 justify-between'>
+                <div className='w-[200px]'>
+                  <BBInput type='number' min={1} max={6} label='No of Room' value={noofroom}
+                    onChange={(e) => setNoofRoom(e.target.value)} />
+                </div>
+                <div className='flex '>
+                  <Button type='submit' className='hover- border rounded-lg 
+                    bg-[#8b5cf6] border-gray-500 text-white w-[200px]  ml-2 '
+                    onClick={addMore}>ADD </Button>
+                </div>
+              </div>
+
               <p></p>
             </div>
           </div>
 
           <div className=''>
-            <div className='border border-gray-400  w-[400px] mx-3 my-3 p-5 rounded-lg'>
+            <div className='border border-gray-400  w-[500px] mx-3 my-3 p-5 rounded-lg'>
               <div className='text-xl font-semibold'> Address</div>
 
               <div className='my-3 leading-8'>
@@ -218,7 +313,7 @@ export default function page({ params }: any) {
               </div>
             </div>
 
-            <div className='border border-gray-400  w-[400px] mx-3 my-3 p-5 rounded-lg'>
+            <div className='border border-gray-400  w-[500px] mx-3 my-3 p-5 rounded-lg'>
               <div className='text-xl font-semibold'> Quick Information</div>
               <div >
                 <div className='text-gray-500 mt-4'>Mode of Payment</div>
@@ -228,15 +323,32 @@ export default function page({ params }: any) {
               </div>
               <div >
                 <div className='text-gray-500 mt-4'>Year of Establishment</div>
-                <p className='mt-3'></p>
+                <p className='mt-3'>{data?.date}</p>
               </div>
+            </div>
+            <div className='border border-gray-400  w-[500px] mx-3 my-3 p-5 rounded-lg'>
+              <div className='text-xl font-semibold'> Room Details</div>
+              <div>
+                <p>Room Type- Single Bed</p>
+                <p>price for single Bed- 1000</p>
+                <p>Total Number Of Room- 2</p>
+              </div>
+              <div className='flex justify-center h-9 mt-8'>
+                <Button type='submit' className='hover- border rounded-lg 
+                    bg-[#8b5cf6] border-gray-500 text-white w-[300px]  ml-2 '
+                  onClick={bookNow}>PROCEED</Button>
+              </div>
+
             </div>
           </div>
 
         </div>
       </div>
       :
-      <p>Data Loading...</p>
+      <div className="grid  place-content-center h-96">
+        <h1>Loading</h1>
+      </div>
+
 
   )
 }
