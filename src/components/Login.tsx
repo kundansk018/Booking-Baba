@@ -48,12 +48,12 @@ export default function Login() {
     console.log("API userData is ..", userData);
     if (!email || !email.trim()) {
       isErrorFound = true;
-      error.push("Please enter valid Email Address");
+      error.push("Valid Email Address");
     }
 
     if (!password || !password.trim()) {
       isErrorFound = true;
-      error.push("Please Enter Password");
+      error.push("Valid Password");
     }
     if (isErrorFound) {
       setErrorDialogMessage(error);
@@ -117,7 +117,7 @@ export default function Login() {
         />
       </form>
       <BBErrorDialog
-        dialogHeader="Error"
+        dialogHeader="Please enter"
         dialogMessage={errorDialogMessage}
         open={showErrorDialog}
         onOkClick={() => setShowErrorDialog(false)}

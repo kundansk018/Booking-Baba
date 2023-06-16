@@ -103,7 +103,9 @@ export default function Navigationbar() {
           href="/"
           className="mr-4 cursor-pointer  font-medium mx-[20] fixed left-5 top-3 "
         >
-          <b className="m-[20] text-2xl" onClick={()=>router.push("/")}>Booking Baba</b>
+          <b className="m-[20] text-2xl" onClick={() => router.push("/")}>
+            Booking Baba
+          </b>
         </Typography>
         <div
           style={{ position: "fixed", right: 28, top: 0 }}

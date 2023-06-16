@@ -2,7 +2,7 @@ import { Button } from "@material-tailwind/react";
 import React from "react";
 
 interface button {
-  label: string;
+  label: any;
   type?: "button" | "submit" | "reset" | undefined;
   onClick?: (e: any) => void; // for function type
   size: "sm" | "lg" | "md";

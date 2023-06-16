@@ -5,23 +5,30 @@ import { addHotels } from "@/redux/action/hotelaction";
 import { useAppDispatch } from "@/redux/store";
 import { essential_Kit, options_view, room_amenities } from "@/utils/Data";
 import { PlusIcon, TrashIcon } from "@heroicons/react/24/solid";
-import { Button, Input, Option, Radio, Select, Spinner } from "@material-tailwind/react";
+import {
+  Button,
+  Input,
+  Option,
+  Radio,
+  Select,
+  Spinner,
+} from "@material-tailwind/react";
 import Multiselect from "multiselect-react-dropdown";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 export default function Page() {
-
   let data = [
-    { lable: 'Single Bed', value: 1 },
-    { lable: 'Double Bed', value: 2 },
-    { lable: 'Triple Bed', value: 3 },
-    { lable: 'King Bed', value: 4 },
-    { lable: 'Queen Bed', value: 5 },
-
-  ]
-  const { previousHotelData, loading }: any = useSelector((state: any) => state.hotel);
+    { lable: "Single Bed", value: 1 },
+    { lable: "Double Bed", value: 2 },
+    { lable: "Triple Bed", value: 3 },
+    { lable: "King Bed", value: 4 },
+    { lable: "Queen Bed", value: 5 },
+  ];
+  const { previousHotelData, loading }: any = useSelector(
+    (state: any) => state.hotel
+  );
   // console.log("hotel data is ..", previoushotelData);
   const router = useRouter();
   const dispatch = useAppDispatch();
@@ -31,11 +38,20 @@ export default function Page() {
   //   }
   // }, [previoushotelData]);
   // const [view, setView] = useState([])
-  const [amenities, setAmenities] = useState([])
-  const [essentialKit, setEssentialKit] = useState([])
+  const [amenities, setAmenities] = useState([]);
+  const [essentialKit, setEssentialKit] = useState([]);
 
   const [roomDetails, setRoomDetails] = useState([
-    { id: 1, no_of_bed: 0, price: "", isAC: false, no_rooms: "", view: [], amenities: [], essentialKit: [] },
+    {
+      id: 1,
+      no_of_bed: 0,
+      price: "",
+      isAC: false,
+      no_rooms: "",
+      view: [],
+      amenities: [],
+      essentialKit: [],
+    },
   ]);
 
   const setOptionValue = (index: number, value: number) => {
@@ -51,7 +67,7 @@ export default function Page() {
   };
 
   const setAcStatus = (index: number, value: boolean) => {
-    console.log(value)
+    console.log(value);
     let data = [...roomDetails];
     data[index].isAC = value;
     setRoomDetails(data);
@@ -63,77 +79,90 @@ export default function Page() {
     setRoomDetails(data);
   };
 
-
   const addMore = () => {
     let data = [...roomDetails];
-    data.push({ id: data.length + 1, no_of_bed: 0, price: "", isAC: false, no_rooms: "", view: [], amenities: [], essentialKit: [] });
+    data.push({
+      id: data.length + 1,
+      no_of_bed: 0,
+      price: "",
+      isAC: false,
+      no_rooms: "",
+      view: [],
+      amenities: [],
+      essentialKit: [],
+    });
     setRoomDetails(data);
     console.log(data);
   };
 
   const addHotelsDetails = () => {
-    let data = { ...previousHotelData }
-    data.rooms = roomDetails
+    let data = { ...previousHotelData };
+    data.rooms = roomDetails;
     // data.view = view
     // data.amenities = amenities
     // data.essentialKit = essentialKit
     // data["rooms"]=roomDetails
 
-    console.log(data)
+    console.log(data);
 
     dispatch(addHotels(data));
-    router.push("/hotels")
-  }
+    router.push("/hotels");
+  };
 
   const deleteRoom = (index: number) => {
-    let data = [...roomDetails]
-    data.splice(index, 1)
-    setRoomDetails(data)
+    let data = [...roomDetails];
+    data.splice(index, 1);
+    setRoomDetails(data);
+  };
 
-  }
-
-  const selectOption_view = (index: number, selectedList: any, selectedItem: any) => {
+  const selectOption_view = (
+    index: number,
+    selectedList: any,
+    selectedItem: any
+  ) => {
     let data = [...roomDetails];
     data[index].view = selectedList;
     setRoomDetails(data);
-  }
+  };
   const getSelectedViews = (index: number) => {
-    let names = roomDetails[index]?.view.map((element: any) => element.name)
-    if (names && names.length > 0)
-      return names.toString()
-    else
-      return "Select Room View"
-  }
+    let names = roomDetails[index]?.view.map((element: any) => element.name);
+    if (names && names.length > 0) return names.toString();
+    else return "Select Room View";
+  };
 
-
-  const selectRoomAmenities = (index: number, selectedList: any, selectedItem: any) => {
+  const selectRoomAmenities = (
+    index: number,
+    selectedList: any,
+    selectedItem: any
+  ) => {
     let data = [...roomDetails];
     data[index].amenities = selectedList;
     setRoomDetails(data);
-  }
+  };
   const getSelectedAmenities = (index: number) => {
-    let names = roomDetails[index]?.amenities.map((element: any) => element.name)
-    if (names && names.length > 0)
-      return names.toString()
-    else
-      return "Select BedRoom Amenities"
-  }
+    let names = roomDetails[index]?.amenities.map(
+      (element: any) => element.name
+    );
+    if (names && names.length > 0) return names.toString();
+    else return "Select BedRoom Amenities";
+  };
 
-
-  const selectEssential_Kit = (index: number, selectedList: any, selectedItem: any) => {
+  const selectEssential_Kit = (
+    index: number,
+    selectedList: any,
+    selectedItem: any
+  ) => {
     let data = [...roomDetails];
     data[index].essentialKit = selectedList;
     setRoomDetails(data);
-  }
+  };
   const getSelectedKit = (index: number) => {
-    let names = roomDetails[index]?.essentialKit.map((element: any) => element.name)
-    if (names && names.length > 0)
-      return names.toString()
-    else
-      return "Select Essential Kit"
-  }
-
-
+    let names = roomDetails[index]?.essentialKit.map(
+      (element: any) => element.name
+    );
+    if (names && names.length > 0) return names.toString();
+    else return "Select Essential Kit";
+  };
 
   return loading ? (
     <Spinner />
@@ -199,57 +228,68 @@ export default function Page() {
                 </div>
               </div>
 
-                <div className="flex  flex-col mx-4 w-[300px]">
-                  <div className="my-2 w-72">
-                    <Multiselect
-                      placeholder={getSelectedViews(index)}
-                      options={options_view}
-                      onSelect={(selectedList, selectedItem) => selectOption_view(index, selectedList, selectedItem)}
-                      onRemove={(selectedList, selectedItem) => selectOption_view(index, selectedList, selectedItem)}
-                      displayValue="name"
-                      avoidHighlightFirstOption={true}
-                      showCheckbox={true}
-                      hideSelectedList={true}
-                    />
-                  </div>
-                  <div className="my-2 w-72">
-                    <Multiselect
-                      placeholder={getSelectedAmenities(index)}
-                      options={room_amenities}
-                      onSelect={(selectedList, selectedItem) => selectRoomAmenities(index, selectedList, selectedItem)}
-                      onRemove={(selectedList, selectedItem) => selectRoomAmenities(index, selectedList, selectedItem)}
-                      displayValue="name"
-                      avoidHighlightFirstOption={true}
-                      showCheckbox={true}
-                      hideSelectedList={true}
-                    />
-                  </div>
-                  <div className="my-2 w-72">
-                    <Multiselect
-                      placeholder={getSelectedKit(index)}
-                      options={essential_Kit}
-                      onSelect={(selectedList, selectedItem) => selectEssential_Kit(index, selectedList, selectedItem)}
-                      onRemove={(selectedList, selectedItem) => selectEssential_Kit(index, selectedList, selectedItem)}
-                      displayValue="name"
-                      avoidHighlightFirstOption={true}
-                      showCheckbox={true}
-                      hideSelectedList={true}
-                    />
-                  </div>
+              <div className="flex  flex-col mx-4 w-[300px]">
+                <div className="my-2 w-72">
+                  <Multiselect
+                    placeholder={getSelectedViews(index)}
+                    options={options_view}
+                    onSelect={(selectedList, selectedItem) =>
+                      selectOption_view(index, selectedList, selectedItem)
+                    }
+                    onRemove={(selectedList, selectedItem) =>
+                      selectOption_view(index, selectedList, selectedItem)
+                    }
+                    displayValue="name"
+                    avoidHighlightFirstOption={true}
+                    showCheckbox={true}
+                    hideSelectedList={true}
+                  />
+                </div>
+                <div className="my-2 w-72">
+                  <Multiselect
+                    placeholder={getSelectedAmenities(index)}
+                    options={room_amenities}
+                    onSelect={(selectedList, selectedItem) =>
+                      selectRoomAmenities(index, selectedList, selectedItem)
+                    }
+                    onRemove={(selectedList, selectedItem) =>
+                      selectRoomAmenities(index, selectedList, selectedItem)
+                    }
+                    displayValue="name"
+                    avoidHighlightFirstOption={true}
+                    showCheckbox={true}
+                    hideSelectedList={true}
+                  />
+                </div>
+                <div className="my-2 w-72">
+                  <Multiselect
+                    placeholder={getSelectedKit(index)}
+                    options={essential_Kit}
+                    onSelect={(selectedList, selectedItem) =>
+                      selectEssential_Kit(index, selectedList, selectedItem)
+                    }
+                    onRemove={(selectedList, selectedItem) =>
+                      selectEssential_Kit(index, selectedList, selectedItem)
+                    }
+                    displayValue="name"
+                    avoidHighlightFirstOption={true}
+                    showCheckbox={true}
+                    hideSelectedList={true}
+                  />
                 </div>
               </div>
-
             </div>
-          ))}
-        </div>
-        <></>
-        <BBButton
-          color=""
-          label="ADD"
-          size="lg"
-          onClick={addHotelsDetails}
-          className="h-12 bg-blackblue w-[300px]  flex justify-center m-auto mb-5"
-        />
+          </div>
+        ))}
       </div>
+      <></>
+      <BBButton
+        color=""
+        label="ADD"
+        size="lg"
+        onClick={addHotelsDetails}
+        className="h-12 bg-blackblue w-[300px]  flex justify-center m-auto mb-5"
+      />
+    </div>
   );
 }

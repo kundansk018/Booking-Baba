@@ -35,10 +35,9 @@ export default function page() {
   // }, [userData]);
 
   return (
-    <div className="flex justify-center items-center py-[30px]">
+    <div className="flex justify-center items-center mt-5">
       <Card className="w-full max-w-[24rem] ">
         <CardHeader
-          color="red"
           floated={false}
           shadow={false}
           className="m-0 grid place-items-center rounded-b-none py-2 px-4 text-center bg-GreenBlue "

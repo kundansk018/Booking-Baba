@@ -51,8 +51,6 @@ const ResetPassword = () => {
     }
   };
 
-  //const resetnew = () => {};
-
   return (
     <div className="flex justify-center items-center py-[5px]">
       <Card className="flex flex-row flex-wrap w-auto  m-10 ">
@@ -96,7 +94,7 @@ const ResetPassword = () => {
               color=""
               label="Back"
               size="md"
-              onClick={() => router.push("/auth")}
+              onClick={() => router.back()}
               className=" m-0 p-3 w-[50%] rounded-md place-items-center bg-GreenBlue hover:bg-blackblue"
             />
 

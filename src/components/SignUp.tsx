@@ -39,6 +39,10 @@ function SignUp() {
   console.log("Roll Type in sign up pagee ..", userData?.data.data.rollType);
   const rollType = userData?.data.data.rollType;
 
+  const isNumberValid = (num: any) => {
+    return /\d/.test(num);
+  };
+
   useEffect(() => {
     if (signupStatus) {
       if (signupStatus.success === true) {
@@ -70,46 +74,49 @@ function SignUp() {
     let error: any = [];
     if (!firstName || !firstName.trim()) {
       isErrorFound = true;
-      error.push("Please enter first name");
+      error.push("first name");
     }
 
     if (!lastName || !lastName.trim()) {
       isErrorFound = true;
-      error.push("Please enter last name");
+      error.push("last name");
     }
 
-    if (!mobileNumber || !mobileNumber.trim()) {
+    if (!mobileNumber || !mobileNumber.trim() || !isNumberValid(mobileNumber)) {
       isErrorFound = true;
-      error.push("Please enter Mobile Number");
+      error.push("Mobile Number in number format");
     }
+    if (mobileNumber) {
+      isErrorFound = true;
+      error.push("");
+    }
+
     if (!email || !email.trim()) {
       isErrorFound = true;
-      error.push("Please enter Email Address");
+      error.push("Email Address");
     }
     if (
       !email.includes("@") ||
       (!email.includes(".com") && !email.includes(".in"))
     ) {
       isErrorFound = true;
-      error.push("Plz Enter valid email address");
+      error.push("valid email address");
     }
     if (!birthDate || !birthDate.trim()) {
       isErrorFound = true;
-      error.push("Please enter Birthdate");
+      error.push("Birthdate");
     }
     if (!password || !password.trim()) {
       isErrorFound = true;
-      error.push("Please Enter Password");
+      error.push("Password");
     }
     if (!confirmPassword || !confirmPassword.trim()) {
       isErrorFound = true;
-      error.push("Please Enter Confirm Password");
+      error.push("Confirm Password");
     }
     if (password !== confirmPassword) {
       isErrorFound = true;
-      error.push(
-        " Password Not Matching ..!! Password and Confirm-Password Should Be Same"
-      );
+      error.push("Same Password and Confirm-Password");
     }
     if (isErrorFound) {
       setErrorDialogMessage(error);
@@ -143,7 +150,7 @@ function SignUp() {
             label="Mobile Number "
             containerProps={{ className: "min-w-[30px]" }}
             value={mobileNumber}
-            onChange={(e) => setMobileNumber(e.target.value)}
+            onChange={(e) => setMobileNumber(e.target.value.replace(/\D/g, ""))}
           />
           <BBInput
             type="date"
@@ -212,7 +219,7 @@ function SignUp() {
         />
       </form>
       <BBErrorDialog
-        dialogHeader="Error"
+        dialogHeader="Please Enter"
         dialogMessage={errorDialogMessage}
         open={showErrorDialog}
         onOkClick={() => setShowErrorDialog(false)}

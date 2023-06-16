@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 
 import { useRouter } from "next/navigation";
 
-
 import {
   MagnifyingGlassIcon,
   PencilIcon,
@@ -22,7 +21,11 @@ import {
 
 import { useAppDispatch } from "@/redux/store";
 import { useSelector } from "react-redux";
-import { deleteBusAction, getBus, updateBusAction } from "@/redux/action/busaction";
+import {
+  deleteBusAction,
+  getBus,
+  updateBusAction,
+} from "@/redux/action/busaction";
 import { Pagination } from "react-bootstrap";
 
 const TABS = [
@@ -50,11 +53,10 @@ export default function Bus() {
   const [items, setItems] = useState<any>([]);
   const [totalPages, setTotalPages] = useState<any>();
 
-
   console.log(" using usestate bus data is ..", busData);
 
   useEffect(() => {
-    getAllBuses()
+    getAllBuses();
   }, [counter, page]);
 
   useEffect(() => {
@@ -77,22 +79,21 @@ export default function Bus() {
   };
 
   const deleteBus = (id: string) => {
-    dispatch(deleteBusAction(id))
-    setCounter(counter + 1)
-    getAllBuses()
-  }
-
+    dispatch(deleteBusAction(id));
+    setCounter(counter + 1);
+    getAllBuses();
+  };
 
   const updateBus = (id: string) => {
-    router.push("/bus/updatebus/" + id)
-    setCounter(counter + 1)
-    getAllBuses()
-  }
+    router.push("/bus/updatebus/" + id);
+    setCounter(counter + 1);
+    getAllBuses();
+  };
   const addBus = () => {
-    router.push("/bus/add")
-    setCounter(counter + 1)
-    getAllBuses()
-  }
+    router.push("/bus/add");
+    setCounter(counter + 1);
+    getAllBuses();
+  };
 
   const router = useRouter();
   return (
@@ -104,43 +105,11 @@ export default function Bus() {
               className="px-4 font-castoro"
               variant="h3"
               color="black"
-
             >
               Bus List
             </Typography>
           </div>
-          <div className=" table table-hover " style={{ margin: "1%" }}>
-            <Pagination className="flex gap-5">
-              <Pagination.First
-                onClick={() => handlePageChange(1)}
-                disabled={page === 1}
-              />
-              <Pagination.Prev
-                onClick={() => handlePageChange(page - 1)}
-                disabled={page === 1}
-              />
-              {Array.from(Array(totalPages).keys()).map((pageIndex, index) => (
-                <Pagination.Item
-                  key={index}
-                  active={pageIndex === page}
-                  onClick={() => handlePageChange(pageIndex)}
-                  disabled={page === 1}
-                >
-                  {pageIndex}
-                </Pagination.Item>
-              ))}
-              <Pagination.Next
-                onClick={() => handlePageChange(page + 1)}
-                disabled={page === totalPages - 1}
-              />
-              <Pagination.Last
-                onClick={() => handlePageChange(totalPages)}
-                disabled={page === totalPages}
-              />
-            </Pagination>
-          </div>
           <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
-
             <div className="w-full md:w-72">
               <Input
                 label="Search"
@@ -158,7 +127,7 @@ export default function Bus() {
         </div>
       </Card>
 
-      <div className="mx-3 h-[500px] w-[98%] mt-[1%]  bg-white relative overflow-scroll px-1 mt-0">
+      <div className="mx-3 h-[450px] w-[98%] mt-[1%]  bg-white relative overflow-scroll px-1">
         <table className="relative font-roboto w-full min-w-max table-auto text-left text-sm text-black">
           <thead className="z-10 font-semibold flex-col">
             <tr className="z-10 bg-GreenBlue text-white sticky top-0  w-full">
@@ -185,61 +154,108 @@ export default function Bus() {
           <tbody>
             {busData
               ? busData?.items?.map((element: any) => (
-                <>
-                  <tr className="border-b">
-                    <td className="w-[5px] p-2">
-                      <Avatar
-                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTI5KPcBp9vKBWRnMlYxr8AXUbQO6GiHvrBQZ5FJiVx6w9kmarHbNLCGzgnMqHkrjl7-zE&usqp=CAU"
-                        alt="imagee"
-                        size="md"
-                      />
-                    </td>
-                    <td className="w-[5px] p-2">{element.busnumber}</td>
-                    <td className="w-[5px] p-2 font-semibold">
-                      {element.busname}
-                    </td>
-                    <td className="w-[5px] p-2">{element.from}</td>
-                    <td className="w-[5px] p-2">{element.to}</td>
-                    <td className="w-[5px] p-2">{element.arrivalDate}</td>
-                    <td className="w-[5px] p-2">{element.arrivalTime}</td>
-                    <td className="w-[5px] p-2">{element.pickUpPoint}</td>
-                    <td className="w-[5px] p-2">{element.seats}</td>
-                    <td className="w-[5px] p-2">{element.ticketprice}</td>
-                    {/* <td className="w-[5px] p-2">{element.operator}</td> */}
-                    {/* <td className="w-[5px] p-2">{element.currentStatus}</td> */}
-                    <td className="w-[5px] p-2">{element.busType}</td>
-                    <td className="w-[5px] p-2">{element.busstops}</td>
-                    <td className="w-[5px] p-2">{element.noofstop}</td>
-                    <td className="w-[5px] p-2">{element.bookingseats}</td>
-                    <td className="w-[5px] p-2">
-                      {element.travelagencyname}
-                    </td>
-                    <td className="w-[5px] p-2 ">
-                      <Tooltip content="Update Bus">
-                        <IconButton onClick={() => updateBus(element._id)}
-                          variant="text" color="blue-gray">
-                          <PencilIcon className="h-4 w-4" />
-                        </IconButton>
-                      </Tooltip>
-                      <Tooltip content="Delete Bus">
-                        <IconButton onClick={() => deleteBus(element._id)}
-                          variant="text" color="blue-gray">
-                          <TrashIcon
-                            className=" w-4 text-red-500"
-                            onClick={() => alert("Bus Deleted")}
-                          />
-                        </IconButton>
-                      </Tooltip>
-                    </td>
-                  </tr>
-                </>
-              ))
+                  <>
+                    <tr className="border-b border-b-gray-400 hover:bg-gray-300 hover:scale-[1.004] focus:scale-[1.004] active:scale-100">
+                      <td className="w-[5px] p-2">
+                        <Avatar
+                          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTI5KPcBp9vKBWRnMlYxr8AXUbQO6GiHvrBQZ5FJiVx6w9kmarHbNLCGzgnMqHkrjl7-zE&usqp=CAU"
+                          alt="imagee"
+                          size="md"
+                        />
+                      </td>
+                      <td className="w-[5px] p-2">{element.busnumber}</td>
+                      <td className="w-[5px] p-2 font-semibold">
+                        {element.busname}
+                      </td>
+                      <td className="w-[5px] p-2">{element.from}</td>
+                      <td className="w-[5px] p-2">{element.to}</td>
+                      <td className="w-[5px] p-2">{element.arrivalDate}</td>
+                      <td className="w-[5px] p-2">{element.arrivalTime}</td>
+                      <td className="w-[5px] p-2">{element.pickUpPoint}</td>
+                      <td className="w-[5px] p-2">{element.seats}</td>
+                      <td className="w-[5px] p-2">{element.ticketprice}</td>
+                      {/* <td className="w-[5px] p-2">{element.operator}</td> */}
+                      {/* <td className="w-[5px] p-2">{element.currentStatus}</td> */}
+                      <td className="w-[5px] p-2">{element.busType}</td>
+                      <td className="w-[5px] p-2">{element.busstops}</td>
+                      <td className="w-[5px] p-2">{element.noofstop}</td>
+                      <td className="w-[5px] p-2">{element.bookingseats}</td>
+                      <td className="w-[5px] p-2">
+                        {element.travelagencyname}
+                      </td>
+                      <td className="w-[5px] p-2 ">
+                        <Tooltip content="Update Bus">
+                          <IconButton
+                            onClick={() => updateBus(element._id)}
+                            variant="text"
+                            color="blue-gray"
+                            className="hover:bg-gray-500"
+                          >
+                            <PencilIcon className="h-4 w-4" />
+                          </IconButton>
+                        </Tooltip>
+                        <Tooltip content="Delete Bus">
+                          <IconButton
+                            onClick={() => deleteBus(element._id)}
+                            variant="text"
+                            color="blue-gray"
+                            className="hover:bg-gray-500"
+                          >
+                            <TrashIcon
+                              className=" w-4 text-red-500"
+                              onClick={() => alert("Bus Deleted")}
+                            />
+                          </IconButton>
+                        </Tooltip>
+                      </td>
+                    </tr>
+                  </>
+                ))
               : "Data not found"}
           </tbody>
         </table>
       </div>
+      <div className="bg-white ">
+        <Pagination className="flex justify-center gap-5 p-3 text-gray-700">
+          <div className="hover:text-black">
+            <Pagination.First
+              onClick={() => handlePageChange(1)}
+              disabled={page === 1}
+            />
+          </div>
+          <div className="hover:text-black">
+            <Pagination.Prev
+              onClick={() => handlePageChange(page - 1)}
+              disabled={page === 1}
+            />
+          </div>
+          <div className="flex hover:text-black">
+            {Array.from(Array(totalPages).keys()).map((pageIndex, index) => (
+              <Pagination.Item
+                key={index}
+                active={pageIndex === page}
+                onClick={() => handlePageChange(pageIndex)}
+                disabled={page === 1}
+              >
+                {pageIndex}
+              </Pagination.Item>
+            ))}
+          </div>
 
-
+          <div className="hover:text-black">
+            <Pagination.Next
+              onClick={() => handlePageChange(page + 1)}
+              disabled={page === totalPages - 1}
+            />
+          </div>
+          <div className="hover:text-black">
+            <Pagination.Last
+              onClick={() => handlePageChange(totalPages)}
+              disabled={page === totalPages}
+            />
+          </div>
+        </Pagination>
+      </div>
     </div>
   );
 }

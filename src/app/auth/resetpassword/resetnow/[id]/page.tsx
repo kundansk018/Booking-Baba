@@ -27,7 +27,7 @@ export default function Reset({ params }: any) {
       _id: params.id,
       password: password,
     };
-    console.log("Reswferfhenuchifuh    : ", data);
+    console.log("email for changing password   : ", data);
 
     let isErrorFound = false;
     let error: any = [];
@@ -42,7 +42,7 @@ export default function Reset({ params }: any) {
     if (password !== confirmPassword) {
       isErrorFound = true;
       error.push(
-        " Password Not Matching ..!! Password and Confirm-Password Should Be Same"
+        " Password Not Matching ..!! ","Password and Confirm-Password Should Be Same"
       );
     }
 

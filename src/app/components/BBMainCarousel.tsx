@@ -12,16 +12,16 @@ import { useRouter } from "next/navigation";
 export default function BBMainCarousel() {
   const router = useRouter();
   return (
-    <Carousel className="h-[600px] w-full" loop={true} autoplay={true}>
-      <div className="h-[600px] w-full">
+    <Carousel className="h-[400px] w-full" loop={true} autoplay={true}>
+      <div className="h-[400px] w-full">
         <Image
-          className=" h-[600px] w-full"
+          className=" h-[400px] w-full"
           src={booking}
           alt="Multi-services-booking"
         />
         <div className="absolute inset-0 grid h-full w-full place-items-center ">
           <div className="w-3/4 text-center ">
-            <div className="flex align-baseline -mx-7 mt-[280px]">
+            <div className="flex align-baseline -mx-7 mt-[200px]">
               <Button
                 size="lg"
                 color="white"
@@ -38,7 +38,7 @@ export default function BBMainCarousel() {
       </div>
       <div className="relative h-[400px] w-full">
         <Image
-          className="h-[600px] w-full"
+          className="h-[400px] w-full"
           src={top}
           alt="Multi-services-booking"
         />
@@ -77,7 +77,7 @@ export default function BBMainCarousel() {
       </div>
       <div className="relative h-[400px] w-full">
         <Image
-          className=" h-[600px] w-full"
+          className=" h-[400px] w-full"
           src={rail}
           alt="Multi-services-booking"
         />
@@ -116,7 +116,7 @@ export default function BBMainCarousel() {
       </div>
       <div className="relative h-[400px] w-full">
         <Image
-          className=" h-[600px] w-full"
+          className=" h-[400px] w-full"
           src={busimg}
           alt="Multi-services-booking"
         />

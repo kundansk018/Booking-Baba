@@ -13,13 +13,13 @@ export default function page() {
   return (
     <div>
       <div className="justify-center flex gap-5">
-        <h4 className="my-2 w-1/4 font-castoro font-bold bg-white p-5 flex justify-center">
+        <h4 className="my-2 w-1/4 font-castoro font-bold bg-white p-5 flex justify-center hover:scale-[1.02] focus:scale-[1.02] active:scale-100">
           Admin Management
         </h4>
-        <h4 className="my-2 w-1/4 font-castoro font-bold bg-white p-5 flex justify-center">
+        <h4 className="my-2 w-1/4 font-castoro font-bold bg-white p-5 flex justify-center hover:scale-[1.02] focus:scale-[1.02] active:scale-100">
           App Management
         </h4>
-        <h4 className="my-2 w-1/4 font-castoro font-bold bg-white p-5 flex justify-center">
+        <h4 className="my-2 w-1/4 font-castoro font-bold bg-white p-5 flex justify-center hover:scale-[1.02] focus:scale-[1.02] active:scale-100">
           User Management
         </h4>
       </div>

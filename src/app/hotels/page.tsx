@@ -143,7 +143,7 @@ export default function Hotels() {
         <table className="relative font-roboto w-full min-w-max table-auto text-left text-sm text-black">
           <thead className="z-10 bg-blue-gray-100 font-bold flex-col">
             <tr className="z-10 sticky top-0 bg-GreenBlue text-white w-full ">
-              <th className="w-[5px] p-2">Hotel Photos</th>
+              <th className="w-[5px] p-2 ">Hotel Photos</th>
               <th className="w-[5px] p-2">Hotel Name /Email</th>
               <th className="w-[5px] p-2">Hotel Owner</th>
               <th className="w-[5px] p-2">Contact No</th>
@@ -158,7 +158,7 @@ export default function Hotels() {
             {hotelData
               ? hotelData?.map((element: any) => (
                   <>
-                    <tr className="border-b">
+                    <tr className="border-b border-b-gray-400 hover:bg-gray-300 hover:scale-[1.004] focus:scale-[1.004] active:scale-100">
                       <td className="w-[5px] p-2">
                         <Avatar
                           src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjnWFevA5oNiWzj1bPoiiq71JaH6LhsIrmEQ&usqp=CAU"
@@ -183,11 +183,12 @@ export default function Hotels() {
                       <td className="w-[5px] p-2">
                         <Tooltip content="Update Hotel Details">
                           <IconButton
+                            variant="text"
+                            color="blue-gray"
+                            className="hover:bg-gray-500"
                             onClick={() =>
                               router.push("/hotels/update/" + element._id)
                             }
-                            variant="text"
-                            color="blue-gray"
                           >
                             <PencilIcon className="h-4 w-4" />
                           </IconButton>
@@ -196,6 +197,7 @@ export default function Hotels() {
                           <IconButton
                             variant="text"
                             color="blue-gray"
+                            className="hover:bg-gray-500"
                             onClick={() => deleteHotel(element._id)}
                           >
                             <TrashIcon

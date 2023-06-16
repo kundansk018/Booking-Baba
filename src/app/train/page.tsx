@@ -124,7 +124,7 @@ export default function Train() {
       <div className="mx-3 h-[450px] w-[98%] mt-[0.5%] bg-white relative overflow-scroll px-1">
         <table className="relative font-roboto w-full min-w-max table-auto text-left text-sm text-black">
           <thead className="z-10 bg- font-bold flex-col">
-            <tr className="z-10 sticky top-0 bg-GreenBlue text-white w-full">
+            <tr className="z-10 sticky top-0 bg-GreenBlue text-white w-full ">
               <th className="w-[5px] p-2">Train photo</th>
               <th className="w-[5px] p-2">Train Number</th>
               <th className="w-[5px] p-2">Train Name</th>
@@ -139,7 +139,10 @@ export default function Train() {
           <tbody className="-z-10">
             {trainData
               ? trainData?.items?.map((element: any) => (
-                  <tr key={element._id}>
+                  <tr
+                    key={element._id}
+                    className="text-overflow: ellipsis; overflow: scroll; border border-b-gray-400 hover:bg-gray-300 hover:scale-[1.004] focus:scale-[1.004] active:scale-100"
+                  >
                     <td className="w-[5px] p-2">
                       <img
                         className="h-20 w-20 rounded-full"
@@ -148,7 +151,7 @@ export default function Train() {
                       />
                     </td>
                     <td className="w-[5px]  p-2">{element.trainNo}</td>
-                    <td className="w-[5px]  p-2">{element.trainName}</td>
+                    <td className="w-[5px]  p-2 ">{element.trainName}</td>
                     <td className="w-[5px]  p-2">{element.from_Stn}</td>
                     <td className="w-[5px]  p-2">{element.to_Stn}</td>
                     <td className="w-[5px]  p-2">{element.fare}</td>
@@ -160,6 +163,7 @@ export default function Train() {
                           onClick={() => updateTrain(element._id)}
                           variant="text"
                           color="blue-gray"
+                          className="hover:bg-gray-500"
                         >
                           <PencilIcon className="h-4 w-4" />
                         </IconButton>
@@ -169,6 +173,7 @@ export default function Train() {
                           onClick={() => deleteTrain(element._id)}
                           variant="text"
                           color="blue-gray"
+                          className="hover:bg-gray-500"
                         >
                           <TrashIcon className=" w-5 text-red-500" />{" "}
                         </IconButton>

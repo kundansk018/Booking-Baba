@@ -46,7 +46,7 @@ export default function Home() {
     <div className="">
       <Navigationbar />
       <BBMainCarousel />
-      <div className="flex flex-col gap-4">
+      {/* <div className="flex flex-col gap-4">
         <div>
           <Card className="flex flex-row mx-6 w-full h-auto ">
             <CardHeader
@@ -71,8 +71,6 @@ export default function Home() {
                 Book Now
               </Button>
             </CardBody>
-            {/* <CardFooter className=" pt-0">
-            </CardFooter> */}
           </Card>
         </div>
 
@@ -100,8 +98,6 @@ export default function Home() {
                 Book Now
               </Button>
             </CardBody>
-            {/* <CardFooter className="pt-0">
-            </CardFooter> */}
           </Card>
         </div>
 
@@ -127,10 +123,76 @@ export default function Home() {
               </Typography>
               <Button onClick={() => router.push("/user/bus")}>Book Now</Button>
             </CardBody>
-            {/* <CardFooter className="pt-0">
-            </CardFooter> */}
           </Card>
         </div>
+      </div> */}
+      <div className="flex flex-row my-4">
+        <div>
+          <Card className=" mx-6 w-[400px] h-[400px]">
+            <CardHeader
+              floated={false}
+              color="blue-gray"
+              className="relative h-30"
+            >
+              <Image src={h1} alt="img-blur-shadow" />
+            </CardHeader>
+            <CardBody>
+              <Typography variant="h5" color="blue-gray" className="mb-2">
+                Hotel Booking
+              </Typography>
+              <Typography>
+                Search best prices on hotels,home and much more...
+              </Typography>
+            </CardBody>
+            <CardFooter className="pt-0 ">
+              <Button onClick={() => router.push("/user/hotels")}>
+                Book Now
+              </Button>
+            </CardFooter>
+          </Card>
+        </div>
+        <div>
+          <Card className="  w-[400px] h-[400px]">
+            <CardHeader
+              floated={false}
+              color="blue-gray"
+              className="relative h-30"
+            >
+              <Image src={bus1} alt="img-blur-shadow" />
+            </CardHeader>
+            <CardBody>
+              <Typography variant="h5" color="blue-gray" className="mb-2">
+                Bus Booking
+              </Typography>
+              <Typography>
+                Make Your Bus Booking Smoother with Baba-Booking
+              </Typography>
+            </CardBody>
+            <CardFooter className="pt-0">
+              <Button onClick={() => router.push("/user/bus")}>Book Now</Button>
+            </CardFooter>
+          </Card>
+        </div>
+        <Card className="mx-6 w-[400px] h-[400px]">
+          <CardHeader
+            floated={false}
+            color="blue-gray"
+            className="relative h-30"
+          >
+            <Image src={rail} alt="img-blur-shadow" />
+          </CardHeader>
+          <CardBody>
+            <Typography variant="h5" color="blue-gray" className="mb-2">
+              Train Booking
+            </Typography>
+            <Typography>
+              Make Your Train Booking Smoother with Baba-Booking
+            </Typography>
+          </CardBody>
+          <CardFooter className="pt-0">
+            <Button onClick={() => router.push("/user/train")}>Book Now</Button>
+          </CardFooter>
+        </Card>
       </div>
     </div>
   );
