@@ -2,7 +2,7 @@
 
 import BBButton from "@/app/components/BBButton";
 import BBInput from "@/app/components/BBInput";
-import "../../styles  /hotel.css";
+import "../../styles/hotel.css";
 
 import { useState } from "react";
 import { useAppDispatch } from "@/redux/store";
@@ -36,12 +36,9 @@ export default function AddTrain() {
   const [showErrorDialog, setShowErrorDialog] = useState(false);
   const router = useRouter();
 
-
-
   const onFileUploadChange = (e: any) => {
     const fileInput = e?.target;
-    
-   
+
     if (!fileInput.files) {
       alert("No file was chosen");
       return;
@@ -50,10 +47,11 @@ export default function AddTrain() {
     const trainImage = fileInput.files[0];
 
     setTrainImage(trainImage);
-    setPreviewUrl(URL.createObjectURL(trainImage));
+    console.log(trainImage);
+    // setPreviewUrl(URL.createObjectURL(trainImage));
   };
 
-  const onUploadFile = async (e: any) => {
+  const addTrainDetails = async (e: any) => {
     e.preventDefault();
 
     if (!trainImage) {
@@ -61,7 +59,7 @@ export default function AddTrain() {
     }
     try {
       var formData = new FormData();
-
+      console.log("trainImage::", trainImage);
       formData.append("trainNo", trainNo);
       formData.append("trainName", trainName);
       formData.append("from_Stn", from_Stn);
@@ -80,24 +78,39 @@ export default function AddTrain() {
 
       console.log("formData>>>>>>>>>>>", formData);
 
-      const res = await fetch("/api/trainApi/trainApi?action=ADD_TRAIN", {
-        method: "POST",
-        body: formData,
-      });
-      console.log("response>>>>>>>>>>>>>>", res);
+      // const res = await fetch("/api/trainApi/trainApi?action=ADD_TRAIN", {
+      //   method: "POST",
+      //   body: formData,
+      // });
 
-      const {
-        data,
-        error,
-      }: { data: { url: string | string[] } | null; error: string | null } =
-        await res.json();
+      dispatch(addTrain(formData))
+        .then((res: any) => {
+          console.log("response>>>>>>>>>>>>>>", res);
 
-      if (error || !data) {
-        alert(error || "Sorry! something went wrong.");
-        return;
-      }
+          if (res) {
+            console.log("response>>>>>>>>>>>>>>", res);
 
-      console.log("File was uploaded successfylly:", data);
+            router.push("/train");
+
+            const {
+              data,
+              error,
+            }: {
+              data: { url: string | string[] } | null;
+              error: string | null;
+            } = res.json();
+
+            console.log("File was uploaded successfylly:", data);
+
+            if (error || !data) {
+              alert(error || "Sorry! something went wrong.");
+              return;
+            }
+          }
+        })
+        .catch((err: any) => {
+          console.log("error ::::::::::::", err);
+        });
     } catch (error) {
       console.error(error);
       alert("Sorry! something went wrong inside catch");
@@ -308,7 +321,7 @@ export default function AddTrain() {
             color=""
             label="ADD "
             size="lg"
-            onClick={(e) => onUploadFile(e)}
+            onClick={(e) => addTrainDetails(e)}
             className="h-12 bg-blackblue hover:bg-GreenBlue w-[500px] "
           />
         </div>

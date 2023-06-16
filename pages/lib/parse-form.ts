@@ -9,11 +9,12 @@ export const FormidableError = formidable.errors.FormidableError;
 
 export const parseForm = async (
   req: NextApiRequest
-): Promise<{ fields: formidable.Fields; files: formidable.Files }> => {
+): Promise<{ fields: any; files: formidable.Files }> => {
   return await new Promise(async (resolve, reject) => {
     const uploadDir = join(
       process.env.ROOT_DIR || process.cwd(),
-      `/public/uploads/${dateFn.format(Date.now(), "dd-MM-Y")}`
+      // `/public/uploads/${dateFn.format(Date.now(), "dd-MM-Y")}`
+      `/public/uploads/`
     );
 
     try {

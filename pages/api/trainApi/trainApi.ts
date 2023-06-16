@@ -31,6 +31,11 @@ export default async function handler(
         return await searchTrains(request, response);
       }
 
+    case "GET":
+      if (request.query?.action === "GETFILE") {
+        return await getFile(request, response);
+      }
+
     default:
       return response
         .status(404)
@@ -73,27 +78,28 @@ export async function updateTrain(
   request: NextApiRequest,
   response: NextApiResponse
 ) {
+  const { fields, files } = await parseForm(request);
+
   const buses = await db.collection("Train Details");
   const res = await buses.updateOne(
-    { _id: new ObjectId(request.body._id) },
+    { _id: new ObjectId(fields._id) },
     {
       $set: {
-        trainNo: request.body.trainNo,
-        trainName: request.body.trainName,
-        from_Stn: request.body.from_Stn,
-        to_Stn: request.body.to_Stn,
-        depTime: request.body.depTime,
-        arrivalTime: request.body.arrivalTime,
-        fare: request.body.fare,
-        seats: request.body.seats,
-        coach: request.body.coach,
-        duration: request.body.duration,
-        classType: request.body.classType,
-        trainType: request.body.trainType,
-        operationDays: request.body.operationDays,
-        trainRoute: request.body.trainRoute,
-        trainDesc: request.body.trainDesc,
-        trainImage: request.body.trainImage,
+        trainNo: fields.trainNo,
+        trainName: fields.trainName,
+        from_Stn: fields.from_Stn,
+        to_Stn: fields.to_Stn,
+        depTime: fields.depTime,
+        arrivalTime: fields.arrivalTime,
+        fare: fields.fare,
+        seats: fields.seats,
+        coach: fields.coach,
+        duration: fields.duration,
+        classType: fields.classType,
+        trainType: fields.trainType,
+        operationDays: fields.operationDays,
+        trainRoute: fields.trainRoute,
+        trainDesc: fields.trainDesc,
       },
     }
   );
@@ -106,10 +112,18 @@ export async function deleteTrain(
   request: NextApiRequest,
   response: NextApiResponse
 ) {
+  console.log("called api");
   const trains = await db.collection("Train Details");
+  let { fields } = await parseForm(request);
+
+  console.log(" fields.....>>>", fields);
+
   const res = await trains.deleteOne({
-    _id: new ObjectId(request.body),
+    _id: new ObjectId(fields._id),
   });
+
+  console.log("response delete train..>>>", res);
+
   return response.status(200).json({ data: res });
 }
 
@@ -155,8 +169,13 @@ export async function getTrainById(
   request: NextApiRequest,
   response: NextApiResponse
 ) {
+  let { fields } = await parseForm(request);
+
+  console.log(" fields.....>>>", fields);
   const trains = await db.collection("Train Details");
-  const res = await trains.findOne({ _id: new ObjectId(request.body._id) });
+
+  // const res = await trains.findOne({ _id: new ObjectId(request.body._id) });
+  const res = await trains.findOne({ _id: new ObjectId(fields._id) });
   return response.status(200).json({ data: res });
 }
 
@@ -179,3 +198,8 @@ export async function searchTrains(
     .toArray();
   return response.status(200).json({ data: res });
 }
+
+export async function getFile(
+  request: NextApiRequest,
+  response: NextApiResponse
+) {}

@@ -39,13 +39,6 @@ function SignUp() {
   console.log("Roll Type in sign up pagee ..", userData?.data.data.rollType);
   const rollType = userData?.data.data.rollType;
 
-  // useEffect(() => {
-  //   if (userData) {
-  //     console.log("use effect inside ", userData);
-  //     router.push("/auth");
-  //   }
-  // }, [userData]);
-
   useEffect(() => {
     if (signupStatus) {
       if (signupStatus.success === true) {

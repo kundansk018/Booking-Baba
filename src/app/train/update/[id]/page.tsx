@@ -26,7 +26,7 @@ export default function updateTrain({ params }: any) {
   const [operationDays, setOperationDays] = useState<string>("");
   const [trainRoute, setTrainRoute] = useState<string>("");
   const [trainDesc, setTrainDesc] = useState<string>("");
-  const [trainImage, setTrainImage] = useState<string>("");
+  const [trainImage, setTrainImage] = useState<any>("");
 
   const dispatch = useAppDispatch();
   const router = useRouter();
@@ -217,7 +217,7 @@ export default function updateTrain({ params }: any) {
               type="file"
               label="Train Image"
               value={trainImage}
-              onChange={(e) => setTrainImage(e.target.value)}
+              onChange={(e) => setTrainImage(e?.target.files[0])}
             />
           </div>
 

@@ -75,8 +75,9 @@ export default function Train() {
     getAllTrains();
   };
 
-  const deleteTrain = (id: any) => {
-    dispatch(deleteTrainAction(id));
+  const deleteTrain = (_id: any) => {
+    console.log("called delete train fun..>>", _id);
+    dispatch(deleteTrainAction(_id));
     getAllTrains();
     setCounter(counter + 1);
   };
@@ -140,12 +141,11 @@ export default function Train() {
               ? trainData?.items?.map((element: any) => (
                   <tr key={element._id}>
                     <td className="w-[5px] p-2">
-                      {/* <Avatar
-                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4Rb78i6mV3XF1VxsVX_f6FvUggBNCIw4-xw&usqp=CAU"
-                        alt="imagee"
-                        size="md"
-                      /> */}
-                      {element.imageUrl}
+                      <img
+                        className="h-20 w-20 rounded-full"
+                        src={"uploads/" + element.imageUrl}
+                        alt="nature image"
+                      />
                     </td>
                     <td className="w-[5px]  p-2">{element.trainNo}</td>
                     <td className="w-[5px]  p-2">{element.trainName}</td>

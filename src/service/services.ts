@@ -56,7 +56,13 @@ export const deleteHotel = (data: IPropsDelete) => {
 
 export const addtrainInfo = (data: any) => {
   let url = `${ENDPOINTS.addTrain}`;
-  return client.post(url, data, headers);
+  return client.post(url, data, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+      "x-rapidapi-host": "file-upload8.p.rapidapi.com",
+      "x-rapidapi-key": "your-rapidapi-key-here",
+    },
+  });
 };
 
 export const getAllTrains = (page: any) => {
@@ -64,9 +70,10 @@ export const getAllTrains = (page: any) => {
   return client.post(url, page, headers);
 };
 
-export const deleteTrain = (data: any) => {
+export const deleteTrain = (_id: any) => {
+  console.log("service in delete train..", _id);
   let url = `${ENDPOINTS.deleteTrain}`;
-  return client.post(url, data, headers);
+  return client.post(url, _id, headers);
 };
 
 export const trainById = (data: any) => {
