@@ -21,6 +21,7 @@ export default function BookTrain() {
   const [fromStation, setFromStation] = useState<any>("");
   const [toStation, setToStation] = useState<any>("");
   const [date, setDate] = useState(getDefaultDate());
+  const [showBox, setShowBox] = useState<Boolean>(false);
   const dispatch = useAppDispatch();
   const router = useRouter();
 
@@ -54,7 +55,9 @@ export default function BookTrain() {
     if (fromStation || toStation) {
       let data = { from_Stn: fromStation.value, to_Stn: toStation.value };
       console.log("Searching for trains:", data);
-      dispatch(getTrainBySearch(data)).then(() => {
+      dispatch(getTrainBySearch(data)).then((res: any) => {
+        console.log("response ???????????????????????", res);
+        setShowBox(true);
         router.push("/user/train#pagee");
       });
     }
@@ -70,7 +73,7 @@ export default function BookTrain() {
           <Image src={agent} alt="fgvhbj" className="h-[150px] w-[400px]" />
         </div>
       </div>
-      <div className="z-10 -mt-[80px] w-[90%]  h-[300px] bg-white m-auto rounded-2xl">
+      <div className="z-10 -mt-[80px] w-[90%]  h-[350px] bg-white m-auto rounded-2xl">
         <h1 className="text-2xl font-Signika py-4 ml-10 flex gap-5">
           <SiRailway
             size={50}
@@ -133,11 +136,10 @@ export default function BookTrain() {
           {/* <Image src={payment} alt="fgvhbj" className="h-[180px] w-[400px]" />
           <Image src={agent} alt="fgvhbj" className="h-[180px] w-[400px]" /> */}
         </div>
-        <section className="pagee" id="pagee">
-          <Page />
+        <section className="pt-3" id="pagee">
+          {showBox == false ? "" : <Page />}
         </section>
       </div>
-      <div></div>
     </div>
   );
 }

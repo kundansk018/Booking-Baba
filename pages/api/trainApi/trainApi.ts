@@ -131,31 +131,32 @@ export async function getTrains(
   request: NextApiRequest,
   response: NextApiResponse
 ) {
-  // const page: number = parseInt(request.body.page as string) || 1;
-  // //console.log("page Number", request.body.page);
-  // const itemsPerPage: number = 3;
+  let { fields } = await parseForm(request);
+  const page: number = parseInt(fields.page as string) || 1;
+  //console.log("page Number", request.body.page);
+  const itemsPerPage: number = 3;
 
   try {
-    // const startIndex: number = (page - 1) * itemsPerPage;
+    const startIndex: number = (page - 1) * itemsPerPage;
 
-    // const endIndex: number = startIndex + itemsPerPage;
+    const endIndex: number = startIndex + itemsPerPage;
 
     const items = await db
       .collection("Train Details")
       .find()
-      // .skip(startIndex)
-      // .limit(itemsPerPage)
+      .skip(startIndex)
+      .limit(itemsPerPage)
       .toArray();
 
     const totalItems: number = await db
       .collection("Train Details")
       .countDocuments();
 
-    // const totalPages: number = Math.ceil(totalItems / itemsPerPage);
+    const totalPages: number = Math.ceil(totalItems / itemsPerPage);
 
     response.status(200).json({
-      // page,
-      // totalPages,
+      page,
+      totalPages,
       totalItems,
       items,
     });
@@ -183,15 +184,16 @@ export async function searchTrains(
   request: NextApiRequest,
   response: NextApiResponse
 ) {
+  let { fields } = await parseForm(request);
   const trains = await db.collection("Train Details");
   const res = await trains
     .find({
       $and: [
         {
-          from_Stn: { $regex: request.body.from_Stn, $options: "i" },
+          from_Stn: { $regex: fields.from_Stn, $options: "i" },
         },
         {
-          to_Stn: { $regex: request.body.to_Stn, $options: "i" },
+          to_Stn: { $regex: fields.to_Stn, $options: "i" },
         },
       ],
     })

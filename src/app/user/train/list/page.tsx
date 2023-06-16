@@ -30,16 +30,16 @@ export default function Page() {
   const router = useRouter();
 
   return (
-    <div className="tracking-wide -mt-5">
-      <Card className="w-full mt-[0.5%]">
+    <div className="tracking-wide ">
+      <div className="w-full mt-[0.5%]">
         <div className="">
           <Typography className="px-4 font-castoro" variant="h4" color="black">
             Available Trains
           </Typography>
         </div>
-      </Card>
+      </div>
 
-      <div className="mx-3 h-[300px] w-[98%] mt-[0.5%] bg-white relative overflow-scroll px-1">
+      <div className="mx-3 h-[300px] w-full bg-white relative overflow-scroll px-1">
         <table className="relative font-roboto w-full min-w-max table-auto text-left text-sm text-black">
           <thead className="z-10 bg- font-bold flex-col">
             <tr className="z-10 sticky top-0 bg-GreenBlue text-white w-full">
@@ -62,10 +62,10 @@ export default function Page() {
               ? trainData?.data?.map((element: any) => (
                   <tr key={element._id}>
                     <td className="w-[5px] p-2">
-                      <Avatar
-                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4Rb78i6mV3XF1VxsVX_f6FvUggBNCIw4-xw&usqp=CAU"
-                        alt="imagee"
-                        size="md"
+                      <img
+                        className="h-20 w-20 rounded-full"
+                        src={"/uploads/" + element.imageUrl}
+                        alt="nature image"
                       />
                     </td>
                     <td className="w-[5px]  p-2">{element.trainNo}</td>
