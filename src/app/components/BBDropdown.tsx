@@ -9,6 +9,8 @@ interface Props {
   color?: any;
   onPress?: (event: any) => any;
   containerProps?: any;
+  returnType?:'value'
+  onClick?:(event:any)=>any;
 }
 
 export default function BBDropdown(props: Props) {
@@ -27,7 +29,10 @@ export default function BBDropdown(props: Props) {
       {props.options.map((ele: any) => (
 
         <Option onClick={() => {
-          props.onPress ? props.onPress(ele.label) : null;
+          props.onPress ? props.onPress(props?.returnType?ele.value: ele.label) : null;
+          props.onClick? props.onClick(ele.label) : null;
+          
+          
         }}
           value={ele.label}
         >{ele.label}

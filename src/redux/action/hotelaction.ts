@@ -65,19 +65,19 @@ export const getHotels = () => async (dispatch: AppDispatch) => {
 
 /*................. get Hotel By Id..........*/
 export const getHotelById = (id: string) => async (dispatch: AppDispatch) => {
-  try{
-  dispatch({ type: REQUEST_STARTED, payload: null });
-  let data = { id: id };
-  const res = await hotelsById(data)
-  if (res && res.status === 200) {
-    console.log(res.data)
-    dispatch({ type: SAVE_HOTEL_DETAILS, payload: res.data })
-    dispatch({ type: REQUEST_COMPLETED, payload: null });
+  try {
+    dispatch({ type: REQUEST_STARTED, payload: null });
+    let data = { id: id };
+    const res = await hotelsById(data)
+    if (res && res.status === 200) {
+      console.log(res.data)
+      dispatch({ type: SAVE_HOTEL_DETAILS, payload: res.data })
+      dispatch({ type: REQUEST_COMPLETED, payload: null });
+    }
   }
-}
-catch(error){
-  console.log(error)
-}
+  catch (error) {
+    console.log(error)
+  }
 }
 
 
@@ -113,30 +113,40 @@ export const deleteHotelById =
   };
 
 
-  export const searchHotelByName =(hotelname:any) =>async(dispatch:AppDispatch)=>{
-   let param={searchKey:hotelname}
- const res =await searchHotel(param);
- if(res && res.status==200){
-  console.log(res);
-  dispatch({type:SEARCH_HOTELS,payload:res.data?[res.data]:[]})
- }
+export const searchHotelByName = (hotelname: any) => async (dispatch: AppDispatch) => {
+  try {
+    dispatch({ type: REQUEST_STARTED, payload: null });
+    let param = { searchKey: hotelname }
+    const res = await searchHotel(param);
+    if (res && res.status == 200) {
+      console.log(res);
+      dispatch({ type: SEARCH_HOTELS, payload: res.data?.data })
+    }
+  } catch (error) {
+    console.log(error)
+  }
+  dispatch({ type: REQUEST_COMPLETED, payload: null });
 };
 
-export const sortHotel =(data:any) =>async(dispatch:AppDispatch) =>{
-let type=null;
-debugger;
-if(data=='Low to High'){
-  type="PRICE_HIGH"
-}else if(data=='"High to Low'){
-    type='PRICE_LOW'   
-  }else{
+export const sortHotel = (data: any) => async (dispatch: AppDispatch) => {
+  try {
+    dispatch({ type: REQUEST_STARTED, payload: null });
+    let type = null;
+    if (data == 'Low to High') {
+      type = "PRICE_LOW"
+    } else if (data == 'High to Low') {
+      type = 'PRICE_HIGH'
+    } else {
 
-}
-  let param={sortType:type}
-  const res= await sortHotelBy(param);
-  if(res && res.status==200){
-    console.log("dtfgdty",res)
-    dispatch({type:SORT_By,payload:res.data?.data})
+    }
+    let param = { sortType: type }
+    const res = await sortHotelBy(param);
+    if (res && res.status == 200) {
+      dispatch({ type: SORT_By, payload: res.data?.data })
+    }
+  } catch (error) {
+    console.log(error)
   }
+  dispatch({ type: REQUEST_COMPLETED, payload: null });
 }
 
