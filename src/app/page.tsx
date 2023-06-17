@@ -37,8 +37,8 @@ export default function Home() {
       router.push("/user");
     } else {
       setTimeout(() => {
-        router.push("/auth");
-      }, 10000);
+        () => router.push("/auth");
+      }, 100000);
     }
   }, [userData]);
 

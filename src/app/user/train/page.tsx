@@ -73,7 +73,13 @@ export default function BookTrain() {
           <Image src={agent} alt="fgvhbj" className="h-[150px] w-[400px]" />
         </div>
       </div>
-      <div className="z-10 -mt-[80px] w-[90%]  h-[350px] bg-white m-auto rounded-2xl">
+      <div
+        className="z-10 -mt-[80px] w-[90%]  h-[350px] bg-white m-auto rounded-2xl"
+        style={{
+          boxShadow:
+            "rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px",
+        }}
+      >
         <h1 className="text-2xl font-Signika py-4 ml-10 flex gap-5">
           <SiRailway
             size={50}
@@ -131,12 +137,12 @@ export default function BookTrain() {
           </a>
         </div>
         <div className="flex flex-row justify-center pt-3 ">
-          <Image src={t1} alt="sdc" className="h-[150px]" />
-          <Image src={t2} alt="fgvhbj" className="h-[150px] w-[400px]" />
+          <Image src={t1} alt="sdc" className="h-[150px] w-[35%]" />
+          <Image src={t2} alt="fgvhbj" className="h-[150px] w-[35%]" />
           {/* <Image src={payment} alt="fgvhbj" className="h-[180px] w-[400px]" />
           <Image src={agent} alt="fgvhbj" className="h-[180px] w-[400px]" /> */}
         </div>
-        <section className="pt-3" id="pagee">
+        <section className="pt-10" id="pagee">
           {showBox == false ? "" : <Page />}
         </section>
       </div>

@@ -30,7 +30,7 @@ export default function Page() {
   const router = useRouter();
 
   return (
-    <div className="tracking-wide ">
+    <div className="tracking-wide pt-10">
       <div className="w-full mt-[0.5%]">
         <div className="">
           <Typography className="px-4 font-castoro" variant="h4" color="black">

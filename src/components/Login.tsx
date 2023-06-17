@@ -21,16 +21,13 @@ export default function Login() {
   const rollType = userData?.data.data.rollType;
   const router: any = useRouter();
 
-  
-
   useEffect(() => {
     if (userData) {
       if (rollType === 1) {
         console.log("called  if ");
 
         router.push("/dashboard");
-      }
-     else if (rollType != 1) {
+      } else if (rollType != 1) {
         console.log("called else if ");
         router.push("/user");
       }
@@ -103,7 +100,7 @@ export default function Login() {
           <Checkbox label="Remember Me" color="blue" className=" left-0" />
           <h1
             onClick={() => router.push("auth/resetpassword")}
-            className="font-medium text-blue-500 transition-colors hover:text-GreenBlue hover:text-lg"
+            className="cursor-pointer font-medium text-blue-500 transition-colors hover:text-GreenBlue hover:text-lg"
           >
             Forget Password?
           </h1>

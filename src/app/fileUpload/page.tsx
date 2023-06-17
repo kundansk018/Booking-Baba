@@ -52,10 +52,12 @@ export default function page() {
       <div className="px-10 flex justify-center f-column items-center h-[400] w-[100%]">
         <div>
           <input
-            style={{ 
-              // marginTop: 200, marginBottom: 100,
-              //  display: "block" 
-              }}
+            style={
+              {
+                // marginTop: 200, marginBottom: 100,
+                //  display: "block"
+              }
+            }
             type="file"
             onChange={uploadToClient}
           />
