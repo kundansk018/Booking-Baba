@@ -37,7 +37,7 @@ export default function UserHotelPage() {
 
         let available_amenities = new Set()
         rooms?.map((room: any) => {
-            room?.amenities?.map((amenity: any) => available_amenities.add(amenity.name)) //["tv","doctor avail"]   
+            room?.amenities?.map((amenity: any) => available_amenities?.add(amenity.name)) 
         })
 
         let name = (Array.from(available_amenities)).toString();
@@ -48,7 +48,7 @@ export default function UserHotelPage() {
     const displayeView = (rooms: any) => {
         let available_view = new Set()
         rooms?.map((room: any) => {
-            room?.view?.map((item: any) => available_view.add(item.name)) //["tv","doctor avail"]   
+            room?.view?.map((item: any) => available_view.add(item.name)) 
         })
         let name = (Array.from(available_view)).toString();
         return name

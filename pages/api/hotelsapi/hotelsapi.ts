@@ -5,11 +5,11 @@ import { parseForm } from "../../lib/parse-form";
 
 let db: any = undefined;
 
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
+// export const config = {
+//   api: {
+//     bodyParser: false,
+//   },
+// };
 export default async function handler(
   request: NextApiRequest,
   response: NextApiResponse
@@ -45,20 +45,20 @@ export async function addhotel(
   request: NextApiRequest,
   response: NextApiResponse
 ) {
-  const { fields, files } = await parseForm(request);
+//   const { fields, files } = await parseForm(request);
 
-  const file = files?.imageUrl;
-console.log(file)
-  let url =null;
-  if(file){
-  url= Array.isArray(file)
-  ? file.map((f) => f.newFilename)
-  : file.newFilename;
-  }
+//   const file = files?.imageUrl;
+// console.log(file)
+//   let url =null;
+//   if(file){
+//   url= Array.isArray(file)
+//   ? file.map((f) => f.newFilename)
+//   : file.newFilename;
+//   }
 
-  fields.imageUrl = url;
+  // fields.imageUrl = url;
   const hotels = await db.collection("Hotels_Details");
-  const res = await hotels.insertOne(fields);
+  const res = await hotels.insertOne(request.body);
   return response.status(200).json({ data: res });
 }
 
