@@ -39,7 +39,7 @@ export default function AddHotels() {
   const [ownerName, setOwnerName] = useState<String>("");
   const [city, setCity] = useState("");
   const [pin, setPin] = useState("");
-  const [file, setFile] = useState("");
+  const [file, setFile] = useState<any>();
   const [pool, setPool] = useState<boolean>(true);
   const [wifi, setWifi] = useState<boolean>(true);
   const [kids, setKids] = useState<boolean>(true);
@@ -148,13 +148,33 @@ export default function AddHotels() {
     });
   }, []);
 
+  const onFileUploadChange =(e:any)=>{
+    const fileInput = e?.target;
+
+    if (!fileInput.files) {
+      alert("No file was chosen");
+      return;
+    }
+
+    debugger
+   let selectedImg=fileInput.files[0]
+  
+
+const url = URL.createObjectURL(selectedImg);
+
+debugger
+    setFile(url);
+    // setFile(selectedImg)
+  }
+
   const addHotelDetails = () => {
-    let data = {
+    debugger
+    let data:any = {
       hotelname: hotelname,
       ownerName: ownerName,
       contactno: contactno,
       email: email,
-      file: file,
+      imageUrl: "file",
       adress: adress,
       street: street,
       city: city,
@@ -175,6 +195,9 @@ export default function AddHotels() {
       min_order_price:price,
 
     };
+
+
+    
 
     let isErrorFound = false;
     let error: any = [];
@@ -197,7 +220,7 @@ export default function AddHotels() {
       error.push("Please enter valid email address");
     }
 
-    if (!file || !file.trim()) {
+    if (!file) {
       isErrorFound = true;
       error.push("Please Select File");
     }
@@ -212,6 +235,9 @@ export default function AddHotels() {
       setShowErrorDialog(true);
       return;
     } else {
+      console.log(data)
+      // let ldata={...data}
+      // delete ldata.imageUrl
       dispatch(savePreviousData(data));
       router.push("/hotels/add-step2");
     }
@@ -254,8 +280,10 @@ export default function AddHotels() {
               containerProps={{ className: "w-[300px] mb-4" }}
               type="file"
               label="Hotel Photos"
-              value={file}
-              onChange={(e) => setFile(e.target.value)}
+            //  value={file} 
+            //   onChange={(e) => setFile(e.target.value)}
+              onChange={
+                (e) => onFileUploadChange(e)}
             />
             <BBInput
               containerProps={{ className: "" }}

@@ -42,7 +42,7 @@ export const parseForm = async (
       },
       filter: (part) => {
         return (
-          part.name === "trainImage" &&
+          part.name === "imageUrl" &&
           (part.mimetype?.includes("image") || false)
         );
       },

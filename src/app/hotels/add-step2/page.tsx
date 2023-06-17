@@ -103,11 +103,16 @@ export default function Page() {
     // data.essentialKit = essentialKit
     // data["rooms"]=roomDetails
 
-    console.log(data);
+    console.log(data)
+    var form_data = new FormData();
 
-    dispatch(addHotels(data));
-    router.push("/hotels");
-  };
+    for (var key in data) {
+      form_data.append(key, data[key]);
+    }
+
+    dispatch(addHotels(form_data));
+    router.push("/hotels")
+  }
 
   const deleteRoom = (index: number) => {
     let data = [...roomDetails];
@@ -233,12 +238,8 @@ export default function Page() {
                   <Multiselect
                     placeholder={getSelectedViews(index)}
                     options={options_view}
-                    onSelect={(selectedList, selectedItem) =>
-                      selectOption_view(index, selectedList, selectedItem)
-                    }
-                    onRemove={(selectedList, selectedItem) =>
-                      selectOption_view(index, selectedList, selectedItem)
-                    }
+                    onSelect={(selectedList, selectedItem) => selectOption_view(index, selectedList, selectedItem)}
+                    onRemove={(selectedList, selectedItem) => selectOption_view(index, selectedList, selectedItem)}
                     displayValue="name"
                     avoidHighlightFirstOption={true}
                     showCheckbox={true}
@@ -249,12 +250,8 @@ export default function Page() {
                   <Multiselect
                     placeholder={getSelectedAmenities(index)}
                     options={room_amenities}
-                    onSelect={(selectedList, selectedItem) =>
-                      selectRoomAmenities(index, selectedList, selectedItem)
-                    }
-                    onRemove={(selectedList, selectedItem) =>
-                      selectRoomAmenities(index, selectedList, selectedItem)
-                    }
+                    onSelect={(selectedList, selectedItem) => selectRoomAmenities(index, selectedList, selectedItem)}
+                    onRemove={(selectedList, selectedItem) => selectRoomAmenities(index, selectedList, selectedItem)}
                     displayValue="name"
                     avoidHighlightFirstOption={true}
                     showCheckbox={true}
@@ -265,12 +262,8 @@ export default function Page() {
                   <Multiselect
                     placeholder={getSelectedKit(index)}
                     options={essential_Kit}
-                    onSelect={(selectedList, selectedItem) =>
-                      selectEssential_Kit(index, selectedList, selectedItem)
-                    }
-                    onRemove={(selectedList, selectedItem) =>
-                      selectEssential_Kit(index, selectedList, selectedItem)
-                    }
+                    onSelect={(selectedList, selectedItem) => selectEssential_Kit(index, selectedList, selectedItem)}
+                    onRemove={(selectedList, selectedItem) => selectEssential_Kit(index, selectedList, selectedItem)}
                     displayValue="name"
                     avoidHighlightFirstOption={true}
                     showCheckbox={true}
@@ -279,6 +272,7 @@ export default function Page() {
                 </div>
               </div>
             </div>
+
           </div>
         ))}
       </div>

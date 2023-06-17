@@ -7,6 +7,13 @@ let headers = {
   },
 };
 
+let formDataHeader = {
+  headers: {
+    "Content-Type": "multipart/form-data",
+  },
+};
+
+
 interface IPropsDelete {
   id: string;
 }
@@ -30,7 +37,7 @@ export const updatePwd = (data: any) => {
 
 export const addHotelsInfo = (data: any) => {
   let url = `${ENDPOINTS.addHotels}`;
-  return client.post(url, data, headers);
+  return client.post(url, data, formDataHeader);
 };
 
 export const getHotel = () => {

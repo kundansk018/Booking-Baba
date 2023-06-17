@@ -1,5 +1,6 @@
 'use client'
 import BBButton from '@/app/components/BBButton';
+import BBDate from '@/app/components/BBDate';
 import BBDropdown from '@/app/components/BBDropdown';
 import BBInput from '@/app/components/BBInput';
 import BBRating from '@/app/components/BBRating'
@@ -12,6 +13,7 @@ import { useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 import { Button, Row } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
+
 
 export default function UserHotelPage() {
     const [searchKey, setSearchKey] = useState("")
@@ -109,6 +111,9 @@ export default function UserHotelPage() {
                             onPress={(value) => {
                                 setSort(value)
                             }} />
+                    </div>
+                    <div >
+                        <BBDate/>
                     </div>
 
                     <div className='flex justify-end '>
