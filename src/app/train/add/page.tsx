@@ -4,7 +4,7 @@ import BBButton from "@/app/components/BBButton";
 import BBInput from "@/app/components/BBInput";
 import "../../styles/hotel.css";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAppDispatch } from "@/redux/store";
 import { useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
@@ -35,6 +35,16 @@ export default function AddTrain() {
   const [errorDialogMessage, setErrorDialogMessage] = useState([]);
   const [showErrorDialog, setShowErrorDialog] = useState(false);
   const router = useRouter();
+
+  const { trainDetails }: any = useSelector((state: any) => state.train);
+  // console.log("add train page::::::::*****", trainDetails);
+
+  useEffect(() => {
+    if (trainDetails?.status === 200) {
+      // console.log("traindetails in useeffect :: ", trainDetails);
+      router.push("/train");
+    }
+  }, [trainDetails]);
 
   const onFileUploadChange = (e: any) => {
     const fileInput = e?.target;
@@ -74,7 +84,7 @@ export default function AddTrain() {
       formData.append("operationDays", operationDays);
       formData.append("trainRoute", trainRoute);
       formData.append("trainDesc", trainDesc);
-      formData.append("trainImage", trainImage);
+      formData.append("imageUrl", trainImage);
 
       console.log("formData>>>>>>>>>>>", formData);
 
@@ -82,35 +92,8 @@ export default function AddTrain() {
       //   method: "POST",
       //   body: formData,
       // });
-
-      dispatch(addTrain(formData))
-        .then((res: any) => {
-          console.log("response>>>>>>>>>>>>>>", res);
-
-          if (res) {
-            console.log("response>>>>>>>>>>>>>>", res);
-
-            router.push("/train");
-
-            const {
-              data,
-              error,
-            }: {
-              data: { url: string | string[] } | null;
-              error: string | null;
-            } = res.json();
-
-            console.log("File was uploaded successfylly:", data);
-
-            if (error || !data) {
-              alert(error || "Sorry! something went wrong.");
-              return;
-            }
-          }
-        })
-        .catch((err: any) => {
-          console.log("error ::::::::::::", err);
-        });
+      
+      dispatch(addTrain(formData));
     } catch (error) {
       console.error(error);
       alert("Sorry! something went wrong inside catch");

@@ -58,7 +58,7 @@ export default function updateTrain({ params }: any) {
         operationDays,
         trainRoute,
         trainDesc,
-        //trainImage,
+        trainImage,
       } = train_Data;
       setTrainNo(trainNo);
       setTrainName(trainName);
@@ -75,7 +75,7 @@ export default function updateTrain({ params }: any) {
       setOperationDays(operationDays);
       setTrainRoute(trainRoute);
       setTrainDesc(trainDesc);
-      //setTrainImage(trainImage);
+      setTrainImage(trainImage);
     }
   }, [trainData]);
 
@@ -217,7 +217,7 @@ export default function updateTrain({ params }: any) {
               type="file"
               label="Train Image"
               value={trainImage}
-              onChange={(e) => setTrainImage(e?.target.files[0])}
+              onChange={(e) => console.log(e?.target.files[0])}
             />
           </div>
 

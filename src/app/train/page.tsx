@@ -58,7 +58,7 @@ export default function Train() {
       setTotalPages(totalPages);
       setItems(items);
     }
-  }, []);
+  }, [trainData]);
   console.log("totalPages => ", totalPages);
 
   const getAllTrains = () => {

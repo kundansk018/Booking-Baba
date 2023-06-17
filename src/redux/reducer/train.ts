@@ -15,7 +15,7 @@ export const initialState = {
 export const TrainReducer = (state = initialState, action: any) => {
   switch (action.type) {
     case TRAIN_REQUEST_SUCCESS: {
-      console.log("data in train reducer: ", action.payload);
+      console.log("data in train reducer******************: ", action.payload);
       return {
         ...state,
         loading: false,
@@ -24,10 +24,11 @@ export const TrainReducer = (state = initialState, action: any) => {
     }
 
     case TRAIN_UPDATE_REQUEST_SUCCESS: {
-      console.log("data in train reducer: ", action.payload);
+      console.log("data in train reducer>>>>>>>>>>>>>>>>: ", action.payload);
       return {
         ...state,
         loading: false,
+        trainDetails: action.payload,
       };
     }
 

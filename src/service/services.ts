@@ -95,7 +95,13 @@ export const TrainSearch = (data: any) => {
 export const updateTrainInfo = (data: any) => {
   //debugger;
   let url = `${ENDPOINTS.updateTrain}`;
-  return client.post(url, data, headers);
+  return client.post(url, data, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+      "x-rapidapi-host": "file-upload8.p.rapidapi.com",
+      "x-rapidapi-key": "your-rapidapi-key-here",
+    },
+  });
 };
 
 //bus servicess//
