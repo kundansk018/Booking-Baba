@@ -26,8 +26,6 @@ export const signup = (data: any) => async (dispatch: AppDispatch) => {
   });
   if (res.ok === true) {
     console.log("inside if sign up api in user.ts page :::::::::>>>", res);
-
-   
     dispatch({ type: SIGNUP_REQUEST_SUCCESS, payload: {success:true,message:"Registeration done"} });
     
   } else {

@@ -1,8 +1,15 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import getDB from "../connection";
 import { ObjectId } from "mongodb";
+import { FormidableError, parseForm } from "../../lib/parse-form";
 
 let db: any = undefined;
+
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+};
 
 export default async function handler(
   request: NextApiRequest,
@@ -14,12 +21,12 @@ export default async function handler(
     case "POST":
       if (request.query?.action === "ADD_BUS") {
         return await addBus(request, response);
+      } else if (request.query?.action === "GET_ALL_BUSES") {
+        return await getAllBuses(request, response);
       } else if (request.query?.action === "UPDATE_BUS") {
         return await updateBus(request, response);
       } else if (request.query?.action === "DELETE_BUS") {
         return await deleteBus(request, response);
-      } else if (request.query?.action === "GET_ALL_BUSES") {
-        return await getAllBuses(request, response);
       } else if (request.query?.action === "SEARCH_BUS") {
         return await search(request, response);
       } else if (request.query?.action === "GET_BUS_BY_ID") {
@@ -37,16 +44,44 @@ export async function addBus(
   request: NextApiRequest,
   response: NextApiResponse
 ) {
-  const buses = await db.collection("Bus Details");
-  const res = await buses.insertOne(request.body);
-  return response.status(200).json({ data: res });
+  try {
+    console.log("called api");
+
+    const { fields, files } = await parseForm(request);
+
+    const file = files?.imageUrl;
+
+    console.log("fields in add bus ", fields);
+    console.log("file  in add bus  ", file);
+
+    let url = Array.isArray(file)
+      ? file.map((f) => f.newFilename)
+      : file.newFilename;
+    fields.imageUrl = url;
+
+    const buses = await db.collection("Bus Details");
+    const res = await buses.insertOne(fields);
+    return response.status(200).json({ data: res });
+  } catch (e) {
+    if (e instanceof FormidableError) {
+      return response
+        .status(e.httpCode || 400)
+        .json({ data: null, error: e.message });
+    } else {
+      console.error(e);
+      return response
+        .status(500)
+        .json({ data: null, error: "Internal Server Error" });
+    }
+  }
 }
 
 export async function search(
   request: NextApiRequest,
   response: NextApiResponse
 ) {
-  const { from, to } = request.body;
+  const { fields } = await parseForm(request);
+  const { from, to } = fields;
   const buses = await db.collection("Bus Details");
   const res = await buses.find({ from, to }).toArray();
   return response.status(200).json({ data: res });
@@ -56,29 +91,30 @@ export async function updateBus(
   request: NextApiRequest,
   response: NextApiResponse
 ) {
+  const { fields } = await parseForm(request);
   const buses = await db.collection("Bus Details");
   const res = await buses.updateOne(
-    { _id: new ObjectId(request.body._id) },
+    { _id: new ObjectId(fields._id) },
     {
       // $set: request.body.data,
       $set: {
-        busname: request.body.busname,
-        busnumber: request.body.busnumber,
-        from: request.body.from,
-        to: request.body.to,
-        arrivalTime: request.body.arrivalTime,
-        arrivalDate: request.body.arrivalDate,
-        pickUpPoint: request.body.pickUpPoint,
-        departureTime: request.body.departureTime,
-        seats: request.body.seats,
-        ticketprice: request.body.ticketprice,
-        operator: request.body.operator,
-        currentStatus: request.body.currentStatus,
-        busType: request.body.busType,
-        busstops: request.body.busstops,
-        noofstop: request.body.noofstop,
-        bookingseats: request.body.bookingseats,
-        travelagencyname: request.body.travelagencyname,
+        busname: fields.busname,
+        busnumber: fields.busnumber,
+        from: fields.from,
+        to: fields.to,
+        arrivalTime: fields.arrivalTime,
+        arrivalDate: fields.arrivalDate,
+        pickUpPoint: fields.pickUpPoint,
+        departureTime: fields.departureTime,
+        seats: fields.seats,
+        ticketprice: fields.ticketprice,
+        operator: fields.operator,
+        currentStatus: fields.currentStatus,
+        busType: fields.busType,
+        busstops: fields.busstops,
+        noofstop: fields.noofstop,
+        bookingseats: fields.bookingseats,
+        travelagencyname: fields.travelagencyname,
       },
     }
   );
@@ -89,57 +125,24 @@ export async function deleteBus(
   request: NextApiRequest,
   response: NextApiResponse
 ) {
+  const { fields } = await parseForm(request);
   const buses = await db.collection("Bus Details");
   const res = await buses.deleteOne({
-    _id: new ObjectId(request.body),
+    _id: new ObjectId(fields._id),
   });
   return response.status(200).json({ data: res });
-}
-
-export async function getBus(
-  request: NextApiRequest,
-  response: NextApiResponse
-) {
-  const page: number = parseInt(request.body.page as string) || 1;
-  //console.log("page Number", request.body.page);
-  const itemsPerPage: number = 3;
-
-  try {
-    const startIndex: number = (page - 1) * itemsPerPage;
-
-    const endIndex: number = startIndex + itemsPerPage;
-
-    const items = await db
-      .collection("Bus Details")
-      .find()
-      .skip(startIndex)
-      .limit(itemsPerPage)
-      .toArray();
-
-    const totalItems: number = await db
-      .collection("Bus Details")
-      .countDocuments();
-
-    const totalPages: number = Math.ceil(totalItems / itemsPerPage);
-
-    response.status(200).json({
-      page,
-      totalPages,
-      totalItems,
-      items,
-    });
-  } catch (error) {
-    console.log("error fetching data from mongodb", error);
-    response.status(500).json({ message: "internal server error" });
-  }
 }
 
 export async function getAllBuses(
   request: NextApiRequest,
   response: NextApiResponse
 ) {
-  const page: number = parseInt(request.body.page as string) || 1;
-  //console.log("page Number", request.body.page);
+  console.log("api called....");
+
+  const { fields } = await parseForm(request);
+  console.log("fields", fields);
+  const page: number = parseInt(fields.page as string) || 1;
+  console.log("page Number", fields.page);
   const itemsPerPage: number = 3;
 
   try {
@@ -176,7 +179,8 @@ export async function getBusById(
   request: NextApiRequest,
   response: NextApiResponse
 ) {
+  const { fields } = await parseForm(request);
   const bus = await db.collection("Bus Details");
-  const res = await bus.findOne({ _id: new ObjectId(request.body._id) });
+  const res = await bus.findOne({ _id: new ObjectId(fields._id) });
   return response.status(200).json({ data: res });
 }

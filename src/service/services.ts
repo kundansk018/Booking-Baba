@@ -66,8 +66,6 @@ export const addtrainInfo = (data: any) => {
   return client.post(url, data, {
     headers: {
       "Content-Type": "multipart/form-data",
-      "x-rapidapi-host": "file-upload8.p.rapidapi.com",
-      "x-rapidapi-key": "your-rapidapi-key-here",
     },
   });
 };
@@ -106,8 +104,13 @@ export const updateTrainInfo = (data: any) => {
 
 //bus servicess//
 export const addBus = (data: any) => {
+  console.log("add bus service called");
   let url = `${ENDPOINTS.addBus}`;
-  return client.post(url, data, headers);
+  return client.post(url, data, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
 };
 export const updateBus = (data: any) => {
   let url = `${ENDPOINTS.updateBus}`;

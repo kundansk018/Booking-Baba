@@ -47,7 +47,7 @@ export default function Bus() {
   const busData: any = useSelector((state: any) => state.bus.busDetails);
   console.log("bus data is ..==>>>>", busData);
   const dispatch = useAppDispatch();
-  const [counter, setCounter] = useState<any>(0);
+  const [counter, setCounter] = useState<any>(1);
   const [page, setPage] = useState<any>(1);
   const [totalItems, setTotalItems] = useState<any>();
   const [items, setItems] = useState<any>([]);
@@ -67,7 +67,7 @@ export default function Bus() {
       setTotalPages(totalPages);
       setItems(items);
     }
-  }, []);
+  }, [busData]);
   console.log("totalPages => ", items);
 
   const getAllBuses = () => {
@@ -79,9 +79,10 @@ export default function Bus() {
   };
 
   const deleteBus = (id: string) => {
-    dispatch(deleteBusAction(id));
-    setCounter(counter + 1);
-    getAllBuses();
+    dispatch(deleteBusAction(id)).then(() => {
+      setCounter(counter + 1);
+      getAllBuses();
+    });
   };
 
   const updateBus = (id: string) => {
@@ -155,12 +156,12 @@ export default function Bus() {
             {busData
               ? busData?.items?.map((element: any) => (
                   <>
-                    <tr className="border-b border-b-gray-400 hover:bg-gray-300 hover:scale-[1.004] focus:scale-[1.004] active:scale-100">
+                    <tr className="border-b">
                       <td className="w-[5px] p-2">
-                        <Avatar
-                          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTI5KPcBp9vKBWRnMlYxr8AXUbQO6GiHvrBQZ5FJiVx6w9kmarHbNLCGzgnMqHkrjl7-zE&usqp=CAU"
-                          alt="imagee"
-                          size="md"
+                        <img
+                          className="h-20 w-20 rounded-full"
+                          src={"uploads/" + element.imageUrl}
+                          alt="nature image"
                         />
                       </td>
                       <td className="w-[5px] p-2">{element.busnumber}</td>
@@ -189,7 +190,6 @@ export default function Bus() {
                             onClick={() => updateBus(element._id)}
                             variant="text"
                             color="blue-gray"
-                            className="hover:bg-gray-500"
                           >
                             <PencilIcon className="h-4 w-4" />
                           </IconButton>
@@ -199,7 +199,6 @@ export default function Bus() {
                             onClick={() => deleteBus(element._id)}
                             variant="text"
                             color="blue-gray"
-                            className="hover:bg-gray-500"
                           >
                             <TrashIcon
                               className=" w-4 text-red-500"

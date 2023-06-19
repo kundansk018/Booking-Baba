@@ -51,6 +51,11 @@ export async function addTrain(
     const { fields, files } = await parseForm(request);
 
     const file = files?.imageUrl;
+<<<<<<< Updated upstream
+=======
+    console.log("fields", fields);
+    console.log("file", file);
+>>>>>>> Stashed changes
 
     let url = Array.isArray(file)
       ? file.map((f) => f.newFilename)
@@ -106,8 +111,6 @@ export async function updateTrain(
       },
     }
   );
-  console.log("ressssss ", res);
-  console.log("ressssss id ", request.body);
   return response.status(200).json({ data: res });
 }
 
@@ -118,8 +121,6 @@ export async function deleteTrain(
   console.log("called api");
   const trains = await db.collection("Train Details");
   let { fields } = await parseForm(request);
-
-  console.log(" fields.....>>>", fields);
 
   const res = await trains.deleteOne({
     _id: new ObjectId(fields._id),
@@ -135,8 +136,9 @@ export async function getTrains(
   response: NextApiResponse
 ) {
   let { fields } = await parseForm(request);
+  console.log("page", fields.page);
   const page: number = parseInt(fields.page as string) || 1;
-  //console.log("page Number", request.body.page);
+  console.log("page Number", request);
   const itemsPerPage: number = 3;
 
   try {
@@ -178,7 +180,6 @@ export async function getTrainById(
   console.log(" fields.....>>>", fields);
   const trains = await db.collection("Train Details");
 
-  // const res = await trains.findOne({ _id: new ObjectId(request.body._id) });
   const res = await trains.findOne({ _id: new ObjectId(fields._id) });
   return response.status(200).json({ data: res });
 }

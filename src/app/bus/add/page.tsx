@@ -24,128 +24,152 @@ import { useRouter } from "next/navigation";
 
 export default function AddBus() {
   const dispatch = useAppDispatch();
-  const [busname, setBusname] = useState<String>("");
-  const [from, setFrom] = useState<String>("");
-  const [to, setTo] = useState<String>("");
-  const [busnumber, setBusnumber] = useState<String>("");
-  const [time, setTime] = useState<String>("");
-  const [seats, setSeats] = useState<String>("");
+  const [busname, setBusname] = useState<string>("");
+  const [from, setFrom] = useState<string>("");
+  const [to, setTo] = useState<string>("");
+  const [busnumber, setBusnumber] = useState<string>("");
+  const [time, setTime] = useState<string>("");
+  const [seats, setSeats] = useState<string>("");
   const [ticketprice, setTicketPrice] = useState<string>("");
-  const [operator, setOperator] = useState<String>("");
-  const [busstops, setBusStops] = useState<String>("");
+  const [operator, setOperator] = useState<string>("");
+  const [busstops, setBusStops] = useState<string>("");
   const [noofstop, setNoOfStop] = useState("");
   const [bookingseats, setBookingSeats] = useState("");
   const [travelagencyname, setTravelAgencyName] = useState("");
-  // const [status, setStatus] = useState("");
-  // const [file, setFile] = useState("");
   const [arrivalDate, setArrivalDate] = useState("");
   const [arrivalTime, setArrivalTime] = useState("");
   const [departureTime, setDepartureTime] = useState("");
   const [pickUpPoint, setPickUpPoint] = useState("");
   const [busType, setBusType] = useState("");
   const [currentStatus, setCurrentStatus] = useState("");
-  // const [photos, setPhotos] = useState<String>("");
+  const [busImage, setBusImage] = useState<any>();
   const [wifi, setWifi] = useState<boolean>(true);
   const [cpoint, setCpoint] = useState<boolean>(true);
   const [system, setSystem] = useState<boolean>(true);
   const [lights, setLights] = useState<boolean>(true);
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const router = useRouter();
 
   const [showErrorDialog, setShowErrorDialog] = useState(false);
 
   const [errorDialogMessage, setErrorDialogMessage] = useState([]);
 
+  const onFileUploadChange = (e: any) => {
+    const fileInput = e?.target;
+
+    if (!fileInput.files) {
+      alert("No file was chosen");
+      return;
+    }
+
+    const busImage = fileInput.files[0];
+
+    setBusImage(busImage);
+    console.log(busImage);
+    // setPreviewUrl(URL.createObjectURL(busImage));
+  };
+
   const addBus = (e: any) => {
     console.log("called add bus");
-    let data = {
-      // file,
-      busname,
-      busnumber,
-      from,
-      to,
-      arrivalTime,
-      arrivalDate,
-      pickUpPoint,
-      departureTime,
-      seats,
-      ticketprice,
-      operator,
-      currentStatus,
-      busType,
-      busstops,
-      noofstop,
-      bookingseats,
-      travelagencyname,
-    };
-
-    let isErrorFound = false;
-    let error: any = [];
-    if (!busname || !busname.trim()) {
-      isErrorFound = true;
-      error.push("plz add bus..");
-    }
-
-    if (!busnumber || !busnumber.trim()) {
-      isErrorFound = true;
-      error.push("Please add bus no..");
-    }
-    if (!from || !from.trim()) {
-      isErrorFound = true;
-      error.push("Please add route ");
-    }
-    if (!to || !to.trim()) {
-      isErrorFound = true;
-      error.push("Please add route ");
-    }
-    if (!arrivalDate || !arrivalDate.trim()) {
-      isErrorFound = true;
-      error.push("Please enter arrival date ");
-    }
-    if (!departureTime || !departureTime.trim()) {
-      isErrorFound = true;
-      error.push("Please enter departure time ");
-    }
-    if (!arrivalTime || !arrivalTime.trim()) {
-      isErrorFound = true;
-      error.push("Please enter arrival time");
-    }
-    if (!seats || !seats.trim()) {
-      isErrorFound = true;
-      error.push("Please enter total seats");
-    }
-    if (!ticketprice || !ticketprice.trim()) {
-      isErrorFound = true;
-      error.push("Please enter ticket price ");
-    }
-    if (!operator || !operator.trim()) {
-      isErrorFound = true;
-      error.push("Please enter bus operator name ");
-    }
-    if (!pickUpPoint || !pickUpPoint.trim()) {
-      isErrorFound = true;
-      error.push("Please enter pickup point");
-    }
-
-    if (!busstops || !busstops.trim()) {
-      isErrorFound = true;
-      error.push("Please enter busstops point");
-    }
-
-    if (!busType || !busType.trim()) {
-      isErrorFound = true;
-      error.push("Please enter bus type ");
-    }
-    if (!currentStatus || !currentStatus.trim()) {
-      isErrorFound = true;
-      error.push("Please enter current status");
-    }
-    if (isErrorFound) {
-      setErrorDialogMessage(error);
-      setShowErrorDialog(true);
+    if (!busImage) {
       return;
-    } else {
-      dispatch(addBuses(data));
-      router.push("/bus");
+    }
+    try {
+      let isErrorFound = false;
+      let error: any = [];
+      if (!busname || !busname.trim()) {
+        isErrorFound = true;
+        error.push("plz add bus..");
+      }
+
+      if (!busnumber || !busnumber.trim()) {
+        isErrorFound = true;
+        error.push("Please add bus no..");
+      }
+      if (!from || !from.trim()) {
+        isErrorFound = true;
+        error.push("Please add route ");
+      }
+      if (!to || !to.trim()) {
+        isErrorFound = true;
+        error.push("Please add route ");
+      }
+      if (!arrivalDate || !arrivalDate.trim()) {
+        isErrorFound = true;
+        error.push("Please enter arrival date ");
+      }
+      if (!departureTime || !departureTime.trim()) {
+        isErrorFound = true;
+        error.push("Please enter departure time ");
+      }
+      if (!arrivalTime || !arrivalTime.trim()) {
+        isErrorFound = true;
+        error.push("Please enter arrival time");
+      }
+      if (!seats || !seats.trim()) {
+        isErrorFound = true;
+        error.push("Please enter total seats");
+      }
+      if (!ticketprice || !ticketprice.trim()) {
+        isErrorFound = true;
+        error.push("Please enter ticket price ");
+      }
+      if (!operator || !operator.trim()) {
+        isErrorFound = true;
+        error.push("Please enter bus operator name ");
+      }
+      if (!pickUpPoint || !pickUpPoint.trim()) {
+        isErrorFound = true;
+        error.push("Please enter pickup point");
+      }
+
+      if (!busstops || !busstops.trim()) {
+        isErrorFound = true;
+        error.push("Please enter busstops point");
+      }
+
+      if (!busType || !busType.trim()) {
+        isErrorFound = true;
+        error.push("Please enter bus type ");
+      }
+      if (!currentStatus || !currentStatus.trim()) {
+        isErrorFound = true;
+        error.push("Please enter current status");
+      }
+
+      if (isErrorFound) {
+        setErrorDialogMessage(error);
+        setShowErrorDialog(true);
+        return;
+      } else {
+        let formData = new FormData();
+        formData.append("busnumber", busnumber);
+        formData.append("busname", busname);
+        formData.append("from", from);
+        formData.append("to", to);
+        formData.append("arrivalDate", arrivalDate);
+        formData.append("seats", seats);
+        formData.append("departureTime", departureTime);
+        formData.append("pickUpPoint", pickUpPoint);
+        formData.append("arrivalTime", arrivalTime);
+        formData.append("seats", seats);
+        formData.append("ticketprice", ticketprice);
+        formData.append("operator", operator);
+        formData.append("currentStatus", currentStatus);
+        formData.append("busType", busType);
+        formData.append("busstops", busstops);
+        formData.append("noofstop", noofstop);
+        formData.append("bookingseats", bookingseats);
+        formData.append("travelagencyname", travelagencyname);
+        formData.append("imageUrl", busImage);
+
+        dispatch(addBuses(formData)).then(() => {
+          router.push("/bus");
+        });
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Sorry! something went wrong inside catch");
     }
   };
 
@@ -175,13 +199,6 @@ export default function AddBus() {
               value={busnumber + ""}
               onChange={(e) => setBusnumber(e.target.value)}
             />
-            {/* <BBInput
-            containerProps={{ className: "mb-3" }}
-            type="file"
-            label="file"
-            value={file + ""}
-            onChange={(e) => setFile(e.target.value)}
-          /> */}
 
             <BBDropdown
               containerProps={{ className: "mb-3" }}
@@ -198,7 +215,11 @@ export default function AddBus() {
 
             <BBDropdown
               containerProps={{ className: "mb-3" }}
-              options={[{ label: "Nashik" }, { label: "Pune" }, { label: "Mumbai" }]}
+              options={[
+                { label: "Nashik" },
+                { label: "Pune" },
+                { label: "Mumbai" },
+              ]}
               value={from}
               onPress={(value: any) => {
                 setFrom(value);
@@ -208,7 +229,11 @@ export default function AddBus() {
 
             <BBDropdown
               containerProps={{ className: "mb-3" }}
-              options={[{ label: "Nashik" }, { label: "Pune" }, { label: "Mumbai" }]}
+              options={[
+                { label: "Nashik" },
+                { label: "Pune" },
+                { label: "Mumbai" },
+              ]}
               value={to}
               onPress={(value: any) => {
                 setTo(value);
@@ -277,15 +302,16 @@ export default function AddBus() {
               label="Ticket Prise"
             />
             <BBInput
-              containerProps={{ className: "mb-3" }}
-              label="Bus Operator"
-              value={operator + ""}
-              onChange={(e) => setOperator(e.target.value)}
+              containerProps={{ className: "mb-4" }}
+              type="file"
+              label="Bus Image"
+              onChange={(e) => onFileUploadChange(e)}
             />
           </div>
 
           <div className="flex  flex-col mx-5 w-[300px]">
             <BBDropdown
+              containerProps={{ className: "mb-3" }}
               options={[
                 { label: "CBS" },
                 { label: "New CBS" },
@@ -297,8 +323,8 @@ export default function AddBus() {
               }}
               label="PickUp Point"
             />
-            <br />
             <BBDropdown
+              containerProps={{ className: "mb-3" }}
               options={[
                 { label: "Nashik New CBS" },
                 { label: "Sinner" },
@@ -309,7 +335,8 @@ export default function AddBus() {
                 { label: "Igatpuri" },
                 { label: "Kasara" },
                 { label: "Kalyan" },
-                { label: "Thane" }, { label: "Mumbai" },
+                { label: "Thane" },
+                { label: "Mumbai" },
               ]}
               value={busstops}
               onPress={(value: any) => {
@@ -317,9 +344,9 @@ export default function AddBus() {
               }}
               label=" View Bus Stops"
             />
-            <br />
 
             <BBDropdown
+              containerProps={{ className: "mb-3" }}
               options={[
                 { label: "Ac-Shivneri" },
                 { label: "Semi-Luxury" },
@@ -335,9 +362,9 @@ export default function AddBus() {
               }}
               label="BusType"
             />
-            <br />
 
             <BBDropdown
+              containerProps={{ className: "mb-3" }}
               options={[{ label: "Available" }, { label: "Not-Availabel" }]}
               value={currentStatus}
               onPress={(value: any) => {
@@ -345,8 +372,9 @@ export default function AddBus() {
               }}
               label="CurrentStatus"
             />
-            <br />
+
             <BBDropdown
+              containerProps={{ className: "mb-3" }}
               options={[
                 { label: "1" },
                 { label: "2" },
@@ -360,7 +388,12 @@ export default function AddBus() {
               }}
               label="No Of Bus Stop"
             />
-            <br />
+            <BBInput
+              containerProps={{ className: "mb-3" }}
+              label="Bus Operator"
+              value={operator + ""}
+              onChange={(e) => setOperator(e.target.value)}
+            />
           </div>
         </div>
 

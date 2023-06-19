@@ -62,7 +62,7 @@ export default function UpdateBus({ params }: any) {
     dispatch(getBusesById(params.id));
   }, []);
 
-  console.log("Bus Data Is???????????????", busState)
+  console.log("Bus Data Is???????????????", busState);
   const updatebus = () => {
     let data = {
       _id: params.id,
@@ -84,11 +84,12 @@ export default function UpdateBus({ params }: any) {
       bookingseats,
       travelagencyname,
     };
-    dispatch(updateBusAction(data))
-    router.push("/bus")
-  }
+    dispatch(updateBusAction(data)).then(() => {
+      router.push("/bus");
+    });
+  };
   useEffect(() => {
-    let bus_data = busState?.data
+    let bus_data = busState?.data;
     if (bus_data) {
       const {
         busname,
@@ -110,36 +111,30 @@ export default function UpdateBus({ params }: any) {
         currentStatus,
         // photos,
         // wifi,
-
-      } = bus_data
-      setBusname(busname)
-      setFrom(from)
-      setTo(to)
-      setBusnumber(busnumber)
-      setSeats(seats)
-      setTicketPrice(ticketprice)
-      setOperator(operator)
-      setBusStops(busstops)
-      setNoOfStop(noofstop)
-      setBookingSeats(bookingseats)
-      setTravelAgencyName(travelagencyname)
-      setArrivalDate(arrivalDate)
-      setArrivalTime(arrivalTime)
-      setDepartureTime(departureTime)
-      setPickUpPoint(pickUpPoint)
-      setBusType(busType)
-      setCurrentStatus(currentStatus)
+      } = bus_data;
+      setBusname(busname);
+      setFrom(from);
+      setTo(to);
+      setBusnumber(busnumber);
+      setSeats(seats);
+      setTicketPrice(ticketprice);
+      setOperator(operator);
+      setBusStops(busstops);
+      setNoOfStop(noofstop);
+      setBookingSeats(bookingseats);
+      setTravelAgencyName(travelagencyname);
+      setArrivalDate(arrivalDate);
+      setArrivalTime(arrivalTime);
+      setDepartureTime(departureTime);
+      setPickUpPoint(pickUpPoint);
+      setBusType(busType);
+      setCurrentStatus(currentStatus);
       // setPhotos(photos)
       // setWifi(wifi)
-
     }
-
-  }, [busState])
+  }, [busState]);
 
   // console.log("///////////////", busState.updateBusDetails)
-
-
-
 
   return (
     <div className="bg-white h-[550px] mt-5 p-5 m-auto w-[90%] justify-center rounded-lg">

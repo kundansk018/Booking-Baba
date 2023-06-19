@@ -68,18 +68,16 @@ export const getHotelById = (id: string) => async (dispatch: AppDispatch) => {
   try {
     dispatch({ type: REQUEST_STARTED, payload: null });
     let data = { id: id };
-    const res = await hotelsById(data)
+    const res = await hotelsById(data);
     if (res && res.status === 200) {
-      console.log(res.data)
-      dispatch({ type: SAVE_HOTEL_DETAILS, payload: res.data })
+      console.log(res.data);
+      dispatch({ type: SAVE_HOTEL_DETAILS, payload: res.data });
       dispatch({ type: REQUEST_COMPLETED, payload: null });
     }
+  } catch (error) {
+    console.log(error);
   }
-  catch (error) {
-    console.log(error)
-  }
-}
-
+};
 
 /*................. update Hotel By Id..........*/
 export const updateHotel = (data: any) => async (dispatch: AppDispatch) => {
@@ -112,41 +110,39 @@ export const deleteHotelById =
     }
   };
 
-
-export const searchHotelByName = (hotelname: any) => async (dispatch: AppDispatch) => {
-  try {
-    dispatch({ type: REQUEST_STARTED, payload: null });
-    let param = { searchKey: hotelname }
-    const res = await searchHotel(param);
-    if (res && res.status == 200) {
-      console.log(res);
-      dispatch({ type: SEARCH_HOTELS, payload: res.data?.data })
+export const searchHotelByName =
+  (hotelname: any) => async (dispatch: AppDispatch) => {
+    try {
+      dispatch({ type: REQUEST_STARTED, payload: null });
+      let param = { searchKey: hotelname };
+      const res = await searchHotel(param);
+      if (res && res.status == 200) {
+        console.log(res);
+        dispatch({ type: SEARCH_HOTELS, payload: res.data?.data });
+      }
+    } catch (error) {
+      console.log(error);
     }
-  } catch (error) {
-    console.log(error)
-  }
-  dispatch({ type: REQUEST_COMPLETED, payload: null });
-};
+    dispatch({ type: REQUEST_COMPLETED, payload: null });
+  };
 
 export const sortHotel = (data: any) => async (dispatch: AppDispatch) => {
   try {
     dispatch({ type: REQUEST_STARTED, payload: null });
     let type = null;
-    if (data == 'Low to High') {
-      type = "PRICE_LOW"
-    } else if (data == 'High to Low') {
-      type = 'PRICE_HIGH'
+    if (data == "Low to High") {
+      type = "PRICE_LOW";
+    } else if (data == "High to Low") {
+      type = "PRICE_HIGH";
     } else {
-
     }
-    let param = { sortType: type }
+    let param = { sortType: type };
     const res = await sortHotelBy(param);
     if (res && res.status == 200) {
-      dispatch({ type: SORT_By, payload: res.data?.data })
+      dispatch({ type: SORT_By, payload: res.data?.data });
     }
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
   dispatch({ type: REQUEST_COMPLETED, payload: null });
-}
-
+};

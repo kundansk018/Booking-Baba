@@ -13,7 +13,7 @@ export const ENDPOINTS = {
   getHotelById: "hotelsapi/hotelsapi?action=getHotelDetails",
   deleteHotel: "hotelsapi/hotelsapi?action=deleteHotel",
   updateHotel: "hotelsapi/hotelsapi?action=updateHotels",
-  searchHotel:"hotelsapi/hotelsapi?action=searchByHotel",
+  searchHotel: "hotelsapi/hotelsapi?action=searchByHotel",
   sortHotelBy: "hotelsapi/hotelsapi?action=sort",
 
   addTrain: "trainApi/trainApi?action=ADD_TRAIN",

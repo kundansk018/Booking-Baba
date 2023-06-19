@@ -2,7 +2,6 @@
 
 import React from "react";
 import { useSelector } from "react-redux";
-import { Spinner } from "@material-tailwind/react";
 import Navigationbar from "@/app/components/Navbar";
 import { RotatingLines } from "react-loader-spinner";
 

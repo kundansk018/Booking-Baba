@@ -1,16 +1,14 @@
 "use client";
-
 import BBButton from "@/app/components/BBButton";
 import BBInput from "@/app/components/BBInput";
-import "../../styles/hotel.css";
 
 import { useEffect, useState } from "react";
 import { useAppDispatch } from "@/redux/store";
 import { useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
 import BBErrorDialog from "@/app/components/BBErrorDialog";
-import { addTrain } from "@/redux/action/trainAction";
 import BBDropdown from "@/app/components/BBDropdown";
+import { addTrain } from "@/redux/action/trainAction";
 
 export default function AddTrain() {
   const [trainNo, setTrainNo] = useState<string>("");
@@ -85,6 +83,7 @@ export default function AddTrain() {
       formData.append("trainRoute", trainRoute);
       formData.append("trainDesc", trainDesc);
       formData.append("imageUrl", trainImage);
+      formData.append("imageUrl", trainImage);
 
       console.log("formData>>>>>>>>>>>", formData);
 
@@ -92,8 +91,35 @@ export default function AddTrain() {
       //   method: "POST",
       //   body: formData,
       // });
-      
-      dispatch(addTrain(formData));
+
+      dispatch(addTrain(formData))
+        .then((res: any) => {
+          console.log("response>>>>>>>>>>>>>>", res);
+
+          if (res) {
+            console.log("response>>>>>>>>>>>>>>", res);
+
+            router.push("/train");
+
+            const {
+              data,
+              error,
+            }: {
+              data: { url: string | string[] } | null;
+              error: string | null;
+            } = res.json();
+
+            console.log("File was uploaded successfylly:", data);
+
+            if (error || !data) {
+              alert(error || "Sorry! something went wrong.");
+              return;
+            }
+          }
+        })
+        .catch((err: any) => {
+          console.log("error ::::::::::::", err);
+        });
     } catch (error) {
       console.error(error);
       alert("Sorry! something went wrong inside catch");
