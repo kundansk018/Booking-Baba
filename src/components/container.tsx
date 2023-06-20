@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Spinner } from "@material-tailwind/react";
 import Navigationbar from "@/app/components/Navbar";
@@ -13,6 +13,16 @@ interface ContainerProps {
 const Container = (props: ContainerProps) => {
   // console.log("Window Location ", window.location.pathname);
   const loading: boolean = useSelector((state: any) => state.app.loading);
+  
+
+  useEffect(() => {
+    setTimeout(() => {
+      loading;
+      console.log("Please connect to internet connection or database connection")
+    
+    }, 300)
+    
+},[])
 
   // useEffect(() => {
   //   setPathname(window?.location?.pathname);
@@ -36,6 +46,7 @@ const Container = (props: ContainerProps) => {
               animationDuration="0.75"
               width="96"
               visible={true}
+
             />
           </div>
         ) : null}
