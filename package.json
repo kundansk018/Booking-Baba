@@ -27,6 +27,7 @@
     "multiselect-react-dropdown": "^2.0.25",
     "mv": "^2.1.1",
     "next": "13.4.3",
+    "ngx-select-dropdown": "^3.3.0",
     "postcss": "8.4.23",
     "react": "18.2.0",
     "react-bootstrap": "^2.7.4",

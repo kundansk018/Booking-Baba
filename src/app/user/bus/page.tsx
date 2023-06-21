@@ -39,15 +39,12 @@ export default function BookBus() {
 
   const routeData = [
     { value: "Nashik", label: "Nashik" },
+    { value: "Pune", label: "Pune" },
     { value: "Sinnar", label: "Sinnar" },
     { value: "Sangamner", label: "Sangamner" },
-    { value: "Ghargaon", label: "Ghargaon" },
     { value: "Alephata", label: "Alephata" },
     { value: "Narayangaon", label: "Narayangaon" },
-    { value: "Manchar", label: "Manchar" },
-    { value: "Rajgurunagar", label: "Rajgurunagar" },
     { value: "Nashik Phata", label: "Nashik Phata" },
-    { value: "Pune", label: "Pune" },
   ];
   const handleSubmit = (e: any) => {
     e.preventDefault();

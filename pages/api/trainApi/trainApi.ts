@@ -51,11 +51,6 @@ export async function addTrain(
     const { fields, files } = await parseForm(request);
 
     const file = files?.imageUrl;
-<<<<<<< Updated upstream
-=======
-    console.log("fields", fields);
-    console.log("file", file);
->>>>>>> Stashed changes
 
     let url = Array.isArray(file)
       ? file.map((f) => f.newFilename)
@@ -208,4 +203,4 @@ export async function searchTrains(
 export async function getFile(
   request: NextApiRequest,
   response: NextApiResponse
-) {}
+) { }

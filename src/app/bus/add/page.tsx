@@ -193,6 +193,7 @@ export default function AddBus() {
               value={busname + ""}
               onChange={(e) => setBusname(e.target.value)}
             />
+
             <BBInput
               containerProps={{ className: "mb-3" }}
               label="Bus Number"

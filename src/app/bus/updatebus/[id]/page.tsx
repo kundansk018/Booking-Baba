@@ -259,6 +259,7 @@ export default function UpdateBus({ params }: any) {
               value={operator + ""}
               onChange={(e) => setOperator(e.target.value)}
             />
+
           </div>
 
           <div className="flex  flex-col mx-5 w-[300px]">
