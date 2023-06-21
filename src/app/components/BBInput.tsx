@@ -2,11 +2,11 @@ import { Input } from "@material-tailwind/react";
 import React from "react";
 
 interface Props {
-  label: string;
+  label?: string;
   value?: string;
   type?: string;
   className?: string;
-  onChange: (e: any) => void; // for function type
+  onChange?: (e: any) => void; // for function type
   containerProps?: any;
   color?: any;
   max?:number;

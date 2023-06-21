@@ -1,6 +1,6 @@
 const Basic_Facilities = [
 
-    { name: '24-hour Room Service', id: 1 },
+    { name: '24-hour Room Service', id: 1,  },
     { name: 'Free Parking', id: 2 },
     { name: 'Air Conditioning', id: 3 },
     { name: 'Elevator/Lift', id: 4 },

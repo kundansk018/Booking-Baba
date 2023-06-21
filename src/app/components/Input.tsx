@@ -3,6 +3,7 @@ import React from "react";
 
 interface Props {
   label: string;
+  placeholder?: string
   value: string;
   type?: string;
   className?: string;
@@ -18,13 +19,14 @@ export default function (props: Props) {
       value={props.value}
       type={props.type}
       color={props.color ? props.color : "orange"}
-      //   className={props.className}
-      className="b"
+         className={props.className}
+placeholder={props.placeholder}
+      
       onChange={props.onChange}
       containerProps={
         props.containerProps
           ? props.containerProps
-          : { className: "min-w-[30px]" }
+          : { className: "min-w-[30px] border border-gray-300 rounded-md p-5 " }
       }
     />
   );

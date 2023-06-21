@@ -5,7 +5,7 @@ interface button {
   label: any;
   type?: "button" | "submit" | "reset" | undefined;
   onClick?: (e: any) => void; // for function type
-  size: "sm" | "lg" | "md";
+  size?: "sm" | "lg" | "md";
   color?: any;
   className?: string;
 }
