@@ -1,24 +1,9 @@
 "use client";
-import updateTrain from "@/app/train/update/[id]/page";
-import {
-  MagnifyingGlassIcon,
-  PencilIcon,
-  TrashIcon,
-  UserPlusIcon,
-} from "@heroicons/react/24/outline";
-import {
-  Avatar,
-  Button,
-  Card,
-  IconButton,
-  Input,
-  Typography,
-} from "@material-tailwind/react";
 
+import { Avatar, Card, Typography } from "@material-tailwind/react";
 import React from "react";
-import { Pagination, Tooltip } from "react-bootstrap";
+
 import { useSelector } from "react-redux";
-import { deleteTrain } from "../../../../../pages/api/trainApi/trainApi";
 import BBButton from "@/app/components/BBButton";
 import { useRouter } from "next/navigation";
 
@@ -26,8 +11,8 @@ export default function Page() {
   const trainData: any = useSelector(
     (state: any) => state.train.userTrainDetails
   );
-  console.log("Train data is in update page ..", trainData);
   const router = useRouter();
+  console.log("Train data is in update page ..", trainData);
 
   return (
     <div className="tracking-wide pt-10">
@@ -82,7 +67,7 @@ export default function Page() {
                     <td className="w-[5px]  p-2">
                       <BBButton
                         label="Book Ticket"
-                        onClick={() => router.push("/user/train/ticket")}
+                        onClick={() => router.push("train/bookticket")}
                         size="sm"
                         className=""
                         color=""

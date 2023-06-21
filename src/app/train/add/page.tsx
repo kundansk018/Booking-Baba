@@ -30,6 +30,7 @@ export default function AddTrain() {
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
 
   const dispatch = useAppDispatch();
+  
   const [errorDialogMessage, setErrorDialogMessage] = useState([]);
   const [showErrorDialog, setShowErrorDialog] = useState(false);
   const router = useRouter();

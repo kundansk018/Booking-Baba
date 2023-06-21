@@ -102,6 +102,11 @@ export const updateTrainInfo = (data: any) => {
   });
 };
 
+export const bookTrain = (data: any) => {
+  let url = `${ENDPOINTS.trainTicket}`;
+  return client.post(url, data, headers);
+};
+
 //bus servicess//
 export const addBus = (data: any) => {
   console.log("add bus service called");

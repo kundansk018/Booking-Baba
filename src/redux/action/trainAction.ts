@@ -7,11 +7,13 @@ import {
   TRAIN_BY_ID_REQUEST_SUCCESS,
   TRAIN_UPDATE_REQUEST_SUCCESS,
   USER_TRAIN_SEARCH_SUCCESS,
+  TRAIN_TICKET_REQUEST_SUCCESS,
 } from "../constant";
 import { AppDispatch } from "../store";
 import {
   TrainSearch,
   addtrainInfo,
+  bookTrain,
   deleteTrain,
   getAllTrains,
   trainById,
@@ -43,7 +45,7 @@ export const getTrains = (data: any) => async (dispatch: AppDispatch) => {
     dispatch({ type: REQUEST_STARTED, payload: null });
     let page = { page: data };
     const res = await getAllTrains(page);
-    // console.log("page response..", page);
+    
     if (res && res.status === 200) {
       dispatch({ type: TRAIN_REQUEST_SUCCESS, payload: res.data });
     } else {
@@ -127,3 +129,22 @@ export const getTrainBySearch =
     }
     dispatch({ type: REQUEST_COMPLETED, payload: null });
   };
+
+export const trainTicket = (data: any) => async (dispatch: AppDispatch) => {
+  console.log("data in action: ", data);
+  try {
+    dispatch({ type: REQUEST_STARTED, payload: null });
+
+    const res = await bookTrain(data);
+    if (res && res.status === 200) {
+      console.log("addTrain data in trainAction:::::::::", res);
+      dispatch({ type: TRAIN_TICKET_REQUEST_SUCCESS, payload: res.data });
+    } else {
+      alert("Fail to add Train Or Train is already added");
+      dispatch({ type: TRAIN_REQUEST_FAIL, payload: null });
+    }
+  } catch (error) {
+    console.log(error);
+  }
+  dispatch({ type: REQUEST_COMPLETED, payload: null });
+};

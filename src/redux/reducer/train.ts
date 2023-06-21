@@ -2,6 +2,7 @@ import {
   TRAIN_BY_ID_REQUEST_SUCCESS,
   TRAIN_REQUEST_FAIL,
   TRAIN_REQUEST_SUCCESS,
+  TRAIN_TICKET_REQUEST_SUCCESS,
   TRAIN_UPDATE_REQUEST_SUCCESS,
   USER_TRAIN_SEARCH_SUCCESS,
 } from "../constant";
@@ -10,6 +11,7 @@ export const initialState = {
   trainDetails: null,
   getTrainById: null,
   userTrainDeatils: null,
+  trainTicketDetails: null,
 };
 
 export const TrainReducer = (state = initialState, action: any) => {
@@ -50,6 +52,13 @@ export const TrainReducer = (state = initialState, action: any) => {
         loading: false,
         userTrainDetails: action.payload,
       };
+
+      case TRAIN_TICKET_REQUEST_SUCCESS:
+        return {
+          ...state,
+          loading: false,
+          trainTicketDetails: action.payload,
+        };
 
     default: {
       return state;

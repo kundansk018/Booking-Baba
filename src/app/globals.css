@@ -45,3 +45,15 @@ body {
   width: 600px;
 }
 }
+
+.Accordion__Header--opened {
+  color: #0071cc;
+  
+}
+.Accordion__Header--closed {
+  color: #4c4d4d;
+}
+.trainList{
+  font-family: "Poppins", sans-serif; 
+  font-size: 14px;
+}

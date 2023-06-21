@@ -29,6 +29,15 @@ export default async function handler(
         return await getTrainById(request, response);
       } else if (request.query?.action === "SEARCH_TRAINS") {
         return await searchTrains(request, response);
+      } else if (request.query?.action === "BOOK_TRAIN_TICKET") {
+        return await bookTrainTicket(request, response);
+      } else if (request.query?.action === "GET_ALL_TRAIN_TICKET") {
+        return await getAllTrainTicket(request, response);
+      }
+
+    case "GET":
+      if (request.query?.action === "GETFILE") {
+        return await getFile(request, response);
       }
 
     case "GET":
@@ -137,26 +146,26 @@ export async function getTrains(
   const itemsPerPage: number = 3;
 
   try {
-    const startIndex: number = (page - 1) * itemsPerPage;
+     const startIndex: number = (page - 1) * itemsPerPage;
 
     const endIndex: number = startIndex + itemsPerPage;
 
     const items = await db
       .collection("Train Details")
       .find()
-      .skip(startIndex)
-      .limit(itemsPerPage)
+       .skip(startIndex)
+       .limit(itemsPerPage)
       .toArray();
 
     const totalItems: number = await db
       .collection("Train Details")
       .countDocuments();
 
-    const totalPages: number = Math.ceil(totalItems / itemsPerPage);
+     const totalPages: number = Math.ceil(totalItems / itemsPerPage);
 
     response.status(200).json({
-      page,
-      totalPages,
+         page,
+       totalPages,
       totalItems,
       items,
     });
@@ -199,6 +208,28 @@ export async function searchTrains(
     .toArray();
   return response.status(200).json({ data: res });
 }
+
+export async function bookTrainTicket(
+  request: NextApiRequest,
+  response: NextApiResponse
+) {
+  let { fields } = await parseForm(request);
+  const trains = await db.collection("Train Ticket");
+  const res = await trains.insertOne(fields);
+  return response.status(200).json({ data: res });
+}
+
+export async function getAllTrainTicket(
+  request: NextApiRequest,
+  response: NextApiResponse
+) {
+  const trains = await db.collection("Train Ticket");
+  const res = await trains.find().toArray();
+  return response.status(200).json({ data: res });
+}
+
+
+
 
 export async function getFile(
   request: NextApiRequest,

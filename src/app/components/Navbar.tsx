@@ -1,4 +1,5 @@
 "use client";
+import React from "react";
 import { useState, useEffect } from "react";
 import {
   Navbar,
@@ -7,12 +8,89 @@ import {
   Button,
   IconButton,
   Collapse,
+  Chip,
+  MenuItem,
+  MenuHandler,
+  ListItem,
+  MenuList,
+  Menu,
 } from "@material-tailwind/react";
 import { useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
+import { ChevronDownIcon, XMarkIcon } from "@heroicons/react/24/solid";
+import {
+  Bars3Icon,
+  ChatBubbleOvalLeftIcon,
+  FlagIcon,
+  UsersIcon,
+} from "@heroicons/react/24/outline";
+// import { Menu } from "antd";
 // import { useRouter } from "next/router";
 
+const navListMenuItems = [
+  {
+    color: "",
+    icon: FlagIcon,
+    title: "Hotels",
+    // onClick={() => router.push("/user")}
+    // description: "Learn about our story and our mission statement.",
+  },
+  {
+    color: "",
+    icon: ChatBubbleOvalLeftIcon,
+    title: "Trains",
+    description: "News and writings, press releases, and resources",
+  },
+  {
+    color: "",
+    icon: ChatBubbleOvalLeftIcon,
+    title: "Bus",
+    description: "News and writings, press releases, and resources",
+  },
+  // {
+  //   color: "Bus",
+  //   icon: UsersIcon,
+  //   title: (
+  //     <div className="flex items-center gap-1">
+  //       Bus{" "}
+  //       <Chip
+  //         size="sm"
+  //         color="green"
+  //         variant="ghost"
+  //         value="We're hiring!"
+  //         className="capitalize"
+  //       />
+  //     </div>
+  //   ),
+  //   description: "We are always looking for talented people. Join us!",
+  // },
+];
+
 export default function Navigationbar() {
+  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
+
+  const renderItems = navListMenuItems.map(
+    ({ icon, title, description, color }, key) => (
+      <a href="#" key={key}>
+        <MenuItem className="flex items-center gap-3 rounded-lg">
+          <div>
+            <Typography
+              variant="h6"
+              color="blue-gray"
+              className="flex items-center text-sm"
+            >
+              {title}
+            </Typography>
+            <Typography variant="small" color="gray" className="font-normal">
+              {description}
+            </Typography>
+          </div>
+        </MenuItem>
+      </a>
+    )
+  );
+
   const userData: any = useSelector((state: any) => state.login.loginDetails);
 
   const rollType: number = userData?.data.data.rollType;
@@ -28,14 +106,86 @@ export default function Navigationbar() {
   }, []);
 
   const navList = (
-    // <ul className="mb-4 mt-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
     <ul className="flex flex-col mt-[6px] gap-2 lg:flex-row lg:gap-6">
       <Typography
         as="li"
         variant="small"
-        // color="blue-gray"
         className="p-1 font-normal"
-        onClick={() => router.push("/auth")} //
+        onClick={() => router.push("/user")}
+      >
+        <a
+          style={{ fontFamily: "Poppins,sans-serif", fontSize: "14px" }}
+          href="#"
+          className="flex items-center text-xl hover:text-black mt-2"
+        >
+          Home
+        </a>
+      </Typography>
+
+      <Menu
+        open={isMenuOpen}
+        handler={setIsMenuOpen}
+        offset={{ mainAxis: 20 }}
+        placement="bottom"
+        allowHover={true}
+      >
+        <MenuHandler>
+          <Typography
+            as="li"
+            variant="small"
+            className="p-1 font-normal"
+            onClick={() => router.push("/user")}
+          >
+            <ListItem
+              className="flex items-center gap-2 py-2 pr-4"
+              selected={isMenuOpen || isMobileMenuOpen}
+              onClick={() => setIsMobileMenuOpen((cur) => !cur)}
+            >
+              <a
+                style={{ fontFamily: "Poppins,sans-serif", fontSize: "14px" }}
+                href="#"
+                className="flex items-center text-xl hover:text-black "
+              >
+                Booking
+              </a>
+
+              <ChevronDownIcon
+                strokeWidth={2.5}
+                className={`hidden h-3 w-3  lg:block ${isMenuOpen ? "" : ""}`}
+              />
+            </ListItem>
+          </Typography>
+        </MenuHandler>
+
+        <MenuList className="hidden max-w-screen-xl rounded-xl lg:block">
+          <ul className="grid grid-cols-3 gap-y-2">{renderItems}</ul>
+        </MenuList>
+      </Menu>
+
+      <div className="block lg:hidden">
+        <Collapse open={isMobileMenuOpen}>{renderItems}</Collapse>
+      </div>
+
+      <Typography
+        as="li"
+        variant="small"
+        className="p-1 font-normal"
+        onClick={() => router.push("/user")}
+      >
+        <a
+          style={{ fontFamily: "Poppins,sans-serif", fontSize: "14px" }}
+          href="#"
+          className="flex items-center text-xl hover:text-black mt-2 -mr-5"
+        >
+          Login / Signup
+        </a>
+      </Typography>
+
+      <Typography
+        as="li"
+        variant="small"
+        className="p-1 font-normal"
+        onClick={() => router.push("/auth")}
       >
         <a href="#" className="flex items-center hover:text-black">
           <svg
@@ -44,7 +194,7 @@ export default function Navigationbar() {
             viewBox="0 0 24 24"
             stroke-width="1.5"
             stroke="currentColor"
-            className="w-8 h-8"
+            className="w-6 h-6 mt-2.5 "
           >
             <path
               stroke-linecap="round"
@@ -52,39 +202,6 @@ export default function Navigationbar() {
               d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z"
             />
           </svg>
-        </a>
-      </Typography>
-      <Typography
-        as="li"
-        variant="small"
-        // color="white-gray"
-        className="p-1 font-normal"
-        onClick={() => router.push("/help")}
-      >
-        <a href="#" className="flex items-center text-xl mt-1 hover:text-black">
-          Help
-        </a>
-      </Typography>
-      <Typography
-        as="li"
-        variant="small"
-        // color="blue-gray"
-        className="p-1 font-normal"
-        onClick={() => router.push("/about")}
-      >
-        <a href="#" className="flex items-center text-xl mt-1 hover:text-black">
-          About Us
-        </a>
-      </Typography>
-      <Typography
-        as="li"
-        variant="small"
-        // color="blue-gray"
-        className="p-1 font-normal"
-        onClick={() => router.push("/user")}
-      >
-        <a href="#" className="flex items-center text-xl mt-1 hover:text-black">
-          User Dashboard
         </a>
       </Typography>
     </ul>
@@ -103,7 +220,11 @@ export default function Navigationbar() {
           href="/"
           className="mr-4 cursor-pointer  font-medium mx-[20] fixed left-5 top-3 "
         >
-          <b className="m-[20] text-2xl" onClick={() => router.push("/")}>
+          <b
+            style={{ fontFamily: "Poppins,sans-serif" }}
+            className="m-[20] text-2xl"
+            onClick={() => router.push("/")}
+          >
             Booking Baba
           </b>
         </Typography>
