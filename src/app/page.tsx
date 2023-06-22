@@ -5,15 +5,13 @@ import booking from "../images/booking.png";
 import Image from "next/image";
 
 import { useRouter } from "next/navigation";
-import react, { useEffect } from "react";
+import react, { useState } from "react";
 import {
   Button,
   Card,
   CardBody,
   CardFooter,
   CardHeader,
-  Carousel,
-  Navbar,
   Typography,
 } from "@material-tailwind/react";
 import BBMainCarousel from "./components/BBMainCarousel";
@@ -22,6 +20,11 @@ import bus1 from "../images/Buses/bus1.png";
 import rail from "../images/Trains/rail.jpg";
 import Navigationbar from "./components/Navbar";
 import { useSelector } from "react-redux";
+// import { Modal } from "react-bootstrap";
+
+import { CustomModal } from "@/app/modal/CustomModal";
+import { BusDetails } from "@/app/user/bus/buslist/BusDetails";
+import { Modal } from "react-bootstrap";
 
 export default function Home() {
   const userData: any = useSelector((state: any) => state.login.loginDetails);
@@ -30,17 +33,17 @@ export default function Home() {
   let rollType = userData?.data.data.rollType;
   const router = useRouter();
 
-  useEffect(() => {
-    if (rollType === 1) {
-      router.push("/dashboard");
-    } else if (rollType === 2) {
-      router.push("/user");
-    } else {
-      setTimeout(() => {
-        () => router.push("/auth");
-      }, 100000);
-    }
-  }, [userData]);
+  // useEffect(() => {
+  //   if (rollType === 1) {
+  //     router.push("/dashboard");
+  //   } else if (rollType === 2) {
+  //     router.push("/user");
+  //   } else {
+  //     setTimeout(() => {
+  //       router.push("/auth");
+  //     }, 10000);
+  //   }
+  // }, [userData]);
 
   return (
     <div className="">

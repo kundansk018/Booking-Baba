@@ -1,6 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Signika:wght@300&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Castoro+Titling&display=swap');
-
+@import url("https://fonts.googleapis.com/css2?family=Signika:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Castoro+Titling&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -23,6 +22,7 @@
 body {
   color: rgb(var(--foreground-rgb));
   background-color: #e7e9ed;
+  background-color: #e7e9ed;
   /* background: rgb(var(--background-start-rgb));  */
   /* background: linear-gradient(
       to bottom,
@@ -33,34 +33,21 @@ body {
 }
 
 /* .font-castoro {
-  font-family: 'Castoro Titling', "cursive";
+  font-family: "Castoro Titling", "cursive";
   letter-spacing: 2px;
+}
+  
+.font-signika {
+  font-family: 'Signika', "sans-serif"; 
+.bus-form{
+  width: 600px;
+}
+.update-form{
+  width: 600px;
+}
 } */
-
-/* .font-signika {
-  font-family: 'Signika', "sans-serif"; } */
-.bus-form {
-  width: 600px;
-}
-
-.update-form {
-  width: 600px;
-}
-
-
-.Accordion__Header--opened {
-  color: #0071cc;
-
-}
-
-.Accordion__Header--closed {
-  color: #0071cc;
-}
 
 .trainList {
   font-family: "Poppins", sans-serif;
   font-size: 14px;
 }
-
-
-
