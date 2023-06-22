@@ -2,13 +2,10 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import {
-  Navbar,
   MobileNav,
   Typography,
-  Button,
   IconButton,
   Collapse,
-  Chip,
   MenuItem,
   MenuHandler,
   ListItem,
@@ -19,13 +16,10 @@ import { useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
 import { ChevronDownIcon, XMarkIcon } from "@heroicons/react/24/solid";
 import {
-  Bars3Icon,
   ChatBubbleOvalLeftIcon,
   FlagIcon,
   UsersIcon,
 } from "@heroicons/react/24/outline";
-// import { Menu } from "antd";
-// import { useRouter } from "next/router";
 
 const navListMenuItems = [
   {
@@ -33,37 +27,20 @@ const navListMenuItems = [
     icon: FlagIcon,
     title: "Hotels",
     // onClick={() => router.push("/user")}
-    // description: "Learn about our story and our mission statement.",
+    description: "Book hotels on Booking Baba",
   },
   {
     color: "",
     icon: ChatBubbleOvalLeftIcon,
     title: "Trains",
-    description: "News and writings, press releases, and resources",
+    description: "Book your train tickets from home",
   },
   {
     color: "",
     icon: ChatBubbleOvalLeftIcon,
     title: "Bus",
-    description: "News and writings, press releases, and resources",
+    description: "Book your bus tickets from home",
   },
-  // {
-  //   color: "Bus",
-  //   icon: UsersIcon,
-  //   title: (
-  //     <div className="flex items-center gap-1">
-  //       Bus{" "}
-  //       <Chip
-  //         size="sm"
-  //         color="green"
-  //         variant="ghost"
-  //         value="We're hiring!"
-  //         className="capitalize"
-  //       />
-  //     </div>
-  //   ),
-  //   description: "We are always looking for talented people. Join us!",
-  // },
 ];
 
 export default function Navigationbar() {
@@ -71,7 +48,7 @@ export default function Navigationbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
 
   const renderItems = navListMenuItems.map(
-    ({ icon, title, description, color }, key) => (
+    ({  title, description }, key) => (
       <a href="#" key={key}>
         <MenuItem className="flex items-center gap-3 rounded-lg">
           <div>
@@ -144,20 +121,20 @@ export default function Navigationbar() {
               <a
                 style={{ fontFamily: "Poppins,sans-serif", fontSize: "14px" }}
                 href="#"
-                className="flex items-center text-xl hover:text-black "
+                className="flex items-center text-xl "
               >
                 Booking
               </a>
 
               <ChevronDownIcon
                 strokeWidth={2.5}
-                className={`hidden h-3 w-3  lg:block ${isMenuOpen ? "" : ""}`}
+                className={` h-3 w-3  ${isMenuOpen ? "" : ""}`}
               />
             </ListItem>
           </Typography>
         </MenuHandler>
 
-        <MenuList className="hidden max-w-screen-xl rounded-xl lg:block">
+        <MenuList className="lg:block">
           <ul className="grid grid-cols-3 gap-y-2">{renderItems}</ul>
         </MenuList>
       </Menu>
