@@ -2,17 +2,14 @@
 
 import HomeSearch from "@/components/HomeSearch";
 
-export default function Bus() {
+interface Props {
+  type?: any;
+}
+
+export const Bus: React.FC<Props> = ({ type }) => {
   return (
     <div>
-      <HomeSearch
-        title="Book Bus Tickets"
-        dropDownValue={""}
-        to="Mumbai"
-        arrivalDate=""
-        from="pune"
-        
-      />
+      <HomeSearch title="Book Bus Tickets" travelType={type} />
     </div>
   );
-}
+};

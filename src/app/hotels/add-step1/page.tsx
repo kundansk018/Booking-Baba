@@ -23,7 +23,7 @@ import { useSelector } from "react-redux";
 import BBErrorDialog from "@/app/components/BBErrorDialog";
 import Multiselect from "multiselect-react-dropdown";
 import {
-Basic_Facilities,
+  Basic_Facilities,
   Safety,
   food_facilities,
   general_services,
@@ -47,14 +47,14 @@ export default function AddHotels() {
   const [dinner, setDinner] = useState<boolean>(true);
   const [country, setCountry] = useState("");
   const [date, setDate] = useState("");
-  const[price,setPrice]=useState("");
+  const [price, setPrice] = useState("");
   const [location, setLocation] = useState("");
 
   const [food, setFood] = useState([]);
   const [basics, setBasics] = useState([]);
   const [generalService, setGeneral] = useState([]);
   const [safety, setSafety] = useState([]);
-  const[payment ,setPayment]=useState([]);
+  const [payment, setPayment] = useState([]);
 
   const [selectedFoodName, setSelectedFoodName] = useState(
     "Select foods & drinks"
@@ -113,11 +113,8 @@ export default function AddHotels() {
     let names = selectedList.map((element: any) => element.name);
     setSelectedSafety(names.toString());
   };
-  
 
-  const [selectPayment, setSelectPayment] = useState(
-    "Select Mode Of Payment"
-  );
+  const [selectPayment, setSelectPayment] = useState("Select Mode Of Payment");
   const selectModePayment = (selectedList: any, selectedItem: any) => {
     setPayment(selectedList);
     let names = selectedList.map((element: any) => element.name);
@@ -128,7 +125,6 @@ export default function AddHotels() {
     let names = selectedList.map((element: any) => element.name);
     setSelectPayment(names.toString());
   };
-  
 
   const dispatch = useAppDispatch();
   const [errorDialogMessage, setErrorDialogMessage] = useState([]);
@@ -148,7 +144,7 @@ export default function AddHotels() {
     });
   }, []);
 
-  const onFileUploadChange =(e:any)=>{
+  const onFileUploadChange = (e: any) => {
     const fileInput = e?.target;
 
     if (!fileInput.files) {
@@ -156,20 +152,19 @@ export default function AddHotels() {
       return;
     }
 
-    debugger
-   let selectedImg=fileInput.files[0]
-  
+    debugger;
+    let selectedImg = fileInput.files[0];
 
-const url = URL.createObjectURL(selectedImg);
+    const url = URL.createObjectURL(selectedImg);
 
-debugger
+    debugger;
     setFile(url);
     // setFile(selectedImg)
-  }
+  };
 
   const addHotelDetails = () => {
-    debugger
-    let data:any = {
+    debugger;
+    let data: any = {
       hotelname: hotelname,
       ownerName: ownerName,
       contactno: contactno,
@@ -191,13 +186,9 @@ debugger
       basics: basics,
       generalService: generalService,
       safety: safety,
-      payment:payment,
-      min_order_price:price,
-
+      payment: payment,
+      min_order_price: price,
     };
-
-
-    
 
     let isErrorFound = false;
     let error: any = [];
@@ -235,13 +226,13 @@ debugger
       setShowErrorDialog(true);
       return;
     } else {
-      console.log(data)
+      console.log(data);
       // let ldata={...data}
       // delete ldata.imageUrl
       dispatch(savePreviousData(data));
       router.push("/hotels/add-step2");
     }
-  }
+  };
   return (
     <>
       <div className="bg-white h-[40%] pb-4 mt-5 m-auto w-[800px] justify-center rounded-lg">
@@ -280,10 +271,9 @@ debugger
               containerProps={{ className: "w-[300px] mb-4" }}
               type="file"
               label="Hotel Photos"
-            //  value={file} 
-            //   onChange={(e) => setFile(e.target.value)}
-              onChange={
-                (e) => onFileUploadChange(e)}
+              //  value={file}
+              //   onChange={(e) => setFile(e.target.value)}
+              onChange={(e) => onFileUploadChange(e)}
             />
             <BBInput
               containerProps={{ className: "" }}
@@ -334,7 +324,7 @@ debugger
           </div>
 
           <div className="flex  flex-col mx-4 w-[300px] ">
-          <BBInput
+            <BBInput
               containerProps={{ className: "mb-4" }}
               label="Min Price"
               value={price}
@@ -354,7 +344,7 @@ debugger
               />
             </div>
 
-            <div className="my-2 ">
+            <div className="my-2">
               <Multiselect
                 // placeholder={food?food[0]?.name  :"Select FooD & Drinks"}
                 placeholder={selectedFoodName || "Select Food & Drinks"}

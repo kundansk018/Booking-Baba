@@ -13,7 +13,7 @@ interface Props {
   label?: any;
 }
 
-export default function BInput(props: Props) {
+export default function UInput(props: Props) {
   return (
     <input
       required={props.required}
@@ -23,9 +23,6 @@ export default function BInput(props: Props) {
       onChange={props.onChange}
       className={props.className}
       style={props.style}
-
-      //     : { className: "min-w-[30px] border border-gray-300 rounded-md p-2" }
-      // }
     >
       {props.label}
     </input>

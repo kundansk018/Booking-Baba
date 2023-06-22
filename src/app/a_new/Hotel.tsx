@@ -1,17 +1,17 @@
 "use client";
 
 import HomeSearch from "@/components/HomeSearch";
-import BBAdCarousel from "../components/BBMainCarousel";
 
-export default function Hotel() {
+interface Props {
+  type?: any;
+}
+
+export default function Hotel(props: Props) {
   return (
     <div className="flex flex-row h-fit">
       <HomeSearch
         title="Book Domestic and International Hotels"
-        dropDownValue={""}
-        to="Mumbai"
-        arrivalDate=""
-        from="pune"
+        travelType={props.type}
       />
       {/* <BBAdCarousel/> */}
     </div>

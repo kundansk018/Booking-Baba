@@ -4,7 +4,6 @@ import BBDate from "@/app/components/BBDate";
 import BBDropdown from "@/app/components/BBDropdown";
 import BBInput from "@/app/components/BBInput";
 import BBRating from "@/app/components/BBRating";
-import BBSearch from "@/app/components/BBSearch";
 import {
   getHotels,
   searchHotelByName,

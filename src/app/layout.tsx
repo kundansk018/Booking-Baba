@@ -1,6 +1,6 @@
 "use client";
 
-import { Provider } from "react-redux"
+import { Provider } from "react-redux";
 import "./globals.css";
 import { Poppins } from "next/font/google";
 import { store } from "@/redux/store";
@@ -28,4 +28,3 @@ export default function RootLayout({
     </html>
   );
 }
-

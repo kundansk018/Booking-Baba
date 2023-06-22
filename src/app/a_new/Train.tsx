@@ -2,16 +2,14 @@
 
 import HomeSearch from "@/components/HomeSearch";
 
-export default function Train() {
+interface Props {
+  type?: any;
+}
+
+export default function Train(props: Props) {
   return (
     <div>
-      <HomeSearch
-        title="Book Train Tickets"
-        dropDownValue={""}
-        to="Mumbai"
-        arrivalDate=""
-        from="pune"
-      />
+      <HomeSearch title="Book Train Tickets" travelType={props.type} />
     </div>
   );
 }

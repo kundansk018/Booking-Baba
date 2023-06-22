@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Button, Card, Typography } from "@material-tailwind/react";
 import FilterPage from "../page";
 // import FilterPage from '../new1/page';
-export default function page() {
+export default function UTrainList() {
   const TABLE_HEAD = ["Train Name", "Departure", "Duration", "Arrival", ""];
   const TABLE_ROWS = [
     {

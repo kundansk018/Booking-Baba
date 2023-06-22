@@ -13,7 +13,7 @@ import { FaTrain } from "react-icons/Fa";
 import { FaBus } from "react-icons/Fa";
 import Hotel from "./Hotel";
 import Train from "./Train";
-import Bus from "./Bus";
+import { Bus } from "./Bus";
 // import Hotel from "./hotel";
 
 export default function Page() {
@@ -76,13 +76,13 @@ export default function Page() {
 
             <TabsBody className="bg-gray-500 max-w-screen-xl mx-auto  h-[1000px]">
               <TabPanel value="hotel" className="p-0 flex flex-row">
-                <Hotel />
+                <Hotel type={type} />
               </TabPanel>
               <TabPanel value="train" className="p-0 flex flex-row">
-                <Train />
+                <Train type={type} />
               </TabPanel>
               <TabPanel value="bus" className="p-0 flex flex-row">
-                <Bus />
+                <Bus type={type} />
               </TabPanel>
             </TabsBody>
           </Tabs>

@@ -1,39 +1,42 @@
 import BBButton from "@/app/components/BBButton";
-import BInput from "@/app/components/BInput";
-import react, { useState } from "react";
+import UInput from "@/components/userComponents/UInput";
+
+import react, { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
-import InputIcon from "react-multi-date-picker";
+//import InputIcon from "react-multi-date-picker";
 
 import "react-datepicker/dist/react-datepicker.css";
+import UDatePicker from "./userComponents/UDatePicker";
 
 interface Props {
   from?: string;
   to?: string;
-  arrivalDate?: Date | any;
+  departDate?: Date | any;
   checkoutDate?: Date | any;
-
+  travelType?: any;
   dropDownValue?: string | any;
+  placeholder?: any;
   title?: string;
 }
 
 export default function HomeSearch(props: Props) {
   const [from, setFrom] = useState("");
   const [to, SetTo] = useState("");
-  const [arrivalDate, setArrivalDate] = useState<Date | any>(null);
+  const [departDate, setDepartDate] = useState<Date | any>(null);
   const [checkoutDate, setCheckoutDate] = useState<Date | any>(null);
   const [dropDownValue, setDropdownValue] = useState("");
-  // const [] = useState("");
 
-  console.log("from", props.from);
+  console.log("from", props.travelType);
 
   const handleSearch = () => {
     const searchData = {
       from,
       to,
-      arrivalDate,
+      departDate,
       checkoutDate,
       dropDownValue,
     };
+    console.log("from", props.travelType);
   };
 
   return (
@@ -42,59 +45,79 @@ export default function HomeSearch(props: Props) {
         <div className="flex flex-col justify-center  gap-4">
           <div className=" text-lg font-medium text-black">{props.title}</div>
           <div className="flex flex-row gap-5">
-            <BInput
+            <UInput
               type="text"
               id="from"
               value={from}
               required
-              placeholder="From"
+              placeholder={
+                props.travelType === "hotel" ? "Enter Locality , City " : "From"
+              }
               onChange={(e) => {
                 setFrom(e.target.value);
               }}
               className=" w-full  border border-gray-500 rounded-[4px] focus:outline-none focus:ring-1 focus:ring-blue-400 py-[12px] px-[14.5px]"
-            ></BInput>
-            <BInput
-              type="text"
-              id="to"
-              value={to}
-              placeholder="To"
-              onChange={(e) => {
-                SetTo(e.target.value);
-              }}
-              className="w-full  border border-gray-500 rounded-[4px] focus:outline-none focus:ring-1 focus:ring-blue-400 py-[12px] px-[14.5px]"
-            ></BInput>
+            />
+            {/* {props.travelType === "bus" || "train" ? (
+              <UInput
+                type="text"
+                id="to"
+                value={to}
+                placeholder="To"
+                onChange={(e) => {
+                  SetTo(e.target.value);
+                }}
+                className="w-full  border border-gray-500 rounded-[4px] focus:outline-none focus:ring-1 focus:ring-blue-400 py-[12px] px-[14.5px]"
+              />
+            ) : null} */}
+
+            {props.travelType === "hotel" ? null : (
+              <UInput
+                type="text"
+                id="to"
+                value={to}
+                placeholder="To"
+                onChange={(e) => {
+                  SetTo(e.target.value);
+                }}
+                className="w-full  border border-gray-500 rounded-[4px] focus:outline-none focus:ring-1 focus:ring-blue-400 py-[12px] px-[14.5px]"
+              />
+            )}
           </div>
 
-          <DatePicker
-            id="arrivalDate"
-            placeholderText="Arrival Date"
+          <UDatePicker
+            id="departDate"
+            placeholder={
+              props.travelType === "hotel" ? "Check In" : "Depart Date"
+            }
             minDate={new Date()}
-            selected={arrivalDate}
-            onChange={(date) => {
-              setArrivalDate(date);
+            selected={departDate}
+            onChange={(date: any) => {
+              setDepartDate(date);
             }}
-            className="w-full  border border-gray-500 rounded-[4px] focus:outline-none focus:ring-1 focus:ring-blue-400 py-[12px] px-[14.5px]"
           />
-          <DatePicker
-            id="checkoutDate"
-            placeholderText="checkout Date"
-            minDate={new Date()}
-            selected={checkoutDate}
-            onChange={(date) => {
-              setCheckoutDate(date);
-            }}
-            className="w-full  border border-gray-500 rounded-[4px] focus:outline-none focus:ring-1 focus:ring-blue-400 py-[12px] px-[14.5px]"
-          />
+          {props.travelType === "hotel" ? (
+            <UDatePicker
+              id="checkoutDate"
+              placeholder="Check Out"
+              minDate={new Date()}
+              selected={checkoutDate}
+              onChange={(date: any) => {
+                setCheckoutDate(date);
+              }}
+              className="w-full  border border-gray-500 rounded-[4px] focus:outline-none focus:ring-1 focus:ring-blue-400 py-[12px] px-[14.5px]"
+            />
+          ) : null}
           <select
             id="dropDown"
-            value={props.dropDownValue}
+            value={dropDownValue}
             placeholder="SeDropdownats"
             onChange={(e) => {
               setDropdownValue(e.target.value);
             }}
             className="w-full  border border-gray-500 rounded-[4px] focus:outline-none focus:ring-1 focus:ring-blue-400 py-[12px] px-[14.5px]"
           >
-            <option value="option1">Option1</option>
+            <option  value="option1">Option1</option>
             <option value="option2">Option2</option>
             <option value="option3">Option3</option>
           </select>
