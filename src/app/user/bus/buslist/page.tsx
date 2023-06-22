@@ -2,7 +2,7 @@
 import React from 'react'
 import { useState } from 'react';
 import { Button, Card, Typography } from "@material-tailwind/react";
-// import FilterPage from '../new1/page';
+import FilterPage from '../buslist/FilterPage';
 export default function page() {
     const TABLE_HEAD = ["Operators", "Departure", "Duration", "Arrival", "Price", ""];
     const TABLE_ROWS = [
@@ -48,25 +48,25 @@ export default function page() {
 
     return (
 
-        <Card className="overflow-scroll h-full w-full ">
-            {/* 
+        <Card className="overflow-scroll h-full w-full flex-row gap-10">
+
             <div className='p-5'>
                 <FilterPage />
-            </div> */}
+            </div>
             {/* flex flex-row gap-10 */}
             <div>
-                <h1 className="text-2xl font-bold mb-4 pl-10 text-center "  >Mumbai To Pune  </h1>
-                <table className="mx-auto border border-gray-300 w-[70%] min-w-max table-auto text-left">
+                <h1 className="text-2xl font-bold serif fontSize-25px mb-4 pl-10 pt-3 text-center "  >Mumbai To Pune  </h1>
+                <table className="mx-auto border border-gray-300 w-[160%]  table-auto text-left">
 
                     <thead>
 
                         <tr>
                             {TABLE_HEAD.map((head) => (
-                                <th key={head} className="border-b border-blue-gray-100 bg-blue-gray-50 p-4">
+                                <th key={head} className="border-b  border-blue-gray-100 bg-blue-gray-50 p-4">
                                     <Typography
                                         variant="small"
                                         color="blue-gray"
-                                        className="font-normal leading-none opacity-70"
+                                        className="font-extrabold leading-none opacity-70"
 
                                     >
                                         {head}
@@ -87,38 +87,42 @@ export default function page() {
 
                                 <tr key={operators}>
                                     <td className={classes}>
-                                        <Typography variant="small" color="blue-gray" className="font-normal">
+                                        <Typography variant="small" color="blue-gray" className="font-bold">
                                             {operators}
                                             <br />
-                                            Ac sleeper
+                                            <div className="font-normal">Ac sleeper </div>
+
                                         </Typography>
                                     </td>
                                     <td className={`${classes} bg-blue-gray-50/50`}>
-                                        <Typography variant="small" color="blue-gray" className="font-normal">
+                                        <Typography variant="small" color="blue-gray" className="font-bold">
                                             {departure}
                                             <br />
-                                            Mumbai
+                                            <div className="font-normal">Mumbai </div>
+
                                         </Typography>
                                     </td>
                                     <td className={classes}>
-                                        <Typography variant="small" color="blue-gray" className="font-normal">
+                                        <Typography variant="small" color="blue-gray" className="font-bold">
                                             {duration}
                                             <br />
-                                            12 Stops
+                                            <div className="font-normal">12 Stops </div>
+
                                         </Typography>
                                     </td>
                                     <td className={classes}>
-                                        <Typography variant="small" color="blue-gray" className="font-normal">
+                                        <Typography variant="small" color="blue-gray" className="font-bold">
                                             {arrival}
                                             <br />
-                                            Pune
+                                            <div className="font-normal">Pune </div>
+
                                         </Typography>
                                     </td>
                                     <td className={classes}>
-                                        <Typography variant="small" color="blue-gray" className="font-normal pl-10">
+                                        <Typography variant="small" color="blue-gray" className="font-bold">
                                             {price}
                                         </Typography>
-                                        <Button variant="outlined" size='sm'>Select Seats</Button>
+                                        <Button variant="outlined" size='sm' >Select Seats</Button>
                                     </td>
 
                                 </tr>

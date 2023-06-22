@@ -10,9 +10,8 @@ function Icon({ id, open }: any) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      className={`${
-        id === open ? "rotate-180" : ""
-      } h-5 w-5 transition-transform`}
+      className={`${id === open ? "rotate-180" : ""
+        } h-5 w-5 transition-transform`}
       fill="none"
       viewBox="0 0 24 24"
       stroke="currentColor"
@@ -110,9 +109,8 @@ const FilterPage = () => {
         <div className="mb-4">
           <Accordion open={open === 1} icon={<Icon id={1} open={open} />}>
             <AccordionHeader
-              className={`Accordion__Header--${
-                open === 1 ? "opened" : "closed"
-              }`}
+              className={`Accordion__Header--${open === 1 ? "opened" : "closed"
+                }`}
               onClick={() => handleOpen(1)}
             >
               <h2
@@ -153,9 +151,8 @@ const FilterPage = () => {
         <div className="mb-4">
           <Accordion open={open === 2} icon={<Icon id={2} open={open} />}>
             <AccordionHeader
-              className={`Accordion__Header--${
-                open === 2 ? "opened" : "closed"
-              }`}
+              className={`Accordion__Header--${open === 2 ? "opened" : "closed"
+                }`}
               onClick={() => handleOpen(2)}
             >
               <p
@@ -195,9 +192,8 @@ const FilterPage = () => {
         <div>
           <Accordion open={open === 3} icon={<Icon id={3} open={open} />}>
             <AccordionHeader
-              className={`Accordion__Header--${
-                open === 3 ? "opened" : "closed"
-              }`}
+              className={`Accordion__Header--${open === 3 ? "opened" : "closed"
+                }`}
               onClick={() => handleOpen(3)}
             >
               <h2
