@@ -1,6 +1,8 @@
 "use client";
 
 import HomeSearch from "@/components/HomeSearch";
+import BBMainCarousel from "../components/BBMainCarousel";
+
 
 interface Props {
   type?: any;

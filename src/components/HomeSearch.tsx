@@ -1,12 +1,12 @@
 import BBButton from "@/app/components/BBButton";
 import UInput from "@/components/userComponents/UInput";
 
-import react, { useEffect, useState } from "react";
-import DatePicker from "react-datepicker";
-//import InputIcon from "react-multi-date-picker";
+import { useState } from "react";
+// import InputIcon from "react-multi-date-picker";
 
 import "react-datepicker/dist/react-datepicker.css";
 import UDatePicker from "./userComponents/UDatePicker";
+import Accordion from "./userComponents/UCounter";
 
 interface Props {
   from?: string;
@@ -36,6 +36,7 @@ export default function HomeSearch(props: Props) {
       checkoutDate,
       dropDownValue,
     };
+    console.log("data", searchData);
     console.log("from", props.travelType);
   };
 
@@ -43,9 +44,7 @@ export default function HomeSearch(props: Props) {
     <div className="w-full">
       <div className="p-5 bg-white">
         <div className="flex flex-col justify-center  gap-4">
-          <div className=" text-lg font-medium text-black">
-            {props.title} 
-          </div>
+          <div className=" text-lg font-medium text-black">{props.title}</div>
           <div className="flex flex-row gap-5">
             <UInput
               type="text"
@@ -111,24 +110,15 @@ export default function HomeSearch(props: Props) {
               className=" w-full  border border-gray-500 rounded-[4px] focus:outline-none focus:ring-1 focus:ring-blue-400 py-[12px] px-[14.5px]"
             />
           )}
-          <select
-            id="dropDown"
-            value={dropDownValue}
-            placeholder="SeDropdownats"
-            onChange={(e) => {
-              setDropdownValue(e.target.value);
-            }}
-            className="w-full  border border-gray-500 rounded-[4px] focus:outline-none focus:ring-1 focus:ring-blue-400 py-[12px] px-[14.5px]"
-          >
-            <option value="option1">Option1</option>
-            <option value="option2">Option2</option>
-            <option value="option3">Option3</option>
-          </select>
+          {/* <div className="z-10 absolute bg-white  text-[14px]  w-50 border border-gray-500 rounded-[4px] focus:outline-none focus:ring-1 focus:ring-blue-400 py-[12px] px-[14.5px]"> */}
+            {" "}
+            <Accordion travelType={props.travelType} />
+          {/* </div> */}
           <BBButton
             label="Search"
             type="button"
             onClick={handleSearch}
-            className="w-full text-white text-[14px] bg-blue-600 border border-gray-500 rounded-[4px] focus:outline-none focus:ring-1 focus:ring-blue-400 py-[12px] px-[14.5px]"
+            className=" w-full text-white text-[14px] bg-blue-600 border border-gray-500 rounded-[4px] focus:outline-none focus:ring-1 focus:ring-blue-400 py-[12px] px-[14.5px]"
           ></BBButton>
         </div>
       </div>
