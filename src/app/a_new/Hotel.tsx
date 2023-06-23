@@ -8,12 +8,17 @@ interface Props {
 
 export default function Hotel(props: Props) {
   return (
-    <div className="flex flex-row h-fit">
-      <HomeSearch
-        title="Book Domestic and International Hotels"
-        travelType={props.type}
-      />
-      {/* <BBAdCarousel/> */}
+    <div>
+      <div className=" ">
+        <div className="">
+          <HomeSearch
+            title="Book Domestic and International Hotels"
+            travelType={props.type}
+          />
+        </div>
+     
+        {/* <BBAdCarousel/> */}
+      </div>
     </div>
   );
 }

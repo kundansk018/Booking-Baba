@@ -21,8 +21,7 @@
 
 body {
   color: rgb(var(--foreground-rgb));
-  background-color: #e7e9ed;
-  background-color: #e7e9ed;
+  background-color:#e7e9ed;
   /* background: rgb(var(--background-start-rgb));  */
   /* background: linear-gradient(
       to bottom,
@@ -35,17 +34,17 @@ body {
 /* .font-castoro {
   font-family: "Castoro Titling", "cursive";
   letter-spacing: 2px;
-}
+} */
   
-.font-signika {
-  font-family: 'Signika', "sans-serif"; 
+/* .font-signika {
+  font-family: 'Signika', "sans-serif"; } */
 .bus-form{
   width: 600px;
 }
 .update-form{
   width: 600px;
 }
-} */
+
 
 .trainList {
   font-family: "Poppins", sans-serif;

@@ -43,7 +43,9 @@ export default function HomeSearch(props: Props) {
     <div className="w-full">
       <div className="p-5 bg-white">
         <div className="flex flex-col justify-center  gap-4">
-          <div className=" text-lg font-medium text-black">{props.title}</div>
+          <div className=" text-lg font-medium text-black">
+            {props.title} 
+          </div>
           <div className="flex flex-row gap-5">
             <UInput
               type="text"
@@ -58,18 +60,6 @@ export default function HomeSearch(props: Props) {
               }}
               className=" w-full  border border-gray-500 rounded-[4px] focus:outline-none focus:ring-1 focus:ring-blue-400 py-[12px] px-[14.5px]"
             />
-            {/* {props.travelType === "bus" || "train" ? (
-              <UInput
-                type="text"
-                id="to"
-                value={to}
-                placeholder="To"
-                onChange={(e) => {
-                  SetTo(e.target.value);
-                }}
-                className="w-full  border border-gray-500 rounded-[4px] focus:outline-none focus:ring-1 focus:ring-blue-400 py-[12px] px-[14.5px]"
-              />
-            ) : null} */}
 
             {props.travelType === "hotel" ? null : (
               <UInput
@@ -85,29 +75,42 @@ export default function HomeSearch(props: Props) {
             )}
           </div>
 
-          <UDatePicker
-            id="departDate"
-            placeholder={
-              props.travelType === "hotel" ? "Check In" : "Depart Date"
-            }
-            minDate={new Date()}
-            selected={departDate}
-            onChange={(date: any) => {
-              setDepartDate(date);
-            }}
-          />
           {props.travelType === "hotel" ? (
+            <div className="flex flex-row gap-5">
+              <UDatePicker
+                id="departDate"
+                placeholder="Check In"
+                minDate={new Date()}
+                selected={departDate}
+                onChange={(date: any) => {
+                  setDepartDate(date);
+                }}
+                className=" w-full  border border-gray-500 rounded-[4px] focus:outline-none focus:ring-1 focus:ring-blue-400 py-[12px] px-[14.5px]"
+              />
+
+              <UDatePicker
+                id="checkoutDate"
+                placeholder="Check Out"
+                minDate={new Date()}
+                selected={checkoutDate}
+                onChange={(date: any) => {
+                  setCheckoutDate(date);
+                }}
+                className="w-full  border border-gray-500 rounded-[4px] focus:outline-none focus:ring-1 focus:ring-blue-400 py-[12px] px-[14.5px]"
+              />
+            </div>
+          ) : (
             <UDatePicker
-              id="checkoutDate"
-              placeholder="Check Out"
+              id="departDate"
+              placeholder="Depart Date"
               minDate={new Date()}
-              selected={checkoutDate}
+              selected={departDate}
               onChange={(date: any) => {
-                setCheckoutDate(date);
+                setDepartDate(date);
               }}
-              className="w-full  border border-gray-500 rounded-[4px] focus:outline-none focus:ring-1 focus:ring-blue-400 py-[12px] px-[14.5px]"
+              className=" w-full  border border-gray-500 rounded-[4px] focus:outline-none focus:ring-1 focus:ring-blue-400 py-[12px] px-[14.5px]"
             />
-          ) : null}
+          )}
           <select
             id="dropDown"
             value={dropDownValue}
@@ -117,7 +120,7 @@ export default function HomeSearch(props: Props) {
             }}
             className="w-full  border border-gray-500 rounded-[4px] focus:outline-none focus:ring-1 focus:ring-blue-400 py-[12px] px-[14.5px]"
           >
-            <option  value="option1">Option1</option>
+            <option value="option1">Option1</option>
             <option value="option2">Option2</option>
             <option value="option3">Option3</option>
           </select>
