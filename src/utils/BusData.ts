@@ -1,139 +1,197 @@
+const class_list = [
+  { id: 1, name: "economic", price: 250 },
+  { id: 2, name: "economic 1" },
+];
+
 const SEATS = [
   {
-    value: 1,
+    id: 1,
     price: 250,
+    classType: "First Class",
+    seat_number: 100,
   },
   {
+    id: 2,
     price: 250,
-    value: 2,
+    classType: "First Class",
+    seat_number: 100,
   },
   {
+    id: 3,
     price: 250,
-    value: 3,
+    classType: "First Class",
+    seat_number: 101,
   },
   {
+    id: 4,
     price: 250,
-    value: 4,
+    classType: "First Class",
+    seat_number: 102,
   },
   {
+    id: 5,
     price: 250,
-    value: 5,
+    classType: "First Class",
+    seat_number: 103,
   },
   {
+    id: 6,
     price: 250,
-    value: 6,
+    classType: "First Class",
+    seat_number: 104,
   },
   {
-    price: 150,
-    value: 7,
+    id: 7,
+    price: 250,
+    classType: "First Class",
+    seat_number: 105,
   },
   {
-    price: 150,
-    value: 8,
+    id: 8,
+    price: 250,
+    classType: "First Class",
+
+    seat_number: 106,
   },
   {
+    id: 9,
     price: 150,
-    value: 9,
+    classType: "Economy Class",
+
+    seat_number: 107,
   },
   {
+    id: 10,
     price: 150,
-    value: 10,
+    classType: "Economy Class",
+
+    seat_number: 108,
   },
   {
+    id: 11,
     price: 150,
-    value: 11,
+    classType: "Economy Class",
+
+    seat_number: 109,
   },
   {
+    id: 12,
     price: 150,
-    value: 12,
+    classType: "Economy Class",
+
+    seat_number: 110,
   },
   {
+    id: 13,
     price: 150,
-    value: 13,
+    classType: "Economy Class",
+
+    seat_number: 111,
   },
   {
+    id: 14,
     price: 150,
-    value: 14,
+    classType: "Economy Class",
+
+    seat_number: 112,
   },
   {
+    id: 15,
     price: 150,
-    value: 15,
+    classType: "Economy Class",
+
+    seat_number: 113,
   },
   {
+    id: 16,
     price: 150,
-    value: 16,
+    classType: "Economy Class",
+
+    seat_number: 114,
   },
   {
+    id: 17,
     price: 150,
-    value: 17,
+    classType: "Economy Class",
+
+    seat_number: 115,
   },
   {
+    id: 18,
     price: 150,
-    value: 18,
+    classType: "Economy Class",
+
+    seat_number: 116,
   },
   {
+    id: 19,
     price: 150,
-    value: 19,
+    classType: "Economy Class",
+
+    seat_number: 117,
   },
   {
+    id: 20,
     price: 150,
-    value: 20,
+    classType: "Economy Class",
+
+    seat_number: 118,
   },
   {
+    id: 21,
     price: 150,
-    value: 21,
+    classType: "Economy Class",
+    seat_number: 119,
   },
   {
+    id: 22,
     price: 150,
-    value: 22,
+    classType: "Economy Class",
+    seat_number: 120,
   },
   {
+    id: 23,
     price: 150,
-    value: 23,
+    classType: "Economy Class",
+    seat_number: 121,
   },
   {
+    id: 24,
     price: 150,
-    value: 24,
+    classType: "Economy Class",
+    seat_number: 122,
   },
   {
+    id: 25,
     price: 150,
-    value: 25,
-  },
-  {
-    price: 150,
-    value: 26,
-  },
-  {
-    price: 150,
-    value: 27,
-  },
-  {
-    price: 150,
-    value: 28,
+    classType: "Economy Class",
+    seat_number: 123,
   },
 ];
 
 const TABLE_ROWS = [
   {
     name: "Before 0 Hrs.",
-    job: "0%",
+    job: "0 %",
   },
   {
     name: "Before 24 Hrs.",
-    job: "30%",
+    job: "30 %",
   },
   {
     name: "Before 48 Hrs",
-    job: "60%",
+    job: "60 %",
   },
   {
     name: "Before 60 Hrs.",
-    job: "75%",
+    job: "75 %",
   },
   {
     name: "Above 60 Hrs.",
-    job: "80%r",
+    job: "80 %",
   },
 ];
 
-export { SEATS, TABLE_ROWS };
+const headerData = [{}];
+
+export { SEATS, TABLE_ROWS, headerData };

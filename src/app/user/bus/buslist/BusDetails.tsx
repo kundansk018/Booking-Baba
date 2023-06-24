@@ -22,69 +22,77 @@ interface Props {
 export const BusDetails: React.FC<Props> = ({ option }) => {
   const [activeTab, setActiveTab] = React.useState("Available");
   const [seats, setSeats] = useState<Array<any>>([]);
-  const [bookSeats, setBookSeats] = useState<boolean>(false);
-  const [ticketPrice, setTicketPrice] = useState<any>(0);
-  const [firstClassTicketPrice, setFirstClassTicketPrice] = useState<any>(250);
-  const [economyClassTicketPrice, setEconomyClassTicketPrice] =
-    useState<any>(140);
+  const [ticketPrice, setTicketPrice] = useState<Array<any>>([]);
+  const [bookSeats, setBookSeats] = useState<Array<any>>([]);
 
   const [count, setCount] = useState<number>(0);
 
-  // useEffect(() => {
-  //   onHandleDelete;
-  //   onBookSeats;
-  // }, []);
+  const onSeats = (selected_seat: any) => {
+    let seatId = selected_seat.id;
 
-  const onSeats = (seat_number: any) => {
-    let lseats = [...seats];
-    if (seats.includes(seat_number)) {
-      ///
-      let index = lseats.findIndex(
-        (element: any, index: number) => element == seat_number
-      );
-      lseats.splice(index, 1);
+    let l_seats = [...seats];
 
-      setSeats(lseats);
+    let index = l_seats.findIndex((element) => element.id == seatId);
+    if (index >= 0) {
+      l_seats.splice(index, 1); //remove
+      setSeats(l_seats);
     } else {
-      let seat_no = [...lseats, seat_number];
-      setSeats(seat_no);
+      l_seats = [...l_seats, selected_seat];
+      setSeats(l_seats);
     }
   };
 
+  let sum = 0;
+  const totalPrice = () => {
+    console.log("ticket price inside totalPrice function ::");
+
+    sum = seats.reduce((sum, item) => sum + item.price, 0);
+
+    console.log("total price sum  ::", sum);
+
+    return sum;
+  };
+  console.log("total Price ::", totalPrice());
+
   const onBookSeats = () => {
-    setBookSeats(true);
+    let b_Seats = [...seats];
+
+    setBookSeats(b_Seats);
+    setSeats([]);
   };
 
   const onHandleDelete = () => {
     seats.pop();
     setCount(count + 1);
   };
+  console.log("Books Seats ::", bookSeats);
 
-  console.log("Seats current status::::::::::::", seats);
-  console.log("Book Seats current status::::::::::::", bookSeats);
+  console.log("selected seats::", seats);
 
   return (
-    <div>
+    <div className="h-[530px] overflow-y-scroll overflow-y-hidden">
       {/* <p className="text-black font-semibold text-xl">Bus Booking Details</p> */}
 
-      {/* <div className="flex flex-row p-1">
-        <div className="col ">
-          <span>AK Tour & Travels</span>
+      <div className="flex justify-between px-5 py-5 text-4">
+        <div className="flex flex-col">
+          <span className="text-black font-2xl text-2xl">
+            AK Tour & Travels
+          </span>
           <small>AC Sleeper</small>
         </div>
-        <div>
-          <span>12:00</span>
+        <div className="flex flex-col">
+          <span className="text-black font-2xl text-2xl">12:00</span>
           <small>Mumbai</small>
         </div>
-        <div>
-          <span>06h 32m</span>
+        <div className="flex flex-col">
+          <span className="text-black font-2xl text-2xl">06h 32m</span>
           <small>12 Stops</small>
         </div>
-        <div>
-          <span>05:15</span>
+        <div className="flex flex-col">
+          <span className="text-black font-2xl text-2xl">05:15</span>
           <small>Surat</small>
         </div>
-      </div> */}
+      </div>
 
       <div>
         <Tabs value={activeTab}>
@@ -121,21 +129,20 @@ export const BusDetails: React.FC<Props> = ({ option }) => {
                         <div
                           key={index}
                           onClick={() => {
-                            onSeats(element.value);
-                            setTicketPrice(ticketPrice + element.price);
+                            onSeats(element);
                           }}
                           className={`flex justify-center mx-3 my-2 text-sm rounded-md px-3 p-1 h-fit w-5 bg-grey-900 border border-black ${
-                            seats.includes(element.value)
-                              ? "selected-seats"
-                              : "bg-grey-900"
+                            seats.includes(element)
+                              ? "selected-seats text-white"
+                              : ""
                           } `}
                         >
-                          {element.value}
+                          {element.seat_number}
                         </div>
                       ))}
                     </div>
                   </div>
-                  <div className="h-96 w-68 mx-auto border border-grey-500 bg-white p-3">
+                  <div className="h-96 w-68 mx-auto overflow-y-scroll overflow-y-hidden border border-grey-500 bg-white p-3">
                     <div>
                       <p className="text-black font-semibold text-xl">
                         Booking Details
@@ -147,20 +154,11 @@ export const BusDetails: React.FC<Props> = ({ option }) => {
                         <ul>
                           {seats?.map((elements: any, index) => (
                             <li>
-                              {elements === 1 ||
-                              elements === 2 ||
-                              elements === 3 ||
-                              elements === 4 ||
-                              elements === 5 ||
-                              elements === 6
-                                ? "First Class Seat # " +
-                                  elements +
-                                  " : " +
-                                  firstClassTicketPrice
-                                : "Economy Class Seat # " +
-                                  elements +
-                                  " : " +
-                                  economyClassTicketPrice}
+                              {elements.classType +
+                                " Seats " +
+                                elements.seat_number +
+                                ": $" +
+                                elements.price}
                               <button onClick={() => onHandleDelete()}>
                                 <RxCross2
                                   color="red"
@@ -171,7 +169,7 @@ export const BusDetails: React.FC<Props> = ({ option }) => {
                           ))}
                         </ul>
                         <div className="border border-black">
-                          Total Fare : {`$` + ticketPrice}
+                          Total Fare : {`$` + totalPrice()}
                         </div>
                         <div className="m-2">
                           <Button onClick={onBookSeats} fullWidth>
