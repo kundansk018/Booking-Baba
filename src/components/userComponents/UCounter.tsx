@@ -29,9 +29,9 @@ const DropdownItem: React.FC<DropdownItemProps> = ({ option }) => {
   };
 
   return (
-    <div className=" flex items-center justify-between my-2">
+    <div className=" flex items-center justify-between my-2  gap-[150px]">
       <div className="mr-2">{label}</div>
-      <div className="flex items-center">
+      <div className="flex items-center justify-between ">
         <button
           className="bg-[#e7e9ed] text-black hover:bg-blue-700 font-bold h-8 w-8 rounded-sm flex justify-center items-center"
           onClick={decreaseCount}
@@ -96,14 +96,17 @@ export default function Accordion(props: Props) {
   ];
 
   return (
-    <div className="space-y-4">
+    <div className="bg-white border border-gray-500  rounded-[4px] ">
       {options.map((option, index) => (
-        <div key={index} className="border border-gray-300 p-4 rounded">
+        <div
+          key={index}
+          className=" px-3 flex flex-col justify-center items-center py-2"
+        >
           <div
-            className="flex items-center justify-between cursor-pointer"
+            className="flex justify-between cursor-pointer "
             onClick={() => toggleAccordion(index)}
           >
-            <div>
+            <div className="w-[350px]">
               {option.count} {option.label}
               {/* {props.travelType === "hotel"
                 ? "Room"
@@ -112,7 +115,7 @@ export default function Accordion(props: Props) {
                 : "Seats"} */}
             </div>
             <svg
-              className={`w-6 h-6 transition-transform duration-300 ease-in-out transform ${
+              className={`w-24 h-6 transition-transform duration-300 ease-in-out transform ${
                 index === activeIndex ? "rotate-180" : "rotate-0"
               }`}
               fill="none"
@@ -129,7 +132,7 @@ export default function Accordion(props: Props) {
             </svg>
           </div>
           {index === activeIndex && (
-            <>
+            <div className="shadow-black shadow-2xl z-10 absolute p-2 mt-20 mt-[200px] bg-white">
               {props.travelType === "hotel" ? (
                 <div className="mt-4">
                   {userHotelOptions.map((option, i) => (
@@ -185,7 +188,7 @@ export default function Accordion(props: Props) {
                   ))}
                 </div>
               )}
-            </>
+            </div>
           )}
         </div>
       ))}

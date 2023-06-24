@@ -5,7 +5,14 @@ import { Button, Card, Typography } from "@material-tailwind/react";
 import FilterPage from "../page";
 import HomeSearch from "@/components/HomeSearch";
 // import FilterPage from '../new1/page';
+
+interface Props {
+  type?: any;
+}
+
 export default function page() {
+  const [type, setType] = useState("hotel");
+
   const TABLE_HEAD = ["Train Name", "Departure", "Duration", "Arrival", ""];
   const TABLE_ROWS = [
     {
@@ -46,9 +53,11 @@ export default function page() {
   ];
 
   return (
-    <>
-      <HomeSearch />
-      <Card className="overflow-scroll h-full w-full flex-row gap-10 ">
+    <div className="max-w-screen-xl mx-auto">
+      <div className="my-5">
+        <HomeSearch travelType={type} />
+      </div>
+      <Card className="overflow-scroll h-full w-full flex-row gap-5">
         <div className="">
           <FilterPage />
         </div>
@@ -167,6 +176,6 @@ export default function page() {
           </table>
         </div>
       </Card>
-    </>
+    </div>
   );
 }

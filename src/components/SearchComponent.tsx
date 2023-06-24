@@ -1,29 +1,8 @@
-// import { Input } from "@material-tailwind/react";
-// import React from "react";
-
-// interface Props {
-//   label: string;
-//   value?: string;
-//   type?: string;
-//   classNameName?: string;
-//   onChange: (e: any) => void; // for function type
-//   containerProps?: any;
-//   color?: any;
-//   max?: number;
-//   min?: number;
-// }
-
-// export default function CustomComponents(props: Props) {
-//   return (
-//     <div classNameNameName="w-72">
-//       <Input label={props.label} />
-//     </div>
-//   );
-// }
-
 import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import Accordion from "./userComponents/UCounter";
+import { type } from "os";
 
 interface SearchData {
   from: string;
@@ -80,17 +59,7 @@ const SearchComponent = (props: SearchData) => {
         onChange={(date) => setArrivalDate(date)}
         className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-400 mb-2"
       />
-      <select
-        id="dropdown"
-        value={dropdownValue}
-        placeholder="Dropdown"
-        onChange={(e) => setDropdownValue(e.target.value)}
-        className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-400 mb-2"
-      >
-        <option value="option1">Option 1</option>
-        <option value="option2">Option 2</option>
-        <option value="option3">Option 3</option>
-      </select>
+      <Accordion travelType={type} />
 
       <button
         onClick={handleSearch}

@@ -21,7 +21,7 @@ export default function UInput(props: Props) {
       value={props.value}
       placeholder={props.placeholder}
       onChange={props.onChange}
-      className={props.className}
+      className={`w-full  border border-gray-500 rounded-[4px] focus:outline-none focus:ring-1 focus:ring-blue-400 py-[11px] px-[14.5px] ${props?.className}`}
       style={props.style}
     >
       {props.label}

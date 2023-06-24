@@ -17,7 +17,11 @@ export default function BBButton(props: button) {
       onClick={props.onClick}
       color={props.color || "blue"}
       size={props.size}
-      className={props.className}
+      className={
+        props.className
+          ? props.className
+          : " w-full text-white text-[14px] bg-blue-600 border border-gray-500 rounded-[4px] focus:outline-none focus:ring-1 focus:ring-blue-400 py-[11px] px-[14.5px]"
+      }
     >
       {props.label}
     </Button>
