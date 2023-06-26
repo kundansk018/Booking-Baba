@@ -187,7 +187,7 @@ export default function HomeSearch(props: Props) {
               />
             )}
             {/* <div className=" bg-white  text-[14px]  w-full border border-gray-500 rounded-[4px] focus:outline-none focus:ring-1 focus:ring-blue-400 py-[11px] px-[14.5px]"> */}{" "}
-            <Accordion travelType={props.travelType} />
+            <Accordion travelType={props.travelType} className="w-[50%]" />
             {/* </div> */}
             <BBButton
               label="Search"

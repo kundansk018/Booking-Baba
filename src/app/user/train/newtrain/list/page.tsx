@@ -11,7 +11,7 @@ interface Props {
 }
 
 export default function page() {
-  const [type, setType] = useState("hotel");
+  const [type, setType] = useState("train");
 
   const TABLE_HEAD = ["Train Name", "Departure", "Duration", "Arrival", ""];
   const TABLE_ROWS = [
