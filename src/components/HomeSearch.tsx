@@ -7,6 +7,10 @@ import { useState } from "react";
 import "react-datepicker/dist/react-datepicker.css";
 import UDatePicker from "./userComponents/UDatePicker";
 import Accordion from "./userComponents/UCounter";
+import { useAppDispatch } from "@/redux/store";
+import { useRouter } from "next/navigation";
+import { getTrainBySearch } from "@/redux/action/trainAction";
+import { getBusBySearch } from "@/redux/action/busaction";
 
 interface Props {
   from?: string;
@@ -25,11 +29,38 @@ export default function HomeSearch(props: Props) {
   const [departDate, setDepartDate] = useState<Date | any>(null);
   const [checkoutDate, setCheckoutDate] = useState<Date | any>(null);
   const [dropDownValue, setDropdownValue] = useState("");
+  const dispatch = useAppDispatch();
+  const router = useRouter();
 
   console.log("from", props.travelType);
 
   const handleSearch = () => {
-    
+    console.log("from nd to ", from, to);
+    if (!from && !to) {
+      alert("plz enter details");
+    } else {
+      if (from && to) {
+        if (props.travelType === "train") {
+          let data = { from_Stn: from, to_Stn: to };
+          console.log("Searching for trains:", data);
+          dispatch(getTrainBySearch(data)).then((res: any) => {
+            console.log("response train ???????????????????????", res);
+            router.push("/user/train/list");
+          });
+        } else if (props.travelType === "hotel") {
+        } else {
+          let data = { from: from, to: to };
+          dispatch(getBusBySearch(data)).then((res: any) => {
+            console.log("response  bus     ???????????????????????", res);
+            // setShowBox(true);
+            router.push("/user/bus/list");
+          });
+        }
+      } else {
+        alert("Please Insert Fields");
+      }
+    }
+
     const searchData = {
       from,
       to,
@@ -122,7 +153,7 @@ export default function HomeSearch(props: Props) {
             <BBButton
               label="Search"
               type="button"
-              onClick={handleSearch}
+              onClick={() => handleSearch()}
               className=" w-full text-white text-[14px] bg-blue-600 border border-gray-500 rounded-[4px] focus:outline-none focus:ring-1 focus:ring-blue-400 py-[11px] px-[14.5px]"
             ></BBButton>
           </div>

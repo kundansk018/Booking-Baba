@@ -110,7 +110,7 @@ export default function Accordion(props: Props) {
             className="flex justify-between cursor-pointer "
             onClick={() => toggleAccordion(index)}
           >
-            <div className="w-[350px]">
+            <div className="w-[150px]">
               {option.count} {option.label}
               {/* {props.travelType === "hotel"
                 ? "Room"
@@ -119,7 +119,7 @@ export default function Accordion(props: Props) {
                 : "Seats"} */}
             </div>
             <svg
-              className={`w-24 h-6 transition-transform duration-300 ease-in-out transform ${
+              className={`w-20 h-6 transition-transform duration-300 ease-in-out transform ${
                 index === activeIndex ? "rotate-180" : "rotate-0"
               }`}
               fill="none"
