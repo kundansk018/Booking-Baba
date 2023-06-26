@@ -30,7 +30,7 @@ const DropdownItem: React.FC<DropdownItemProps> = ({ option }) => {
 
   return (
     <div className="border border-b-gray-300 border-t-0 border-x-0">
-      <div className=" flex items-center justify-between my-2  gap-[150px]">
+      <div className=" flex items-center justify-between my-2  gap-[180px]">
         <div className="mr-2">{label}</div>
         <div className="flex items-center justify-between ">
           <button
