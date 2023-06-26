@@ -24,10 +24,12 @@ import BBErrorDialog from "@/app/components/BBErrorDialog";
 import Multiselect from "multiselect-react-dropdown";
 import {
   Basic_Facilities,
+
   Safety,
   food_facilities,
   general_services,
   mode_of_payment,
+  propert_type,
 } from "@/utils/Data";
 
 export default function AddHotels() {
@@ -47,6 +49,7 @@ export default function AddHotels() {
   const [dinner, setDinner] = useState<boolean>(true);
   const [country, setCountry] = useState("");
   const [date, setDate] = useState("");
+
   const [price, setPrice] = useState("");
   const [location, setLocation] = useState("");
 
@@ -55,6 +58,7 @@ export default function AddHotels() {
   const [generalService, setGeneral] = useState([]);
   const [safety, setSafety] = useState([]);
   const [payment, setPayment] = useState([]);
+  const [property, setProperty] = useState([]);
 
   const [selectedFoodName, setSelectedFoodName] = useState(
     "Select foods & drinks"
@@ -114,7 +118,10 @@ export default function AddHotels() {
     setSelectedSafety(names.toString());
   };
 
-  const [selectPayment, setSelectPayment] = useState("Select Mode Of Payment");
+
+  const [selectPayment, setSelectPayment] = useState(
+    "Select Mode Of Payment"
+  );
   const selectModePayment = (selectedList: any, selectedItem: any) => {
     setPayment(selectedList);
     let names = selectedList.map((element: any) => element.name);
@@ -125,6 +132,21 @@ export default function AddHotels() {
     let names = selectedList.map((element: any) => element.name);
     setSelectPayment(names.toString());
   };
+
+  const [selectProperty_Type, setPropertyType] = useState(
+    "Select Property Type"
+  );
+  const selectPropertyType = (selectedList: any, selectedItem: any) => {
+    setProperty(selectedList);
+    let names = selectedList.map((element: any) => element.name);
+    setPropertyType(names.toString());
+  };
+  const removePropertyType = (selectedList: any, removedItem: any) => {
+    setProperty(selectedList);
+    let names = selectedList.map((element: any) => element.name);
+    setPropertyType(names.toString());
+  };
+
 
   const dispatch = useAppDispatch();
   const [errorDialogMessage, setErrorDialogMessage] = useState([]);
@@ -152,24 +174,25 @@ export default function AddHotels() {
       return;
     }
 
-    debugger;
-    let selectedImg = fileInput.files[0];
+    debugger
+    let selectedImg = fileInput.files[0]
+
 
     const url = URL.createObjectURL(selectedImg);
 
-    debugger;
+    debugger
     setFile(url);
     // setFile(selectedImg)
   };
 
   const addHotelDetails = () => {
-    debugger;
+    debugger
     let data: any = {
       hotelname: hotelname,
       ownerName: ownerName,
       contactno: contactno,
       email: email,
-      imageUrl: "file",
+      file: "",
       adress: adress,
       street: street,
       city: city,
@@ -187,8 +210,13 @@ export default function AddHotels() {
       generalService: generalService,
       safety: safety,
       payment: payment,
+      property:property,
       min_order_price: price,
+
     };
+
+
+
 
     let isErrorFound = false;
     let error: any = [];
@@ -271,9 +299,10 @@ export default function AddHotels() {
               containerProps={{ className: "w-[300px] mb-4" }}
               type="file"
               label="Hotel Photos"
-              //  value={file}
+              //  value={file} 
               //   onChange={(e) => setFile(e.target.value)}
-              onChange={(e) => onFileUploadChange(e)}
+              onChange={
+                (e) => onFileUploadChange(e)}
             />
             <BBInput
               containerProps={{ className: "" }}
@@ -388,6 +417,18 @@ export default function AddHotels() {
                 options={mode_of_payment}
                 onSelect={selectModePayment}
                 onRemove={removeModePayment}
+                displayValue="name"
+                avoidHighlightFirstOption={true}
+                showCheckbox={true}
+                hideSelectedList={true}
+              />
+            </div>
+            <div className="my-2 w-60">
+              <Multiselect
+                placeholder={selectProperty_Type || "Select Property Type"}
+                options={propert_type}
+                onSelect={selectPropertyType}
+                onRemove={removePropertyType}
                 displayValue="name"
                 avoidHighlightFirstOption={true}
                 showCheckbox={true}

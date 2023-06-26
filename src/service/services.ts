@@ -37,7 +37,7 @@ export const updatePwd = (data: any) => {
 
 export const addHotelsInfo = (data: any) => {
   let url = `${ENDPOINTS.addHotels}`;
-  return client.post(url, data, formDataHeader);
+  return client.post(url, data, headers);
 };
 
 export const getHotel = () => {

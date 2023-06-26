@@ -72,6 +72,12 @@ const Basic_Facilities = [
     { name: 'Bathrobes', id: 7 },
     { name: 'Tissue', id: 8 },
   ]
+ const room_type=[
+  { name: 'Standard Room', id: 1 },
+  { name: 'Deluxe Room', id: 2 },
+  { name: 'Premium Room', id: 3 },
+  { name: 'Suite', id: 4 },
+ ]
 
   const mode_of_payment = [
     { name: 'Cash', id: 1 },
@@ -84,5 +90,42 @@ const Basic_Facilities = [
     { name: 'Amazon Pay', id: 7 },
     { name: 'PhonePe', id: 8 },
   ]
+
+  const propert_type=[
+    {name:'Hotel', id:1},
+    {name:'Resort', id:2},
+    {name:'Villa', id:3},
+    {name:'Heritage', id:4},
+    {name:'Motel', id:5},
+    {name:'Guest House', id:6},
+    {name:'Farm House', id:7},
+    {name:'Palace', id:8},
+    {name:'Serviced Apartments', id:9},
+   
+  ]
+  const star_category=[
+    {name:'5 Star', id:1},
+    {name:'4 Star', id:2},
+    {name:'3 Star', id:3},
+    {name:'2 Star', id:4},
+    {name:'1 Star', id:5},
+  ]
+  const amenities=[
+    {name:' Internet/Wi-Fi', id:1},
+    {name:' Restaurant', id:2},
+    {name:' Bar', id:3},
+    {name:' Swimming Pool', id:4},
+    {name:'Business Facilities', id:5},
+    {name: 'Spa/Wellness', id:6},
+    {name:'Gym', id:7},
+]
   
-  export {Safety,general_services,food_facilities,Basic_Facilities,options_view,room_amenities,essential_Kit,mode_of_payment}
+const user_review=[
+  {name:' Excellent', id:1},
+  {name:' Good', id:2},
+  {name:' Fair', id:3},
+  {name:'Poor', id:4},
+  {name:' Bad', id:5},
+]
+  export {Safety,general_services,food_facilities,Basic_Facilities,star_category,room_type,
+    options_view,room_amenities,essential_Kit,mode_of_payment,propert_type,amenities,user_review}

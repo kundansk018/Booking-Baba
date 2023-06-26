@@ -1,0 +1,6 @@
+.container::-webkit-scrollbar {
+    display: none;
+}
+.alltesxt{
+    text-decoration-color:#535b61;
+}

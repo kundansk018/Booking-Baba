@@ -3,7 +3,7 @@ import BBButton from "@/app/components/BBButton";
 import BBCheckbox from "@/app/components/BBCheckbox";
 import { addHotels } from "@/redux/action/hotelaction";
 import { useAppDispatch } from "@/redux/store";
-import { essential_Kit, options_view, room_amenities } from "@/utils/Data";
+import { essential_Kit, options_view, room_amenities, room_type } from "@/utils/Data";
 import { PlusIcon, TrashIcon } from "@heroicons/react/24/solid";
 import {
   Button,
@@ -51,6 +51,7 @@ export default function Page() {
       view: [],
       amenities: [],
       essentialKit: [],
+      room_type:[],
     },
   ]);
 
@@ -90,27 +91,18 @@ export default function Page() {
       view: [],
       amenities: [],
       essentialKit: [],
+      room_type:[],
     });
     setRoomDetails(data);
     console.log(data);
   };
 
   const addHotelsDetails = () => {
+    
     let data = { ...previousHotelData };
     data.rooms = roomDetails;
-    // data.view = view
-    // data.amenities = amenities
-    // data.essentialKit = essentialKit
-    // data["rooms"]=roomDetails
-
-    console.log(data)
-    var form_data = new FormData();
-
-    for (var key in data) {
-      form_data.append(key, data[key]);
-    }
-
-    dispatch(addHotels(form_data));
+   
+    dispatch(addHotels(data));
     router.push("/hotels")
   }
 
@@ -167,6 +159,23 @@ export default function Page() {
     );
     if (names && names.length > 0) return names.toString();
     else return "Select Essential Kit";
+  };
+
+  const selectRoomType = (
+    index: number,
+    selectedList: any,
+    selectedItem: any
+  ) => {
+    let data = [...roomDetails];
+    data[index].room_type = selectedList;
+    setRoomDetails(data);
+  };
+  const getRoomType = (index: number) => {
+    let names = roomDetails[index]?.room_type.map(
+      (element: any) => element.name
+    );
+    if (names && names.length > 0) return names.toString();
+    else return "Select Room Type";
   };
 
   return loading ? (
@@ -264,6 +273,19 @@ export default function Page() {
                     options={essential_Kit}
                     onSelect={(selectedList, selectedItem) => selectEssential_Kit(index, selectedList, selectedItem)}
                     onRemove={(selectedList, selectedItem) => selectEssential_Kit(index, selectedList, selectedItem)}
+                    displayValue="name"
+                    avoidHighlightFirstOption={true}
+                    showCheckbox={true}
+                    hideSelectedList={true}
+                  />
+                </div>
+
+                <div className="my-2 w-72">
+                  <Multiselect
+                    placeholder={getRoomType(index)}
+                    options={room_type}
+                    onSelect={(selectedList, selectedItem) => selectRoomType(index, selectedList, selectedItem)}
+                    onRemove={(selectedList, selectedItem) => selectRoomType(index, selectedList, selectedItem)}
                     displayValue="name"
                     avoidHighlightFirstOption={true}
                     showCheckbox={true}
