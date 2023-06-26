@@ -13,13 +13,13 @@ export default function BAdCarousel() {
   const router = useRouter();
   return (
     <Carousel className="h-[400px] w-full" loop={true} autoplay={true}>
-      <div className="h-[400px] w-full">
+      <div className="h-[325px] w-full">
         <Image
-          className=" h-[400px] w-full"
+          className=" h-[325px] w-full"
           src={booking}
           alt="Multi-services-booking"
         />
-        <div className="absolute inset-0 grid h-full w-full place-items-center ">
+        {/* <div className="absolute inset-0 grid h-full w-full place-items-center ">
           <div className="w-3/4 text-center ">
             <div className="flex align-baseline -mx-7 mt-[200px]">
               <Button
@@ -34,15 +34,15 @@ export default function BAdCarousel() {
               </Button>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
-      <div className="relative h-[400px] w-full">
+      <div className="relative h-[325px] w-full">
         <Image
-          className="h-[400px] w-full"
+          className="h-[325px] w-full"
           src={top}
           alt="Multi-services-booking"
         />
-        <div className="absolute inset-0 grid h-full w-full place-items-top ">
+        {/* <div className="absolute inset-0 grid h-full w-full place-items-top ">
           <div className="w-3/4 text-left ml-12">
             <Typography
               variant="h1"
@@ -73,15 +73,15 @@ export default function BAdCarousel() {
               </Button>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
-      <div className="relative h-[400px] w-full">
+      <div className="relative h-[325px] w-full">
         <Image
-          className=" h-[400px] w-full"
+          className=" h-[325px] w-full"
           src={rail}
           alt="Multi-services-booking"
         />
-        <div className="absolute inset-0 grid h-full w-full place-items-top ">
+        {/* <div className="absolute inset-0 grid h-full w-full place-items-top ">
           <div className="w-3/4 text-left ml-12">
             <Typography
               variant="h1"
@@ -112,15 +112,15 @@ export default function BAdCarousel() {
               </Button>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
-      <div className="relative h-[400px] w-full">
+      <div className="relative h-[325px] w-full">
         <Image
-          className=" h-[400px] w-full"
+          className=" h-[325px] w-full"
           src={busimg}
           alt="Multi-services-booking"
         />
-        <div className="absolute inset-0 grid h-full w-full place-items-top ">
+        {/* <div className="absolute inset-0 grid h-full w-full place-items-top ">
           <div className="w-3/4 text-left ml-12">
             <Typography
               variant="h1"
@@ -151,7 +151,7 @@ export default function BAdCarousel() {
               </Button>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </Carousel>
   );

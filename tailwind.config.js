@@ -21,12 +21,14 @@ module.exports = withMT({
         darkgreen: "#1BA89E",
         GreenBlue: "#1B6CA8",
         blackblue: "#243f56",
-        purple:"#4338ca"
+        purple: "#4338ca",
+        headcolor: "#0C2F55"
       },
       fontFamily: {
         Signika: ["Signika", "sans-serif"],
         Castoro: ["Castoro Titling", "cursive"],
       },
+
     },
   },
   plugins: [],

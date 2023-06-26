@@ -95,7 +95,6 @@ export default function HomeSearch(props: Props) {
                 onChange={(e) => {
                   setFrom(e.target.value);
                 }}
-                // className=" w-full  border border-gray-500 rounded-[4px] focus:outline-none focus:ring-1 focus:ring-blue-400 py-[12px] px-[14.5px]"
               />
 
               {props.travelType === "hotel" ? null : (
@@ -107,12 +106,11 @@ export default function HomeSearch(props: Props) {
                   onChange={(e) => {
                     SetTo(e.target.value);
                   }}
-                  // className="w-full  border border-gray-500 rounded-[4px] focus:outline-none focus:ring-1 focus:ring-blue-400 py-[12px] px-[14.5px]"
                 />
               )}
             </div>
             {props.travelType === "hotel" ? (
-              <div className="flex flex-row gap-5">
+              <div className="flex flex-row justify-between">
                 <UDatePicker
                   id="departDate"
                   placeholder="Check In"
@@ -121,7 +119,7 @@ export default function HomeSearch(props: Props) {
                   onChange={(date: any) => {
                     setDepartDate(date);
                   }}
-                  className=" w-full  border border-gray-500 rounded-[4px] focus:outline-none focus:ring-1 focus:ring-blue-400 py-[12px] px-[14.5px]"
+                  className=" w-full flex-shrink border border-gray-500 rounded-[4px] focus:outline-none focus:ring-1 focus:ring-blue-400 py-[11px] px-[14.5px]"
                 />
 
                 <UDatePicker
@@ -132,7 +130,7 @@ export default function HomeSearch(props: Props) {
                   onChange={(date: any) => {
                     setCheckoutDate(date);
                   }}
-                  className="w-full  border border-gray-500 rounded-[4px] focus:outline-none focus:ring-1 focus:ring-blue-400 py-[11px] px-[14.5px]"
+                  className="w-full flex-shrink border border-gray-500 rounded-[4px] focus:outline-none focus:ring-1 focus:ring-blue-400 py-[11px] px-[14.5px]"
                 />
               </div>
             ) : (
@@ -147,9 +145,7 @@ export default function HomeSearch(props: Props) {
                 className=" w-full  border border-gray-500 rounded-[4px] focus:outline-none focus:ring-1 focus:ring-blue-400 py-[11px] px-[14.5px]"
               />
             )}
-            {/* <div className="z-10 absolute bg-white  text-[14px]  w-50 border border-gray-500 rounded-[4px] focus:outline-none focus:ring-1 focus:ring-blue-400 py-[12px] px-[14.5px]"> */}{" "}
             <Accordion travelType={props.travelType} />
-            {/* </div> */}
             <BBButton
               label="Search"
               type="button"
@@ -161,7 +157,7 @@ export default function HomeSearch(props: Props) {
       ) : (
         //******************************************************************************************************* */
         <div>
-          <div className="flex flex-row  gap-5 text-sm">
+          <div className="flex flex-row  gap-2 text-sm">
             <UInput
               type="text"
               id="from"
@@ -186,7 +182,6 @@ export default function HomeSearch(props: Props) {
                 }}
               />
             )}
-            {/* </div> */}
             {props.travelType === "hotel" ? (
               <>
                 <UDatePicker
@@ -220,7 +215,9 @@ export default function HomeSearch(props: Props) {
                 }}
               />
             )}
-            <Accordion travelType={props.travelType} className="w-[50%]" />
+            <div>
+              <Accordion travelType={props.travelType} />
+            </div>
 
             <BBButton
               label="Search"

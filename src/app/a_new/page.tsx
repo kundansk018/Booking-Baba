@@ -74,7 +74,7 @@ export default function Page() {
               </Tab>
             </TabsHeader>
 
-            <TabsBody className=" max-w-screen-xl mx-auto  h-[1000px]">
+            <TabsBody className=" max-w-screen-xl mx-auto  rounded-md overflow-auto h-[480px] bg-gray-100 container">
               <TabPanel value="hotel" className="p-0 flex flex-row">
                 <Hotel type={type} />
               </TabPanel>

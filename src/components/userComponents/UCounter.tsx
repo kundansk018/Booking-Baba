@@ -1,11 +1,6 @@
 import BBButton from "@/app/components/BBButton";
 import React, { useState } from "react";
 
-interface Props {
-  travelType: any;
-  className?: any;
-}
-
 type Option = {
   label: string;
   count: number;
@@ -31,7 +26,7 @@ const DropdownItem: React.FC<DropdownItemProps> = ({ option }) => {
 
   return (
     <div className="border border-b-gray-300 border-t-0 border-x-0">
-      <div className=" flex items-center justify-between my-2  gap-[195px]">
+      <div className=" flex items-center justify-between my-2  gap-[200px]">
         <div className="mr-2">{label}</div>
         <div className="flex items-center justify-between ">
           <button
@@ -57,6 +52,11 @@ const DropdownItem: React.FC<DropdownItemProps> = ({ option }) => {
     </div>
   );
 };
+
+interface Props {
+  travelType: any;
+  className?: any;
+}
 
 export default function Accordion(props: Props) {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
@@ -99,112 +99,117 @@ export default function Accordion(props: Props) {
     { label: "Seats", count: count1, setCount: setCount1 },
   ];
 
+  console.log("gefhgrhrhhrhrhryn r hrhethn", window.location.pathname);
+
   return (
-    <div className="bg-white border border-gray-500  rounded-[4px] ">
-      {options.map((option, index) => (
-        <div
-          key={index}
-          className=" px-3 flex flex-col justify-center items-center py-2"
-        >
+    <>
+      <div className="bg-white border border-gray-500  rounded-[4px]">
+        {options.map((option, index) => (
           <div
-            className="flex justify-between cursor-pointer "
-            onClick={() => toggleAccordion(index)}
+            key={index}
+            className=" px-3 flex flex-col justify-center items-center py-[9px] "
           >
-            <div className="w-[150px]">
-              {option.count} {option.label}
-              {/* {props.travelType === "hotel"
-                ? "Room"
-                : props.travelType === "train"
-                ? "Traveller"
-                : "Seats"} */}
-            </div>
-            <svg
-              className={`w-20 h-6 transition-transform duration-300 ease-in-out transform ${
-                index === activeIndex ? "rotate-180" : "rotate-0"
-              }`}
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
+            <div
+              className="flex justify-between cursor-pointer "
+              onClick={() => toggleAccordion(index)}
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M19 9l-7 7-7-7"
-              />
-            </svg>
-          </div>
-          <div className="flex justify-center">
-            {index === activeIndex && (
-              <div className="z-10 absolute shadow-black shadow-2xl  p-3  m-3 bg-white">
-                {props.travelType === "hotel" ? (
-                  <div className="mt-2">
-                    {userHotelOptions.map((option, i) => (
-                      <DropdownItem key={i} option={option} />
-                    ))}
-                  </div>
-                ) : props.travelType === "train" ? (
-                  <>
+              {window.location.pathname === "/a_new" ? (
+                <div className="w-[350px]">
+                  {option.count} {option.label}
+                </div>
+              ) : (
+                <div className="w-[225px]">
+                  {option.count} {option.label}
+                </div>
+              )}
+              <svg
+                className={`w-24 h-6 transition-transform duration-300 ease-in-out transform ${
+                  index === activeIndex ? "rotate-180" : "rotate-0"
+                }`}
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M19 9l-7 7-7-7"
+                />
+              </svg>
+            </div>
+            <div className="flex justify-center">
+              {index === activeIndex && (
+                <div className=" z-10 absolute  shadow-gray-700 shadow-md rounded-[4px] p-3  m-3 bg-white ">
+                  {props.travelType === "hotel" ? (
                     <div className="mt-2">
-                      {userTrainOptions.map((option, i) => (
+                      {userHotelOptions.map((option, i) => (
                         <DropdownItem key={i} option={option} />
                       ))}
                     </div>
-                    <select
-                      id="dropDown"
-                      value={dropDownValue}
-                      placeholder="SeDropdownats"
-                      onChange={(e) => {
-                        setDropdownValue(e.target.value);
-                      }}
-                      className="w-full  border border-gray-500 rounded-[4px] focus:outline-none focus:ring-1 focus:ring-blue-400 py-[12px] px-[14.5px]"
-                    >
-                      <option value=" All Class" className="text-lg">
-                        All Class
-                      </option>
-                      <option value="First Class" className="text-lg">
-                        First Class
-                      </option>
-                      <option value=" Second Class" className="text-lg">
-                        Second Class
-                      </option>
-                      <option
-                        value="First Class Sleeper (SL)"
-                        className="text-lg"
+                  ) : props.travelType === "train" ? (
+                    <>
+                      <div className="mt-2">
+                        {userTrainOptions.map((option, i) => (
+                          <DropdownItem key={i} option={option} />
+                        ))}
+                      </div>
+                      <select
+                        id="dropDown"
+                        value={dropDownValue}
+                        placeholder="SeDropdownats"
+                        onChange={(e) => {
+                          setDropdownValue(e.target.value);
+                        }}
+                        className="w-full  border border-gray-500 rounded-[4px] focus:outline-none focus:ring-1 focus:ring-blue-400 py-[12px] px-[14.5px]"
                       >
-                        First Class Sleeper (SL)
-                      </option>
-                      <option
-                        value="Second Class Sleeper (SL)"
-                        className="text-lg font-light"
-                      >
-                        Second Class Sleeper (SL)
-                      </option>
-                      <option value=" Business" className="text-lg">
-                        Business
-                      </option>
-                    </select>
-                  </>
-                ) : (
-                  <div className="mt-3">
-                    {userBusOptions.map((option, i) => (
-                      <DropdownItem key={i} option={option} />
-                    ))}
-                  </div>
-                )}
+                        <option value=" All Class" className="text-lg">
+                          All Class
+                        </option>
+                        <option value="First Class" className="text-lg">
+                          First Class
+                        </option>
+                        <option value=" Second Class" className="text-lg">
+                          Second Class
+                        </option>
+                        <option
+                          value="First Class Sleeper (SL)"
+                          className="text-lg"
+                        >
+                          First Class Sleeper (SL)
+                        </option>
+                        <option
+                          value="Second Class Sleeper (SL)"
+                          className="text-lg font-light"
+                        >
+                          Second Class Sleeper (SL)
+                        </option>
+                        <option value=" Business" className="text-lg">
+                          Business
+                        </option>
+                      </select>
+                    </>
+                  ) : (
+                    <div className="mt-3">
+                      {userBusOptions.map((option, i) => (
+                        <DropdownItem key={i} option={option} />
+                      ))}
+                    </div>
+                  )}
 
-                <BBButton
-                  label="Done"
-                  type="button"
-                  onClick={() => toggleAccordion(index)}
-                  className="mt-2"
-                ></BBButton>
-              </div>
-            )}
+                  <BBButton
+                    label="Done"
+                    type="button"
+                    onClick={() => toggleAccordion(index)}
+                    className="mt-2"
+                  ></BBButton>
+                </div>
+              )}
+            </div>
           </div>
-        </div>
-      ))}
-    </div>
+        ))}
+      </div>
+    </>
   );
 }
