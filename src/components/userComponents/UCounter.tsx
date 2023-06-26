@@ -1,3 +1,4 @@
+import BBButton from "@/app/components/BBButton";
 import React, { useState } from "react";
 
 interface Props {
@@ -30,7 +31,7 @@ const DropdownItem: React.FC<DropdownItemProps> = ({ option }) => {
 
   return (
     <div className="border border-b-gray-300 border-t-0 border-x-0">
-      <div className=" flex items-center justify-between my-2  gap-[180px]">
+      <div className=" flex items-center justify-between my-2  gap-[195px]">
         <div className="mr-2">{label}</div>
         <div className="flex items-center justify-between ">
           <button
@@ -192,6 +193,13 @@ export default function Accordion(props: Props) {
                     ))}
                   </div>
                 )}
+
+                <BBButton
+                  label="Done"
+                  type="button"
+                  onClick={() => toggleAccordion(index)}
+                  className="mt-2"
+                ></BBButton>
               </div>
             )}
           </div>
