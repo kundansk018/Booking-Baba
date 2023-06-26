@@ -19,7 +19,7 @@ const DropdownItem: React.FC<DropdownItemProps> = ({ option }) => {
   const { label, count, setCount } = option;
 
   const decreaseCount = () => {
-    if (count > 1) {
+    if (count >= 1) {
       setCount(count - 1);
     }
   };
@@ -62,7 +62,7 @@ export default function Accordion(props: Props) {
   const [count1, setCount1] = useState(1);
   const [count2, setCount2] = useState(0);
   const [count3, setCount3] = useState(0);
-  const [dropDownValue, setDropdownValue] = useState("");
+  const [dropDownValue, setDropdownValue] = useState("Class");
 
   const toggleAccordion = (index: number) => {
     setActiveIndex(index === activeIndex ? null : index);
@@ -72,11 +72,12 @@ export default function Accordion(props: Props) {
     {
       label:
         props.travelType === "train"
-          ? "Travellers"
+          ? "Travellers - " + dropDownValue
           : props.travelType === "bus"
           ? "Seats"
-          : "Room",
-      count: count1,
+          : "Rooms / " + (count2 + count3) + " Peoples",
+      count: props.travelType === "train" ? count1 + count2 + count3 : count1,
+
       setCount: setCount1,
     },
   ];
