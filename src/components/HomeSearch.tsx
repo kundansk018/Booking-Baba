@@ -29,6 +29,7 @@ export default function HomeSearch(props: Props) {
   console.log("from", props.travelType);
 
   const handleSearch = () => {
+    
     const searchData = {
       from,
       to,
@@ -36,6 +37,8 @@ export default function HomeSearch(props: Props) {
       checkoutDate,
       dropDownValue,
     };
+
+   
     console.log("data", searchData);
     console.log("from", props.travelType);
     console.log("gefhgrhrhhrhrhryn r hrhethn", window.location.pathname);
