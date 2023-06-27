@@ -23,57 +23,63 @@ export default function Page() {
     <div>
       <div className="">
         <div className=" ">
-          <Tabs value={type} className="">
-            <TabsHeader
-              className="rounded-none gap-12 !bg-[#0C2F55] w-full pl-[10%] pt-4 pb-0  shadow-none"
-              indicatorProps={{
-                className: "rounded-b-none rounded-t-md shadow-none -mx-2 ",
-              }}
-            >
-              <Tab
-                value="hotel"
-                onClick={() => setType("hotel")}
-                className={
-                  type === "hotel"
-                    ? "text-[#0071cc] w-fit"
-                    : "text-[#8298AF] w-fit "
-                }
+          <Tabs value={type} className=" ">
+            <div className=" !bg-[#0C2F55]">
+              <TabsHeader
+                className="rounded-none !bg-[#0C2F55] gap-12 max-w-screen-xl mx-auto w-full pl-[3%] pt-4 pb-0  shadow-none"
+                indicatorProps={{
+                  className: "rounded-b-none rounded-t-md shadow-none -mx-2 ",
+                }}
               >
-                <span className=" text-sm">
-                  <FaBed color="" size="30" title="Hotel" className="mt-2" />
-                  <>Hotel</>
-                </span>
-              </Tab>
-              <Tab
-                value="train"
-                onClick={() => setType("train")}
-                className={
-                  type === "train"
-                    ? "text-[#0071cc] w-fit"
-                    : "text-[#8298AF] w-fit"
-                }
-              >
-                <span className="text-sm ">
-                  <FaTrain color="" size="30" title="train" className="mt-2" />
-                  Train
-                </span>
-              </Tab>
-              <Tab
-                value="bus"
-                onClick={() => setType("bus")}
-                className={
-                  type === "bus"
-                    ? "text-[#0071cc] w-fit"
-                    : "text-[#8298AF] w-fit"
-                }
-              >
-                <span className=" text-sm">
-                  <FaBus color="" size="30" title="bus" className="mt-2" />
-                  Bus
-                </span>
-              </Tab>
-            </TabsHeader>
-
+                <Tab
+                  value="hotel"
+                  onClick={() => setType("hotel")}
+                  className={
+                    type === "hotel"
+                      ? "text-[#0071cc] w-fit"
+                      : "text-[#8298AF] w-fit "
+                  }
+                >
+                  <span className=" text-sm">
+                    <FaBed color="" size="30" title="Hotel" className="mt-2" />
+                    <>Hotel</>
+                  </span>
+                </Tab>
+                <Tab
+                  value="train"
+                  onClick={() => setType("train")}
+                  className={
+                    type === "train"
+                      ? "text-[#0071cc] w-fit"
+                      : "text-[#8298AF] w-fit"
+                  }
+                >
+                  <span className="text-sm ">
+                    <FaTrain
+                      color=""
+                      size="30"
+                      title="train"
+                      className="mt-2"
+                    />
+                    Train
+                  </span>
+                </Tab>
+                <Tab
+                  value="bus"
+                  onClick={() => setType("bus")}
+                  className={
+                    type === "bus"
+                      ? "text-[#0071cc] w-fit"
+                      : "text-[#8298AF] w-fit"
+                  }
+                >
+                  <span className=" text-sm">
+                    <FaBus color="" size="30" title="bus" className="mt-2" />
+                    Bus
+                  </span>
+                </Tab>
+              </TabsHeader>
+            </div>
             <TabsBody className=" max-w-screen-xl mx-auto  rounded-md overflow-auto h-[480px] bg-gray-100 container">
               <TabPanel value="hotel" className="p-0 flex flex-row">
                 <Hotel type={type} />
