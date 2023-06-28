@@ -14,6 +14,7 @@ import { FaBus } from "react-icons/Fa";
 import Hotel from "./Hotel";
 import Train from "./Train";
 import { Bus } from "./Bus";
+import UBannerFooter from "@/components/userComponents/UBannerFooter";
 // import Hotel from "./hotel";
 
 export default function Page() {
@@ -80,7 +81,8 @@ export default function Page() {
                 </Tab>
               </TabsHeader>
             </div>
-            <TabsBody className=" max-w-screen-xl mx-auto  rounded-md overflow-auto h-[480px] bg-gray-100 container">
+
+            <TabsBody className=" max-w-screen-xl mx-auto  rounded-md overflow-auto h-[480px]  container ">
               <TabPanel value="hotel" className="p-0 flex flex-row">
                 <Hotel type={type} />
               </TabPanel>
@@ -92,10 +94,9 @@ export default function Page() {
               </TabPanel>
             </TabsBody>
           </Tabs>
-
-          {/* <div className="bg-white flex flex-col justify-center w-[90%]">
-            <Hotel />
-          </div> */}
+          <div className="bg-white flex flex-col justify-center  mb-10">
+            <UBannerFooter />
+          </div>
         </div>
       </div>
     </div>

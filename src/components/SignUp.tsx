@@ -138,6 +138,7 @@ function SignUp() {
             onChange={(e) => setFirstName(e.target.value)}
           />
           <BBInput
+          
             label="Last Name"
             containerProps={{ className: "min-w-[30px]" }}
             value={lastName}

@@ -12,6 +12,7 @@ export default function Train(props: Props) {
     <div className="flex flex-row">
       <HomeSearch title="Book Train Tickets" travelType={props.type} />
       <BAdCarousel />
+      
     </div>
   );
 }

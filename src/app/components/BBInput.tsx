@@ -11,18 +11,18 @@ interface Props {
   color?: any;
   max?:number;
   min?:number;
- 
+ required?:boolean
 }
 
 export default function BBInput(props: Props) {
   return (
     <Input
-
-    // {...props}
+      // {...props}
       label={props.label}
       value={props.value}
       type={props.type}
       color="blue"
+      required
       max={props.max}
       min={props.min}
       //   className="bg-sky-500 hover:bg-sky-700"
@@ -34,8 +34,6 @@ export default function BBInput(props: Props) {
               className: "min-w-[30px] bg-sky-500 hover:bg-sky-700 ",
             }
       }
-
-    
     />
   );
 }

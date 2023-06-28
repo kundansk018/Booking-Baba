@@ -2,10 +2,11 @@ import { Typography } from "@material-tailwind/react";
 import React from "react";
 
 interface Props {
-  variant: string;
-  color: string;
-  className: string;
-  text: string;
+  variant?: string;
+  color?: string;
+  className?: string;
+  text?: string;
+  children?: any;
 }
 
 export default function BBTypography(props: Props) {
@@ -15,7 +16,7 @@ export default function BBTypography(props: Props) {
       color={props.color}
       className={props.className}
     >
-      {props.text}{" "}
+      {props.text} {props.children}
     </Typography>
   );
 }
