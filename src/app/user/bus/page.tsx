@@ -9,7 +9,7 @@ import Select from "react-select";
 import React from "react";
 import { useState } from "react";
 import Bus from "./list/page";
-import bus from "../../../images/Buses/carousel/bus_bg.jpg"
+import bus from "../../../images/Buses/carousel/bus_bg.jpg";
 
 export default function BookBus() {
   const [from, setFrom] = useState<any>("");
@@ -57,7 +57,7 @@ export default function BookBus() {
         console.log("response  bus     ???????????????????????", res);
 
         setShowBox(true);
-        router.push("/user/bus#pagee");
+        router.push("/user/bus");
         // router.push("/user/bus/list");
       });
     }
@@ -105,7 +105,6 @@ export default function BookBus() {
               isSearchable={true}
               placeholder="From Destination..."
             />
-            
           </div>
 
           <div className=" w-[80%]">
@@ -135,7 +134,7 @@ export default function BookBus() {
         </div>
         <div className="flex flex-row justify-center pt-3 ">
           {/* {/* <Image src={t1} alt="sdc" className="h-[150px] w-[35%]" /> */}
-          {/* <Image src={bus} alt="fgvhbj" className="h-[150px] w-[35%]" /> */} 
+          {/* <Image src={bus} alt="fgvhbj" className="h-[150px] w-[35%]" /> */}
           {/* <Image src={payment} alt="fgvhbj" className="h-[180px] w-[400px]" />
            <Image src={agent} alt="fgvhbj" className="h-[180px] w-[400px]" /> */}
         </div>

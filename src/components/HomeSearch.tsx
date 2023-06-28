@@ -53,7 +53,7 @@ export default function HomeSearch(props: Props) {
           dispatch(getBusBySearch(data)).then((res: any) => {
             console.log("response  bus     ???????????????????????", res);
             // setShowBox(true);
-            router.push("/user/bus/list");
+            router.push("/user/bus/buslist");
           });
         }
       } else {

@@ -1,4 +1,5 @@
 import { Typography } from "@material-tailwind/react";
+import { children } from "@material-tailwind/react/types/components/accordion";
 import React from "react";
 
 interface Props {
