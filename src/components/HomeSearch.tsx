@@ -32,7 +32,7 @@ export default function HomeSearch(props: Props) {
   const dispatch = useAppDispatch();
   const router = useRouter();
 
-  console.log("from", props.travelType);
+  console.log("travelType", props.travelType);
 
   const handleSearch = () => {
     console.log("from nd to ", from, to);
@@ -48,7 +48,7 @@ export default function HomeSearch(props: Props) {
             router.push("/user/train/list");
           });
         } else if (props.travelType === "hotel") {
-        } else {
+        } else if (props.travelType === "bus") {
           let data = { from: from, to: to };
           dispatch(getBusBySearch(data)).then((res: any) => {
             console.log("response  bus     ???????????????????????", res);
@@ -69,7 +69,6 @@ export default function HomeSearch(props: Props) {
       dropDownValue,
     };
 
-   
     console.log("data", searchData);
     console.log("from", props.travelType);
     console.log("gefhgrhrhhrhrhryn r hrhethn", window.location.pathname);
