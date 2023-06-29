@@ -29,7 +29,7 @@ import { Modal } from "react-bootstrap";
 export default function Home() {
   const userData: any = useSelector((state: any) => state.login.loginDetails);
   console.log("8080 Page ..", userData);
-  console.log("8080 page Roll Type is ..", userData?.data.data.rollType);
+  console.log("8080 page Roll Type is ..", userData?.data?.data?.rollType);
   let rollType = userData?.data.data.rollType;
   const router = useRouter();
 

@@ -47,30 +47,33 @@ export default function Navigationbar() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
 
-  const renderItems = navListMenuItems.map(
-    ({  title, description }, key) => (
-      <a href="#" key={key}>
-        <MenuItem className="flex items-center gap-3 rounded-lg">
-          <div>
-            <Typography
-              variant="h6"
-              color="blue-gray"
-              className="flex items-center text-sm"
-            >
-              {title}
-            </Typography>
-            <Typography variant="small" color="gray" className="font-normal">
-              {description}
-            </Typography>
-          </div>
-        </MenuItem>
-      </a>
-    )
-  );
+  const renderItems = navListMenuItems.map(({ title, description }, key) => (
+    <a href="#" key={key}>
+      <MenuItem className="flex items-center gap-3 rounded-lg">
+        <div>
+          <Typography
+            variant="h6"
+            color="blue-gray"
+            className="flex items-center text-sm"
+          >
+            {title}
+          </Typography>
+          <Typography variant="small" color="gray" className="font-normal">
+            {description}
+          </Typography>
+        </div>
+      </MenuItem>
+    </a>
+  ));
+
+  const onLogOut = () => {
+    localStorage.clear();
+    router.push("/");
+  };
 
   const userData: any = useSelector((state: any) => state.login.loginDetails);
 
-  const rollType: number = userData?.data.data.rollType;
+  const rollType: number = userData?.data?.data?.rollType;
 
   const [openNav, setOpenNav] = useState(false);
   const router = useRouter();
@@ -106,8 +109,8 @@ export default function Navigationbar() {
         placement="bottom"
         allowHover={true}
       >
-        <MenuHandler>
-          <Typography
+        {/* <MenuHandler> */}
+        {/* <Typography
             as="li"
             variant="small"
             className="p-1 font-normal"
@@ -132,7 +135,7 @@ export default function Navigationbar() {
               />
             </ListItem>
           </Typography>
-        </MenuHandler>
+        </MenuHandler> */}
 
         <MenuList className="lg:block">
           <ul className="grid grid-cols-3 gap-y-2">{renderItems}</ul>
@@ -142,17 +145,23 @@ export default function Navigationbar() {
       <div className="block lg:hidden">
         <Collapse open={isMobileMenuOpen}>{renderItems}</Collapse>
       </div>
+      <div className="flex items-center gap-2 py-2 pr-4">
+        <a
+          style={{ fontFamily: "Poppins,sans-serif", fontSize: "14px" }}
+          href="#"
+          className="flex items-center text-xl "
+          onClick={() => onLogOut()}
+        >
+          Log-Out
+        </a>
+      </div>
 
-      <Typography
-        as="li"
-        variant="small"
-        className="p-1 font-normal"
-        onClick={() => router.push("/user")}
-      >
+      <Typography as="li" variant="small" className="p-1 font-normal">
         <a
           style={{ fontFamily: "Poppins,sans-serif", fontSize: "14px" }}
           href="#"
           className="flex items-center text-xl hover:text-black mt-2 -mr-5"
+          onClick={() => router.push("/auth")}
         >
           Login / Signup
         </a>

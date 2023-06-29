@@ -5,6 +5,7 @@ import { Button, Card, Typography } from "@material-tailwind/react";
 import FilterPage from "../page";
 import HomeSearch from "@/components/HomeSearch";
 import UHeader from "@/components/userComponents/UHeader";
+import SearchComponent from "@/components/SearchComponent";
 // import FilterPage from '../new1/page';
 
 interface Props {
@@ -61,7 +62,7 @@ export default function page() {
       />
       <div className="max-w-screen-xl mx-auto">
         <div className="my-5">
-          <HomeSearch travelType={type} />
+          <SearchComponent travelType={type} />
         </div>
         <Card className="overflow-scroll h-full w-full flex-row gap-5">
           <div className="">

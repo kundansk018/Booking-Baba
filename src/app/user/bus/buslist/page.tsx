@@ -5,11 +5,14 @@ import { Button, Card } from "@material-tailwind/react";
 import FilterPage from "../buslist/FilterPage";
 import { CustomModal } from "@/app/modal/CustomModal";
 import { BusDetails } from "@/app/user/bus/buslist/BusDetails";
+import { useSelector } from "react-redux";
+import { getBusesById } from "@/redux/action/busaction";
+import { useAppDispatch } from "@/redux/store";
 import BBTypography from "@/app/components/BBTypography";
 import { IconButton } from "@material-tailwind/react";
 import { ArrowRightIcon, ArrowLeftIcon } from "@heroicons/react/24/outline";
 import HomeSearch from "@/components/HomeSearch";
-import { useSelector } from "react-redux";
+import SearchComponent from "@/components/SearchComponent";
 
 export default function page() {
   const busData: any = useSelector((state: any) => state.bus.userBusDetails);
@@ -19,6 +22,7 @@ export default function page() {
   let to = busData?.data[0]?.to;
   console.log("from ..==>>>>", from);
   console.log("to ..==>>>>", to);
+  const dispatch = useAppDispatch();
 
   const TABLE_HEAD = ["Operators", "Departure", "Duration", "Arrival", "Price"];
   const TABLE_ROWS = [
@@ -62,6 +66,15 @@ export default function page() {
     setShowModal(false);
   };
 
+  const onHandleChange = (id: any) => {
+    dispatch(getBusesById(id)).then(() => {
+      setShowModal(true);
+      console.log("Inside Catch:::::::::::::::::==");
+    });
+
+    console.log("id is+++++++++++++++", id);
+  };
+
   const [active, setActive] = React.useState(1);
 
   const getItemProps = (index: any) =>
@@ -94,7 +107,7 @@ export default function page() {
   return (
     <div className="max-w-screen-xl mx-auto">
       <div className="my-5">
-        <HomeSearch travelType="bus" />
+        <SearchComponent travelType="bus" />
       </div>
       <Card className="overflow-scroll h-full w-full flex-row gap-5">
         <div className="p-5">
@@ -207,7 +220,10 @@ export default function page() {
                         </BBTypography>
 
                         <Button
-                          onClick={() => setShowModal(true)}
+                          onClick={() => {
+                            onHandleChange(element._id);
+                            setShowModal(true);
+                          }}
                           variant="outlined"
                           size="sm"
                         >

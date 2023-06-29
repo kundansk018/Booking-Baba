@@ -31,6 +31,8 @@ export default async function handler(
         return await search(request, response);
       } else if (request.query?.action === "GET_BUS_BY_ID") {
         return await getBusById(request, response);
+      } else if (request.query?.action === "BOOK_SEATS") {
+        return await bookSeats(request, response);
       }
 
     default:
@@ -61,6 +63,7 @@ export async function addBus(
 
     const buses = await db.collection("Bus Details");
     const res = await buses.insertOne(fields);
+
     return response.status(200).json({ data: res });
   } catch (e) {
     if (e instanceof FormidableError) {
@@ -182,5 +185,19 @@ export async function getBusById(
   const { fields } = await parseForm(request);
   const bus = await db.collection("Bus Details");
   const res = await bus.findOne({ _id: new ObjectId(fields._id) });
+  return response.status(200).json({ data: res });
+}
+
+export async function bookSeats(
+  request: NextApiRequest,
+  response: NextApiResponse
+) {
+  const { fields } = await parseForm(request);
+  console.log("fields...........", fields);
+
+  const bookSeats = await db.collection("Bus_Book_Seats");
+
+  const res = await bookSeats.insertOne(fields);
+
   return response.status(200).json({ data: res });
 }

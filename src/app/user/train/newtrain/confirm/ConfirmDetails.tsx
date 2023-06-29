@@ -1,4 +1,12 @@
-import { Tab, Tabs, TabsBody, TabsHeader } from "@material-tailwind/react";
+import {
+  Button,
+  Tab,
+  Tabs,
+  TabsBody,
+  TabsHeader,
+  Typography,
+} from "@material-tailwind/react";
+import { useRouter } from "next/navigation";
 
 import React from "react";
 
@@ -12,10 +20,13 @@ export const Adesh: React.FC<Props> = () => {
   const handleCloseModal = () => {
     setShowModal(false);
   };
+
+  const router = useRouter();
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50">
       <div className="bg-white p-4 rounded shadow-lg w-1/2">
         <h2 className="text-2xl mb-4">Fare Rules</h2>
+
         <hr className="mb-4" />
         <div className="modal-body">
           <div className="h-[530px] overflow-y-scroll overflow-y-hidden">
@@ -143,7 +154,7 @@ export const Adesh: React.FC<Props> = () => {
             <div className="text-right mt-4">
               <button
                 className="bg-gray-300 text-gray-700 py-2 px-4 rounded"
-                onClick={handleCloseModal}
+                onClick={() => router.back()}
               >
                 Close
               </button>

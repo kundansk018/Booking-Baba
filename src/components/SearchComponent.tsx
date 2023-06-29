@@ -3,70 +3,147 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Accordion from "./userComponents/UCounter";
 import { type } from "os";
+import UInput from "./userComponents/UInput";
+import UDatePicker from "./userComponents/UDatePicker";
+import BBButton from "@/app/components/BBButton";
+import { useAppDispatch } from "@/redux/store";
+import { useRouter } from "next/navigation";
+import { getTrainBySearch } from "@/redux/action/trainAction";
+import { getBusBySearch } from "@/redux/action/busaction";
 
-interface SearchData {
-  from: string;
-  to: string;
-  arrivalDate: Date | any;
-  dropdownValue: string | any;
-  id?: number;
-  label?: string;
-  onChange?: (e: any) => void;
+interface Props {
+  from?: string;
+  to?: string;
+  departDate?: Date | any;
+  checkoutDate?: Date | any;
+  travelType?: any;
+  dropDownValue?: string | any;
+  placeholder?: any;
+  title?: string;
 }
 
-const SearchComponent = (props: SearchData) => {
+const SearchComponent = (props: Props) => {
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
   const [arrivalDate, setArrivalDate] = useState<Date | null>(null);
   const [dropdownValue, setDropdownValue] = useState("");
+  const [departDate, setDepartDate] = useState<Date | any>(null);
+  const [checkoutDate, setCheckoutDate] = useState<Date | any>(null);
+  const dispatch = useAppDispatch();
+  const router = useRouter();
 
   console.log("from", props.from);
   console.log("from", arrivalDate);
 
   const handleSearch = () => {
+    console.log("from nd to ", from, to);
+    if (!from && !to) {
+      alert("plz enter details");
+    } else {
+      if (from && to) {
+        if (props.travelType === "train") {
+          let data = { from_Stn: from, to_Stn: to };
+          console.log("Searching for trains:", data);
+          dispatch(getTrainBySearch(data)).then((res: any) => {
+            console.log("response train ???????????????????????", res);
+            router.push("/user/train/list");
+          });
+        } else if (props.travelType === "hotel") {
+        } else if (props.travelType === "bus") {
+          let data = { from: from, to: to };
+          dispatch(getBusBySearch(data)).then((res: any) => {
+            console.log("response  bus     ???????????????????????", res);
+            // setShowBox(true);
+            router.push("/user/bus/buslist");
+          });
+        }
+      } else {
+        alert("Please Insert Fields");
+      }
+    }
+
     const searchData = {
       from,
       to,
-      arrivalDate: arrivalDate || new Date(),
-      dropdownValue,
+      departDate,
+      checkoutDate,
     };
+
+    console.log("data", searchData);
+    console.log("from", props.travelType);
+    console.log("gefhgrhrhhrhrhryn r hrhethn", window.location.pathname);
   };
 
   return (
-    <div className="md:flex flex-row gap-4 max-w-xs ">
-      <input
-        type="text"
-        id="from"
-        value={from}
-        required
-        placeholder="From"
-        onChange={(e) => setFrom(e.target.value)}
-        className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-400 mb-2"
-      />
-      <input
-        type="text"
-        id="to"
-        value={to}
-        placeholder="To"
-        onChange={(e) => setTo(e.target.value)}
-        className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-400 mb-2"
-      />
-      <DatePicker
-        id="arrivalDate"
-        selected={arrivalDate}
-        placeholderText="Arrival Date"
-        minDate={new Date()}
-        onChange={(date) => setArrivalDate(date)}
-        className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-400 mb-2"
-      />
-      <Accordion travelType={type} />
+    <div>
+      <div className="flex flex-row  gap-2 text-sm">
+        <UInput
+          type="text"
+          id="from"
+          value={from}
+          required
+          placeholder={
+            props.travelType === "hotel" ? "Enter Locality , City " : "From"
+          }
+          onChange={(e) => {
+            setFrom(e.target.value);
+          }}
+          className="mix-w-fit"
+        />
+        {props.travelType === "hotel" ? null : (
+          <UInput
+            type="text"
+            id="to"
+            value={to}
+            placeholder="To"
+            onChange={(e) => {
+              setTo(e.target.value);
+            }}
+          />
+        )}
+        {props.travelType === "hotel" ? (
+          <>
+            <UDatePicker
+              id="departDate"
+              placeholder="Check In"
+              minDate={new Date()}
+              selected={departDate}
+              onChange={(date: any) => {
+                setDepartDate(date);
+              }}
+            />
 
-      <button
-        onClick={handleSearch}
-        className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 mb-2"
-      >
-        Search
-      </button>
+            <UDatePicker
+              id="checkoutDate"
+              placeholder="Check Out"
+              minDate={new Date()}
+              selected={checkoutDate}
+              onChange={(date: any) => {
+                setCheckoutDate(date);
+              }}
+            />
+          </>
+        ) : (
+          <UDatePicker
+            id="departDate"
+            placeholder="Depart Date"
+            minDate={new Date()}
+            selected={departDate}
+            onChange={(date: any) => {
+              setDepartDate(date);
+            }}
+          />
+        )}
+        <div>
+          <Accordion travelType={props.travelType} />
+        </div>
+
+        <BBButton
+          label="Search"
+          type="button"
+          onClick={handleSearch}
+        ></BBButton>
+      </div>
     </div>
   );
 };

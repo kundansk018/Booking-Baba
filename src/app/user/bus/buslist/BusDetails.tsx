@@ -13,19 +13,35 @@ import { RxCross2 } from "react-icons/rx";
 
 import "./../../../styles/busDetails.css";
 import { SEATS, TABLE_ROWS } from "@/utils/BusData";
+import { useSelector } from "react-redux";
+import { useRouter } from "next/navigation";
+import { useAppDispatch } from "@/redux/store";
+import { book_seats } from "@/redux/action/seatBook";
 
 interface Props {
   option?: any;
   onSubmit?: any;
+  myData?: any;
 }
 
-export const BusDetails: React.FC<Props> = ({ option }) => {
+export const BusDetails: React.FC<Props> = ({ myData }) => {
   const [activeTab, setActiveTab] = React.useState("Available");
   const [seats, setSeats] = useState<Array<any>>([]);
   const [ticketPrice, setTicketPrice] = useState<Array<any>>([]);
   const [bookSeats, setBookSeats] = useState<Array<any>>([]);
 
+  const [price, setPrice] = useState(0);
+
   const [count, setCount] = useState<number>(0);
+  const dispatch = useAppDispatch();
+
+  const router = useRouter();
+
+  console.log(" Data in Bus Details :::::: ", myData);
+
+  const busDetails = useSelector((state: any) => state.bus.getBusById);
+
+  console.log(" bus Details By id..:::::::::::::: ", busDetails);
 
   const onSeats = (selected_seat: any) => {
     let seatId = selected_seat.id;
@@ -44,31 +60,35 @@ export const BusDetails: React.FC<Props> = ({ option }) => {
 
   let sum = 0;
   const totalPrice = () => {
-    console.log("ticket price inside totalPrice function ::");
-
     sum = seats.reduce((sum, item) => sum + item.price, 0);
-
-    console.log("total price sum  ::", sum);
 
     return sum;
   };
-  console.log("total Price ::", totalPrice());
 
   const onBookSeats = () => {
-    let b_Seats = [...seats];
+    let b_Seats: any = [...seats];
+    console.log("seats ", b_Seats);
 
-    setBookSeats(b_Seats);
-    setSeats([]);
+    let data = {
+      b_Seats: JSON.stringify(b_Seats),
+      totalPrice: price,
+      busDetails: busDetails,
+    };
+    console.log("data in busdetails page...", data);
+
+    dispatch(book_seats(data)).then((res: any) => {
+      router.push("/user/bus/details");
+    });
   };
 
   const onHandleDelete = () => {
     seats.pop();
     setCount(count + 1);
   };
-  console.log("Books Seats ::", bookSeats);
-
-  console.log("selected seats::", seats);
-
+  console.log(
+    "busDetails?.data?.travelagencyname",
+    busDetails?.data?.travelagencyname
+  );
   return (
     <div className="h-[530px] overflow-y-scroll overflow-y-hidden">
       {/* <p className="text-black font-semibold text-xl">Bus Booking Details</p> */}
@@ -76,21 +96,29 @@ export const BusDetails: React.FC<Props> = ({ option }) => {
       <div className="flex justify-between px-5 py-5 text-4">
         <div className="flex flex-col">
           <span className="text-black font-2xl text-2xl">
-            AK Tour & Travels
+            {busDetails?.data?.travelagencyname}
           </span>
-          <small>AC Sleeper</small>
+          <small>{busDetails?.data?.busType}</small>
         </div>
         <div className="flex flex-col">
-          <span className="text-black font-2xl text-2xl">12:00</span>
-          <small>Mumbai</small>
+          <span className="text-black font-2xl text-2xl">
+            {busDetails?.data?.departureTime}
+          </span>
+          <small>{busDetails?.data?.from}</small>
         </div>
         <div className="flex flex-col">
-          <span className="text-black font-2xl text-2xl">06h 32m</span>
-          <small>12 Stops</small>
+          <span className="text-black font-2xl text-2xl">
+            {busDetails?.data?.duration
+              ? busDetails?.data?.duration
+              : "06 h 32 m"}
+          </span>
+          <small>{busDetails?.data?.busType}</small>
         </div>
         <div className="flex flex-col">
-          <span className="text-black font-2xl text-2xl">05:15</span>
-          <small>Surat</small>
+          <span className="text-black font-2xl text-2xl">
+            {busDetails?.data?.arrivalTime}
+          </span>
+          <small>{busDetails?.data?.to}</small>
         </div>
       </div>
 
@@ -283,8 +311,3 @@ export const BusDetails: React.FC<Props> = ({ option }) => {
     </div>
   );
 };
-
-<>
-  <>filter</>
-  <> loops</>
-</>;

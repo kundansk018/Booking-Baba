@@ -11,6 +11,7 @@ import {
 } from "../constant";
 import { AppDispatch } from "../store";
 import { getEmailId, loginDetails, updatePwd } from "@/service/services";
+import { json } from "stream/consumers";
 
 export const signup = (data: any) => async (dispatch: AppDispatch) => {
   console.log("data in action: ", data);
@@ -26,11 +27,16 @@ export const signup = (data: any) => async (dispatch: AppDispatch) => {
   });
   if (res.ok === true) {
     console.log("inside if sign up api in user.ts page :::::::::>>>", res);
-    dispatch({ type: SIGNUP_REQUEST_SUCCESS, payload: {success:true,message:"Registeration done"} });
-    
+    dispatch({
+      type: SIGNUP_REQUEST_SUCCESS,
+      payload: { success: true, message: "Registeration done" },
+    });
   } else {
     alert("Email is already Registered. Please log in...");
-    dispatch({ type: SIGNUP_REQUEST_FAIL, payload: {success:false,message:"Registeration failed"} });
+    dispatch({
+      type: SIGNUP_REQUEST_FAIL,
+      payload: { success: false, message: "Registeration failed" },
+    });
   }
 
   dispatch({ type: REQUEST_COMPLETED, payload: null });
@@ -44,10 +50,13 @@ export const login = (data: any) => async (dispatch: AppDispatch) => {
   try {
     dispatch({ type: REQUEST_STARTED, payload: null });
 
-    const res = await loginDetails(data);
+    const res: any = await loginDetails(data);
 
     if (res && res.status === 200) {
       console.log("inside if:::::::::", res);
+
+      localStorage.setItem("key", JSON.stringify(res.data.data));
+
       dispatch({ type: LOGIN_REQUEST_SUCCESS, payload: res });
     } else {
       console.log("inside else:::::::::", res);

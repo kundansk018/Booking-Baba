@@ -14,158 +14,158 @@ const SEATS = [
     id: 2,
     price: 250,
     classType: "First Class",
-    seat_number: 100,
+    seat_number: 101,
   },
   {
     id: 3,
     price: 250,
     classType: "First Class",
-    seat_number: 101,
+    seat_number: 102,
   },
   {
     id: 4,
     price: 250,
     classType: "First Class",
-    seat_number: 102,
+    seat_number: 103,
   },
   {
     id: 5,
     price: 250,
     classType: "First Class",
-    seat_number: 103,
+    seat_number: 104,
   },
   {
     id: 6,
     price: 250,
     classType: "First Class",
-    seat_number: 104,
+    seat_number: 105,
   },
   {
     id: 7,
     price: 250,
     classType: "First Class",
-    seat_number: 105,
+    seat_number: 106,
   },
   {
     id: 8,
     price: 250,
     classType: "First Class",
 
-    seat_number: 106,
+    seat_number: 107,
   },
   {
     id: 9,
     price: 150,
     classType: "Economy Class",
 
-    seat_number: 107,
+    seat_number: 108,
   },
   {
     id: 10,
     price: 150,
     classType: "Economy Class",
 
-    seat_number: 108,
+    seat_number: 109,
   },
   {
     id: 11,
     price: 150,
     classType: "Economy Class",
 
-    seat_number: 109,
+    seat_number: 110,
   },
   {
     id: 12,
     price: 150,
     classType: "Economy Class",
 
-    seat_number: 110,
+    seat_number: 111,
   },
   {
     id: 13,
     price: 150,
     classType: "Economy Class",
 
-    seat_number: 111,
+    seat_number: 112,
   },
   {
     id: 14,
     price: 150,
     classType: "Economy Class",
 
-    seat_number: 112,
+    seat_number: 113,
   },
   {
     id: 15,
     price: 150,
     classType: "Economy Class",
 
-    seat_number: 113,
+    seat_number: 114,
   },
   {
     id: 16,
     price: 150,
     classType: "Economy Class",
 
-    seat_number: 114,
+    seat_number: 115,
   },
   {
     id: 17,
     price: 150,
     classType: "Economy Class",
 
-    seat_number: 115,
+    seat_number: 116,
   },
   {
     id: 18,
     price: 150,
     classType: "Economy Class",
 
-    seat_number: 116,
+    seat_number: 117,
   },
   {
     id: 19,
     price: 150,
     classType: "Economy Class",
 
-    seat_number: 117,
+    seat_number: 118,
   },
   {
     id: 20,
     price: 150,
     classType: "Economy Class",
 
-    seat_number: 118,
+    seat_number: 119,
   },
   {
     id: 21,
     price: 150,
     classType: "Economy Class",
-    seat_number: 119,
+    seat_number: 120,
   },
   {
     id: 22,
     price: 150,
     classType: "Economy Class",
-    seat_number: 120,
+    seat_number: 121,
   },
   {
     id: 23,
     price: 150,
     classType: "Economy Class",
-    seat_number: 121,
+    seat_number: 122,
   },
   {
     id: 24,
     price: 150,
     classType: "Economy Class",
-    seat_number: 122,
+    seat_number: 123,
   },
   {
     id: 25,
     price: 150,
     classType: "Economy Class",
-    seat_number: 123,
+    seat_number: 124,
   },
 ];
 

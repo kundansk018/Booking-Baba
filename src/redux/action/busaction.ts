@@ -85,7 +85,7 @@ export const getBusesById = (id: any) => async (dispatch: AppDispatch) => {
     const res = await getBusById(data);
 
     if (res && res.status === 200) {
-      console.log("updtae response", res.data);
+      console.log("new Response :::::::::::::{}{}{}{} ", res.data);
       dispatch({ type: BUS_BY_ID_REQUEST_SUCCESS, payload: res.data });
     } else {
       dispatch({ type: BUS_REQUEST_FAIL, payload: null });

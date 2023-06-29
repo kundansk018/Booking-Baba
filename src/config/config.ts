@@ -21,8 +21,8 @@ export const ENDPOINTS = {
   deleteTrain: "trainApi/trainApi?action=DELETE_TRAIN",
   getTrain: "trainApi/trainApi?action=GET_TRAINS",
   getTrainById: "trainApi/trainApi?action=GET_TRAIN_BY_ID",
-  searchTrain: 'trainApi/trainApi?action=SEARCH_TRAINS',
-  trainTicket:'trainApi/trainApi?action=BOOK_TRAIN_TICKET',
+  searchTrain: "trainApi/trainApi?action=SEARCH_TRAINS",
+  trainTicket: "trainApi/trainApi?action=BOOK_TRAIN_TICKET",
 
   addBus: "busapi/busapi?action=ADD_BUS",
   getAllBuses: "busapi/busapi?action=GET_ALL_BUSES",
@@ -30,4 +30,6 @@ export const ENDPOINTS = {
   updateBus: "busapi/busapi?action=UPDATE_BUS",
   deleteBus: "busapi/busapi?action=DELETE_BUS",
   busSearch: "busapi/busapi?action=SEARCH_BUS",
+
+  seatBook: "busapi/busapi?action=BOOK_SEATS",
 };

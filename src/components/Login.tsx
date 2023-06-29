@@ -17,22 +17,22 @@ export default function Login() {
   const [errorDialogMessage, setErrorDialogMessage] = useState([]);
   const userData: any = useSelector((state: any) => state.login.loginDetails);
   console.log("userData is ..", userData);
-  console.log("Roll Type is ..", userData?.data.data.rollType);
-  const rollType = userData?.data.data.rollType;
+  console.log("Roll Type is ..", userData?.data?.data?.rollType);
+  const rollType = userData?.data?.data?.rollType;
   const router: any = useRouter();
 
-  useEffect(() => {
-    if (userData) {
-      if (rollType === 1) {
-        console.log("called  if ");
+  // useEffect(() => {
+  //   if (userData) {
+  //     if (rollType === 1) {
+  //       console.log("called  if ");
 
-        router.push("/dashboard");
-      } else if (rollType != 1) {
-        console.log("called else if ");
-        router.push("/user");
-      }
-    }
-  }, [userData]);
+  //       router.push("/dashboard");
+  //     } else if (rollType != 1) {
+  //       console.log("called else if ");
+  //       router.push("/user");
+  //     }
+  //   }
+  // }, [userData]);
 
   const loginCredential = () => {
     let data = {

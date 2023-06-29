@@ -36,8 +36,8 @@ function SignUp() {
 
   const userData: any = useSelector((state: any) => state.login.loginDetails);
   console.log("userData in sign up page ..", userData);
-  console.log("Roll Type in sign up pagee ..", userData?.data.data.rollType);
-  const rollType = userData?.data.data.rollType;
+  console.log("Roll Type in sign up pagee ..", userData?.data?.data?.rollType);
+  const rollType = userData?.data?.data?.rollType;
 
   const isNumberValid = (num: any) => {
     return /\d/.test(num);

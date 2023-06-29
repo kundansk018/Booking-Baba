@@ -1,98 +1,101 @@
 "use client";
 import {
-  Button,
-  Card,
-  CardBody,
-  CardFooter,
-  CardHeader,
-  Carousel,
-  Typography,
+  Tab,
+  TabPanel,
+  Tabs,
+  TabsBody,
+  TabsHeader,
 } from "@material-tailwind/react";
-import React from "react";
-import BBCarousel from "../components/BBCarousel";
-import { useRouter } from "next/navigation";
+import react, { useState } from "react";
 
-export default function page() {
-  const router = useRouter();
+import { FaBed, FaBus, FaTrain } from "react-icons/fa";
+
+import Hotel from "../components/Hotel";
+import Train from "../components/Train";
+import { Bus } from "../components/Bus";
+import UBannerFooter from "@/components/userComponents/UBannerFooter";
+
+export default function Page() {
+  const [type, setType] = useState("hotel");
+
   return (
-    <div className="bg-white">
-      <BBCarousel />
-      <div className="flex flex-row my-4">
-        <div>
-          <Card className=" mx-6 w-[400px] h-[400px]">
-            <CardHeader
-              floated={false}
-              color="blue-gray"
-              className="relative h-30"
-            >
-              <img
-                src="/image/kkk.jpg"
-                alt="img-blur-shadow"
-              />
-            </CardHeader>
-            <CardBody>
-              <Typography variant="h5" color="blue-gray" className="mb-2">
-                Hotel Booking
-              </Typography>
-              <Typography>
-                Search best prices on hotels,home and much more...
-              </Typography>
-            </CardBody>
-            <CardFooter className="pt-0 ">
-              <Button onClick={() => router.push("/user/hotels")}>
-                Book Now
-              </Button>
-            </CardFooter>
-          </Card>
+    <div>
+      <div className="">
+        <div className=" ">
+          <Tabs value={type} className=" ">
+            <div className=" !bg-[#0C2F55]">
+              <TabsHeader
+                className="rounded-none !bg-[#0C2F55] gap-12 max-w-screen-xl mx-auto w-full pl-[3%] pt-4 pb-0  shadow-none"
+                indicatorProps={{
+                  className: "rounded-b-none rounded-t-md shadow-none -mx-2 ",
+                }}
+              >
+                <Tab
+                  value="hotel"
+                  onClick={() => setType("hotel")}
+                  className={
+                    type === "hotel"
+                      ? "text-[#0071cc] w-fit"
+                      : "text-[#8298AF] w-fit "
+                  }
+                >
+                  <span className=" text-sm">
+                    <FaBed color="" size="30" title="Hotel" className="mt-2" />
+                    <>Hotel</>
+                  </span>
+                </Tab>
+                <Tab
+                  value="train"
+                  onClick={() => setType("train")}
+                  className={
+                    type === "train"
+                      ? "text-[#0071cc] w-fit"
+                      : "text-[#8298AF] w-fit"
+                  }
+                >
+                  <span className="text-sm ">
+                    <FaTrain
+                      color=""
+                      size="30"
+                      title="train"
+                      className="mt-2"
+                    />
+                    Train
+                  </span>
+                </Tab>
+                <Tab
+                  value="bus"
+                  onClick={() => setType("bus")}
+                  className={
+                    type === "bus"
+                      ? "text-[#0071cc] w-fit"
+                      : "text-[#8298AF] w-fit"
+                  }
+                >
+                  <span className=" text-sm">
+                    <FaBus color="" size="30" title="bus" className="mt-2" />
+                    Bus
+                  </span>
+                </Tab>
+              </TabsHeader>
+            </div>
+
+            <TabsBody className=" max-w-screen-xl mx-auto  rounded-md overflow-auto h-[480px]  container ">
+              <TabPanel value="hotel" className="p-0 flex flex-row">
+                <Hotel type={type} />
+              </TabPanel>
+              <TabPanel value="train" className="p-0 flex flex-row">
+                <Train type={type} />
+              </TabPanel>
+              <TabPanel value="bus" className="p-0 flex flex-row">
+                <Bus type={type} />
+              </TabPanel>
+            </TabsBody>
+          </Tabs>
+          <div className="bg-white flex flex-col justify-center  mb-10">
+            <UBannerFooter />
+          </div>
         </div>
-        <div>
-          <Card className="  w-[400px] h-[400px]">
-            <CardHeader
-              floated={false}
-              color="blue-gray"
-              className="relative h-30"
-            >
-              <img
-                src="/image/bus1.jpg"
-                alt="img-blur-shadow"
-              />
-            </CardHeader>
-            <CardBody>
-              <Typography variant="h5" color="blue-gray" className="mb-2">
-                Bus Booking
-              </Typography>
-              <Typography>
-                Make Your Bus Booking Smoother with Baba-Booking
-              </Typography>
-            </CardBody>
-            <CardFooter className="pt-0">
-              <Button onClick={() => router.push("/user/bus")}>Book Now</Button>
-            </CardFooter>
-          </Card>
-        </div>
-        <Card className="mx-6 w-[400px] h-[400px]">
-          <CardHeader
-            floated={false}
-            color="blue-gray"
-            className="relative h-30"
-          >
-            <img
-              src="/image/train2.jpg"
-              alt="img-blur-shadow"
-            />
-          </CardHeader>
-          <CardBody>
-            <Typography variant="h5" color="blue-gray" className="mb-2">
-              Train Booking
-            </Typography>
-            <Typography>
-              Make Your Train Booking Smoother with Baba-Booking
-            </Typography>
-          </CardBody>
-          <CardFooter className="pt-0">
-            <Button onClick={() => router.push("/user/train")}>Book Now</Button>
-          </CardFooter>
-        </Card>
       </div>
     </div>
   );

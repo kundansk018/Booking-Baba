@@ -13,7 +13,6 @@ let formDataHeader = {
   },
 };
 
-
 interface IPropsDelete {
   id: string;
 }
@@ -147,4 +146,14 @@ export const searchHotel = (hotelname: any) => {
 export const sortHotelBy = (data: any) => {
   let url = `${ENDPOINTS.sortHotelBy}`;
   return client.post(url, data, headers);
+};
+
+export const seatBook = (data: any) => {
+  console.log("data in service", data);
+  let url = `${ENDPOINTS.seatBook}`;
+  return client.post(url, data, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
 };
