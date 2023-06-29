@@ -1,6 +1,7 @@
 "use client";
 import { CustomModal } from "@/app/modal/CustomModal";
 import { Adesh } from "@/app/user/train/newtrain/confirm/ConfirmDetails";
+import UInput from "@/components/userComponents/UInput";
 import React from "react";
 
 const ConfirmationPage: React.FC = () => {
@@ -53,9 +54,15 @@ const ConfirmationPage: React.FC = () => {
             <div className="card-body">
               {/* Train details */}
               <div className="flex items-center mb-4 pb-2 border border-gray-200">
-                <div className="w-1/4 text-center">
-                  <h5 className="text-2xl">Ashram Express</h5>
+                <div className="w-1/4 text-center mt-2">
+                  <h5 className="text-2xl pl-1">Ashram Express</h5>
                   <span className="text-sm text-gray-500">12916</span>
+                  <h5 className="mt-4">
+                    Class :{" "}
+                    <span className="bg-[#0DCAF0] p-1 text-white rounded">
+                      First Class
+                    </span>
+                  </h5>
                 </div>
                 <div className="w-1/4 text-center">
                   <h5 className="text-2xl">23:00</h5>
@@ -86,55 +93,29 @@ const ConfirmationPage: React.FC = () => {
               <p className="font-semibold">Contact Details</p>
               <div className="flex flex-wrap mb-4">
                 <div className="w-full sm:w-1/2 sm:pr-2 mb-3">
-                  <input
-                    className="w-full border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:border-blue-500"
-                    id="name"
-                    type="text"
-                    placeholder="Name"
-                  />
+                  <UInput id="name" type="text" placeholder="Name" />
                 </div>
                 <div className="w-full sm:w-1/2 sm:pl-2 mb-3">
-                  <input
-                    className="w-full border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:border-blue-500"
-                    id="email"
-                    type="email"
-                    placeholder="Email"
-                  />
+                  <UInput id="email" type="email" placeholder="Email" />
                 </div>
                 <div className="w-full sm:w-1/2 sm:pr-2 mb-3">
-                  <input
-                    className="w-full border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:border-blue-500"
-                    id="phone"
-                    type="text"
-                    placeholder="Phone"
-                  />
+                  <UInput id="phone" type="text" placeholder="Phone" />
                 </div>
                 <div className="w-full sm:w-1/2 sm:pl-2 mb-3">
-                  <input
-                    className="w-full border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:border-blue-500"
-                    id="address"
-                    type="text"
-                    placeholder="Address"
-                  />
+                  <UInput id="address" type="text" placeholder="Address" />
                 </div>
               </div>
               <p className="font-semibold">Passenger Details</p>
               <div className="flex flex-wrap mb-4">
                 <div className="w-full sm:w-1/2 sm:pr-2 mb-3">
-                  <input
-                    className="w-full border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:border-blue-500"
+                  <UInput
                     id="passenger-name"
                     type="text"
                     placeholder="Passenger Name"
                   />
                 </div>
                 <div className="w-full sm:w-1/2 sm:pl-2 mb-3">
-                  <input
-                    className="w-full border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:border-blue-500"
-                    id="passenger-age"
-                    type="text"
-                    placeholder="Age"
-                  />
+                  <UInput id="passenger-age" type="text" placeholder="Age" />
                 </div>
               </div>
             </div>
@@ -187,7 +168,7 @@ const ConfirmationPage: React.FC = () => {
                     type="text"
                   />
                   <button
-                    className="bg-blue-500 shadow-none ml-3 px-3 py-2 rounded-md"
+                    className="bg-blue-500 text-white shadow-none ml-3 px-3 py-2 rounded-md"
                     type="submit"
                   >
                     APPLY

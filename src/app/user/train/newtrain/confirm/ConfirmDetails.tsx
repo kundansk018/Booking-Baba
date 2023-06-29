@@ -1,15 +1,6 @@
-import {
-  Button,
-  Tab,
-  Tabs,
-  TabsBody,
-  TabsHeader,
-  Typography,
-} from "@material-tailwind/react";
+import { Tab, Tabs, TabsBody, TabsHeader } from "@material-tailwind/react";
 
 import React from "react";
-
-// import "./../../../styles/busDetails.css";
 
 interface Props {}
 
