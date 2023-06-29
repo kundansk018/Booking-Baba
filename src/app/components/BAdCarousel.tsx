@@ -12,7 +12,7 @@ import { useRouter } from "next/navigation";
 export default function BAdCarousel() {
   const router = useRouter();
   return (
-    <Carousel className="h-[400px] w-full" loop={true} autoplay={true}>
+    <Carousel className="h-[325px] w-full" loop={true} autoplay={true}>
       <div className="h-[325px] w-full">
         <Image
           className=" h-[325px] w-full"

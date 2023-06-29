@@ -79,7 +79,9 @@ export default function HomeSearch(props: Props) {
       {window.location.pathname === "/a_new" ? (
         <div className="p-5 bg-white">
           <div className="flex flex-col justify-center  gap-4">
-            <div className=" text-lg font-medium text-black">{props.title}</div>
+            <div className=" text-lg font-medium text-headcolor">
+              {props.title}
+            </div>
             <div className="flex flex-row gap-5">
               <UInput
                 type="text"
@@ -110,27 +112,30 @@ export default function HomeSearch(props: Props) {
             </div>
             {props.travelType === "hotel" ? (
               <div className="flex flex-row justify-between">
-                <UDatePicker
-                  id="departDate"
-                  placeholder="Check In"
-                  minDate={new Date()}
-                  selected={departDate}
-                  onChange={(date: any) => {
-                    setDepartDate(date);
-                  }}
-                  className=" w-full flex-shrink border border-gray-500 rounded-[4px] focus:outline-none focus:ring-1 focus:ring-blue-400 py-[11px] px-[14.5px]"
-                />
-
-                <UDatePicker
-                  id="checkoutDate"
-                  placeholder="Check Out"
-                  minDate={new Date()}
-                  selected={checkoutDate}
-                  onChange={(date: any) => {
-                    setCheckoutDate(date);
-                  }}
-                  className="w-full flex-shrink border border-gray-500 rounded-[4px] focus:outline-none focus:ring-1 focus:ring-blue-400 py-[11px] px-[14.5px]"
-                />
+                <div className="flex justify-start">
+                  <UDatePicker
+                    id="departDate"
+                    placeholder="Check In"
+                    minDate={new Date()}
+                    selected={departDate}
+                    onChange={(date: any) => {
+                      setDepartDate(date);
+                    }}
+                    className=" w-full flex-shrink border border-gray-500 rounded-[4px] focus:outline-none focus:ring-1 focus:ring-blue-400 py-[11px] px-[14.5px]"
+                  />
+                </div>
+                <div className="flex justify-end">
+                  <UDatePicker
+                    id="checkoutDate"
+                    placeholder="Check Out"
+                    minDate={new Date()}
+                    selected={checkoutDate}
+                    onChange={(date: any) => {
+                      setCheckoutDate(date);
+                    }}
+                    className="w-full flex-shrink border border-gray-500 rounded-[4px] focus:outline-none focus:ring-1 focus:ring-blue-400 py-[11px] px-[14.5px]"
+                  />
+                </div>
               </div>
             ) : (
               <UDatePicker

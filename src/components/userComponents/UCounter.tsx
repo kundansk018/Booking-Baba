@@ -96,7 +96,7 @@ export default function Accordion(props: Props) {
   ];
 
   const userBusOptions: Option[] = [
-    { label: "Seats", count: count1, setCount: setCount1 },
+    { label: "Seats (Book For All)", count: count1, setCount: setCount1 },
   ];
 
   console.log("gefhgrhrhhrhrhryn r hrhethn", window.location.pathname);

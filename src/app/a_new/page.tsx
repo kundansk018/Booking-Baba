@@ -13,7 +13,7 @@ import { FaTrain } from "react-icons/Fa";
 import { FaBus } from "react-icons/Fa";
 import Hotel from "./Hotel";
 import Train from "./Train";
-import { Bus } from "./Bus";
+import Bus from "./Bus";
 import UBannerFooter from "@/components/userComponents/UBannerFooter";
 // import Hotel from "./hotel";
 
@@ -25,9 +25,9 @@ export default function Page() {
       <div className="">
         <div className=" ">
           <Tabs value={type} className=" ">
-            <div className=" !bg-[#0C2F55]">
+            <div className=" !bg-headcolor">
               <TabsHeader
-                className="rounded-none !bg-[#0C2F55] gap-12 max-w-screen-xl mx-auto w-full pl-[3%] pt-4 pb-0  shadow-none"
+                className="rounded-none !bg-headcolor gap-12 max-w-screen-xl mx-auto w-full pl-[3%] pt-4 pb-0  shadow-none"
                 indicatorProps={{
                   className: "rounded-b-none rounded-t-md shadow-none -mx-2 ",
                 }}
@@ -37,8 +37,8 @@ export default function Page() {
                   onClick={() => setType("hotel")}
                   className={
                     type === "hotel"
-                      ? "text-[#0071cc] w-fit"
-                      : "text-[#8298AF] w-fit "
+                      ? "text-tabchange w-fit"
+                      : "text-tab w-fit "
                   }
                 >
                   <span className=" text-sm">
@@ -50,9 +50,7 @@ export default function Page() {
                   value="train"
                   onClick={() => setType("train")}
                   className={
-                    type === "train"
-                      ? "text-[#0071cc] w-fit"
-                      : "text-[#8298AF] w-fit"
+                    type === "train" ? "text-tabchange w-fit" : "text-tab w-fit"
                   }
                 >
                   <span className="text-sm ">
@@ -69,9 +67,7 @@ export default function Page() {
                   value="bus"
                   onClick={() => setType("bus")}
                   className={
-                    type === "bus"
-                      ? "text-[#0071cc] w-fit"
-                      : "text-[#8298AF] w-fit"
+                    type === "bus" ? "text-tabchange w-fit" : "text-tab w-fit"
                   }
                 >
                   <span className=" text-sm">
@@ -82,7 +78,7 @@ export default function Page() {
               </TabsHeader>
             </div>
 
-            <TabsBody className=" max-w-screen-xl mx-auto  rounded-md overflow-auto h-[480px]  container ">
+            <TabsBody className=" max-w-screen-xl mx-auto  rounded-md overflow-auto   container ">
               <TabPanel value="hotel" className="p-0 flex flex-row">
                 <Hotel type={type} />
               </TabPanel>

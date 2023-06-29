@@ -17,12 +17,18 @@ module.exports = withMT({
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
       colors: {
+        bodycolor: "#e7e9ed",
         green: "#4fb291",
         darkgreen: "#1BA89E",
         GreenBlue: "#1B6CA8",
         blackblue: "#243f56",
         purple: "#4338ca",
-        headcolor: "#0C2F55"
+        headcolor: "#0C2F55",
+        lightgrey: "#535b61",
+        tab: "#8298AF",
+        tabchange: "#0071cc",
+        uficon: "#546d89",
+        greycommon: "#253B33"
       },
       fontFamily: {
         Signika: ["Signika", "sans-serif"],

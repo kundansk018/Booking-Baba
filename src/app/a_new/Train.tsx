@@ -2,6 +2,7 @@
 
 import HomeSearch from "@/components/HomeSearch";
 import BAdCarousel from "../components/BAdCarousel";
+import UFeatures from "@/components/userComponents/UFeatures";
 
 interface Props {
   type?: any;
@@ -9,10 +10,23 @@ interface Props {
 
 export default function Train(props: Props) {
   return (
-    <div className="flex flex-row">
-      <HomeSearch title="Book Train Tickets" travelType={props.type} />
-      <BAdCarousel />
-      
+    <div>
+      {" "}
+      <div className="flex flex-row">
+        <div className="w-[45%]">
+          <HomeSearch title="Book Train Tickets" travelType={props.type} />
+        </div>
+        <div className="w-[55%]">
+          <BAdCarousel />
+        </div>
+      </div>
+      <div className=" mb-10">
+        <UFeatures
+          title="  Why Book Trains with Quickai"
+          subtitle="Book Train Tickets Online. Save Time and Money!"
+          travelType={props.type}
+        />
+      </div>
     </div>
   );
 }
