@@ -22,7 +22,7 @@ export default function Train(props: Props) {
       </div>
       <div className=" mb-10">
         <UFeatures
-          title="  Why Book Trains with Quickai"
+          title="  Why Book Trains with Booking Baba"
           subtitle="Book Train Tickets Online. Save Time and Money!"
           travelType={props.type}
         />

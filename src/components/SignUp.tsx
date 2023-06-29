@@ -86,10 +86,6 @@ function SignUp() {
       isErrorFound = true;
       error.push("Mobile Number in number format");
     }
-    if (mobileNumber) {
-      isErrorFound = true;
-      error.push("");
-    }
 
     if (!email || !email.trim()) {
       isErrorFound = true;
@@ -138,7 +134,6 @@ function SignUp() {
             onChange={(e) => setFirstName(e.target.value)}
           />
           <BBInput
-          
             label="Last Name"
             containerProps={{ className: "min-w-[30px]" }}
             value={lastName}

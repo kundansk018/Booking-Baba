@@ -26,7 +26,7 @@ export default function Hotel(props: Props) {
         </div>
         <div className=" mb-10">
           <UFeatures
-            title="Why Choose Us"
+            title="Why Choose Booking Baba"
             subtitle="Book Hotels Online. Save Time and Money!"
             travelType={props.type}
           />

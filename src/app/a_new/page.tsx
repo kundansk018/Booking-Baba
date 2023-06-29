@@ -15,6 +15,8 @@ import Hotel from "./Hotel";
 import Train from "./Train";
 import Bus from "./Bus";
 import UBannerFooter from "@/components/userComponents/UBannerFooter";
+import UAA from "@/components/userComponents/UFooter";
+import UFooter from "@/components/userComponents/UFooter";
 // import Hotel from "./hotel";
 
 export default function Page() {
@@ -92,6 +94,9 @@ export default function Page() {
           </Tabs>
           <div className="bg-white flex flex-col justify-center  mb-10">
             <UBannerFooter />
+          </div>
+          <div className=" max-w-screen-xl mx-auto flex flex-col justify-center  mb-10">
+            <UFooter />
           </div>
         </div>
       </div>

@@ -45,7 +45,7 @@ export default function HomeSearch(props: Props) {
           console.log("Searching for trains:", data);
           dispatch(getTrainBySearch(data)).then((res: any) => {
             console.log("response train ???????????????????????", res);
-            router.push("/user/train/list");
+            router.push("/user/train/newtrain/list");
           });
         } else if (props.travelType === "hotel") {
         } else if (props.travelType === "bus") {
