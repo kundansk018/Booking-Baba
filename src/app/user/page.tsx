@@ -12,8 +12,9 @@ import { FaBed, FaBus, FaTrain } from "react-icons/fa";
 
 import Hotel from "../components/Hotel";
 import Train from "../components/Train";
-import { Bus } from "../components/Bus";
+import Bus from "../components/Bus";
 import UBannerFooter from "@/components/userComponents/UBannerFooter";
+import UFooter from "@/components/userComponents/UFooter";
 
 export default function Page() {
   const [type, setType] = useState("hotel");
@@ -95,6 +96,9 @@ export default function Page() {
           <div className="bg-white flex flex-col justify-center  mb-10">
             <UBannerFooter />
           </div>
+        </div>
+        <div className="mb-10">
+          <UFooter />
         </div>
       </div>
     </div>

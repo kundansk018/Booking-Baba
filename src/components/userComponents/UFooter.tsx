@@ -8,39 +8,56 @@ import {
   FaLinkedinIn,
   FaTwitter,
   FaYoutube,
-} from "react-icons/Fa";
+} from "react-icons/fa";
+import { OverlayTrigger, Tooltip } from "react-bootstrap";
+
+const renderTooltip = (props: any) => (
+  <Tooltip
+    id="button-tooltip"
+    {...props}
+    className="bg-black text-white rounded-xl p-5 "
+  >
+    Click to View
+  </Tooltip>
+);
 
 export default function UFooter() {
   return (
-    <footer id="footer" className="">
+    <footer id="footer" className="max-w-screen-xl mx-auto">
       <div className="container mt-[24px]">
         <div className="flex flex-wrap md:grid-cols-3 justify-between">
           <div className="flex flex-wrap w-[33.333%]">
             <p className="text-greycommon">Payment</p>
             <ul className="payments-types m-0 p-0 flex flex-wrap space-x-2">
+              <OverlayTrigger
+                placement="top"
+                delay={{ show: 250, hide: 400 }}
+                overlay={renderTooltip}
+              >
+                <li>
+                  <a href="#" target="_blank">
+                    <img
+                      data-bs-toggle="tooltip"
+                      src="data:image/png;base64,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"
+                      alt="visa"
+                      title=""
+                      data-bs-original-title="Visa"
+                      aria-label="Visa"
+                      className="w-16 h-16"
+                    />
+                  </a>
+                </li>
+              </OverlayTrigger>
               <li>
                 <a href="#" target="_blank">
                   <img
                     data-bs-toggle="tooltip"
-                    src="data:image/png;base64,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"
-                    alt="visa"
-                    title=""
-                    data-bs-original-title="Visa"
-                    aria-label="Visa"
-                    className="w-16 h-16"
-                  />
-                </a>
-              </li>
-              <li>
-                <a href="#" target="_blank">
-                  <img
-                    data-bs-toggle="tooltip"
-                    src="data:image/png;base64,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"
+                    src="https://www.freepnglogos.com/uploads/discover-png-logo/credit-cards-discover-png-logo-4.png"
                     alt="discover"
                     title=""
                     data-bs-original-title="Discover"
                     aria-label="Discover"
-                    className="w-20 h-16"
+                    className="w-16 h-16"
                   />
                 </a>
               </li>
@@ -66,7 +83,7 @@ export default function UFooter() {
                     title=""
                     data-bs-original-title="American Express"
                     aria-label="American Express"
-                    className="w-12 h-12"
+                    className="w-16 h-16"
                   />
                 </a>
               </li>
@@ -79,7 +96,7 @@ export default function UFooter() {
                     title=""
                     data-bs-original-title="Discover"
                     aria-label="Discover"
-                    className="w-12 h-12"
+                    className="w-16 h-16"
                   />
                 </a>
               </li>
@@ -103,7 +120,7 @@ export default function UFooter() {
           </div>
           <div className="col-span-1 flex flex-col items-end justify-center">
             <p className="text-greycommon">Keep in touch</p>
-            <ul className="social-icons flex space-x-2 ">
+            <ul className="social-icons flex space-x-2 text-white">
               <li className=" my-[2px] mx-[3px] bg-gray-500 p-3 rounded-full hover:bg-[#3b5998]">
                 <a
                   data-bs-toggle="tooltip"
@@ -117,7 +134,7 @@ export default function UFooter() {
                   <FaFacebookF />
                 </a>
               </li>
-              <li className=" my-[2px] mx-[3px] bg-gray-500 p-3 rounded-full hover:bg-[#3b5998]">
+              <li className=" my-[2px] mx-[3px] bg-gray-500 p-3 rounded-full hover:bg-light-blue-500">
                 <a
                   data-bs-toggle="tooltip"
                   href="http://www.twitter.com/"
@@ -129,7 +146,7 @@ export default function UFooter() {
                   <FaTwitter />
                 </a>
               </li>
-              <li className=" my-[2px] mx-[3px] bg-gray-500 p-3 rounded-full hover:bg-[#3b5998]">
+              <li className=" my-[2px] mx-[3px] bg-gray-500 p-3 rounded-full hover:bg-red-500">
                 <a
                   data-bs-toggle="tooltip"
                   href="http://www.google.com/"
@@ -141,7 +158,7 @@ export default function UFooter() {
                   <FaGoogle />
                 </a>
               </li>
-              <li className=" my-[2px] mx-[3px] bg-gray-500 p-3 rounded-full hover:bg-[#3b5998]">
+              <li className=" my-[2px] mx-[3px] bg-gray-500 p-3 rounded-full hover:bg-light-blue-900">
                 <a
                   data-bs-toggle="tooltip"
                   href="http://www.linkedin.com/"
@@ -153,7 +170,7 @@ export default function UFooter() {
                   <FaLinkedinIn />
                 </a>
               </li>
-              <li className=" my-[2px] mx-[3px] bg-gray-500 p-3 rounded-full hover:bg-[#3b5998]">
+              <li className=" my-[2px] mx-[3px] bg-gray-500 p-3 rounded-full hover:bg-red-600">
                 <a
                   data-bs-toggle="tooltip"
                   href="http://www.youtube.com/"
@@ -165,7 +182,7 @@ export default function UFooter() {
                   <FaYoutube />
                 </a>
               </li>
-              <li className=" my-[2px] mx-[3px] bg-gray-500 p-3 rounded-full hover:bg-[#3b5998]">
+              <li className=" my-[2px] mx-[3px] bg-gray-500 p-3 rounded-full hover:bg-blackblue">
                 <a
                   data-bs-toggle="tooltip"
                   href="http://www.instagram.com/"
@@ -184,32 +201,32 @@ export default function UFooter() {
       <div className="container ">
         <div className="footer-copyright text-center border border-t-gray-400 mt-5 pt-8">
           <ul className="nav justify-center flex flex-wrap ">
-            <li className="nav-item px-3 hover:text-blue-500">
+            <li className="nav-item px-3 hover:text-tabchange">
               <a className="nav-link active" href="#">
                 About Us
               </a>
             </li>
-            <li className="nav-item px-3 hover:text-blue-500">
+            <li className="nav-item px-3 hover:text-tabchange">
               <a className="nav-link" href="#">
                 Faq
               </a>
             </li>
-            <li className="nav-item px-3 hover:text-blue-500">
+            <li className="nav-item px-3 hover:text-tabchange">
               <a className="nav-link" href="#">
                 Contact
               </a>
             </li>
-            <li className="nav-item px-3 hover:text-blue-500">
+            <li className="nav-item px-3 hover:text-tabchange">
               <a className="nav-link" href="#">
                 Support
               </a>
             </li>
-            <li className="nav-item px-3 hover:text-blue-500">
+            <li className="nav-item px-3 hover:text-tabchange">
               <a className="nav-link" href="#">
                 Terms of Use
               </a>
             </li>
-            <li className="nav-item px-3 hover:text-blue-500">
+            <li className="nav-item px-3 hover:text-tabchange">
               <a className="nav-link" href="#">
                 Privacy Policy
               </a>
@@ -217,7 +234,7 @@ export default function UFooter() {
           </ul>
           <p className="pt-5 text-center">
             &copy; {new Date().getFullYear()}{" "}
-            <a href="#" className="text-blue-700">
+            <a href="#" className="text-tabchange">
               Booking Baba
             </a>
             . All Rights Reserved.
