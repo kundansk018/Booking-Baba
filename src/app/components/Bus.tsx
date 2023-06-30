@@ -17,8 +17,7 @@ export default function Bus(props: Props) {
       </div>
       <div>
         <UFeatures
-          title="Why Book Bus with Quickai
-"
+          title="Why Book Bus with Booking Baba"
           subtitle="Book Bus Tickets Online. Save Time and Money!"
           travelType={props.type}
         />
