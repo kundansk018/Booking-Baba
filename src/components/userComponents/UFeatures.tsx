@@ -8,7 +8,7 @@ import {
   FaRoad,
   FaSearch,
   FaUsers,
-} from "react-icons/Fa";
+} from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
 interface Props {
   title?: string;

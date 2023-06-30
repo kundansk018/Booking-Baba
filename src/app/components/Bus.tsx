@@ -2,16 +2,27 @@
 
 import HomeSearch from "@/components/HomeSearch";
 import BAdCarousel from "./BAdCarousel";
+import UFeatures from "@/components/userComponents/UFeatures";
 
 interface Props {
   type?: any;
 }
 
-export const Bus: React.FC<Props> = ({ type }) => {
+export default function Bus(props: Props) {
   return (
-    <div className="flex flex-row">
-      <HomeSearch title="Book Bus Tickets" travelType={type} />
-      <BAdCarousel />
+    <div>
+      <div className="flex flex-row">
+        <HomeSearch title="Book Bus Tickets" travelType={props.type} />
+        <BAdCarousel />
+      </div>
+      <div>
+        <UFeatures
+          title="Why Book Bus with Quickai
+"
+          subtitle="Book Bus Tickets Online. Save Time and Money!"
+          travelType={props.type}
+        />
+      </div>
     </div>
   );
-};
+}

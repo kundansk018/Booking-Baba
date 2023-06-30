@@ -8,7 +8,7 @@ import {
   FaLinkedinIn,
   FaTwitter,
   FaYoutube,
-} from "react-icons/Fa";
+} from "react-icons/fa";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
 
 const renderTooltip = (props: any) => (
@@ -23,7 +23,7 @@ const renderTooltip = (props: any) => (
 
 export default function UFooter() {
   return (
-    <footer id="footer" className="">
+    <footer id="footer" className="max-w-screen-xl mx-auto">
       <div className="container mt-[24px]">
         <div className="flex flex-wrap md:grid-cols-3 justify-between">
           <div className="flex flex-wrap w-[33.333%]">
