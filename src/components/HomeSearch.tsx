@@ -1,7 +1,7 @@
 import BBButton from "@/app/components/BBButton";
 import UInput from "@/components/userComponents/UInput";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 // import InputIcon from "react-multi-date-picker";
 
 import "react-datepicker/dist/react-datepicker.css";
@@ -31,6 +31,11 @@ export default function HomeSearch(props: Props) {
   const [dropDownValue, setDropdownValue] = useState("");
   const dispatch = useAppDispatch();
   const router = useRouter();
+  const [counter, setCounter] = useState(0);
+
+  useEffect(() => {
+    console.log("use Effect called....!");
+  }, [counter]);
 
   console.log("travelType", props.travelType);
 
@@ -43,6 +48,7 @@ export default function HomeSearch(props: Props) {
         if (props.travelType === "train") {
           let data = { from_Stn: from, to_Stn: to };
           console.log("Searching for trains:", data);
+          setCounter(counter + 1);
           dispatch(getTrainBySearch(data)).then((res: any) => {
             console.log("response train ???????????????????????", res);
             router.push("/user/train/newtrain/list");

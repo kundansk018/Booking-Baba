@@ -25,12 +25,8 @@ function Icon({ id, open }: any) {
 }
 
 const FilterPage = () => {
-  // const [range, setRange] = useState([0, 100]);
-  // const [departureTime, setDepartureTime] = useState([1439, 0]);
-  // const [arrivalTime, setArrivalTime] = useState([1439, 0]);
   const [deptminValue, set_deptminValue] = useState(0);
   const [deptmaxValue, set_deptmaxValue] = useState(1439);
-
   const [arrivalminValue, set_arrivalminValue] = useState(0);
   const [arrivalmaxValue, set_arrivalmaxValue] = useState(1439);
   const [firstClass, setFirstClass] = useState(false);
@@ -91,7 +87,7 @@ const FilterPage = () => {
   };
 
   return (
-    <div className="w-55 ml-10 mt-2">
+    <div className="w-56 ml-10 mt-2">
       <div>
         <h3
           style={{
@@ -104,7 +100,7 @@ const FilterPage = () => {
         </h3>
         <hr />
 
-        <div className="mb-4">
+        <div className="mb-4 pt-5">
           <Accordion open={open === 1} icon={<Icon id={1} open={open} />}>
             <AccordionHeader
               // className={`Accordion__Header--${
@@ -123,6 +119,10 @@ const FilterPage = () => {
               </h2>
             </AccordionHeader>
             <AccordionBody>
+              <div>
+                <span>{formatTime(deptminValue)} - </span>
+                <span>{formatTime(deptmaxValue)}</span>
+              </div>
               <div className="ml-1">
                 <MultiRangeSlider
                   min={0}
@@ -134,10 +134,6 @@ const FilterPage = () => {
                     handleDepartureTime(e);
                   }}
                 />
-              </div>
-              <div>
-                <span>{formatTime(deptminValue)} - </span>
-                <span>{formatTime(deptmaxValue)}</span>
               </div>
             </AccordionBody>
           </Accordion>
@@ -162,6 +158,10 @@ const FilterPage = () => {
               </p>
             </AccordionHeader>
             <AccordionBody>
+              <div>
+                <span>{formatTime(arrivalminValue)} - </span>
+                <span>{formatTime(arrivalmaxValue)}</span>
+              </div>
               <div className="ml-1">
                 <MultiRangeSlider
                   min={0}
@@ -173,10 +173,6 @@ const FilterPage = () => {
                     handleArrivalTime(e);
                   }}
                 />
-              </div>
-              <div>
-                <span>{formatTime(arrivalminValue)} - </span>
-                <span>{formatTime(arrivalmaxValue)}</span>
               </div>
             </AccordionBody>
           </Accordion>

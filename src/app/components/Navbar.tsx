@@ -94,7 +94,11 @@ export default function Navigationbar() {
         onClick={() => router.push("/user")}
       >
         <a
-          style={{ fontFamily: "Poppins,sans-serif", fontSize: "14px" }}
+          style={{
+            font: "sans-serif",
+            fontSize: "14px",
+            color: "#0c2e53",
+          }}
           href="#"
           className="flex items-center text-xl hover:text-black mt-2"
         >
@@ -122,7 +126,11 @@ export default function Navigationbar() {
               onClick={() => setIsMobileMenuOpen((cur) => !cur)}
             >
               <a
-                style={{ fontFamily: "Poppins,sans-serif", fontSize: "14px" }}
+                style={{
+                  font: "sans-serif",
+                  fontSize: "14px",
+                  color: "#0c2e53",
+                }}
                 href="#"
                 className="flex items-center text-xl "
               >
@@ -158,7 +166,12 @@ export default function Navigationbar() {
 
       <Typography as="li" variant="small" className="p-1 font-normal">
         <a
-          style={{ fontFamily: "Poppins,sans-serif", fontSize: "14px" }}
+          style={{
+            font: "sans-serif",
+            // fontFamily: "Poppins",
+            fontSize: "14px",
+            color: "#0c2e53",
+          }}
           href="#"
           className="flex items-center text-xl hover:text-black mt-2 -mr-5"
           onClick={() => router.push("/auth")}
@@ -198,7 +211,7 @@ export default function Navigationbar() {
       style={{
         boxShadow: "0 0 20px grey",
       }}
-      className=" z-50 flex flex-1 m-auto w-[100%] h-[54px] sticky top-0 bg-[#8075f5]"
+      className=" z-50 flex flex-1 m-auto w-[100%] h-[54px] sticky top-0 bg-[#fff]"
     >
       <div className="container flex items-center justify-between text-white">
         <Typography
@@ -207,7 +220,7 @@ export default function Navigationbar() {
           className="mr-4 cursor-pointer  font-medium mx-[20] fixed left-5 top-3 "
         >
           <b
-            style={{ fontFamily: "Poppins,sans-serif" }}
+            style={{ fontFamily: "Poppins,sans-serif", color: "#0c2e53" }}
             className="m-[20] text-2xl"
             onClick={() => router.push("/")}
           >

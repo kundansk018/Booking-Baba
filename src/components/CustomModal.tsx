@@ -56,6 +56,7 @@ export const CustomModal: React.FC<Props> = ({
               onClick={handleBackClick}
             >
               {/* <CloseIcon /> */}
+              close
             </div>
           </div>
         )}

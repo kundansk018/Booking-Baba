@@ -3,9 +3,13 @@ import { CustomModal } from "@/app/modal/CustomModal";
 import { Adesh } from "@/app/user/train/newtrain/confirm/ConfirmDetails";
 import UInput from "@/components/userComponents/UInput";
 import React from "react";
+import { useSelector } from "react-redux";
 
 const ConfirmationPage: React.FC = () => {
   const [showModal, setShowModal] = React.useState(false);
+
+  const trainData: any = useSelector((state: any) => state.train.getTrainById);
+  console.log("Train data is in update page ..", trainData);
 
   const handleClosemodal = () => {
     setShowModal(false);
@@ -21,10 +25,14 @@ const ConfirmationPage: React.FC = () => {
               <div className="border border-gray-200 rounded p-2 bg-gray-50">
                 <div className="flex items-center">
                   <div className="w-1/4">
-                    <h5 className="text-lg font-bold">Delhi</h5>
+                    <h5 className="text-lg font-bold">
+                      {trainData?.data?.from_Stn}
+                    </h5>
                   </div>
                   <div className="w-2/3 text-center">
-                    <h5 className="text-lg font-bold">Ahmedabad</h5>
+                    <h5 className="text-lg font-bold">
+                      {trainData?.data?.to_Stn}
+                    </h5>
                   </div>
                   <div className="text-center">
                     <h5 className="inline-block bg-light-green-900 text-white px-3 py-1 rounded-md">
@@ -54,29 +62,41 @@ const ConfirmationPage: React.FC = () => {
             <div className="card-body">
               {/* Train details */}
               <div className="flex items-center mb-4 pb-2 border border-gray-200">
-                <div className="w-1/4 text-center mt-2">
-                  <h5 className="text-2xl pl-1">Ashram Express</h5>
-                  <span className="text-sm text-gray-500">12916</span>
+                <div className="w-1/4 text-center">
+                  <h5 className="text-2xl">{trainData?.data?.trainName}</h5>
+                  <span className="text-sm text-gray-500">
+                    {trainData?.data?.trainNo}
+                  </span>
                   <h5 className="mt-4">
                     Class :{" "}
-                    <span className="bg-[#0DCAF0] p-1 text-white rounded">
-                      First Class
+                    <span className="bg-[#0dcaf0] p-1 text-white rounded">
+                      {trainData?.data?.classType}
                     </span>
                   </h5>
                 </div>
                 <div className="w-1/4 text-center">
-                  <h5 className="text-2xl">23:00</h5>
-                  <span className="text-sm text-gray-500">Delhi Jn</span>
-                  <h5 className="text-sm text-gray-500">15 Jun 18, Sat</h5>
+                  <h5 className="text-2xl">{trainData?.data?.depTime}</h5>
+                  <span className="text-sm text-gray-500">
+                    {trainData?.data?.from_Stn}
+                  </span>
+                  <h5 className="text-sm text-gray-500">
+                    {trainData?.data?.departDate}
+                  </h5>
                 </div>
                 <div className="w-1/4 text-center">
-                  <h5 className="text-lg">18h 55m</h5>
-                  <span className="text-sm text-gray-500">35 Stops</span>
+                  <h5 className="text-lg">{trainData?.data?.duration}</h5>
+                  <span className="text-sm text-gray-500">
+                    {trainData?.data?.stops} Stops
+                  </span>
                 </div>
                 <div className="w-1/4 text-center">
-                  <h5 className="text-2xl">18:15</h5>
-                  <span className="text-sm text-gray-500">Ahmedabad Jn</span>
-                  <h5 className="text-sm text-gray-500">16 Jun 18, Sun</h5>
+                  <h5 className="text-2xl">{trainData?.data?.arrivalTime}</h5>
+                  <span className="text-sm text-gray-500">
+                    {trainData?.data?.to_Stn}
+                  </span>
+                  <h5 className="text-sm text-gray-500">
+                    {trainData?.data?.arrDate}
+                  </h5>
                 </div>
               </div>
               <div className="alert text-sm alert-info mb-4 bg-[#b6effb] p-3 rounded-sm">

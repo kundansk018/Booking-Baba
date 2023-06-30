@@ -40,6 +40,7 @@ export default function Page() {
               <th className="w-[5px] p-2">Coach</th>
               <th className="w-[5px] p-2">Availalbility</th>
               <th className="w-[5px] p-2">Action</th>
+              <th className="w-[5px] p-2">Duration</th>
             </tr>
           </thead>
           <tbody className="-z-10">
@@ -63,6 +64,7 @@ export default function Page() {
                     <td className="w-[5px]  p-2">{element.seats}</td>
                     <td className="w-[5px]  p-2">{element.coach}</td>
                     <td className="w-[5px]  p-2">{element.operationDays}</td>
+                    <td className="w-[5px]  p-2">{element.duration}</td>
 
                     <td className="w-[5px]  p-2">
                       <BBButton

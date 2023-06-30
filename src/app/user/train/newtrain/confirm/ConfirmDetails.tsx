@@ -15,13 +15,14 @@ interface Props {}
 export const Adesh: React.FC<Props> = () => {
   const [activeTab, setActiveTab] = React.useState("Available");
 
+  const router = useRouter();
+
   const [showModal, setShowModal] = React.useState(false);
 
   const handleCloseModal = () => {
     setShowModal(false);
   };
 
-  const router = useRouter();
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50">
       <div className="bg-white p-4 rounded shadow-lg w-1/2">
