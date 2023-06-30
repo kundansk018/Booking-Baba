@@ -113,7 +113,7 @@ export default function Accordion(props: Props) {
               className="flex justify-between cursor-pointer "
               onClick={() => toggleAccordion(index)}
             >
-              {window.location.pathname === "/a_new" ? (
+              {window.location.pathname === "/user" ? (
                 <div className="w-[350px]">
                   {option.count} {option.label}
                 </div>
