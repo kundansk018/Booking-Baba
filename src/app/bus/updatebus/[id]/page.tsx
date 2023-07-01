@@ -42,6 +42,7 @@ export default function UpdateBus({ params }: any) {
   const [arrivalTime, setArrivalTime] = useState("");
   const [departureTime, setDepartureTime] = useState("");
   const [pickUpPoint, setPickUpPoint] = useState("");
+  const [duration, setDuration] = useState("");
   const [busType, setBusType] = useState("");
   const [currentStatus, setCurrentStatus] = useState("");
   const [wifi, setWifi] = useState<boolean>(true);
@@ -83,6 +84,7 @@ export default function UpdateBus({ params }: any) {
       noofstop,
       bookingseats,
       travelagencyname,
+      duration,
     };
     dispatch(updateBusAction(data)).then(() => {
       router.push("/bus");
@@ -109,6 +111,7 @@ export default function UpdateBus({ params }: any) {
         pickUpPoint,
         busType,
         currentStatus,
+        duration,
         // photos,
         // wifi,
       } = bus_data;
@@ -129,6 +132,7 @@ export default function UpdateBus({ params }: any) {
       setPickUpPoint(pickUpPoint);
       setBusType(busType);
       setCurrentStatus(currentStatus);
+      setDuration(duration);
       // setPhotos(photos)
       // setWifi(wifi)
     }
@@ -259,7 +263,6 @@ export default function UpdateBus({ params }: any) {
               value={operator + ""}
               onChange={(e) => setOperator(e.target.value)}
             />
-
           </div>
 
           <div className="flex  flex-col mx-5 w-[300px]">
@@ -295,6 +298,20 @@ export default function UpdateBus({ params }: any) {
             />
             <br />
 
+            <BBDropdown
+              options={[
+                { label: "1:2 Hrs" },
+                { label: "2:4 Hrs" },
+                { label: "4:6 Hrs" },
+                { label: "7:8 Hrs" },
+              ]}
+              value={duration}
+              onPress={(value: any) => {
+                setDuration(value);
+              }}
+              label="Duration"
+            />
+            <br />
             <BBDropdown
               options={[
                 { label: "Ac-Shivneri" },

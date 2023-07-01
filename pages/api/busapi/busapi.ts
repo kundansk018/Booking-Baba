@@ -118,6 +118,7 @@ export async function updateBus(
         noofstop: fields.noofstop,
         bookingseats: fields.bookingseats,
         travelagencyname: fields.travelagencyname,
+        duration:fields.duration,
       },
     }
   );

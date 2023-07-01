@@ -42,6 +42,7 @@ export default function AddBus() {
   const [pickUpPoint, setPickUpPoint] = useState("");
   const [busType, setBusType] = useState("");
   const [currentStatus, setCurrentStatus] = useState("");
+  const [duration, setDuration] = useState("");
   const [busImage, setBusImage] = useState<any>();
   const [wifi, setWifi] = useState<boolean>(true);
   const [cpoint, setCpoint] = useState<boolean>(true);
@@ -97,6 +98,10 @@ export default function AddBus() {
       if (!arrivalDate || !arrivalDate.trim()) {
         isErrorFound = true;
         error.push("Please enter arrival date ");
+      }
+      if (!duration || !duration.trim()) {
+        isErrorFound = true;
+        error.push("Please enter duration time ");
       }
       if (!departureTime || !departureTime.trim()) {
         isErrorFound = true;
@@ -161,6 +166,7 @@ export default function AddBus() {
         formData.append("noofstop", noofstop);
         formData.append("bookingseats", bookingseats);
         formData.append("travelagencyname", travelagencyname);
+        formData.append("duration", duration);
         formData.append("imageUrl", busImage);
 
         dispatch(addBuses(formData)).then(() => {
@@ -256,8 +262,22 @@ export default function AddBus() {
               }}
               label="Travel Agency Name"
             />
-          </div>
 
+            <BBDropdown
+              containerProps={{ className: "mb-3" }}
+              options={[
+                { label: "1:2 Hrs" },
+                { label: "2:4 Hrs" },
+                { label: "4:6 Hrs" },
+                { label: "7:8 Hrs" },
+              ]}
+              value={duration}
+              onPress={(value: any) => {
+                setDuration(value);
+              }}
+              label="Duration"
+            />
+          </div>
           <div className="flex  flex-col mx-5 w-[300px]">
             <BBInput
               containerProps={{ className: "mb-3" }}
@@ -380,6 +400,7 @@ export default function AddBus() {
                 { label: "1" },
                 { label: "2" },
                 { label: "3" },
+
                 { label: "4" },
                 { label: "11" },
               ]}

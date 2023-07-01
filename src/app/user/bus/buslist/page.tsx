@@ -17,6 +17,7 @@ import SearchComponent from "@/components/SearchComponent";
 export default function page() {
   const busData: any = useSelector((state: any) => state.bus.userBusDetails);
   console.log("bus data is ..==>>>>", busData);
+
   const [showModal, setShowModal] = useState<boolean>(false);
   let from = busData?.data[0]?.from;
   let to = busData?.data[0]?.to;
@@ -186,7 +187,7 @@ export default function page() {
                         className="font-medium  text-black"
                       >
                         <div className="font-extralight text-base">
-                          {/* {duration} */}3 : 30 Hrs
+                          {element.duration}
                         </div>
 
                         <div className="font-extralight  text-gray-700">

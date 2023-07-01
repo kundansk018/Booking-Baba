@@ -139,7 +139,7 @@ export default function Bus() {
               <th className="w-[5px] p-2">To</th>
               <th className="w-[5px] p-2 ">Available Date</th>
               <th className="w-[5px] p-2">Arrival Time</th>
-              <th className="w-[5px] p-2">Rest Point</th>
+              {/* <th className="w-[5px] p-2">Rest Point</th> */}
               <th className="w-[5px] p-2">Seats</th>
               <th className="w-[5px] p-2">Ticket Price</th>
               {/* <th className="w-[5px] p-2">Operator</th> */}
@@ -149,6 +149,7 @@ export default function Bus() {
               <th className="w-[5px] p-2">No of Stops</th>
               <th className="w-[5px] p-2">Booking Seats</th>
               <th className="w-[5px] p-2">Travel Agency</th>
+              <th className="w-[5px] p-2">Duration</th>
               <th className="w-[5px] p-2">Admin Action</th>
             </tr>
           </thead>
@@ -172,7 +173,7 @@ export default function Bus() {
                       <td className="w-[5px] p-2">{element.to}</td>
                       <td className="w-[5px] p-2">{element.arrivalDate}</td>
                       <td className="w-[5px] p-2">{element.arrivalTime}</td>
-                      <td className="w-[5px] p-2">{element.pickUpPoint}</td>
+                      {/* <td className="w-[5px] p-2">{element.pickUpPoint}</td> */}
                       <td className="w-[5px] p-2">{element.seats}</td>
                       <td className="w-[5px] p-2">{element.ticketprice}</td>
                       {/* <td className="w-[5px] p-2">{element.operator}</td> */}
@@ -181,9 +182,11 @@ export default function Bus() {
                       <td className="w-[5px] p-2">{element.busstops}</td>
                       <td className="w-[5px] p-2">{element.noofstop}</td>
                       <td className="w-[5px] p-2">{element.bookingseats}</td>
+
                       <td className="w-[5px] p-2">
                         {element.travelagencyname}
                       </td>
+                      <td className="w-[5px] p-2"> {element.duration}</td>
                       <td className="w-[5px] p-2 ">
                         <Tooltip content="Update Bus">
                           <IconButton
