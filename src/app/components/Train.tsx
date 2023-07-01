@@ -12,8 +12,12 @@ export default function Train(props: Props) {
   return (
     <div>
       <div className="flex flex-row">
-        <HomeSearch title="Book Train Tickets" travelType={props.type} />
-        <BAdCarousel />
+        <div className="w-[45%]">
+          <HomeSearch title="Book Train Tickets" travelType={props.type} />
+        </div>
+        <div className="w-[55%]">
+          <BAdCarousel />
+        </div>
       </div>
       <div>
         <UFeatures

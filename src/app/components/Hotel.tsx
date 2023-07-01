@@ -13,11 +13,15 @@ export default function Hotel(props: Props) {
     <div>
       <div className=" ">
         <div className="flex flex-row">
-          <HomeSearch
-            title="Book Domestic and International Hotels"
-            travelType={props.type}
-          />
-          <BAdCarousel />
+          <div className="w-[45%]">
+            <HomeSearch
+              title="Book Domestic and International Hotels"
+              travelType={props.type}
+            />
+          </div>
+          <div className="w-[55%]">
+            <BAdCarousel />
+          </div>
         </div>
         <div>
           <UFeatures
