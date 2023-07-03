@@ -32,6 +32,8 @@ import React, { useEffect, useState } from "react";
 import { Button, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import HomeSearch from "@/components/HomeSearch";
+import UBannerFooter from "@/components/userComponents/UBannerFooter";
+import UFooter from "@/components/userComponents/UFooter";
 
 
 function Icon({ id, open }:any) {
@@ -147,7 +149,7 @@ export default function UserHotelPage() {
           <img src="/image/hotel1.jpg" alt="image-blur" />
         </div>
       </div>
-      <div className="flex justify-between p-3  mx-24" >
+      <div className="flex justify-between p-3  mx-24">
         <HomeSearch travelType={type} />
       </div>
 
@@ -199,142 +201,163 @@ export default function UserHotelPage() {
       </div> */}
 
       <div className=" flex flex-row  mx-24 gap-5 ">
-
         <div>
-
           <div className=" bg-white mt-4 ml-4 w-[320px]  rounded-lg">
-         <div>
-              <p className="  ml-4  mt-5 text-2xl font-semibold "> Filter</p>  
-              </div>
+            <div>
+              <p className="  ml-4  mt-5 text-2xl font-semibold "> Filter</p>
+            </div>
             <hr />
-           
             <div>
-            <Accordion open={open === 1} icon={<Icon id={1} open={open}  />} >
-              <AccordionHeader onClick={() => handleOpen(1)} className="border-0 pr-5" >
-              <p className="text-lg  mt-3 ml-4  text-light-blue-800 border-0"> Hotel Name</p>
-              </AccordionHeader>
-              <AccordionBody>
-              <div className="  mb-5 ml-4 flex ">
-                <div className="w-[200px]  ">
-                  <BBInput
-                    type="search"
-                    label="Search .."
-                    value={searchKey}
-                    onChange={(e) => {
-                      setSearchKey(e.target.value);
-                    }}
-                  />
-                </div>
-                <div className="">
-                  <Button
-                    type="button"
-                    className="hover- border rounded-lg 
+              <Accordion open={open === 1} icon={<Icon id={1} open={open} />}>
+                <AccordionHeader
+                  onClick={() => handleOpen(1)}
+                  className="border-0 pr-5"
+                >
+                  <p className="text-lg  mt-3 ml-4  text-light-blue-800 border-0">
+                    {" "}
+                    Hotel Name
+                  </p>
+                </AccordionHeader>
+                <AccordionBody>
+                  <div className="  mb-5 ml-4 flex ">
+                    <div className="w-[200px]  ">
+                      <BBInput
+                        type="search"
+                        label="Search .."
+                        value={searchKey}
+                        onChange={(e) => {
+                          setSearchKey(e.target.value);
+                        }}
+                      />
+                    </div>
+                    <div className="">
+                      <Button
+                        type="button"
+                        className="hover- border rounded-lg 
                     bg-[#0071cc] text-white border-gray-500  ml-2 h-10 w-[70px]"
-                    onClick={() => searchByName(searchKey)}
-                  >
-                    Search
-                  </Button>
-                </div>
-              </div>
-              </AccordionBody> 
+                        onClick={() => searchByName(searchKey)}
+                      >
+                        Search
+                      </Button>
+                    </div>
+                  </div>
+                </AccordionBody>
               </Accordion>
-            </div><hr />
-           
+            </div>
+            <hr />
             <div>
-            <Accordion open={open === 2} icon={<Icon id={2} open={open}  />} >
-              <AccordionHeader onClick={() => handleOpen(2)} className="border-0 pr-5" >
-              <p className="text-lg  mt-3 ml-4  text-light-blue-800"> Price</p>
-              </AccordionHeader>
-              <AccordionBody>
-              <div className=" mb-5 ml-4 w-[200px] ">
-                <BBDropdown
-                  label="Sort By"
-                  value={sort}
-                  options={datasort}
-                  onPress={(value) => {
-                    setSort(value);
-                  }}
-                />
-              </div>
-              </AccordionBody> 
+              <Accordion open={open === 2} icon={<Icon id={2} open={open} />}>
+                <AccordionHeader
+                  onClick={() => handleOpen(2)}
+                  className="border-0 pr-5"
+                >
+                  <p className="text-lg  mt-3 ml-4  text-light-blue-800">
+                    {" "}
+                    Price
+                  </p>
+                </AccordionHeader>
+                <AccordionBody>
+                  <div className=" mb-5 ml-4 w-[200px] ">
+                    <BBDropdown
+                      label="Sort By"
+                      value={sort}
+                      options={datasort}
+                      onPress={(value) => {
+                        setSort(value);
+                      }}
+                    />
+                  </div>
+                </AccordionBody>
               </Accordion>
-            </div> <hr />
+            </div>{" "}
+            <hr />
             <div>
-            <Accordion open={open === 3} icon={<Icon id={3} open={open}  />} >
-              <AccordionHeader onClick={() => handleOpen(3)} className="border-0 pr-5" >
-              <p className="text-lg  mt-3 ml-4  text-light-blue-800  "> Property Type</p>
-              </AccordionHeader>
-              <AccordionBody>
-              {propert_type.map((element) =>
-                <div className=" " >
-                  <Checkbox label={element.name} />
-                </div>
-
-              )}
-              </AccordionBody> 
+              <Accordion open={open === 3} icon={<Icon id={3} open={open} />}>
+                <AccordionHeader
+                  onClick={() => handleOpen(3)}
+                  className="border-0 pr-5"
+                >
+                  <p className="text-lg  mt-3 ml-4  text-light-blue-800  ">
+                    {" "}
+                    Property Type
+                  </p>
+                </AccordionHeader>
+                <AccordionBody>
+                  {propert_type.map((element) => (
+                    <div className=" ">
+                      <Checkbox label={element.name} />
+                    </div>
+                  ))}
+                </AccordionBody>
               </Accordion>
-            </div> <hr />
-
+            </div>{" "}
+            <hr />
             <div>
-            <Accordion open={open === 3} icon={<Icon id={3} open={open}  />} >
-              <AccordionHeader onClick={() => handleOpen(3)} className="border-0 pr-5" >
-              <p className="text-lg  mt-3 ml-4  text-light-blue-800 my-3 "> Start Category</p>
-              </AccordionHeader>
-              <AccordionBody>
-              {star_category.map((element) =>
-                <div className="" >
-                  <Checkbox label={element.name} />
-                </div>
-
-              )}
-               </AccordionBody> 
+              <Accordion open={open === 3} icon={<Icon id={3} open={open} />}>
+                <AccordionHeader
+                  onClick={() => handleOpen(3)}
+                  className="border-0 pr-5"
+                >
+                  <p className="text-lg  mt-3 ml-4  text-light-blue-800 my-3 ">
+                    {" "}
+                    Start Category
+                  </p>
+                </AccordionHeader>
+                <AccordionBody>
+                  {star_category.map((element) => (
+                    <div className="">
+                      <Checkbox label={element.name} />
+                    </div>
+                  ))}
+                </AccordionBody>
               </Accordion>
-              
-            </div> <hr />
-
+            </div>{" "}
+            <hr />
             <div>
-            <Accordion open={open === 4} icon={<Icon id={4} open={open}  />} >
-              <AccordionHeader onClick={() => handleOpen(4)} className="border-0 pr-5" >
-              <p className="text-lg  mt-3 ml-4  text-light-blue-800 my-3 "> User Revies</p>
-              </AccordionHeader>
-              <AccordionBody>
-              {user_review.map((element) =>
-                <div className=" " >
-                  <Checkbox label={element.name} />
-                </div>
-
-              )}
-               </AccordionBody> 
+              <Accordion open={open === 4} icon={<Icon id={4} open={open} />}>
+                <AccordionHeader
+                  onClick={() => handleOpen(4)}
+                  className="border-0 pr-5"
+                >
+                  <p className="text-lg  mt-3 ml-4  text-light-blue-800 my-3 ">
+                    {" "}
+                    User Revies
+                  </p>
+                </AccordionHeader>
+                <AccordionBody>
+                  {user_review.map((element) => (
+                    <div className=" ">
+                      <Checkbox label={element.name} />
+                    </div>
+                  ))}
+                </AccordionBody>
               </Accordion>
-            </div> <hr />
+            </div>{" "}
+            <hr />
             <div>
-            <Accordion open={open === 4} icon={<Icon id={4} open={open}  />} >
-              <AccordionHeader onClick={() => handleOpen(4)} className="border-0 pr-5" >
-              <p className="text-lg  mt-3 ml-4  text-light-blue-800 my-3 "> Amenities</p>
-              </AccordionHeader>
-              <AccordionBody>
-              {amenities.map((element) =>
-                <div className=" " >
-                  <Checkbox label={element.name} />
-                </div>
-
-              )}
-               </AccordionBody> 
+              <Accordion open={open === 4} icon={<Icon id={4} open={open} />}>
+                <AccordionHeader
+                  onClick={() => handleOpen(4)}
+                  className="border-0 pr-5"
+                >
+                  <p className="text-lg  mt-3 ml-4  text-light-blue-800 my-3 ">
+                    {" "}
+                    Amenities
+                  </p>
+                </AccordionHeader>
+                <AccordionBody>
+                  {amenities.map((element) => (
+                    <div className=" ">
+                      <Checkbox label={element.name} />
+                    </div>
+                  ))}
+                </AccordionBody>
               </Accordion>
-             
-            </div> <hr />
-
-
-
-
-
+            </div>{" "}
+            <hr />
           </div>
           <div className=" border bg-white mt-4 ml-4 w-[320px]  rounded-lg">
-
-            <div className="text-center mt-3 text-xl">
-
-              Are you looking for?
-            </div>
+            <div className="text-center mt-3 text-xl">Are you looking for?</div>
 
             <div className="mx-5">
               <BBInput
@@ -366,8 +389,6 @@ export default function UserHotelPage() {
               </Button>
             </div>
           </div>
-
-
         </div>
         <div>
           {hotelData?.map((element: any, index: any) => (
@@ -389,7 +410,7 @@ export default function UserHotelPage() {
                   <h1 className="text-2xl">{element.hotelname}</h1>
                   <p>Owner:{element.ownerName}</p>
                   <div className="mt2">
-                  <BBRating />
+                    <BBRating />
                   </div>
                   <p>
                     {element.adress} {element.street}
@@ -407,26 +428,34 @@ export default function UserHotelPage() {
                   <p>contact :{element.contactno}</p>
                 </div>
                 <div className=" flex flex-col pr-2 w-[20%] ">
-
-                <p className=" flex justify-end content-end text-2xl font-semibold mt-16" >
-                  <BiRupee className="mt-1"/>{element.min_order_price}</p>
-                 <p className=" flex justify-end content-end mb-3">1 Room/Night</p>
-                <div className=" flex justify-end content-end">
-                  <Button
-                    type="button"
-                    className="hover- border rounded-lg 
+                  <p className=" flex justify-end content-end text-2xl font-semibold mt-16">
+                    <BiRupee className="mt-1" />
+                    {element.min_order_price}
+                  </p>
+                  <p className=" flex justify-end content-end mb-3">
+                    1 Room/Night
+                  </p>
+                  <div className=" flex justify-end content-end">
+                    <Button
+                      type="button"
+                      className="hover- border rounded-lg 
                     bg-[#0071cc] border-gray-500 text-white ml-2 h-10 w-[100px]"
-                    onClick={() => searchByName(searchKey)} >
-                    Book Now
-                  </Button>
-                </div>
-                
+                      onClick={() => searchByName(searchKey)}
+                    >
+                      Book Now
+                    </Button>
+                  </div>
                 </div>
               </div>
             </div>
           ))}
         </div>
-
+      </div>
+      <div className="bg-white flex flex-col justify-center my-5">
+        <UBannerFooter />
+      </div>
+      <div className="mb-10">
+        <UFooter />
       </div>
     </div>
   ) : (

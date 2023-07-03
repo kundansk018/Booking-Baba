@@ -8,151 +8,117 @@ import top from "../../images/top.jpg";
 import rail from "../../images/Trains/home.jpg";
 import busimg from "../../images/Buses/banner.jpg";
 import { useRouter } from "next/navigation";
+import trainbanner1 from "../../images/Trains/train-banner.jpg";
+import busbanner2 from "../../images/Buses/bus-banner2.jpg";
+import hotelbanner1 from "../../images/hotel/hotel-banner-1.jpg";
+import hotelbanner2 from "../../images/hotel/hotel-banner-2.jpg";
+import BBTypography from "./BBTypography";
 
-export default function BAdCarousel() {
+interface Props {
+  travelType?: any;
+}
+
+export default function BAdCarousel(props: Props) {
   const router = useRouter();
   return (
-    <Carousel className="h-[325px] w-full" loop={true} autoplay={true}>
-      <div className="h-[325px] w-full">
-        <Image
-          className=" h-[325px] w-full"
-          src={booking}
-          alt="Multi-services-booking"
-        />
-        {/* <div className="absolute inset-0 grid h-full w-full place-items-center ">
-          <div className="w-3/4 text-center ">
-            <div className="flex align-baseline -mx-7 mt-[200px]">
-              <Button
-                size="lg"
-                color="white"
-                className=""
-                onClick={() => {
-                  router.push("/auth");
-                }}
-              >
-                *** Let's Start Exploring Booking baba ***
-              </Button>
+    <div>
+      {props.travelType === "hotel" ? (
+        <Carousel className="h-[325px] w-full" loop={true} autoplay={true}>
+          <div className="relative h-[325px] w-full">
+            <Image
+              className=" h-[325px] w-full"
+              src={hotelbanner1}
+              alt="Multi-services-booking"
+            />
+          </div>
+          <div className="relative h-[325px] w-full">
+            <Image
+              className=" h-[325px] w-full"
+              src={hotelbanner2}
+              alt="Multi-services-booking"
+            />
+          </div>
+        </Carousel>
+      ) : props.travelType === "train" ? (
+        <Carousel className="h-[325px] w-full" loop={true} autoplay={true}>
+          <div className="h-[325px] w-full">
+            <Image
+              className=" h-[325px] w-full"
+              src={trainbanner1}
+              alt="Multi-services-booking"
+            />
+          </div>
+          <div className="relative h-[325px] w-full">
+            <Image
+              className=" h-[325px] w-full"
+              src={rail}
+              alt="Multi-services-booking"
+            />
+            <div className="absolute inset-0 grid h-full w-full text-white bg-headcolor bg-opacity-50">
+              <div className="w-2/4 ml-12 text-center flex flex-col justify-center items-center">
+                <Typography
+                  variant="h1"
+                  color="white"
+                  className="mb-4  text-3xl md:text-4xl lg:text-4xl font-castoro"
+                >
+                  FLAT 10% CASHBACK
+                </Typography>
+                <Typography
+                  variant="lead"
+                  color="white"
+                  className="mb-12 opacity-80"
+                >
+                  on Train Ticket Bookings
+                  {/* <div>.......... </div> */}
+                  <hr className="my-3" />
+                  <div>
+                    {" "}
+                    Promocode: <span className="text-2xl">Train10</span>
+                  </div>
+                </Typography>
+              </div>
             </div>
           </div>
-        </div> */}
-      </div>
-      <div className="relative h-[325px] w-full">
-        <Image
-          className="h-[325px] w-full"
-          src={top}
-          alt="Multi-services-booking"
-        />
-        {/* <div className="absolute inset-0 grid h-full w-full place-items-top ">
-          <div className="w-3/4 text-left ml-12">
-            <Typography
-              variant="h1"
-              color="black"
-              className="mb-4 mt-12 text-3xl md:text-4xl lg:text-4xl font-castoro"
-            >
-              Welcome to Hotel Booking
-            </Typography>
-            <Typography
-              variant="lead"
-              color="blue-gray"
-              className="mb-12 opacity-80"
-            >
-              It is not so much for its beauty that the forest makes a claim
-              upon men&apos;s hearts, as for that subtle something, that quality
-              of air that emanation from old trees, that so wonderfully changes
-              and renews a weary spirit.
-            </Typography>
-            <div className="relative flex  gap-2">
-              <Button
-                size="lg"
-                color="white"
-                onClick={() => {
-                  router.push("/auth");
-                }}
-              >
-                Start Exploring
-              </Button>
+        </Carousel>
+      ) : props.travelType === "bus" ? (
+        <Carousel className="h-[325px] w-full" loop={true} autoplay={true}>
+          <div className="relative h-[325px] w-full">
+            <Image
+              className="h-[325px] w-full"
+              src={busbanner2}
+              alt="Multi-services-booking"
+            />
+          </div>
+
+          <div className="relative h-[325px] w-full">
+            <Image
+              className=" h-[325px] w-full"
+              src={busimg}
+              alt="Multi-services-booking"
+            />
+            <div className="absolute inset-0 grid h-full w-full ">
+              <div className="w-2/4 text-center flex flex-col justify-center items-center">
+                <Typography
+                  variant="h1"
+                  color="white"
+                  className="mb-4 ml-12 text-3xl md:text-4xl lg:text-4xl font-castoro"
+                >
+                  Book Bus Tickets Online!
+                </Typography>
+                <Typography
+                  variant="lead"
+                  color="white"
+                  className="mb-12 opacity-80"
+                >
+                  Save Time & Money
+                </Typography>
+              </div>
             </div>
           </div>
-        </div> */}
-      </div>
-      <div className="relative h-[325px] w-full">
-        <Image
-          className=" h-[325px] w-full"
-          src={rail}
-          alt="Multi-services-booking"
-        />
-        {/* <div className="absolute inset-0 grid h-full w-full place-items-top ">
-          <div className="w-3/4 text-left ml-12">
-            <Typography
-              variant="h1"
-              color="black"
-              className="mb-4 mt-12 text-3xl md:text-4xl lg:text-4xl font-castoro"
-            >
-              Welcome to Train Booking
-            </Typography>
-            <Typography
-              variant="lead"
-              color="blue-gray"
-              className="mb-12 opacity-80"
-            >
-              It is not so much for its beauty that the forest makes a claim
-              upon men&apos;s hearts, as for that subtle something, that quality
-              of air that emanation from old trees, that so wonderfully changes
-              and renews a weary spirit.
-            </Typography>
-            <div className=" flex gap-2">
-              <Button
-                size="lg"
-                color="white"
-                onClick={() => {
-                  router.push("/auth");
-                }}
-              >
-                Start Exploring
-              </Button>
-            </div>
-          </div>
-        </div> */}
-      </div>
-      <div className="relative h-[325px] w-full">
-        <Image
-          className=" h-[325px] w-full"
-          src={busimg}
-          alt="Multi-services-booking"
-        />
-        {/* <div className="absolute inset-0 grid h-full w-full place-items-top ">
-          <div className="w-3/4 text-left ml-12">
-            <Typography
-              variant="h1"
-              color="white"
-              className="mb-4 mt-12 text-3xl md:text-4xl lg:text-4xl font-castoro"
-            >
-              Welcome to Bus Booking
-            </Typography>
-            <Typography
-              variant="lead"
-              color="white"
-              className="mb-12 opacity-80"
-            >
-              It is not so much for its beauty that the forest makes a claim
-              upon men&apos;s hearts, as for that subtle something, that quality
-              of air that emanation from old trees, that so wonderfully changes
-              and renews a weary spirit.
-            </Typography>
-            <div className="flex gap-2">
-              <Button
-                size="lg"
-                color="white"
-                onClick={() => {
-                  router.push("/auth");
-                }}
-              >
-                Start Exploring
-              </Button>
-            </div>
-          </div>
-        </div> */}
-      </div>
-    </Carousel>
+        </Carousel>
+      ) : (
+        ""
+      )}
+    </div>
   );
 }

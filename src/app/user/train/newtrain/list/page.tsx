@@ -13,6 +13,8 @@ import { useSelector } from "react-redux";
 import { useAppDispatch } from "@/redux/store";
 import { getTrainById } from "@/redux/action/trainAction";
 import SearchComponent from "@/components/SearchComponent";
+import UBannerFooter from "@/components/userComponents/UBannerFooter";
+import UFooter from "@/components/userComponents/UFooter";
 
 interface Props {
   type?: any;
@@ -161,6 +163,12 @@ export default function Page() {
             </table>
           </div>
         </Card>
+      </div>
+      <div className="bg-white flex flex-col justify-center my-5">
+        <UBannerFooter />
+      </div>
+      <div className="mb-10">
+        <UFooter />
       </div>
     </>
   );

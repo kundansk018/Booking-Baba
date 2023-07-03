@@ -16,7 +16,7 @@ export default function Train(props: Props) {
           <HomeSearch title="Book Train Tickets" travelType={props.type} />
         </div>
         <div className="w-[55%]">
-          <BAdCarousel />
+          <BAdCarousel travelType={props.type} />
         </div>
       </div>
       <div>

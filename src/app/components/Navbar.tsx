@@ -22,6 +22,7 @@ import {
 } from "@heroicons/react/24/outline";
 import { useAppDispatch } from "@/redux/store";
 import { LOGIN_REQUEST_SUCCESS } from "@/redux/constant";
+import { FaUser } from "react-icons/fa";
 
 const navListMenuItems = [
   {
@@ -111,15 +112,15 @@ export default function Navigationbar() {
         </a>
       </Typography>
 
-      <Menu
+      {/* <Menu
         open={isMenuOpen}
         handler={setIsMenuOpen}
         offset={{ mainAxis: 20 }}
         placement="bottom"
         allowHover={true}
       >
-        {/* <MenuHandler> */}
-        {/* <Typography
+        <MenuHandler>
+          <Typography
             as="li"
             variant="small"
             className="p-1 font-normal"
@@ -148,25 +149,15 @@ export default function Navigationbar() {
               />
             </ListItem>
           </Typography>
-        </MenuHandler> */}
+        </MenuHandler>
 
         <MenuList className="lg:block">
           <ul className="grid grid-cols-3 gap-y-2">{renderItems}</ul>
         </MenuList>
-      </Menu>
+      </Menu> */}
 
       <div className="block lg:hidden">
         <Collapse open={isMobileMenuOpen}>{renderItems}</Collapse>
-      </div>
-      <div className="flex items-center gap-2 py-2 pr-4">
-        <a
-          style={{ fontFamily: "Poppins,sans-serif", fontSize: "14px" }}
-          href="#"
-          className="flex items-center text-black text-xl "
-          onClick={() => onLogOut()}
-        >
-          Log-Out
-        </a>
       </div>
 
       <Typography as="li" variant="small" className="p-1 font-normal">
@@ -178,7 +169,22 @@ export default function Navigationbar() {
             color: "#0c2e53",
           }}
           href="#"
-          className="flex items-center text-xl hover:text-black mt-2 -mr-5"
+          className="flex items-center text-xl hover:text-black mt-2 "
+          onClick={() => onLogOut()}
+        >
+          Log-Out
+        </a>
+      </Typography>
+      <Typography as="li" variant="small" className="p-1 font-normal">
+        <a
+          style={{
+            font: "sans-serif",
+            // fontFamily: "Poppins",
+            fontSize: "14px",
+            color: "#0c2e53",
+          }}
+          href="#"
+          className="flex items-center text-xl hover:text-black mt-2 "
           onClick={() => router.push("/auth")}
         >
           Login / Signup
@@ -191,21 +197,11 @@ export default function Navigationbar() {
         className="p-1 font-normal"
         onClick={() => router.push("/auth")}
       >
-        <a href="#" className="flex items-center hover:text-black">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            className="w-6 h-6 mt-2.5 "
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z"
-            />
-          </svg>
+        <a
+          href="#"
+          className="flex items-center text-white text-lg mt-2 bg-[#8f9dac] p-2 rounded-full"
+        >
+          <FaUser />
         </a>
       </Typography>
     </ul>

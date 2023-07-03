@@ -20,7 +20,7 @@ export default function Hotel(props: Props) {
             />
           </div>
           <div className="w-[55%]">
-            <BAdCarousel />
+            <BAdCarousel travelType={props.type} />
           </div>
         </div>
         <div>

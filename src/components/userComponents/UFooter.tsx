@@ -104,24 +104,28 @@ export default function UFooter() {
           <div className="flex flex-wrap w-[33.3333%]">
             <p className="text-greycommon">Subscribe</p>
             <div className="flex flex-row text-[14px] h-[38px] newsletter">
-              <UInput
-                className="form-control  py-0 w-[55%]"
-                placeholder="Your Email Address"
-                id="newsletterEmail"
-                type="text"
-              />
-              <BBButton
-                className=" py-0 w-[45%] shadow-none "
-                type="submit"
-                label="Subscribe"
-              ></BBButton>
+              <div className="w-[65%]">
+                <UInput
+                  className="form-control  py-0 rounded-r-none"
+                  placeholder="Your Email Address"
+                  id="newsletterEmail"
+                  type="text"
+                />
+              </div>
+              <div className="w-[35%]">
+                <BBButton
+                  className="   shadow-none rounded-l-none"
+                  type="submit"
+                  label="Subscribe"
+                ></BBButton>
+              </div>
             </div>
           </div>
           <div className="col-span-1 flex flex-col items-end justify-center">
             <p className="text-greycommon">Keep in touch</p>
             <ul className="social-icons flex space-x-2 text-white">
-              <li className=" my-[2px] mx-[3px] bg-gray-500 p-3 rounded-full hover:bg-[#3b5998]">
-                <Overlays title="Facebook">
+              <Overlays title="Facebook">
+                <li className=" my-[2px] mx-[3px] bg-gray-500 p-3 rounded-full hover:bg-[#3b5998]">
                   <a
                     data-bs-toggle="tooltip"
                     href="http://www.facebook.com/"
@@ -133,10 +137,10 @@ export default function UFooter() {
                   >
                     <FaFacebookF />
                   </a>
-                </Overlays>
-              </li>
-              <li className=" my-[2px] mx-[3px] bg-gray-500 p-3 rounded-full hover:bg-light-blue-500">
-                <Overlays title="Twitter">
+                </li>
+              </Overlays>
+              <Overlays title="Twitter">
+                <li className=" my-[2px] mx-[3px] bg-gray-500 p-3 rounded-full hover:bg-light-blue-500">
                   <a
                     data-bs-toggle="tooltip"
                     href="http://www.twitter.com/"
@@ -147,10 +151,10 @@ export default function UFooter() {
                   >
                     <FaTwitter />
                   </a>
-                </Overlays>
-              </li>
-              <li className=" my-[2px] mx-[3px] bg-gray-500 p-3 rounded-full hover:bg-red-500">
-                <Overlays title="Google">
+                </li>
+              </Overlays>
+              <Overlays title="Google">
+                <li className=" my-[2px] mx-[3px] bg-gray-500 p-3 rounded-full hover:bg-red-500">
                   <a
                     data-bs-toggle="tooltip"
                     href="http://www.google.com/"
@@ -161,10 +165,10 @@ export default function UFooter() {
                   >
                     <FaGoogle />
                   </a>
-                </Overlays>
-              </li>
-              <li className=" my-[2px] mx-[3px] bg-gray-500 p-3 rounded-full hover:bg-light-blue-900">
-                <Overlays title="Linkedin">
+                </li>
+              </Overlays>
+              <Overlays title="Linkedin">
+                <li className=" my-[2px] mx-[3px] bg-gray-500 p-3 rounded-full hover:bg-light-blue-900">
                   <a
                     data-bs-toggle="tooltip"
                     href="http://www.linkedin.com/"
@@ -175,10 +179,10 @@ export default function UFooter() {
                   >
                     <FaLinkedinIn />
                   </a>
-                </Overlays>
-              </li>
-              <li className=" my-[2px] mx-[3px] bg-gray-500 p-3 rounded-full hover:bg-red-600">
-                <Overlays title="Youtube">
+                </li>
+              </Overlays>
+              <Overlays title="Youtube">
+                <li className=" my-[2px] mx-[3px] bg-gray-500 p-3 rounded-full hover:bg-red-600">
                   <a
                     data-bs-toggle="tooltip"
                     href="http://www.youtube.com/"
@@ -189,10 +193,10 @@ export default function UFooter() {
                   >
                     <FaYoutube />
                   </a>
-                </Overlays>
-              </li>
-              <li className=" my-[2px] mx-[3px] bg-gray-500 p-3 rounded-full hover:bg-blackblue">
-                <Overlays title="Instagram">
+                </li>
+              </Overlays>
+              <Overlays title="Instagram">
+                <li className=" my-[2px] mx-[3px] bg-gray-500 p-3 rounded-full hover:bg-blackblue">
                   <a
                     data-bs-toggle="tooltip"
                     href="http://www.instagram.com/"
@@ -203,8 +207,8 @@ export default function UFooter() {
                   >
                     <FaInstagram />
                   </a>
-                </Overlays>
-              </li>
+                </li>
+              </Overlays>
             </ul>
           </div>
         </div>

@@ -16,7 +16,7 @@ export default function Bus(props: Props) {
           <HomeSearch title="Book Bus Tickets" travelType={props.type} />
         </div>
         <div className="w-[55%]">
-          <BAdCarousel />
+          <BAdCarousel travelType={props.type} />
         </div>
       </div>
       <div>
