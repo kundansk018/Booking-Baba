@@ -1,5 +1,4 @@
 "use client";
-import { CustomModal } from "@/app/modal/CustomModal";
 import { Adesh } from "@/app/user/train/newtrain/confirm/ConfirmDetails";
 import UInput from "@/components/userComponents/UInput";
 import React from "react";

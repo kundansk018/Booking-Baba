@@ -55,7 +55,7 @@ export const login = (data: any) => async (dispatch: AppDispatch) => {
     if (res && res.status === 200) {
       console.log("inside if:::::::::", res);
 
-      localStorage.setItem("key", JSON.stringify(res.data.data));
+      localStorage.setItem("key", JSON.stringify(res));
 
       dispatch({ type: LOGIN_REQUEST_SUCCESS, payload: res });
     } else {

@@ -5,7 +5,6 @@ import { Typography } from "@material-tailwind/react";
 import { Poppins } from "next/font/google";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
-import { Card } from "react-bootstrap";
 import { useSelector } from "react-redux";
 
 export default function TrainData() {
@@ -99,8 +98,8 @@ export default function TrainData() {
             type="radio"
             className="form-radio text-indigo-600"
             name="radio"
-            value="option1"
-            checked={selectedOption === "option1"}
+            value="First Class"
+            checked={selectedOption === "First Class"}
             onChange={handleOptionChange}
           />
           <span className="ml-2">First Class</span>
@@ -111,8 +110,8 @@ export default function TrainData() {
             type="radio"
             className="form-radio text-indigo-600"
             name="radio"
-            value="Economy"
-            checked={selectedOption === "Economy"}
+            value="Second Class"
+            checked={selectedOption === "Second Class"}
             onChange={handleOptionChange}
           />
           <span className="ml-2">Second Class</span>

@@ -119,7 +119,7 @@ function SignUp() {
       setShowErrorDialog(true);
       return;
     } else {
-      dispatch(signup(data));
+      dispatch(signup(data)).then(() => router.push("/user"));
     }
   };
 
@@ -192,6 +192,7 @@ function SignUp() {
           />
 
           <Radio
+            id="male"
             label="Male"
             name="gender"
             color="blue"
@@ -199,6 +200,7 @@ function SignUp() {
             onChange={(e) => setGender(e.target.value)}
           />
           <Radio
+            id="Female"
             label="Female"
             name="gender"
             color="blue"

@@ -20,6 +20,8 @@ import {
   FlagIcon,
   UsersIcon,
 } from "@heroicons/react/24/outline";
+import { useAppDispatch } from "@/redux/store";
+import { LOGIN_REQUEST_SUCCESS } from "@/redux/constant";
 
 const navListMenuItems = [
   {
@@ -47,6 +49,8 @@ export default function Navigationbar() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
 
+  const dispatch = useAppDispatch();
+
   const renderItems = navListMenuItems.map(({ title, description }, key) => (
     <a href="#" key={key}>
       <MenuItem className="flex items-center gap-3 rounded-lg">
@@ -68,7 +72,8 @@ export default function Navigationbar() {
 
   const onLogOut = () => {
     localStorage.clear();
-    router.push("/");
+    dispatch({ type: LOGIN_REQUEST_SUCCESS, payload: null });
+    router.push("/auth");
   };
 
   const userData: any = useSelector((state: any) => state.login.loginDetails);
@@ -157,7 +162,7 @@ export default function Navigationbar() {
         <a
           style={{ fontFamily: "Poppins,sans-serif", fontSize: "14px" }}
           href="#"
-          className="flex items-center text-xl "
+          className="flex items-center text-black text-xl "
           onClick={() => onLogOut()}
         >
           Log-Out

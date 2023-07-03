@@ -26,12 +26,12 @@ export default function page() {
 
   // const userData: any = useSelector((state: any) => state.user.createdUser);
   // console.log("userData is in auth page ..", userData);
+  const userData: any = useSelector((state: any) => state.login.loginDetails);
+  console.log("userData in container Page  ..", userData);
 
   // useEffect(() => {
-  //   if (userData) {
-  //     console.log("use effect inside ", userData);
-  //     setType("login");
-  //   }
+  //   localStorage.clear();
+  //   router.refresh();
   // }, [userData]);
 
   return (

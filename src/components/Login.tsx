@@ -57,7 +57,7 @@ export default function Login() {
       setShowErrorDialog(true);
       return;
     } else {
-      dispatch(login(data));
+      dispatch(login(data)).then(() => router.push("/user"));
     }
   };
 
