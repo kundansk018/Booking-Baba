@@ -19,9 +19,9 @@ const Container = (props: ContainerProps) => {
   // }, []);
   return (
     <div className="relative">
-      {!["/auth", "/"]?.includes(window?.location?.pathname) && (
-        <Navigationbar />
-      )}
+      {!["/auth", "/", "/user/bus/Invoice"]?.includes(
+        window?.location?.pathname
+      ) && <Navigationbar />}
       {/* 
       {!["/auth", "/"]?.includes(pathname) && <Navigationbar />}  */}
       {props.children}
