@@ -152,7 +152,6 @@ const PaymentForm = () => (
                     <a href="#" className="underline">
                       Privacy Policy
                     </a>
-                    .
                   </p>
                 </div>
               </div>

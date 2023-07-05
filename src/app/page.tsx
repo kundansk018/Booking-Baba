@@ -22,9 +22,7 @@ import Navigationbar from "./components/Navbar";
 import { useSelector } from "react-redux";
 // import { Modal } from "react-bootstrap";
 
-import { CustomModal } from "@/app/modal/CustomModal";
-import { BusDetails } from "@/app/user/bus/buslist/BusDetails";
-import { Modal } from "react-bootstrap";
+
 
 export default function Home() {
   const userData: any = useSelector((state: any) => state.login.loginDetails);

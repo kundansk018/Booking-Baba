@@ -31,7 +31,7 @@ export default function page() {
             <table className=" w-full border-collapse">
               <thead>
                 <tr className="border border-gray-500 ">
-                  <th  className="">
+                  <th className="">
                     <span className="font-bold text-[#535b61] text-sm">
                       Reference ID :
                     </span>
@@ -214,7 +214,7 @@ export default function page() {
             </table>
           </div>
 
-          <h4 className="text-2xl font-bold mb-2 pt-3 text-[#0c2f54] text-lg">
+          <h4 className="font-bold mb-2 pt-3 text-[#0c2f54] text-lg">
             Important Instructions
           </h4>
           <ul className=" list-disc pl-6 mb-2 font-sans text-sm text-[#535b61]">
@@ -262,6 +262,7 @@ export default function page() {
                   Print
                 </a>{" "}
               </button>
+
               <a
                 href=""
                 className="btn btn-light border text-black-50 shadow-none"

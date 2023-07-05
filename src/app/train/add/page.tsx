@@ -27,6 +27,7 @@ export default function AddTrain() {
   const [operationDays, setOperationDays] = useState<string>("");
   const [trainRoute, setTrainRoute] = useState<string>("");
   const [trainDesc, setTrainDesc] = useState<string>("");
+  const [distance, setDistance] = useState<string>("");
 
   const [depDate, setDepDate] = useState<string>("");
   const [arrDate, setArrDate] = useState<string>("");
@@ -231,6 +232,14 @@ export default function AddTrain() {
               label="No of Coaches"
               value={coach}
               onChange={(e) => setCoach(e.target.value)}
+            />
+
+            <BBInput
+              containerProps={{ className: "mb-4" }}
+              type="text"
+              label="Total Distance"
+              value={distance}
+              onChange={(e) => setDistance(e.target.value)}
             />
 
             {/* <BBDropdown

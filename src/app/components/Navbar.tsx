@@ -7,10 +7,6 @@ import {
   IconButton,
   Collapse,
   MenuItem,
-  MenuHandler,
-  ListItem,
-  MenuList,
-  Menu,
 } from "@material-tailwind/react";
 import { useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
@@ -106,7 +102,7 @@ export default function Navigationbar() {
             color: "#0c2e53",
           }}
           href="#"
-          className="flex items-center text-xl hover:text-black mt-2"
+          className="flex items-center text-xl hover:text-black mt-2 pr-2"
         >
           Home
         </a>
@@ -151,7 +147,7 @@ export default function Navigationbar() {
           </Typography>
         </MenuHandler>
 
-        <MenuList className="lg:block">
+      {/* <MenuList className="lg:block">
           <ul className="grid grid-cols-3 gap-y-2">{renderItems}</ul>
         </MenuList>
       </Menu> */}
