@@ -32,4 +32,5 @@ export const ENDPOINTS = {
   busSearch: "busapi/busapi?action=SEARCH_BUS",
 
   seatBook: "busapi/busapi?action=BOOK_SEATS",
+  getBookedSeat: "busapi/busapi?action=GET_BUS_NUMBER",
 };

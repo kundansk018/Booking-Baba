@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { Button, Card } from "@material-tailwind/react";
 import FilterPage from "../buslist/FilterPage";
@@ -11,20 +11,21 @@ import { useAppDispatch } from "@/redux/store";
 import BBTypography from "@/app/components/BBTypography";
 import { IconButton } from "@material-tailwind/react";
 import { ArrowRightIcon, ArrowLeftIcon } from "@heroicons/react/24/outline";
-import HomeSearch from "@/components/HomeSearch";
+
 import SearchComponent from "@/components/SearchComponent";
+import { getBookedSeats } from "@/redux/action/seatBook";
 import UBannerFooter from "@/components/userComponents/UBannerFooter";
 import UFooter from "@/components/userComponents/UFooter";
 
 export default function page() {
   const busData: any = useSelector((state: any) => state.bus.userBusDetails);
-  console.log("bus data is ..==>>>>", busData);
+  // console.log("bus data is ..==>>>>", busData);
 
   const [showModal, setShowModal] = useState<boolean>(false);
   let from = busData?.data[0]?.from;
   let to = busData?.data[0]?.to;
-  console.log("from ..==>>>>", from);
-  console.log("to ..==>>>>", to);
+  // console.log("from ..==>>>>", from);
+  // console.log("to ..==>>>>", to);
   const dispatch = useAppDispatch();
 
   const TABLE_HEAD = ["Operators", "Departure", "Duration", "Arrival", "Price"];

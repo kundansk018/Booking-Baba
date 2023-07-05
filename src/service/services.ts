@@ -157,3 +157,13 @@ export const seatBook = (data: any) => {
     },
   });
 };
+export const getBusSeatNumber = (data: any) => {
+  console.log("called service in getBusSeatNumber ", data);
+  console.log("data in service", data);
+  let url = `${ENDPOINTS.getBookedSeat}`;
+  return client.post(url, data, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+};

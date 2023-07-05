@@ -33,6 +33,8 @@ export default async function handler(
         return await getBusById(request, response);
       } else if (request.query?.action === "BOOK_SEATS") {
         return await bookSeats(request, response);
+      } else if (request.query?.action === "GET_BUS_NUMBER") {
+        return await findByBusNumber(request, response);
       }
 
     default:
@@ -118,7 +120,7 @@ export async function updateBus(
         noofstop: fields.noofstop,
         bookingseats: fields.bookingseats,
         travelagencyname: fields.travelagencyname,
-        duration:fields.duration,
+        duration: fields.duration,
       },
     }
   );
@@ -194,11 +196,30 @@ export async function bookSeats(
   response: NextApiResponse
 ) {
   const { fields } = await parseForm(request);
-  console.log("fields...........", fields);
-
+  // console.log("fields...........", fields);
   const bookSeats = await db.collection("Bus_Book_Seats");
-
   const res = await bookSeats.insertOne(fields);
-
   return response.status(200).json({ data: res });
+}
+
+export async function getBusByName(
+  request: NextApiRequest,
+  response: NextApiResponse
+) {
+  const { fields } = await parseForm(request);
+  const { from, to } = fields;
+  const buses = await db.collection("Bus Details");
+  const res = await buses.find({ from, to }).toArray();
+  return response.status(200).json({ data: res });
+}
+
+export async function findByBusNumber(
+  request: NextApiRequest,
+  response: NextApiResponse
+) {
+  const { fields } = await parseForm(request);
+  console.log("called find by bus number api");
+  const bus = await db.collection("Bus_Book_Seats");
+  const res = await bus.findOne({ busNumber: fields.busNumber });
+  return response.status(200).json({ data: res ? res : "not available bus " });
 }

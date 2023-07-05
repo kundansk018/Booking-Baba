@@ -5,7 +5,7 @@ import booking from "../images/booking.png";
 import Image from "next/image";
 
 import { useRouter } from "next/navigation";
-import react, { useState } from "react";
+import react, { useEffect, useState } from "react";
 import {
   Button,
   Card,
@@ -28,7 +28,7 @@ export default function Home() {
   const userData: any = useSelector((state: any) => state.login.loginDetails);
   console.log("8080 Page ..", userData);
   console.log("8080 page Roll Type is ..", userData?.data?.data?.rollType);
-  let rollType = userData?.data.data.rollType;
+  let rollType = userData?.data?.data?.rollType;
   const router = useRouter();
 
   // useEffect(() => {

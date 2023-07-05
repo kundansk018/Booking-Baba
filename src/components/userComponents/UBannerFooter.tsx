@@ -1,6 +1,6 @@
 import BBTypography from "@/app/components/BBTypography";
 import React from "react";
-import { FaBullhorn, FaLock, FaThumbsUp } from "react-icons/Fa";
+import { FaBullhorn, FaLock, FaThumbsUp } from "react-icons/fa";
 import HiSupport, { HiOutlineSupport } from "react-icons/hi";
 
 export default function UBannerFooter() {

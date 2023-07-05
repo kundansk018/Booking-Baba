@@ -7,15 +7,16 @@ import {
   SIGNUP_REQUEST_FAIL,
   SIGNUP_REQUEST_SUCCESS,
 } from "../constant";
+
 const data: any = localStorage.getItem("key");
-console.log("LOCALSTORAGE in Reducer=====================", JSON.parse(data));
+// console.log("LOCALSTORAGE in Reducer=====================", JSON.parse(data));
 export const initialState = {
   loading: false,
   userDetails: undefined,
   createdUser: undefined,
   resetPassword: undefined,
 
-  loginDetails: JSON.parse(data),
+  loginDetails: JSON.parse(data) ? JSON.parse(data) : null,
 };
 
 export const UserReducer = (state = initialState, action: any) => {

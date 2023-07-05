@@ -7,7 +7,7 @@ import {
   Typography,
 } from "@material-tailwind/react";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BsDot } from "react-icons/bs";
 import { RxCross2 } from "react-icons/rx";
 
@@ -16,7 +16,7 @@ import { SEATS, TABLE_ROWS } from "@/utils/BusData";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
 import { useAppDispatch } from "@/redux/store";
-import { book_seats } from "@/redux/action/seatBook";
+import { book_seats, getBookedSeats } from "@/redux/action/seatBook";
 
 interface Props {
   option?: any;
@@ -37,11 +37,50 @@ export const BusDetails: React.FC<Props> = ({ myData }) => {
 
   const router = useRouter();
 
-  console.log(" Data in Bus Details :::::: ", myData);
+  // console.log(" Data in Bus Details :::::: ", myData);
 
   const busDetails = useSelector((state: any) => state.bus.getBusById);
+  const busNumber = busDetails?.data?.busnumber;
+  console.log("BusNumber ", busDetails?.data?.busnumber);
 
-  console.log(" bus Details By id..:::::::::::::: ", busDetails);
+  const bookedSeats = useSelector((state: any) => state.seats.bookedSeats);
+
+  let data = bookedSeats?.data?.data?.seats;
+  let bookedSeatsData: any = [];
+  bookedSeatsData = data ? JSON.parse(data) : "";
+
+  for (let i = 0; i < bookedSeatsData.length; i++) {
+    bookSeats.push(bookedSeatsData[i]);
+  }
+  console.log("state data ", bookSeats);
+
+  useEffect(() => {
+    if (busNumber) {
+      getBusNo(busDetails?.data?.busnumber);
+    }
+  }, [busNumber]);
+
+  const getBusNo = async (busNumber: any) => {
+    console.log("get bus no in async function ", busNumber);
+
+    var formData = new FormData();
+    formData.append("busNumber", busNumber);
+
+    // const res = await fetch(
+    //   "http://localhost:3000/api/busapi/busapi?action=GET_BUS_NUMBER",
+    //   {
+    //     method: "POST",
+    //     body: formData,
+    //     headers: {
+    //       "content-type": "application/json",
+    //     },
+    //   }
+    // );
+    // console.log(" response in getBusNo in getNusNo function", res);
+    dispatch(getBookedSeats(formData));
+  };
+
+  console.log("bus Details By id..:::::::::::::: ", busDetails);
 
   const onSeats = (selected_seat: any) => {
     let seatId = selected_seat.id;
@@ -153,24 +192,29 @@ export const BusDetails: React.FC<Props> = ({ myData }) => {
                       Front
                     </p>
                     <div className="flex flex-wrap ">
-                      {SEATS?.map((element: any, index: any) => (
-                        <div
-                          key={index}
-                          onClick={() => {
-                            onSeats(element);
-                          }}
-                          className={`flex justify-center mx-3 my-2 text-sm rounded-md px-3 p-1 h-fit w-5 bg-grey-900 border border-black ${
-                            seats.includes(element)
-                              ? "selected-seats text-white"
-                              : ""
-                          } `}
-                        >
-                          {element.seat_number}
-                        </div>
-                      ))}
+                      {SEATS?.map(
+                        (element: any, index: any) => (
+                          // bookSeats.map((item: any, itemIndex: any) => (
+                          <div
+                            key={index}
+                            onClick={() => {
+                              onSeats(element);
+                            }}
+                            className={`flex cursor-pointer justify-center mx-3 my-2 text-sm rounded-md px-3
+                           p-1 h-fit w-5 bg-grey-900 border border-black ${
+                             seats.includes(element)
+                               ? "selected-seats text-white"
+                               : ""
+                           } `}
+                          >
+                            {element.seat_number}
+                          </div>
+                        )
+                        // ))
+                      )}
                     </div>
                   </div>
-                  <div className="h-96 w-68 mx-auto overflow-y-scroll overflow-y-hidden border border-grey-500 bg-white p-3">
+                  <div className="h-full w-72 mx-auto border border-gray-100 bg-white p-3">
                     <div>
                       <p className="text-black font-semibold text-xl">
                         Booking Details
@@ -196,8 +240,8 @@ export const BusDetails: React.FC<Props> = ({ myData }) => {
                             </li>
                           ))}
                         </ul>
-                        <div className="border border-black">
-                          Total Fare : {`$` + totalPrice()}
+                        <div className="h-9 mt-2 w-25 border border-gray-400  p-1">
+                          Total Fare : {`$` + " " + totalPrice()}
                         </div>
                         <div className="m-2">
                           <Button onClick={onBookSeats} fullWidth>

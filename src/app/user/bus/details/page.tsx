@@ -1,24 +1,53 @@
 "use client";
 
 import UInput from "@/components/userComponents/UInput";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Tab, Tabs, TabsBody, TabsHeader } from "@material-tailwind/react";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
+import { useAppDispatch } from "@/redux/store";
+import { getBookedSeats, seats } from "@/redux/action/seatBook";
+import BBDropdown from "@/app/components/BBDropdown";
+import { PlusIcon } from "@heroicons/react/24/solid";
+import BBButton from "@/app/components/BBButton";
 
-const ConfirmationPage: React.FC = () => {
+const ConfirmationPage = () => {
   const userData: any = useSelector((state: any) => state.login.loginDetails);
   console.log("userData in bus Details Page  ..", userData);
 
   const router = useRouter();
   const [email, setEmail] = useState(userData?.email);
   const [mobileNumber, setMobileNumber] = useState(userData?.mobileNumber);
-  const [firstName, setfirstName] = useState(userData?.firstName);
+  const [firstName, setFirstName] = useState(userData?.firstName);
+  const [title, setTitle] = useState("");
   const [lastName, setLastName] = useState(userData?.lastName);
   const [age, setAge] = useState("");
 
   const [showModal, setShowModal] = React.useState(false);
   const [activeTab, setActiveTab] = React.useState("Available");
+
+  const [person, setPerson] = useState<any>([
+    { fName: "", lName: "", age: "" },
+  ]);
+  const dispatch = useAppDispatch();
+
+  const seatsBookData = useSelector((state: any) => state.seats.seats);
+  console.log("seatsBookData ***************************", seatsBookData);
+  console.log(
+    "seatsBookData status *************************** ",
+    seatsBookData?.status
+  );
+  useEffect(() => {
+    if (seatsBookData) {
+      if (seatsBookData?.status === 200) {
+        setTimeout(() => {
+          router.push("/user/bus/Invoice");
+          alert("Your Seats is Booked");
+          console.log("set Time Out Called");
+        }, 10000);
+      }
+    }
+  }, [seatsBookData]);
 
   const book_seats: any = useSelector((state: any) => state.seats.bookSeats);
 
@@ -28,22 +57,21 @@ const ConfirmationPage: React.FC = () => {
     book_seats?.busDetails?.data.travelagencyname
   );
 
-  // seats.concat(book_seats?.b_Seats);
-  // console.log("new seats array++++++++++++++++++++", seats);
-
   console.log("seats array++++++++++++++++++++", book_seats?.b_Seats);
   let data: any = [];
-  data = JSON.parse(book_seats?.b_Seats)
-    ? JSON.parse(book_seats?.b_Seats)
-    : null;
+  data = book_seats?.b_Seats ? JSON.parse(book_seats?.b_Seats) : null;
 
+  if (!data) return;
   console.log("new data array ::::::::::", data);
 
   let from = book_seats?.busDetails?.data.from;
   let to = book_seats?.busDetails?.data.to;
-  let travelagencyname = book_seats?.busDetails?.data.travelagencyname;
+  let travelAgencyName = book_seats?.busDetails?.data.travelagencyname;
   let busType = book_seats?.busDetails?.data.busType;
   let arrivalDate = book_seats?.busDetails?.data.arrivalDate;
+  let busNumber = book_seats?.busDetails?.data.busnumber;
+  console.log("busNumber is ", busNumber);
+
   const handleClosemodal = () => {
     setShowModal(false);
   };
@@ -55,6 +83,59 @@ const ConfirmationPage: React.FC = () => {
     return sum;
   };
   console.log("total price ", totalPrice());
+
+  const onHandleChange = () => {
+    data = {
+      seats: JSON.stringify(data),
+      travelAgencyName: travelAgencyName,
+      busType: busType,
+      from: from,
+      to: to,
+      arrivalDate: arrivalDate,
+      bookingDate: new Date(),
+      seatsPrice: totalPrice(),
+      firstName: firstName,
+      lastName: lastName,
+      mobileNumber: mobileNumber,
+      email: email,
+      busNumber: busNumber,
+      // age: age,
+
+      // persons: [{ firstName, lastName, age }],
+      person: JSON.stringify(person),
+    };
+    dispatch(seats(data));
+  };
+
+  const setFName = (index: number, value: any) => {
+    let data = [...person];
+    data[index].fName = value;
+    setPerson(data);
+  };
+  const setLName = (index: number, value: any) => {
+    let data = [...person];
+    data[index].lName = value;
+    setPerson(data);
+  };
+  const set_Age = (index: number, value: any) => {
+    let data = [...person];
+    data[index].age = value;
+    setPerson(data);
+  };
+
+  const addMore = () => {
+    let data = [...person];
+    data.push({ fName: "", lName: "", age });
+    setPerson(data);
+    console.log("Person data $$$$$$$$$$$$", data);
+  };
+  console.log("Person data in state", person);
+
+  const onSub = () => {
+    let data = [...person];
+    data.pop();
+    setPerson(data);
+  };
 
   return (
     <div className="container mx-auto p-4">
@@ -84,7 +165,7 @@ const ConfirmationPage: React.FC = () => {
                   </div>
                   <div className="text-center w-1/3 text-sm">
                     <a
-                      className="text-center w-1/3 text-sm text-gray-500"
+                      className="text-center w-1/3 text-sm cursor-pointer  text-blue-500"
                       onClick={() => setShowModal(true)}
                     >
                       Fare Rules
@@ -95,53 +176,56 @@ const ConfirmationPage: React.FC = () => {
             </div>
 
             <div className="card-body">
-              {/* Train details */}
-              <div className="flex items-center mb-4 pb-2 border border-gray-200">
-                <div className="">
-                  <div className="w-full text-center">
-                    <h5 className="text-lg mt-2">
-                      {travelagencyname
-                        ? travelagencyname
-                        : "Ak Tour And Travles"}
-                    </h5>
-                    <span className="text-sm text-gray-500">
-                      {busType ? busType : "Ac Sleeper"}
-                    </span>
-                  </div>
-                  <div>
-                    <div className="w-full mt-1 text-sm">
-                      Seat No({data.length}) :{" "}
-                      {data?.map((element: any) => (
-                        <span className="bg-green p-1 m-1 w-full">
-                          {element.seat_number}{" "}
-                        </span>
-                      ))}
+              <div className="border border-gray-200">
+                <div className="flex items-center mb-1 pb-2 ">
+                  <div className="">
+                    <div className="w-full text-center">
+                      <h5 className="text-lg mt-2">
+                        {travelAgencyName
+                          ? travelAgencyName
+                          : "Ak Tour And Travles"}
+                      </h5>
+                      <span className="text-sm text-gray-500">
+                        {busType ? busType : "Ac Sleeper"}
+                      </span>
                     </div>
                   </div>
+                  <div className="w-1/4 text-center">
+                    <h5 className="text-2xl">23:00</h5>
+                    <span className="text-sm text-gray-500">{from}</span>
+                  </div>
+                  <div className="w-1/4 text-center">
+                    <h5 className="text-lg">18h 55m</h5>
+                    <span className="text-sm text-gray-500">12 Stops</span>
+                  </div>
+                  <div className="w-1/4 text-center">
+                    <h5 className="text-2xl">18:15</h5>
+                    <span className="text-sm text-gray-500">{to}</span>
+                  </div>
                 </div>
-                <div className="w-1/4 text-center">
-                  <h5 className="text-2xl">23:00</h5>
-                  <span className="text-sm text-gray-500">{from}</span>
-                  {/* <h5 className="text-sm text-gray-500">15 Jun 18, Sat</h5> */}
-                </div>
-                <div className="w-1/4 text-center">
-                  <h5 className="text-lg">18h 55m</h5>
-                  <span className="text-sm text-gray-500">12 Stops</span>
-                </div>
-                <div className="w-1/4 text-center">
-                  <h5 className="text-2xl">18:15</h5>
-                  <span className="text-sm text-gray-500">{to}</span>
-                  {/* <h5 className="text-sm text-gray-500">16 Jun 18, Sun</h5> */}
+                <div>
+                  <div className="w-full pl-2  mt-1 mb-2 text-sm">
+                    <span className="font-medium pb-5">
+                      {" "}
+                      Seat No({data.length}) :
+                    </span>
+                    <div className="flex flex-wrap"></div>
+                    {data?.map((element: any) => (
+                      <div className="bg-green p-[1px] mb-2 w-7 ">
+                        {element.seat_number}
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
-              <div className="alert text-sm alert-info mb-4 bg-[#b6effb] p-3 rounded-sm">
+              <div className="alert text-sm alert-info mt-1 mb-4 bg-[#b6effb] p-2 rounded-sm">
                 <span className=" bg-cyan-300  p-[2px] rounded-sm">NOTE:</span>{" "}
                 This is a special fare given by the railway. Railway
                 cancellation charges do apply.
               </div>
               <h2 className="text-3xl mb-4 mt-6">
                 Traveller Details -
-                <span className="text-lg">
+                {/* <span className="text-lg">
                   <a
                     className="text-blue-700"
                     onClick={() => router.push("/auth")}
@@ -149,10 +233,28 @@ const ConfirmationPage: React.FC = () => {
                     Login
                   </a>
                   to book faster
-                </span>
+                </span> */}
               </h2>
               <p className="font-semibold">Contact Details</p>
               <div className="flex flex-wrap mb-4">
+                <div className="w-full sm:w-1/2 sm:pr-2 mb-3">
+                  <UInput
+                    id="First Name"
+                    type="text"
+                    placeholder="Enter First Name "
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
+                  />
+                </div>
+                <div className="w-full sm:w-1/2 sm:pr-2 mb-3">
+                  <UInput
+                    id="Last Name"
+                    type="text"
+                    placeholder="Enter Last Name "
+                    value={lastName}
+                    onChange={(e) => setLastName(e.target.value)}
+                  />
+                </div>
                 <div className="w-full sm:w-1/2 sm:pr-2 mb-3">
                   <UInput
                     id="email"
@@ -163,7 +265,7 @@ const ConfirmationPage: React.FC = () => {
                   />
                 </div>
 
-                <div className="w-full sm:w-1/2 sm:pl-2 mb-3">
+                <div className="w-full sm:w-1/2 sm:pr-2 mb-3">
                   <UInput
                     id="phone"
                     type="text"
@@ -174,54 +276,66 @@ const ConfirmationPage: React.FC = () => {
                 </div>
               </div>
               <p className="font-semibold">Adult 1</p>
-              <div className="flex flex-wrap mb-4">
-                {/* <div className="w-32 sm:w-32 sm:pr-1 mb-3">
-                  <BBDropdown
-                    className="w-32 h-12"
-                    options={[
-                      { label: "Mr" },
-                      { label: "Ms" },
-                      { label: "Mrs" },
-                    ]}
-                    value={title}
-                    onPress={(value: any) => {
-                      setTitle(value);
-                    }}
-                    label="Title"
-                  />
-                </div> */}
-                <div className="w-full sm:w-1/4 sm:pr-2 mb-3">
-                  <UInput
-                    // className="w-full border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:border-blue-500"
-                    id="passenger-name"
-                    type="text"
-                    placeholder="Enter First Name"
-                    value={firstName}
-                    onChange={(e) => setfirstName(e.target.value)}
-                  />
-                </div>
-                <div className="w-full sm:w-1/4 sm:pr-2 mb-3">
-                  <UInput
-                    // className="w-full border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:border-blue-500"
-                    id="passenger-name"
-                    type="text"
-                    placeholder="Enter Last Name"
-                    value={lastName}
-                    onChange={(e) => setLastName(e.target.value)}
-                  />
-                </div>
-
-                <div className="w-full sm:w-1/4 sm:pr-2 mb-3">
-                  <UInput
-                    // className="w-full border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:border-blue-500"
-                    id="passenger-age"
-                    type="text"
-                    placeholder="Age"
-                    value={age}
-                    onChange={(e) => setAge(e.target.value)}
-                  />
+              <div className="cursor-pointer w-fit flex ">
+                <div className="">Add More</div>
+                <div className="">
+                  <PlusIcon className=" w-6" onClick={addMore} />
                 </div>
               </div>
+              {person.map((element: any, index: any) => (
+                <div className="flex flex-wrap mb-4">
+                  {/* <div className="w-32 sm:w-32 sm:pr-1 mb-3">
+                    <BBDropdown
+                      className="w-32 h-12"
+                      options={[
+                        { label: "Mr" },
+                        { label: "Ms" },
+                        { label: "Mrs" },
+                      ]}
+                      value={title}
+                      onPress={(value: any) => {
+                        setTitle(value);
+                      }}
+                      label="Title"
+                    />
+                  </div> */}
+                  <div className="w-full sm:w-1/4 sm:pr-2 mb-3">
+                    <UInput
+                      // className="w-full border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:border-blue-500"
+                      id="passenger-name"
+                      type="text"
+                      placeholder="Enter First Name"
+                      value={element.fName}
+                      onChange={(e: any) => setFName(index, e.target.value)}
+                    />
+                  </div>
+                  <div className="w-full sm:w-1/4 sm:pr-2 mb-3">
+                    <UInput
+                      // className="w-full border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:border-blue-500"
+                      id="passenger-name"
+                      type="text"
+                      placeholder="Enter Last Name"
+                      value={element.lName}
+                      onChange={(e) => setLName(index, e.target.value)}
+                    />
+                  </div>
+
+                  <div className="w-full sm:w-1/4 sm:pr-2 mb-3">
+                    <UInput
+                      // className="w-full border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:border-blue-500"
+                      id="passenger-age"
+                      type="text"
+                      placeholder="Age"
+                      value={element.age}
+                      onChange={(e) => set_Age(index, e.target.value)}
+                    />
+                  </div>
+
+                  <div className="w-full sm:w-1/4 sm:pr-2">
+                    <BBButton onClick={onSub} className="w-fit" label={"-"} />
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
@@ -294,7 +408,7 @@ const ConfirmationPage: React.FC = () => {
           <div className="mt-4">
             <button
               className="bg-blue-500 text-white py-2 px-4 rounded w-full"
-              onClick={() => setShowModal(true)}
+              onClick={() => onHandleChange()}
             >
               Proceed to Pay
             </button>

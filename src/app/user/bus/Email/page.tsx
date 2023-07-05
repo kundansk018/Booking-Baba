@@ -149,7 +149,7 @@ const Invoice = () => {
                     src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRy8kOSk0s87b81gtTc5kSmS8PaK_rN1qf5o-XsFJc&s"
                     width="32"
                     height="32"
-                    alt=""
+                    alt="Loading FB Image"
                   />
                 </a>
               </td>

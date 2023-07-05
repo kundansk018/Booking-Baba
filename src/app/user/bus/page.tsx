@@ -8,13 +8,10 @@ import { useRouter } from "next/navigation";
 import Select from "react-select";
 import React from "react";
 import { useState } from "react";
-import Bus from "./list/page";
+// import Bus from "./list/page";
 import bus from "../../../images/Buses/carousel/bus_bg.jpg";
 
 export default function BookBus() {
-
-
-
   const [from, setFrom] = useState<any>("");
   const dispatch = useAppDispatch();
   const [to, setTo] = useState<any>();
@@ -142,7 +139,7 @@ export default function BookBus() {
            <Image src={agent} alt="fgvhbj" className="h-[180px] w-[400px]" /> */}
         </div>
         <section className="pt-10" id="pagee">
-          {showBox == false ? "" : <Bus />}
+          {showBox == false ? "" : "<Bus />"}
         </section>
       </div>
     </div>
