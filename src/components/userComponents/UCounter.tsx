@@ -1,6 +1,13 @@
 import BBButton from "@/app/components/BBButton";
 import React, { useState } from "react";
 
+interface Props {
+  travelType: any;
+  className?: any;
+  onChange?: ((value: any) => void) | undefined
+
+}
+
 type Option = {
   label: string;
   count: number;
@@ -56,6 +63,7 @@ const DropdownItem: React.FC<DropdownItemProps> = ({ option }) => {
 interface Props {
   travelType: any;
   className?: any;
+  value?:any;
 }
 
 export default function Accordion(props: Props) {
@@ -84,7 +92,10 @@ export default function Accordion(props: Props) {
   ];
 
   const userHotelOptions: Option[] = [
-    { label: "Rooms", count: count1, setCount: setCount1 },
+    { label: "Rooms", count: count1, setCount:(value)=>{ 
+      setCount1(value)
+      props.onChange&&props.onChange(value)
+    }},
     { label: "Adults (12+ yrs)", count: count2, setCount: setCount2 },
     { label: "Children (2-12 yrs)", count: count3, setCount: setCount3 },
   ];
@@ -118,7 +129,7 @@ export default function Accordion(props: Props) {
                   {option.count} {option.label}
                 </div>
               ) : (
-                <div className="w-[225px]">
+                <div className="w-[230px] text-center ">
                   {option.count} {option.label}
                 </div>
               )}

@@ -9,6 +9,12 @@ import {
   DELETE_HOTEL,
   SEARCH_HOTELS,
   SORT_By,
+  ROOM_DETAILS,
+  SEARCH_CITY,
+  BOOKHOTEL,
+ HOTEL_BOOKING_DETAILS,
+ SAVE_INVOICE_DATA,
+ BOOKED_HOTELS_LIST,
 
 } from "../constant";
 export const initialState = {
@@ -17,8 +23,12 @@ export const initialState = {
   previousHotelData: null,
   updateHotelDetails: null,
   updateHotelData: null,
-
-
+  roomData: null,
+  booked_hotel_res: null,
+  booked_hotel_history:[],
+  invoice_data:null,
+  hotels_list:[],
+ 
 };
 
 export const HotelReducer = (state = initialState, action: any) => {
@@ -86,19 +96,58 @@ export const HotelReducer = (state = initialState, action: any) => {
       }
     };
 
-    case SEARCH_HOTELS:{
+    case SEARCH_HOTELS: {
       return {
         ...state,
         hotelDetails: action.payload,
       }
-  }
-
-  case SORT_By:{
-    return{
-      ...state,
-      hotelDetails: action.payload,
     }
+
+    case SORT_By: {
+      return {
+        ...state,
+        hotelDetails: action.payload,
+      }
+    }
+    case ROOM_DETAILS: {
+      return {
+        ...state,
+        roomData: action.payload,
+      }
+    }
+
+    case SEARCH_CITY: {
+      return {
+        ...state,
+        hotelDetails: action.payload,
+      }
+    }
+
+    case BOOKHOTEL: {
+      return {
+        ...state,
+        booked_hotel_res: action.payload,
+      }
+    }
+
+    case HOTEL_BOOKING_DETAILS: {
+      return {
+        ...state,
+        booked_hotel_history: action.payload,
+      }
+    }
+ case SAVE_INVOICE_DATA:{
+  return{
+    ...state,
+    invoice_data: action.payload,
   }
+ }
+ case BOOKED_HOTELS_LIST:{
+  return{
+    ...state,
+    hotels_list: action.payload,
+  }
+ }
     default: {
       return state;
     }

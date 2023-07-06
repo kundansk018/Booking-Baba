@@ -15,6 +15,11 @@ export const ENDPOINTS = {
   updateHotel: "hotelsapi/hotelsapi?action=updateHotels",
   searchHotel: "hotelsapi/hotelsapi?action=searchByHotel",
   sortHotelBy: "hotelsapi/hotelsapi?action=sort",
+  searchByCity:"hotelsapi/hotelsapi?action=serachByCity",
+  bookHotel:"hotelsapi/hotelsapi?action=bookHotel",
+  getHotelBookingdata:"hotelsapi/hotelsapi?action=getBookedHotel",
+  gethotelbookingdetails:"hotelsapi/hotelsapi?action=getBookedHotelDtailsByOrderId",
+  getAllHotels:"hotelsapi/hotelsapi?action=getAllHotels",
 
   addTrain: "trainApi/trainApi?action=ADD_TRAIN",
   updateTrain: "trainApi/trainApi?action=UPDATE_TRAIN",

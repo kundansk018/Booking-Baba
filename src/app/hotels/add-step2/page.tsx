@@ -200,7 +200,7 @@ export default function Page() {
               <div className="flex  flex-col mx-4 w-[300px]">
                 <div className="my-2 w-72">
                   <Select label="Select Bed">
-                    {data.map((item: any) => (
+                      {data.map((item: any) => (
                       <Option
                         value={item.value}
                         onClick={() => setOptionValue(index, item.value)}

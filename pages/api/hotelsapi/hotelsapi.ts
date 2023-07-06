@@ -32,6 +32,16 @@ export default async function handler(
         return await serachByName(request, response);
       } else if (request.query?.action === "sort") {
         return await sortHotelBy(request, response);
+      }else if (request.query?.action === "serachByCity"){
+        return await serachByCityname(request ,response);
+      }else if(request.query?.action === "bookHotel"){
+        return await bookHotel(request,response);
+      }else if(request.query?.action === "getBookedHotel"){
+        return await hotelBookedData(request,response);
+      }else if(request.query?.action === "getBookedHotelDtailsByOrderId"){
+        return await getBookedHotelDtailsByOrderId(request,response);
+      }else if(request.query?.action === "getAllHotels"){
+        return await getAllHotels(request,response);
       }
 
     default:
@@ -45,18 +55,7 @@ export async function addhotel(
   request: NextApiRequest,
   response: NextApiResponse
 ) {
-//   const { fields, files } = await parseForm(request);
 
-//   const file = files?.imageUrl;
-// console.log(file)
-//   let url =null;
-//   if(file){
-//   url= Array.isArray(file)
-//   ? file.map((f) => f.newFilename)
-//   : file.newFilename;
-//   }
-
-  // fields.imageUrl = url;
   const hotels = await db.collection("Hotels_Details");
   const res = await hotels.insertOne(request.body);
   return response.status(200).json({ data: res });
@@ -140,4 +139,77 @@ export async function sortHotelBy(
   // const res=await hotels.find().sort({data:-1}).toArray()
 
   response.status(200).json({ data: res });
+}
+
+
+export async function serachByCityname(
+  request: NextApiRequest,
+  response: NextApiResponse
+) {
+  const hotels = await db.collection("Hotels_Details");
+  let data = request.body.searchKey;
+  // const res=await hotels.find().sort({hotelname:-1}).toArray()
+  const res = await hotels
+    .find({
+      $or: [
+        { city: { $regex: data, $options: "i" } },
+        { hotelname: { $regex: data, $options: "i" } },
+       
+      ],
+    })
+    .toArray();
+
+  response.status(200).json({ data: res });
+}
+
+export async function bookHotel(
+  request: NextApiRequest,
+  response: NextApiResponse
+){
+  
+  const hotels = await db.collection("Hotel_Booked_Details");
+  try{
+  const res = await hotels.insertOne(request.body);
+  return response.status(200).json({ data: res, message:"Hotel Book Successfully" });
+}catch(error){
+
+  return response.status(500).json({ data: null,"message":"bad request" });
+}
+}
+
+
+//history
+export async function hotelBookedData(
+  request: NextApiRequest,
+  response: NextApiResponse
+) {
+  const hotels = await db.collection("Hotel_Booked_Details");
+  const res = await hotels.find({ user_id: request.body.user_id}).toArray();
+  return response.status(200).json({ data: res });
+}
+
+
+//booked hotel >>invoice
+export async function getBookedHotelDtailsByOrderId(
+  request: NextApiRequest,
+  response: NextApiResponse
+) {
+  console.log(request.body.hotel_booked_id)
+  try{
+  const hotels = await db.collection("Hotel_Booked_Details");
+  const res = await hotels.findOne({ _id: new ObjectId(request.body.hotel_booked_id) })
+  return response.status(200).json({ data: res });
+  }
+  catch(err){
+    console.log("Error",err)
+  }
+}
+
+export async function getAllHotels(
+  request: NextApiRequest,
+  response: NextApiResponse
+) {
+  const hotels = await db.collection("Hotel_Booked_Details");
+  const res = await hotels.find().toArray();
+  return response.status(200).json({ data: res });
 }

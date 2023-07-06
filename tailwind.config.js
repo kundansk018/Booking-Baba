@@ -33,7 +33,7 @@ module.exports = withMT({
         blackbig: "#212529",
       },
       fontFamily: {
-        Signika: ["Signika", "sans-serif"],
+        Signika: ["Poppins", "sans-serif"],
         Castoro: ["Castoro Titling", "cursive"],
         Poppins: ["Poppins", "sans-serif"]
       },

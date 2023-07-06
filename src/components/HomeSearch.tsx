@@ -11,6 +11,7 @@ import { useAppDispatch } from "@/redux/store";
 import { useRouter } from "next/navigation";
 import { getTrainBySearch } from "@/redux/action/trainAction";
 import { getBusBySearch } from "@/redux/action/busaction";
+import { searchCityByName } from "@/redux/action/hotelaction";
 
 interface Props {
   from?: string;
@@ -41,10 +42,10 @@ export default function HomeSearch(props: Props) {
 
   const handleSearch = () => {
     console.log("from nd to ", from, to);
-    if (!from && !to) {
+    if (!from ) {
       alert("plz enter details");
     } else {
-      if (from && to) {
+      if (from ) {
         if (props.travelType === "train") {
           let data = { from_Stn: from, to_Stn: to };
           console.log("Searching for trains:", data);
@@ -54,7 +55,9 @@ export default function HomeSearch(props: Props) {
             router.push("/user/train/newtrain/list");
           });
         } else if (props.travelType === "hotel") {
-        } else if (props.travelType === "bus") {
+          let data = { city: from };
+          dispatch(searchCityByName(data))
+        } else {
           let data = { from: from, to: to };
           dispatch(getBusBySearch(data)).then((res: any) => {
             console.log("response  bus     ???????????????????????", res);
@@ -74,6 +77,7 @@ export default function HomeSearch(props: Props) {
       checkoutDate,
       dropDownValue,
     };
+
 
     console.log("data", searchData);
     console.log("from", props.travelType);

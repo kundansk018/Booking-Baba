@@ -4,21 +4,30 @@ import {
   ADD_HOTELS_DATA,
   ADD_HOTELS_FAIL,
   ADD_HOTELS_SUCCESS,
+  BOOKHOTEL,
   DELETE_HOTEL,
+  HOTEL_BOOKING_DETAILS,
+  SAVE_INVOICE_DATA,
   PREVIOUS_HOTEL_DATA,
   REQUEST_COMPLETED,
   REQUEST_STARTED,
+  ROOM_DETAILS,
   SAVE_HOTEL_DETAILS,
   SEARCH_HOTELS,
   SORT_By,
   UPDATE_HOTEL_DETAILS,
+  BOOKED_HOTELS_LIST,
 } from "../constant";
 import { AppDispatch } from "../store";
 import { ENDPOINTS } from "@/config/config";
 import {
   addHotelsInfo,
+  bookHotelroom,
   deleteHotel,
+  getAllHotelOrder,
+  getBookedHotelDtailsByOrderId,
   getHotel,
+  getHotelBook,
   hotelsById,
   searchHotel,
   sortHotelBy,
@@ -42,6 +51,8 @@ export const addHotels = (data: any) => async (dispatch: AppDispatch) => {
   }
   dispatch({ type: REQUEST_COMPLETED, payload: null });
 };
+
+/*.....................PreviousDta..............*/
 
 export const savePreviousData =
   (data: any) => async (dispatch: AppDispatch) => {
@@ -101,7 +112,7 @@ export const updateHotel = (data: any) => async (dispatch: AppDispatch) => {
 
 export const deleteHotelById =
   (id: string) => async (dispatch: AppDispatch) => {
-    debugger;
+
     let param = { id: id };
     const res = await deleteHotel(param);
     if (res && res.status == 200) {
@@ -109,6 +120,8 @@ export const deleteHotelById =
       dispatch({ type: DELETE_HOTEL, payload: res.data });
     }
   };
+
+  /*.............Search .....................*/
 
 export const searchHotelByName =
   (hotelname: any) => async (dispatch: AppDispatch) => {
@@ -126,6 +139,25 @@ export const searchHotelByName =
     dispatch({ type: REQUEST_COMPLETED, payload: null });
   };
 
+  /*..............search by city...................*/
+
+
+export const searchCityByName =
+  (city: any) => async (dispatch: AppDispatch) => {
+    try {
+      dispatch({ type: REQUEST_STARTED, payload: null });
+      let param = { searchKey: city};
+      const res = await searchHotel(param);
+      if (res && res.status == 200) {
+        console.log(res);
+        dispatch({ type: SEARCH_HOTELS, payload: res.data?.data });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+    dispatch({ type: REQUEST_COMPLETED, payload: null });
+  };
+/*...........SORT..........................*/
 export const sortHotel = (data: any) => async (dispatch: AppDispatch) => {
   try {
     dispatch({ type: REQUEST_STARTED, payload: null });
@@ -140,6 +172,79 @@ export const sortHotel = (data: any) => async (dispatch: AppDispatch) => {
     const res = await sortHotelBy(param);
     if (res && res.status == 200) {
       dispatch({ type: SORT_By, payload: res.data?.data });
+    }
+  } catch (error) {
+    console.log(error);
+  }
+  dispatch({ type: REQUEST_COMPLETED, payload: null });
+};
+
+/*..............Room Data................*/
+
+export const  saveSelectedRoomData= (data: any) => async (dispatch: AppDispatch) => {
+    dispatch({ type: ROOM_DETAILS, payload: data });
+  };
+
+
+// /*..........hotel booking data...........*/
+// export const  hotelBookingData= (data: any) => async (dispatch: AppDispatch) => {
+//   dispatch({ type: HOTEL_BOOKING_DATA, payload: data });
+// };
+
+
+
+/*.................Book hotels..........*/
+export const bookHotelRoom= (data:any)=> async(dispatch: AppDispatch) =>{
+  console.log(data);
+  try{
+    dispatch({ type: REQUEST_STARTED, payload: null });
+    const res= await bookHotelroom(data);
+    if(res && res.status ===200){
+      dispatch({type:BOOKHOTEL ,payload:res.data});
+    }
+  }catch(error){
+    console.log(error);
+  }
+  dispatch({ type: REQUEST_COMPLETED, payload: null });
+
+}
+
+export const getHotelsBookingDetails = (data:any) => async (dispatch: AppDispatch) => {
+  try {
+    dispatch({ type: REQUEST_STARTED, payload: null });
+    // let data = { user_id: user_id };
+    const res = await getHotelBook(data);
+    if (res && res.status == 200) {
+      dispatch({ type: HOTEL_BOOKING_DETAILS, payload: res?.data });
+    }
+  } catch (error) {
+    console.log(error);
+  }
+  dispatch({ type: REQUEST_COMPLETED, payload: null });
+};
+
+export const getHotelBookingDetailsById =(data:any) => async (dispatch:AppDispatch)=>{
+  try{
+    dispatch({type:REQUEST_STARTED,payload:null});
+    const res =await getBookedHotelDtailsByOrderId(data);
+    console.log("res:------",res)
+    if(res && res.status == 200){
+      dispatch({type: SAVE_INVOICE_DATA,payload:res?.data?.data});
+    }
+  }catch(error){
+  console.log("Errror:::---",error)
+  }
+  dispatch({type:REQUEST_COMPLETED,payload:null});
+}
+
+
+export const getAllBookedHotels = () => async (dispatch: AppDispatch) => {
+  try {
+    dispatch({ type: REQUEST_STARTED, payload: null });
+    const res = await getAllHotelOrder();
+    console.log("res:::::::>>",res)
+    if (res && res.status == 200) {
+      dispatch({ type: BOOKED_HOTELS_LIST, payload: res?.data?.data });
     }
   } catch (error) {
     console.log(error);

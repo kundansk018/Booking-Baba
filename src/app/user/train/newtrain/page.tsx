@@ -130,7 +130,7 @@ const FilterPage = () => {
                   // step={0}
                   minValue={0}
                   maxValue={1439}
-                  onInput={(e) => {
+                  onInput={(e:any) => {
                     handleDepartureTime(e);
                   }}
                 />
@@ -169,7 +169,7 @@ const FilterPage = () => {
                   // step={5}
                   minValue={0}
                   maxValue={1439}
-                  onInput={(e) => {
+                  onInput={(e:any) => {
                     handleArrivalTime(e);
                   }}
                 />

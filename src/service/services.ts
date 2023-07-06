@@ -167,3 +167,29 @@ export const getBusSeatNumber = (data: any) => {
     },
   });
 };
+
+export const serachByCity=(city:any)=>{
+  let url=`${ENDPOINTS.searchByCity}`;
+  return client.post(url, city, headers);
+}
+
+
+export const bookHotelroom=(data:any)=>{
+  let url=`${ENDPOINTS.bookHotel}`;
+  return client.post(url ,data,headers);
+}
+
+export const getHotelBook = (data:any) => {
+  let url = `${ENDPOINTS.getHotelBookingdata}`;
+  return client.post(url, data,headers);
+};
+
+export const getBookedHotelDtailsByOrderId=(data:any) =>{
+  let url=`${ENDPOINTS.gethotelbookingdetails}`;
+  return client.post(url,data,headers)
+}
+
+export const getAllHotelOrder =() =>{
+  let url=`${ENDPOINTS.getAllHotels}`;
+  return client.post(url,headers);
+}
