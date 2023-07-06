@@ -68,8 +68,12 @@ const ConfirmationPage = () => {
   let to = book_seats?.busDetails?.data.to;
   let travelAgencyName = book_seats?.busDetails?.data.travelagencyname;
   let busType = book_seats?.busDetails?.data.busType;
+  let departureTime = book_seats?.busDetails?.data.departureTime;
   let arrivalDate = book_seats?.busDetails?.data.arrivalDate;
   let busNumber = book_seats?.busDetails?.data.busnumber;
+  let arrivalTime = book_seats?.busDetails?.data.arrivalTime;
+  let noOfStops = book_seats?.busDetails?.data.noofstop;
+
   console.log("busNumber is ", busNumber);
 
   const handleClosemodal = () => {
@@ -191,15 +195,22 @@ const ConfirmationPage = () => {
                     </div>
                   </div>
                   <div className="w-1/4 text-center">
-                    <h5 className="text-2xl">23:00</h5>
+                    <h5 className="text-2xl">
+                      {departureTime ? departureTime : "23:00"}
+                    </h5>
                     <span className="text-sm text-gray-500">{from}</span>
                   </div>
                   <div className="w-1/4 text-center">
                     <h5 className="text-lg">18h 55m</h5>
-                    <span className="text-sm text-gray-500">12 Stops</span>
+                    <span className="text-sm text-gray-500">
+                      {noOfStops ? noOfStops + " " + "Stops" : "12 Stops"}
+                    </span>
                   </div>
                   <div className="w-1/4 text-center">
-                    <h5 className="text-2xl">18:15</h5>
+                    <h5 className="text-2xl">
+                      {" "}
+                      {arrivalTime ? arrivalTime : "18:15"}{" "}
+                    </h5>
                     <span className="text-sm text-gray-500">{to}</span>
                   </div>
                 </div>

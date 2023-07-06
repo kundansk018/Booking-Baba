@@ -48,11 +48,14 @@ export const BusDetails: React.FC<Props> = ({ myData }) => {
   let data = bookedSeats?.data?.data?.seats;
   let bookedSeatsData: any = [];
   bookedSeatsData = data ? JSON.parse(data) : "";
+  console.log("bookedSeatsData", bookedSeatsData);
+  let bookedSeatsNo: any = [];
+  // bookedSeatsNo = bookedSeatsData?.map((element: any) => element.seat_number);
 
-  for (let i = 0; i < bookedSeatsData.length; i++) {
-    bookSeats.push(bookedSeatsData[i]);
-  }
-  console.log("state data ", bookSeats);
+  bookedSeatsNo =
+    bookedSeatsData &&
+    bookedSeatsData?.map((element: any, index: any) => element?.seat_number);
+  console.log("booked seat no", bookedSeatsNo);
 
   useEffect(() => {
     if (busNumber) {
@@ -61,22 +64,9 @@ export const BusDetails: React.FC<Props> = ({ myData }) => {
   }, [busNumber]);
 
   const getBusNo = async (busNumber: any) => {
-    console.log("get bus no in async function ", busNumber);
-
     var formData = new FormData();
     formData.append("busNumber", busNumber);
 
-    // const res = await fetch(
-    //   "http://localhost:3000/api/busapi/busapi?action=GET_BUS_NUMBER",
-    //   {
-    //     method: "POST",
-    //     body: formData,
-    //     headers: {
-    //       "content-type": "application/json",
-    //     },
-    //   }
-    // );
-    // console.log(" response in getBusNo in getNusNo function", res);
     dispatch(getBookedSeats(formData));
   };
 
@@ -192,26 +182,53 @@ export const BusDetails: React.FC<Props> = ({ myData }) => {
                       Front
                     </p>
                     <div className="flex flex-wrap ">
-                      {SEATS?.map(
-                        (element: any, index: any) => (
-                          // bookSeats.map((item: any, itemIndex: any) => (
-                          <div
-                            key={index}
-                            onClick={() => {
-                              onSeats(element);
-                            }}
-                            className={`flex cursor-pointer justify-center mx-3 my-2 text-sm rounded-md px-3
-                           p-1 h-fit w-5 bg-grey-900 border border-black ${
-                             seats.includes(element)
-                               ? "selected-seats text-white"
-                               : ""
-                           } `}
-                          >
-                            {element.seat_number}
-                          </div>
-                        )
-                        // ))
-                      )}
+                      {SEATS?.map((element: any, index: any) => (
+                        <>
+                          {bookedSeatsNo.includes(element.seat_number) ? (
+                            <div
+                              key={index}
+                              className={`flex cursor-not-allowed justify-center mx-3 my-2 text-sm rounded-md px-3
+                             p-1 h-fit w-5 bg-gray-200 text-black ${
+                               bookedSeatsNo.includes(element.seat_number)
+                                 ? "book-seats text-white"
+                                 : ""
+                             } `}
+                            >
+                              {element.seat_number}
+                            </div>
+                          ) : (
+                            <div
+                              key={index}
+                              onClick={() => {
+                                onSeats(element);
+                              }}
+                              className={`flex cursor-pointer justify-center mx-3 my-2 text-sm rounded-md px-3
+                             p-1 h-fit w-5 bg-gray-200 text-black ${
+                               seats.includes(element)
+                                 ? "selected-seats text-white"
+                                 : ""
+                             } `}
+                            >
+                              {element.seat_number}
+                            </div>
+                          )}
+                        </>
+
+                        // <div
+                        //   key={index}
+                        //   onClick={() => {
+                        //     onSeats(element);
+                        //   }}
+                        //   className={`flex cursor-pointer justify-center mx-3 my-2 text-sm rounded-md px-3
+                        //    p-1 h-fit w-5 bg-gray-200 text-black ${
+                        //      seats.includes(element)
+                        //        ? "selected-seats text-white"
+                        //        : ""
+                        //    } `}
+                        // >
+                        //   {element.seat_number}
+                        // </div>
+                      ))}
                     </div>
                   </div>
                   <div className="h-full w-72 mx-auto border border-gray-100 bg-white p-3">
