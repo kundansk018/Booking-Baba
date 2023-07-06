@@ -15,7 +15,7 @@ export default function BBTypography(props: Props) {
     <Typography
       variant={props.variant}
       color={props.color}
-      className={props.className}
+      className={`font-Poppins text-lightgrey mb-1 ${props?.className}`}
     >
       {props.text} {props.children}
     </Typography>

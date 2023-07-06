@@ -23,7 +23,7 @@ export default function UFooter() {
         <div className="flex flex-wrap md:grid-cols-3 justify-between">
           <div className="flex flex-wrap w-[33.333%]">
             <p className="text-greycommon">Payment</p>
-            <ul className="payments-types m-0 p-0 flex flex-wrap space-x-2">
+            <ul className="payments-types m-0 px-2 flex flex-wrap space-x-4">
               <li>
                 <Overlays title="Visa">
                   <a href="#" target="_blank">
@@ -34,7 +34,7 @@ export default function UFooter() {
                       title=""
                       data-bs-original-title="Visa"
                       aria-label="Visa"
-                      className="w-16 h-16"
+                      className="w-12 h-10"
                     />
                   </a>
                 </Overlays>
@@ -49,7 +49,7 @@ export default function UFooter() {
                       title=""
                       data-bs-original-title="Discover"
                       aria-label="Discover"
-                      className="w-16 h-16"
+                      className="w-12 h-106"
                     />
                   </a>
                 </Overlays>
@@ -64,7 +64,7 @@ export default function UFooter() {
                       title=""
                       data-bs-original-title="PayPal"
                       aria-label="PayPal"
-                      className="w-16 h-16"
+                      className="w-12 h-10"
                     />
                   </a>
                 </Overlays>
@@ -79,7 +79,7 @@ export default function UFooter() {
                       title=""
                       data-bs-original-title="American Express"
                       aria-label="American Express"
-                      className="w-16 h-16"
+                      className="w-12 h-10"
                     />
                   </a>
                 </Overlays>
@@ -94,7 +94,7 @@ export default function UFooter() {
                       title=""
                       data-bs-original-title="Discover"
                       aria-label="Discover"
-                      className="w-16 h-16"
+                      className="w-12 h-10"
                     />
                   </a>
                 </Overlays>

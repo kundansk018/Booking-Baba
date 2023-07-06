@@ -25,14 +25,17 @@ module.exports = withMT({
         purple: "#4338ca",
         headcolor: "#0C2F55",
         lightgrey: "#535b61",
+        verylightgray: "#f0f0f0",
         tab: "#8298AF",
         tabchange: "#0071cc",
         uficon: "#546d89",
-        greycommon: "#253B33"
+        greycommon: "#253B33",
+        blackbig: "#212529",
       },
       fontFamily: {
         Signika: ["Signika", "sans-serif"],
         Castoro: ["Castoro Titling", "cursive"],
+        Poppins: ["Poppins", "sans-serif"]
       },
 
     },
