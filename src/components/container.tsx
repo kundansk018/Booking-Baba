@@ -34,15 +34,21 @@ const Container = (props: ContainerProps) => {
       {props.children}
       <>
         {loading ? (
-          <div className="absolute top-0 z-50 flex h-full w-full items-center justify-center bg-white bg-opacity-30">
+          <div className="absolute  z-50 flex h-full w-full top-0 justify-center items-center bg-white bg-opacity-25 ">
             {/* <Spinner className="h-12 w-12" /> */}
-            <RotatingLines
+            {/* <RotatingLines
               strokeColor="green"
               strokeWidth="5"
               animationDuration="0.75"
               width="96"
               visible={true}
-            />
+            /> */}
+            <div className="w-fit h-fit border-[6px] border-blue-500 p-2 rounded-full border-x-transparent animate-spin ">
+              <div
+                className="w-fit h-fit rounded-full animate-spin
+                     border-[25px] border-solid border-x-blue-500 border-y-gray-100  "
+              ></div>
+            </div>
           </div>
         ) : null}
       </>
