@@ -1,59 +1,16 @@
 "use client";
 
 import BBButton from "@/app/components/BBButton";
-import { getInvoiceDataInDB } from "@/redux/action/seatBook";
-import { useAppDispatch } from "@/redux/store";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useState } from "react";
 
 const Invoice = () => {
   const [print, setPrint] = useState<boolean>(false);
   const router = useRouter();
-  const dispatch = useAppDispatch();
-
-  const seatsBookData = useSelector((state: any) => state.seats.seats);
-  console.log("seatsBookData in Invoice page..", seatsBookData);
-  let _id = seatsBookData?.data?.data?.insertedId;
-  // console.log("seat book data id available",seatsBookData?.data?.data?.insertedId);
-
-  console.log("id in invoice page", _id);
-  useEffect(() => {
-    if (seatsBookData && _id) {
-      console.log("seat book data id available", _id);
-
-      dispatch(getInvoiceDataInDB(_id));
-    }
-  }, [_id]);
-
-  const invoiceLatestData = useSelector(
-    (state: any) => state.seats.invoiceData
-  );
-  console.log(
-    "invoiceData in Invoice page from db------------------------- .. ",
-    invoiceLatestData
-  );
-
   function funPrint() {
     setPrint(true);
     router.push("javascript:window.print()");
   }
-
-  let from = invoiceLatestData?.data?.data?.from;
-  let to = invoiceLatestData?.data?.data?.to;
-  let bookingDate = invoiceLatestData?.data?.data?.bookingDate;
-  let arrivalDate = invoiceLatestData?.data?.data?.arrivalDate;
-  let busNumber = invoiceLatestData?.data?.data?.busNumber;
-  let busType = invoiceLatestData?.data?.data?.busType;
-  let seats = invoiceLatestData?.data?.data?.seats;
-  let travelAgencyName = invoiceLatestData?.data?.data?.travelAgencyName;
-  let seatsPrice = invoiceLatestData?.data?.data?.seatsPrice;
-  let email = invoiceLatestData?.data?.data?.email;
-  let mobileNumber = invoiceLatestData?.data?.data?.mobileNumber;
-  let firstName = invoiceLatestData?.data?.data?.firstName;
-  let lastName = invoiceLatestData?.data?.data?.lastName;
-
-  let person = invoiceLatestData?.data?.data?.person; //JSON Data
 
   return (
     <div className="">
@@ -72,11 +29,11 @@ const Invoice = () => {
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div className="w-1/3 mb-3 sm:mb-0">
             <p className="text-sm text-[#00000080]">From:</p>
-            <p className="font-bolt ">{from ? from : "No Route Found"}</p>
+            <p className="font-bolt ">Mumbai</p>
           </div>
           <div className="  mb-3 sm:mb-0">
             <p className="text-sm text-[#00000080] text-uppercase">To:</p>
-            <p className="font-bolt">{to ? to : "No Route Found"}</p>
+            <p className="font-bolt">Surat</p>
           </div>
           <div>
             <p className="text-sm text-[#00000080] text-uppercase">
@@ -121,16 +78,12 @@ const Invoice = () => {
               Passenger Name:
             </p>
 
-            <p className="font-bolt">
-              {firstName && lastName
-                ? firstName + " " + lastName
-                : "No Passeneger Name here"}
-            </p>
+            <p className="font-bolt">Mr. Neil Patel</p>
           </div>
           <div className="  mb-3 sm:mb-0">
             <p className="text-sm text-[#00000080] text-uppercase">Seat:</p>
 
-            <p className="font-bolt">{seats ? seats.length : "16"}</p>
+            <p className="font-bolt">16</p>
           </div>
           <div>
             <p className="  text-sm text-[#00000080] text-uppercase">
@@ -150,9 +103,7 @@ const Invoice = () => {
           <div className=" mb-3 sm:mb-0">
             <p className="text-sm text-[#00000080] text-uppercase">Bus Type:</p>
 
-            <p className="font-bolt">
-              {busType ? busType : "Multiaxel Volvo AC Sleeper"}
-            </p>
+            <p className="font-bolt">Multiaxel Volvo AC Sleeper</p>
           </div>
           <div>
             <p className=" text-sm text-[#00000080] text-uppercase">
@@ -166,8 +117,7 @@ const Invoice = () => {
         </div>
         <p className="bg-gray-200 rounded text-gray-800 text-lg items-center font-bolt p-1 pr-52 mt-1 text-right">
           <p>
-            Total Fare:{" "}
-            <p className="pl-2"> {seatsPrice ? "$" + seatsPrice : null}</p>
+            Total Fare: <p className="pl-2">$350.00</p>
           </p>
         </p>
         <hr className="my-[1px]" />

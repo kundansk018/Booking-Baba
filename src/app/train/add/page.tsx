@@ -9,9 +9,6 @@ import { useSelector } from "react-redux";
 import BBErrorDialog from "@/app/components/BBErrorDialog";
 import BBDropdown from "@/app/components/BBDropdown";
 import { addTrain } from "@/redux/action/trainAction";
-import moment from "moment";
-import { dateData } from "@/utils/TrainData";
-import Multiselect from "multiselect-react-dropdown";
 
 export default function AddTrain() {
   const [trainNo, setTrainNo] = useState<string>("");
@@ -31,10 +28,12 @@ export default function AddTrain() {
   const [trainRoute, setTrainRoute] = useState<string>("");
   const [trainDesc, setTrainDesc] = useState<string>("");
   const [distance, setDistance] = useState<string>("");
+
   const [depDate, setDepDate] = useState<string>("");
   const [arrDate, setArrDate] = useState<string>("");
+
   const [trainImage, setTrainImage] = useState<any>();
-  // const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
 
   const dispatch = useAppDispatch();
 
@@ -44,20 +43,6 @@ export default function AddTrain() {
 
   const { trainDetails }: any = useSelector((state: any) => state.train);
   // console.log("add train page::::::::*****", trainDetails);
-
-  const [date, setDate] = useState<any>([
-    {
-      date: "",
-      id: "",
-    },
-  ]);
-
-  const selectDates = (selectedList: any) => {
-    setDate(selectedList);
-  };
-  const removeDates = (selectedList: any) => {
-    setDate(selectedList);
-  };
 
   useEffect(() => {
     if (trainDetails?.status === 200) {
@@ -80,19 +65,8 @@ export default function AddTrain() {
     console.log(trainImage);
     // setPreviewUrl(URL.createObjectURL(trainImage));
   };
-  // let dateData = {
-  //   firstDate: moment().format("LL"),
-  //   secondDate: moment().add(1, "day").format("LL"),
-  //   thirdDate: moment().add(2, "day").format("LL"),
-  //   fourthDate: moment().add(3, "day").format("LL"),
-  //   fifthDate: moment().add(4, "day").format("LL"),
-  // };
-
-  console.log("date data", dateData);
 
   const addTrainDetails = async (e: any) => {
-    console.log("insidde func");
-    console.log("date ", date);
     e.preventDefault();
 
     if (!trainImage) {
@@ -117,10 +91,6 @@ export default function AddTrain() {
       formData.append("trainRoute", trainRoute);
       formData.append("trainDesc", trainDesc);
       formData.append("imageUrl", trainImage);
-      formData.append("depDate", depDate);
-      formData.append("arrDate", arrDate);
-      formData.append("distance", distance);
-      formData.append("date", JSON.stringify(date));
       formData.append("imageUrl", trainImage);
 
       console.log("formData>>>>>>>>>>>", formData);
@@ -133,7 +103,6 @@ export default function AddTrain() {
       dispatch(addTrain(formData))
         .then((res: any) => {
           console.log("response>>>>>>>>>>>>>>", res);
-          alert("123");
 
           if (res) {
             console.log("response>>>>>>>>>>>>>>", res);
@@ -189,16 +158,16 @@ export default function AddTrain() {
             <BBInput
               containerProps={{ className: "mb-4" }}
               type="time"
-              label="Departure Time"
-              value={depTime}
-              onChange={(e) => setDepTime(e.target.value)}
+              label="Arrival Time"
+              value={arrivalTime}
+              onChange={(e) => setArrivalTime(e.target.value)}
             />
             <BBInput
               containerProps={{ className: "mb-4" }}
               type="time"
-              label="Arrival Time"
-              value={arrivalTime}
-              onChange={(e) => setArrivalTime(e.target.value)}
+              label="Departure Time"
+              value={depTime}
+              onChange={(e) => setDepTime(e.target.value)}
             />
 
             <BBInput
@@ -214,13 +183,6 @@ export default function AddTrain() {
               label="Arrival Date"
               value={arrDate}
               onChange={(e) => setArrDate(e.target.value)}
-            />
-            <BBInput
-              containerProps={{ className: "mb-4" }}
-              type="text"
-              label="Train Description"
-              value={trainDesc}
-              onChange={(e) => setTrainDesc(e.target.value)}
             />
           </div>
 
@@ -280,7 +242,7 @@ export default function AddTrain() {
               onChange={(e) => setDistance(e.target.value)}
             />
 
-            <BBDropdown
+            {/* <BBDropdown
               containerProps={{ className: "mb-4" }}
               options={[
                 { label: "Mumbai To Nashik" },
@@ -301,8 +263,15 @@ export default function AddTrain() {
                 setTrainRoute(value);
               }}
               label="Train Route"
-            />
+            /> */}
 
+            {/* <BBInput
+              containerProps={{ className: "mb-4" }}
+              type="text"
+              label="Train Description"
+              value={trainDesc}
+              onChange={(e) => setTrainDesc(e.target.value)}
+            /> */}
             <BBInput
               containerProps={{ className: "mb-4" }}
               type="file"
@@ -381,7 +350,7 @@ export default function AddTrain() {
                 { label: "Superfast" },
                 { label: "Local" },
               ]}
-              value={trainType}
+              value={operationDays}
               onPress={(value: any) => {
                 setTrainType(value);
               }}
@@ -401,18 +370,6 @@ export default function AddTrain() {
               }}
               label="Operational Days"
             />
-            <div className="mb-4 ">
-              <Multiselect
-                placeholder={"Unavailable Dates"}
-                options={dateData}
-                onSelect={selectDates}
-                onRemove={removeDates}
-                displayValue="date"
-                avoidHighlightFirstOption={true}
-                showCheckbox={true}
-                hideSelectedList={true}
-              />
-            </div>
           </div>
         </div>
         <div className="flex justify-center mt-4">

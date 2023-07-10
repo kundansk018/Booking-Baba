@@ -1,5 +1,3 @@
-import moment from "moment";
-
 const TABLE_HEAD = ["Train Name", "Departure", "Duration", "Arrival", ""];
 const TABLE_ROWS = [
   {
@@ -34,12 +32,4 @@ const TABLE_ROWS = [
   },
 ];
 
-const dateData = [
-  { id: 1, date: moment().format("LL") },
-  { id: 2, date: moment().add(1, "day").format("LL") },
-  { id: 3, date: moment().add(2, "day").format("LL") },
-  { id: 4, date: moment().add(3, "day").format("LL") },
-  { id: 5, date: moment().add(4, "day").format("LL") },
-];
-
-export { TABLE_HEAD, TABLE_ROWS, dateData };
+export { TABLE_HEAD, TABLE_ROWS };

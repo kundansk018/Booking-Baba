@@ -25,7 +25,7 @@ function Icon({ id, open }: any) {
     );
 }
 
-export default function Filter() {
+export default function Filter({onChange,name}:any) {
 
     const datasort = [
         { label: "No Sort", value: "Select" },
@@ -55,7 +55,7 @@ export default function Filter() {
       }, [searchKey]);
     
     return (
-        <div className=" bg-[#FFFFFF] mt-4 ml-4 w-[270px]  rounded-md">
+        <div className=" bg-[#FFFFFF] mt-4 ml-4 w-[270px] h-full rounded-md">
             <div>
               <p className="text-[#0c2F54]  text-2xl  mt-3 ml-4 border-0 p-2"> Filter</p>
             </div>
@@ -150,7 +150,7 @@ export default function Filter() {
                 <AccordionBody>
                   {propert_type.map((element) =>
                     <div className=" " >
-                      <Checkbox label={element.name} />
+                      <Checkbox label={element.name} onClick={()=>onChange(element.name)}/>
                     </div>
 
                   )}
@@ -159,8 +159,8 @@ export default function Filter() {
             </div> <hr />
 
             <div>
-              <Accordion open={open === 3} icon={<Icon id={3} open={open} />} >
-                <AccordionHeader onClick={() => handleOpen(3)} className="border-0 pr-5" >
+              <Accordion open={open === 4} icon={<Icon id={4} open={open} />} >
+                <AccordionHeader onClick={() => handleOpen(4)} className="border-0 pr-5" >
                   {/* <p className="text-lg  mt-3 ml-4  text-light-blue-800 my-3 "> Start Category</p> */}
                   <h2 className="p-2"
                     style={{
@@ -186,8 +186,8 @@ export default function Filter() {
             </div> <hr />
 
             <div>
-              <Accordion open={open === 4} icon={<Icon id={4} open={open} />} >
-                <AccordionHeader onClick={() => handleOpen(4)} className="border-0 pr-5" >
+              <Accordion open={open === 5} icon={<Icon id={5} open={open} />} >
+                <AccordionHeader onClick={() => handleOpen(5)} className="border-0 pr-5" >
                   {/* <p className="text-lg  mt-3 ml-4  text-light-blue-800 my-3 "> User Revies</p> */}
                   <h2 className="p-2"
                     style={{
@@ -211,8 +211,8 @@ export default function Filter() {
               </Accordion>
             </div> <hr />
             <div>
-              <Accordion open={open === 4} icon={<Icon id={4} open={open} />} >
-                <AccordionHeader onClick={() => handleOpen(4)} className="border-0 pr-5" >
+              <Accordion open={open === 6} icon={<Icon id={6} open={open} />} >
+                <AccordionHeader onClick={() => handleOpen(6)} className="border-0 pr-5" >
                   {/* <p className="text-lg  mt-3 ml-4  text-light-blue-800 my-3 "> Amenities</p> */}
                   <h2 className="p-2"
                     style={{

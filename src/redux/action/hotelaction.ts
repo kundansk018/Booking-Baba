@@ -196,9 +196,12 @@ export const  saveSelectedRoomData= (data: any) => async (dispatch: AppDispatch)
 /*.................Book hotels..........*/
 export const bookHotelRoom= (data:any)=> async(dispatch: AppDispatch) =>{
   console.log(data);
+
   try{
+    debugger
     dispatch({ type: REQUEST_STARTED, payload: null });
     const res= await bookHotelroom(data);
+    console.log("fuyutu;;;;;",res)
     if(res && res.status ===200){
       dispatch({type:BOOKHOTEL ,payload:res.data});
     }

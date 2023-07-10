@@ -1,15 +1,10 @@
-import {
-  getBookSeatsDataInvoice,
-  getBusSeatNumber,
-  seatBook,
-} from "@/service/services";
+import { getBusSeatNumber, seatBook } from "@/service/services";
 import {
   BOOK_SEAT_SUCCESS,
   BUS_REQUEST_FAIL,
   BUS_SEATS_BOOK_SUCCESS,
   REQUEST_BOOKED_SEATS,
   REQUEST_COMPLETED,
-  REQUEST_INVOICE_BUS_DATA,
   REQUEST_STARTED,
 } from "../constant";
 import { AppDispatch } from "../store";
@@ -67,25 +62,3 @@ export const getBookedSeats = (data: any) => async (dispatch: AppDispatch) => {
   }
   dispatch({ type: REQUEST_COMPLETED, payload: null });
 };
-
-export const getInvoiceDataInDB =
-  (_id: any) => async (dispatch: AppDispatch) => {
-    try {
-      console.log("called getInvoiceDataInDB action", _id);
-      let data = { _id: _id };
-
-      dispatch({ type: REQUEST_STARTED, payload: null });
-      const res = await getBookSeatsDataInvoice(data);
-      console.log("response outside if getInvoiceDataInDB ======", res);
-
-      if (res && res.status === 200) {
-        console.log("response getInvoiceDataInDB ======", res);
-        dispatch({ type: REQUEST_INVOICE_BUS_DATA, payload: res });
-      } else {
-        dispatch({ type: BUS_REQUEST_FAIL, payload: null });
-      }
-    } catch (error) {
-      throw error;
-    }
-    dispatch({ type: REQUEST_COMPLETED, payload: null });
-  };
