@@ -6,27 +6,38 @@ import BBDropdown from "@/app/components/BBDropdown";
 import BBInput from "@/app/components/BBInput";
 import BBRating from "@/app/components/BBRating";
 import BBSearch from "@/app/components/BBSearch";
-import { FaBeer } from 'react-icons/fa';
-import { RiRestaurantFill } from 'react-icons/ri';
-import { BiWifi } from 'react-icons/bi';
-import { FaGlassMartiniAlt } from 'react-icons/fa';
-import { BiSwim } from 'react-icons/bi';
-import { IoBusinessSharp, IoLocationSharp } from 'react-icons/io5';
-import { BiSpa } from 'react-icons/bi';
-import { CgGym } from 'react-icons/cg';
-import { BiRupee } from 'react-icons/bi';
+import { FaBeer } from "react-icons/fa";
+import { RiRestaurantFill } from "react-icons/ri";
+import { BiWifi } from "react-icons/bi";
+import { FaGlassMartiniAlt } from "react-icons/fa";
+import { BiSwim } from "react-icons/bi";
+import { IoBusinessSharp, IoLocationSharp } from "react-icons/io5";
+import { BiSpa } from "react-icons/bi";
+import { CgGym } from "react-icons/cg";
+import { BiRupee } from "react-icons/bi";
 import {
   getHotels,
   searchHotelByName,
   sortHotel,
 } from "@/redux/action/hotelaction";
 import { useAppDispatch } from "@/redux/store";
-import { amenities, propert_type, star_category, user_review } from "@/utils/Data";
+import {
+  amenities,
+  propert_type,
+  star_category,
+  user_review,
+} from "@/utils/Data";
 
 import { HandThumbUpIcon, WifiIcon } from "@heroicons/react/24/outline";
 
 import { MapPinIcon } from "@heroicons/react/24/solid";
-import { Accordion, AccordionBody, AccordionHeader, Checkbox, checkbox } from "@material-tailwind/react";
+import {
+  Accordion,
+  AccordionBody,
+  AccordionHeader,
+  Checkbox,
+  checkbox,
+} from "@material-tailwind/react";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { Button, Row } from "react-bootstrap";
@@ -37,13 +48,13 @@ import Filter from "./filter/page";
 import UBannerFooter from "@/components/userComponents/UBannerFooter";
 import UFooter from "@/components/userComponents/UFooter";
 
-
 function Icon({ id, open }: any) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      className={`${id === open ? "rotate-180" : ""
-        } h-5 w-5 transition-transform`}
+      className={`${
+        id === open ? "rotate-180" : ""
+      } h-5 w-5 transition-transform`}
       fill="none"
       viewBox="0 0 24 24"
       stroke="#0071cc"
@@ -58,7 +69,6 @@ interface Props {
   type?: any;
 }
 
-
 export default function UserHotelPage() {
   const [type, setType] = useState("hotel");
 
@@ -66,8 +76,8 @@ export default function UserHotelPage() {
   const [name, setName] = useState("");
   const [no, setNo] = useState("");
   const [uemail, setUEmail] = useState("");
-  const [sort, setSort] = useState("")
-  const [date, setDate] = useState("")
+  const [sort, setSort] = useState("");
+  const [date, setDate] = useState("");
 
   const hotelData: any = useSelector((state: any) => state.hotel.hotelDetails);
   const dispatch = useAppDispatch();
@@ -141,27 +151,24 @@ export default function UserHotelPage() {
 
   return hotelData ? (
     <div>
-
-      <div className="flex justify-between p-3  mx-24" >
+      <div className="flex justify-between p-3  mx-24">
         <SearchComponent travelType={type} />
       </div>
       <div className=" flex flex-row  mx-24 gap-5">
         <Filter />
         <div>
-          <div className="flex justify-between mt-2 p-1 border-b border-gray-400" >
-            <div className="mt-3">
-              Nashik
+          <div className="flex justify-between mt-2 p-1 border-b border-gray-400">
+            <div className="mt-3">Nashik</div>
+            <div className="  ml-4 bg-[#FFFFFF] mb-2 ">
+              <BBDropdown
+                label="Sort By"
+                value={sort}
+                options={datasort}
+                onPress={(value) => {
+                  setSort(value);
+                }}
+              />
             </div>
-          <div className="  ml-4 bg-[#FFFFFF] mb-2 ">
-                    <BBDropdown
-                      label="Sort By"
-                      value={sort}
-                      options={datasort}
-                      onPress={(value) => {
-                        setSort(value);
-                      }}
-                    />
-                  </div>
           </div>
           {hotelData?.map((element: any, index: any) => (
             <div className=" flex flex-row  w-[100%]">
@@ -182,11 +189,16 @@ export default function UserHotelPage() {
                   <h1 className="text-2xl rounded-lg">{element.hotelname}</h1>
                   {/* <p>Owner:{element.ownerName}</p> */}
                   <div className="mt-2 flex">
-                    <p className="mr-2"> <BBRating /></p>
-                   
-                    <p className="flex">  <IoLocationSharp className="mr-1 mt-1  text-gray-500 "/>
-                    {element.adress} {element.street}
-                  </p>
+                    <p className="mr-2">
+                      {" "}
+                      <BBRating />
+                    </p>
+
+                    <p className="flex">
+                      {" "}
+                      <IoLocationSharp className="mr-1 mt-1  text-gray-500 " />
+                      {element.adress} {element.street}
+                    </p>
                   </div>
                   {/* <p>
                     {element.adress} {element.street}
@@ -204,20 +216,23 @@ export default function UserHotelPage() {
                   <p>contact :{element.contactno}</p>
                 </div>
                 <div className=" flex flex-col pr-2 w-[20%] ">
-
-                  <p className=" flex justify-end content-end text-2xl font-semibold mt-16" >
-                    <BiRupee className="mt-1" />{element.min_order_price}</p>
-                  <p className=" flex justify-end content-end mb-3">1 Room/Night</p>
+                  <p className=" flex justify-end content-end text-2xl font-semibold mt-16">
+                    <BiRupee className="mt-1" />
+                    {element.min_order_price}
+                  </p>
+                  <p className=" flex justify-end content-end mb-3">
+                    1 Room/Night
+                  </p>
                   <div className=" flex justify-end content-end">
                     <Button
                       type="button"
                       className="hover- border rounded-lg 
                     bg-[#0071cc] border-gray-500 text-white ml-2 h-10 w-[100px]"
-                      onClick={() => searchByName(searchKey)} >
+                      onClick={() => searchByName(searchKey)}
+                    >
                       Book Now
                     </Button>
                   </div>
-
                 </div>
               </div>
             </div>

@@ -6,23 +6,20 @@ import { Tab, Tabs, TabsBody, TabsHeader } from "@material-tailwind/react";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
 import { useAppDispatch } from "@/redux/store";
-import { getBookedSeats, seats } from "@/redux/action/seatBook";
-import BBDropdown from "@/app/components/BBDropdown";
+import { seats } from "@/redux/action/seatBook";
+
 import { PlusIcon } from "@heroicons/react/24/solid";
 import BBButton from "@/app/components/BBButton";
 
 const ConfirmationPage = () => {
   const userData: any = useSelector((state: any) => state.login.loginDetails);
-  console.log("userData in bus Details Page  ..", userData);
 
   const router = useRouter();
   const [email, setEmail] = useState(userData?.email);
   const [mobileNumber, setMobileNumber] = useState(userData?.mobileNumber);
   const [firstName, setFirstName] = useState(userData?.firstName);
-  const [title, setTitle] = useState("");
   const [lastName, setLastName] = useState(userData?.lastName);
   const [age, setAge] = useState("");
-
   const [showModal, setShowModal] = React.useState(false);
   const [activeTab, setActiveTab] = React.useState("Available");
 
@@ -31,38 +28,27 @@ const ConfirmationPage = () => {
   ]);
   const dispatch = useAppDispatch();
 
-  const seatsBookData = useSelector((state: any) => state.seats.seats);
-  console.log("seatsBookData ***************************", seatsBookData);
-  console.log(
-    "seatsBookData status *************************** ",
-    seatsBookData?.status
-  );
-  useEffect(() => {
-    if (seatsBookData) {
-      if (seatsBookData?.status === 200) {
-        setTimeout(() => {
-          router.push("/user/bus/Invoice");
-          alert("Your Seats is Booked");
-          console.log("set Time Out Called");
-        }, 10000);
-      }
-    }
-  }, [seatsBookData]);
+  // const seatsBookData = useSelector((state: any) => state.seats.seats);
+
+  // console.log("seatsBookData  in details page..", seatsBookData);
+
+  // useEffect(() => {
+  //   if (seatsBookData) {
+  //     if (seatsBookData?.status === 200) {
+  //       setTimeout(() => {
+  //         router.push("/user/bus/Invoice");
+  //         alert("Your Seats is Booked");
+  //       }, 3000);
+  //     }
+  //   }
+  // }, [seatsBookData]);
 
   const book_seats: any = useSelector((state: any) => state.seats.bookSeats);
 
-  console.log("book seats final details page...!!!", book_seats);
-  console.log(
-    "travelagencyname...!!!",
-    book_seats?.busDetails?.data.travelagencyname
-  );
-
-  console.log("seats array++++++++++++++++++++", book_seats?.b_Seats);
   let data: any = [];
   data = book_seats?.b_Seats ? JSON.parse(book_seats?.b_Seats) : null;
 
   if (!data) return;
-  console.log("new data array ::::::::::", data);
 
   let from = book_seats?.busDetails?.data.from;
   let to = book_seats?.busDetails?.data.to;
@@ -74,8 +60,6 @@ const ConfirmationPage = () => {
   let arrivalTime = book_seats?.busDetails?.data.arrivalTime;
   let noOfStops = book_seats?.busDetails?.data.noofstop;
 
-  console.log("busNumber is ", busNumber);
-
   const handleClosemodal = () => {
     setShowModal(false);
   };
@@ -86,7 +70,6 @@ const ConfirmationPage = () => {
     sum = data.reduce((sum: any, item: any) => sum + item.price, 0);
     return sum;
   };
-  console.log("total price ", totalPrice());
 
   const onHandleChange = () => {
     data = {
@@ -103,12 +86,13 @@ const ConfirmationPage = () => {
       mobileNumber: mobileNumber,
       email: email,
       busNumber: busNumber,
-      // age: age,
 
       // persons: [{ firstName, lastName, age }],
       person: JSON.stringify(person),
     };
-    dispatch(seats(data));
+    dispatch(seats(data)).then((res: any) => {
+      router.push("/user/bus/Invoice");
+    });
   };
 
   const setFName = (index: number, value: any) => {
@@ -131,9 +115,7 @@ const ConfirmationPage = () => {
     let data = [...person];
     data.push({ fName: "", lName: "", age });
     setPerson(data);
-    console.log("Person data $$$$$$$$$$$$", data);
   };
-  console.log("Person data in state", person);
 
   const onSub = () => {
     let data = [...person];
@@ -295,24 +277,8 @@ const ConfirmationPage = () => {
               </div>
               {person.map((element: any, index: any) => (
                 <div className="flex flex-wrap mb-4">
-                  {/* <div className="w-32 sm:w-32 sm:pr-1 mb-3">
-                    <BBDropdown
-                      className="w-32 h-12"
-                      options={[
-                        { label: "Mr" },
-                        { label: "Ms" },
-                        { label: "Mrs" },
-                      ]}
-                      value={title}
-                      onPress={(value: any) => {
-                        setTitle(value);
-                      }}
-                      label="Title"
-                    />
-                  </div> */}
                   <div className="w-full sm:w-1/4 sm:pr-2 mb-3">
                     <UInput
-                      // className="w-full border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:border-blue-500"
                       id="passenger-name"
                       type="text"
                       placeholder="Enter First Name"
@@ -322,7 +288,6 @@ const ConfirmationPage = () => {
                   </div>
                   <div className="w-full sm:w-1/4 sm:pr-2 mb-3">
                     <UInput
-                      // className="w-full border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:border-blue-500"
                       id="passenger-name"
                       type="text"
                       placeholder="Enter Last Name"
@@ -333,7 +298,6 @@ const ConfirmationPage = () => {
 
                   <div className="w-full sm:w-1/4 sm:pr-2 mb-3">
                     <UInput
-                      // className="w-full border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:border-blue-500"
                       id="passenger-age"
                       type="text"
                       placeholder="Age"

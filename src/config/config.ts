@@ -38,4 +38,5 @@ export const ENDPOINTS = {
 
   seatBook: "busapi/busapi?action=BOOK_SEATS",
   getBookedSeat: "busapi/busapi?action=GET_BUS_NUMBER",
+  getBookSeatDataById: "busapi/busapi?action=GET_BOOKS_SEATS_DATA_BY_ID",
 };

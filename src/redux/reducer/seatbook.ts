@@ -2,12 +2,14 @@ import {
   BOOK_SEAT_SUCCESS,
   BUS_SEATS_BOOK_SUCCESS,
   REQUEST_BOOKED_SEATS,
+  REQUEST_INVOICE_BUS_DATA,
 } from "../constant";
 
 export const initialState = {
   bookSeats: undefined,
   seats: undefined,
   bookedSeats: undefined,
+  invoiceData: undefined,
 };
 
 export const seatBookReducer = (state = initialState, action: any) => {
@@ -34,6 +36,13 @@ export const seatBookReducer = (state = initialState, action: any) => {
         ...state,
         loading: false,
         bookedSeats: action.payload,
+      };
+    case REQUEST_INVOICE_BUS_DATA:
+      console.log("REQUEST_INVOICE_BUS_DATA::::::::::::::", action.payload);
+      return {
+        ...state,
+        loading: false,
+        invoiceData: action.payload,
       };
 
     default: {
