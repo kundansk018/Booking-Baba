@@ -28,7 +28,7 @@ interface Props {
 
 export default function HomeSearch(props: Props) {
   const [from, setFrom] = useState("");
-  const [to, SetTo] = useState("");
+  const [to, setTo] = useState("");
   const [departDate, setDepartDate] = useState<Date | any>(null);
   const [checkoutDate, setCheckoutDate] = useState<Date | any>(null);
   const [dropDownValue, setDropdownValue] = useState("");
@@ -47,29 +47,29 @@ export default function HomeSearch(props: Props) {
     if (!from) {
       alert("plz enter details");
     } else {
-      if (from) {
-        if (props.travelType === "train") {
-          let data = { from_Stn: from, to_Stn: to };
-          console.log("Searching for trains:", data);
-          setCounter(counter + 1);
-          dispatch(getTrainBySearch(data)).then((res: any) => {
-            console.log("response train ???????????????????????", res);
-            router.push("/user/train/newtrain/list");
-          });
-        } else if (props.travelType === "hotel") {
-          let data = { city: from };
-          dispatch(searchCityByName(data));
-        } else {
-          let data = { from: from, to: to };
-          dispatch(getBusBySearch(data)).then((res: any) => {
-            console.log("response  bus     ???????????????????????", res);
-            // setShowBox(true);
-            router.push("/user/bus/buslist");
-          });
-        }
+      // if (from ) {
+      if (props.travelType === "train") {
+        let data = { from_Stn: from, to_Stn: to };
+        console.log("Searching for trains:", data);
+        setCounter(counter + 1);
+        dispatch(getTrainBySearch(data)).then((res: any) => {
+          console.log("response train ???????????????????????", res);
+          router.push("/user/train/newtrain/list");
+        });
+      } else if (props.travelType === "hotel") {
+        let data = { city: from };
+        dispatch(searchCityByName(data));
       } else {
-        alert("Please Insert Fields");
+        let data = { from: from, to: to };
+        dispatch(getBusBySearch(data)).then((res: any) => {
+          console.log("response  bus     ???????????????????????", res);
+          // setShowBox(true);
+          router.push("/user/bus/buslist");
+        });
       }
+      // } else {
+      //   alert("Please Insert Fields");
+      // }
     }
 
     const searchData = {
@@ -112,7 +112,7 @@ export default function HomeSearch(props: Props) {
                 value={to}
                 placeholder="To"
                 onChange={(e) => {
-                  SetTo(e.target.value);
+                  setTo(e.target.value);
                 }}
                 icon={<HiLocationMarker />}
               />

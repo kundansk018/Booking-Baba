@@ -16,6 +16,7 @@ export default function updateTrain({ params }: any) {
   const [from_Stn, setFrom_Stn] = useState<string>("");
   const [to_Stn, setTo_Stn] = useState<string>("");
   const [fare, setFare] = useState<any>("");
+  const [stops, setStops] = useState<any>("");
   const [seats, setSeats] = useState<string>("");
   const [coach, setCoach] = useState<any>("");
   const [depTime, setDepTime] = useState<string>("");
@@ -26,7 +27,10 @@ export default function updateTrain({ params }: any) {
   const [operationDays, setOperationDays] = useState<string>("");
   const [trainRoute, setTrainRoute] = useState<string>("");
   const [trainDesc, setTrainDesc] = useState<string>("");
-  const [trainImage, setTrainImage] = useState<any>("");
+  const [distance, setDistance] = useState<string>("");
+  const [depDate, setDepDate] = useState<string>("");
+  const [arrDate, setArrDate] = useState<string>("");
+  const [trainImage, setTrainImage] = useState<any>();
 
   const dispatch = useAppDispatch();
   const router = useRouter();
@@ -38,6 +42,21 @@ export default function updateTrain({ params }: any) {
   useEffect(() => {
     dispatch(getTrainById(params.id));
   }, []);
+
+  const onFileUploadChange = (e: any) => {
+    const fileInput = e?.target;
+
+    if (!fileInput.files) {
+      alert("No file was chosen");
+      return;
+    }
+
+    const trainImage = fileInput.files[0];
+
+    setTrainImage(trainImage);
+    console.log(trainImage);
+    // setPreviewUrl(URL.createObjectURL(trainImage));
+  };
 
   useEffect(() => {
     let train_Data = trainData?.data;
@@ -114,7 +133,7 @@ export default function updateTrain({ params }: any) {
           <div className="flex  flex-col mx-5 w-[300px] ">
             <BBInput
               containerProps={{ className: "mb-4" }}
-              type="number"
+              type="text"
               label="Train No"
               value={trainNo}
               onChange={(e) => setTrainNo(e.target.value)}
@@ -128,17 +147,42 @@ export default function updateTrain({ params }: any) {
             <BBInput
               containerProps={{ className: "mb-4" }}
               type="time"
-              label="Arrival Time"
-              value={arrivalTime}
-              onChange={(e) => setArrivalTime(e.target.value)}
-            />
-            <BBInput
-              containerProps={{ className: "mb-4" }}
-              type="time"
               label="Departure Time"
               value={depTime}
               onChange={(e) => setDepTime(e.target.value)}
             />
+            <BBInput
+              containerProps={{ className: "mb-4" }}
+              type="time"
+              label="Arrival Time"
+              value={arrivalTime}
+              onChange={(e) => setArrivalTime(e.target.value)}
+            />
+
+            <BBInput
+              containerProps={{ className: "mb-4" }}
+              type="date"
+              label="Departure Date"
+              value={depDate}
+              onChange={(e) => setDepDate(e.target.value)}
+            />
+            <BBInput
+              containerProps={{ className: "mb-4" }}
+              type="date"
+              label="Arrival Date"
+              value={arrDate}
+              onChange={(e) => setArrDate(e.target.value)}
+            />
+            <BBInput
+              containerProps={{ className: "mb-4" }}
+              type="text"
+              label="Train Description"
+              value={trainDesc}
+              onChange={(e) => setTrainDesc(e.target.value)}
+            />
+          </div>
+
+          <div className="flex  flex-col mx-5 w-[300px]">
             <BBInput
               containerProps={{ className: "mb-4" }}
               type="text"
@@ -146,9 +190,6 @@ export default function updateTrain({ params }: any) {
               value={duration}
               onChange={(e) => setDuration(e.target.value)}
             />
-          </div>
-
-          <div className="flex  flex-col mx-5 w-[300px]">
             <BBDropdown
               containerProps={{ className: "mb-4" }}
               options={[
@@ -156,6 +197,7 @@ export default function updateTrain({ params }: any) {
                 { label: "Pune" },
                 { label: "Nashik" },
                 { label: "Nagpur" },
+                { label: "Hydrabad" },
               ]}
               value={from_Stn}
               onPress={(value: any) => {
@@ -171,6 +213,7 @@ export default function updateTrain({ params }: any) {
                 { label: "Pune" },
                 { label: "Nashik" },
                 { label: "Nagpur" },
+                { label: "Hydrabad" },
               ]}
               value={to_Stn}
               onPress={(value: any) => {
@@ -186,18 +229,30 @@ export default function updateTrain({ params }: any) {
               value={coach}
               onChange={(e) => setCoach(e.target.value)}
             />
+
+            <BBInput
+              containerProps={{ className: "mb-4" }}
+              type="text"
+              label="Total Distance"
+              value={distance}
+              onChange={(e) => setDistance(e.target.value)}
+            />
+
             <BBDropdown
               containerProps={{ className: "mb-4" }}
               options={[
                 { label: "Mumbai To Nashik" },
                 { label: "Mumbai To Nagpur" },
                 { label: "Mumbai To Pune" },
+                { label: "Mumbai To Hydrabad" },
                 { label: "Pune To Nagpur" },
                 { label: "Pune To Mumbai" },
                 { label: "Pune To Nashik" },
+                { label: "Pune To Hydrabad" },
                 { label: "Nashik To Pune" },
                 { label: "Nashik To Mumbai" },
                 { label: "Nashik To Nagpur" },
+                { label: "Nashik To Hydrabad" },
               ]}
               value={trainRoute}
               onPress={(value: any) => {
@@ -205,24 +260,28 @@ export default function updateTrain({ params }: any) {
               }}
               label="Train Route"
             />
-            <BBInput
-              containerProps={{ className: "mb-4" }}
-              type="text"
-              label="Train Description"
-              value={trainDesc}
-              onChange={(e) => setTrainDesc(e.target.value)}
-            />
+
             <BBInput
               containerProps={{ className: "mb-4" }}
               type="file"
               label="Train Image"
-              value={trainImage}
-              onChange={(e) => console.log(e?.target.files[0])}
+              // value="kjjjjs"
+              // onChange={(e) => setTrainImage(e.target.files[0])}
+              // onChange={() => {}}
+              onChange={
+                (e) => onFileUploadChange(e)
+
+                // {
+                //   if (e.target.files) {
+                //     setTrainImage(e.target.files[0]);
+                //   }
+                // }
+              }
             />
           </div>
 
           <div className="flex  flex-col mx-5 w-[300px] ">
-            <BBDropdown
+            {/* <BBDropdown
               containerProps={{ className: "mb-4" }}
               options={[
                 { label: "Economy-140" },
@@ -234,6 +293,20 @@ export default function updateTrain({ params }: any) {
                 setFare(value);
               }}
               label="Fare"
+            /> */}
+            <BBInput
+              containerProps={{ className: "mb-4" }}
+              type="text"
+              label="Fare"
+              value={fare + ""}
+              onChange={(e) => setFare(e.target.value)}
+            />
+            <BBInput
+              containerProps={{ className: "mb-4" }}
+              type="number"
+              label="Stops"
+              value={stops + ""}
+              onChange={(e) => setStops(e.target.value)}
             />
 
             <BBInput
@@ -244,10 +317,13 @@ export default function updateTrain({ params }: any) {
               onChange={(e) => setSeats(e.target.value)}
             />
             <BBDropdown
+              containerProps={{ className: "mb-4" }}
               options={[
-                { label: "Economy" },
                 { label: "Business" },
                 { label: "First Class" },
+                { label: "Second Class" },
+                { label: "First Class Sleeper(SL)" },
+                { label: "Second Class Sleeper(SL)" },
               ]}
               value={classType}
               onPress={(value: any) => {
@@ -255,20 +331,20 @@ export default function updateTrain({ params }: any) {
               }}
               label="Class Types"
             />
-            <br />
+
             <BBDropdown
+              containerProps={{ className: "mb-4" }}
               options={[
                 { label: "Express" },
                 { label: "Superfast" },
                 { label: "Local" },
               ]}
-              value={trainType}
+              value={operationDays}
               onPress={(value: any) => {
                 setTrainType(value);
               }}
               label="Train Type"
             />
-            <br />
 
             <BBDropdown
               containerProps={{ className: "mb-4" }}

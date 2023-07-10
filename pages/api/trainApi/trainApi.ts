@@ -100,6 +100,9 @@ export async function updateTrain(
         trainName: fields.trainName,
         from_Stn: fields.from_Stn,
         to_Stn: fields.to_Stn,
+        depDate: fields.depDate,
+        arrDate: fields.arrDate,
+        distance: fields.distance,
         depTime: fields.depTime,
         arrivalTime: fields.arrivalTime,
         fare: fields.fare,
@@ -146,26 +149,26 @@ export async function getTrains(
   const itemsPerPage: number = 3;
 
   try {
-     const startIndex: number = (page - 1) * itemsPerPage;
+    const startIndex: number = (page - 1) * itemsPerPage;
 
     const endIndex: number = startIndex + itemsPerPage;
 
     const items = await db
       .collection("Train Details")
       .find()
-       .skip(startIndex)
-       .limit(itemsPerPage)
+      .skip(startIndex)
+      .limit(itemsPerPage)
       .toArray();
 
     const totalItems: number = await db
       .collection("Train Details")
       .countDocuments();
 
-     const totalPages: number = Math.ceil(totalItems / itemsPerPage);
+    const totalPages: number = Math.ceil(totalItems / itemsPerPage);
 
     response.status(200).json({
-         page,
-       totalPages,
+      page,
+      totalPages,
       totalItems,
       items,
     });
@@ -228,10 +231,7 @@ export async function getAllTrainTicket(
   return response.status(200).json({ data: res });
 }
 
-
-
-
 export async function getFile(
   request: NextApiRequest,
   response: NextApiResponse
-) { }
+) {}

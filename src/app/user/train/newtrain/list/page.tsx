@@ -15,6 +15,7 @@ import { getTrainById } from "@/redux/action/trainAction";
 import SearchComponent from "@/components/SearchComponent";
 import UBannerFooter from "@/components/userComponents/UBannerFooter";
 import UFooter from "@/components/userComponents/UFooter";
+import { CustomModalTrain } from "@/components/CustomModalTrain";
 
 interface Props {
   type?: any;
@@ -71,7 +72,7 @@ export default function Page() {
                       <BBTypography
                         variant="small"
                         color="blue-gray"
-                        className="font-normal leading-none opacity-70"
+                        className="font-normal leading-none opacity-70 ml-4 p-1"
                       >
                         {head}
                       </BBTypography>
@@ -81,67 +82,59 @@ export default function Page() {
               </thead>
               <tbody>
                 {trainData?.data.map((element: any, index: any) => {
-                  const isLast = index === TABLE_ROWS.length - 1;
-
                   return (
                     <tr key={index}>
-                      <td className="text-center p-4 border-b border-blue-gray-50">
+                      <td className="text-center  border-b border-blue-gray-50">
                         <BBTypography variant="small">
-                          <span className="font-poppins text-base">
+                          <p className="font-poppins text-base">
                             {element.trainName}
-                          </span>
-                          <br />
+                          </p>
                           <span className="text-blue-gray">
                             {element.trainNo}
                           </span>
                         </BBTypography>
                       </td>
-                      <td className="text-center p-4 border-b border-blue-gray-50">
+                      <td className="text-center  border-b border-blue-gray-50">
                         <BBTypography variant="small">
-                          <span className="text-xl">{element.depTime}</span>
-                          <br />
-                          <span className="text-sm">
-                            {element.from_Stn}
-                            <br />
-                            {element.depDate}
-                          </span>
+                          <p className="text-xl">{element.depTime}</p>
+                          <p className="text-sm">{element.from_Stn}</p>
+                          <p className="text-sm">{element.depDate}</p>
                         </BBTypography>
                       </td>
-                      <td className="text-center p-4 border-b border-blue-gray-50">
+                      <td className="text-center border-b border-blue-gray-50">
                         <BBTypography variant="small">
-                          <span className="text-sm text-blue-gray">
+                          <p className="text-sm text-blue-gray">
                             {element.duration}
-                          </span>
-                          <br />
+                          </p>
                           <span className="text-xs text-blue-gray">
                             {element.stops} Stops
                           </span>
                         </BBTypography>
                       </td>
-                      <td className="text-center p-4 border-b border-blue-gray-50">
+                      <td className="text-center  border-b border-blue-gray-50">
                         <BBTypography variant="small">
-                          <span className="text-xl">{element.arrivalTime}</span>
-                          <br />
-                          <span className="text-xs text-blue-gray">
+                          <p className="text-xl">{element.arrivalTime}</p>
+                          <p className="text-xs text-blue-gray">
                             {element.to_Stn}
-                            <br />
-                            {element.arrDate}
-                          </span>
+                          </p>
+                          <p>{element.arrDate}</p>
                         </BBTypography>
                       </td>
                       <td className="text-center p-4 border-b border-blue-gray-50">
                         {showModal ? (
-                          <CustomModal
-                            children={<TrainData />}
-                            showModalHeader={true}
-                            modalHeader="Train Details"
-                            isFlexible={true}
-                            topRightCloseButtonID="x-"
-                            showModal={true}
-                            showBackButton={true}
-                            showBBPSLogo={true}
-                            handleBackClick={handleCloseModal}
-                          />
+                          <>
+                            <CustomModalTrain
+                              children={<TrainData />}
+                              showModalHeader={true}
+                              modalHeader="Train Details"
+                              isFlexible={true}
+                              topRightCloseButtonID="x-"
+                              showModal={true}
+                              showBackButton={true}
+                              showBBPSLogo={true}
+                              handleBackClick={handleCloseModal}
+                            />
+                          </>
                         ) : null}
 
                         <Button

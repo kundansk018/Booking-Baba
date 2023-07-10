@@ -41,7 +41,7 @@ const SearchComponent = (props: Props) => {
     if (!from && !to) {
       alert("plz enter details");
     } else {
-      if (from && to) {
+      if (from) {
         if (props.travelType === "train") {
           let data = { from_Stn: from, to_Stn: to };
           console.log("Searching for trains:", data);

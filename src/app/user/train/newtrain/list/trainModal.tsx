@@ -1,7 +1,9 @@
 "use client";
 import BBButton from "@/app/components/BBButton";
 import BBTypography from "@/app/components/BBTypography";
+import { dateData } from "@/utils/TrainData";
 import { Typography } from "@material-tailwind/react";
+import moment from "moment";
 import { Poppins } from "next/font/google";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
@@ -10,12 +12,12 @@ import { useSelector } from "react-redux";
 export default function TrainData() {
   const trainData: any = useSelector((state: any) => state.train.getTrainById);
   console.log("Train data is in update page ..", trainData);
+  const [selectedRadioB, setSelectedRadioB] = useState<any>("");
+  const router = useRouter();
 
-  const [selectedOption, setSelectedOption] = useState(
+  const [selectedOption, setSelectedOption] = useState<any>(
     trainData?.data?.classType
   );
-  const [selectedRadioB, setSelectedRadioB] = useState("");
-  const router = useRouter();
 
   const handleRadioButton = (event: any) => {
     setSelectedRadioB(event.target.value);
@@ -25,6 +27,11 @@ export default function TrainData() {
     setSelectedOption(event.target.value);
   };
 
+  let data = trainData ? JSON.parse(trainData?.data?.date) : null;
+  console.log("new data is ", data);
+  let newDates: any = [];
+  newDates = data?.map((element: any) => element?.date);
+  console.log("newDates", newDates);
   return (
     <div className="pt-7">
       <table className="mx-auto  w-[60%]  table-auto text-left">
@@ -97,7 +104,7 @@ export default function TrainData() {
           <input
             type="radio"
             className="form-radio text-indigo-600"
-            name="radio"
+            name="classType"
             value="First Class"
             checked={selectedOption === "First Class"}
             onChange={handleOptionChange}
@@ -109,7 +116,7 @@ export default function TrainData() {
           <input
             type="radio"
             className="form-radio text-indigo-600"
-            name="radio"
+            name="classType"
             value="Second Class"
             checked={selectedOption === "Second Class"}
             onChange={handleOptionChange}
@@ -121,9 +128,9 @@ export default function TrainData() {
           <input
             type="radio"
             className="form-radio text-indigo-600"
-            name="radio"
-            value="option3"
-            checked={selectedOption === "option3"}
+            name="classType"
+            value="First Class Sleeper"
+            checked={selectedOption === "First Class Sleeper"}
             onChange={handleOptionChange}
           />
           <span className="ml-2">First Class Sleeper</span>
@@ -131,75 +138,60 @@ export default function TrainData() {
       </div>
 
       <div>
-        <table className="mx-auto border border-black w-[60%]  table-auto text-left pt-20">
+        <table className="mx-auto  w-[60%]  table-auto text-left pt-20">
           <tbody>
             <tr>
-              <td className="pl-8 pt-3 pb-3">
-                15 June,Sat <br />
-                <label className="inline-flex items-center">
-                  <input
-                    type="radio"
-                    className="form-radio text-indigo-600"
-                    value="date1"
-                    checked={selectedRadioB === "date1"}
-                    onChange={handleRadioButton}
-                  />
-                  <span className="ml-2">Avilable</span>
-                </label>
-              </td>
-              <td>
-                16 June
-                <br />
-                <label className="inline-flex items-center">
-                  <input
-                    type="radio"
-                    className="form-radio text-indigo-600"
-                    value="date2"
-                    checked={selectedRadioB === "date2"}
-                    onChange={handleRadioButton}
-                  />
-                  <span className="ml-2">Avilable</span>
-                </label>
-              </td>
-              <td>
-                17 June <br />
-                <label className="inline-flex items-center">
-                  <input
-                    type="radio"
-                    className="form-radio text-indigo-600"
-                    value="date3"
-                    checked={selectedRadioB === "date3"}
-                    onChange={handleRadioButton}
-                  />
-                  <span className="ml-2">Avilable</span>
-                </label>
-              </td>
-              <td>
-                18 June <br />
-                <label className="inline-flex items-center">
-                  <input
-                    type="radio"
-                    className="form-radio text-indigo-600"
-                    value="date4"
-                    checked={selectedRadioB === "date4"}
-                    onChange={handleRadioButton}
-                  />
-                  <span className="ml-2">Avilable</span>
-                </label>
-              </td>
-              <td>
-                19 June <br />
-                <label className="inline-flex items-center">
-                  <input
-                    type="radio"
-                    className="form-radio text-indigo-600"
-                    value="date5"
-                    checked={selectedRadioB === "date5"}
-                    onChange={handleRadioButton}
-                  />
-                  <span className="ml-2">Avilable</span>
-                </label>
-              </td>
+              <div className="flex my-5 flex-row  justify-center gap-x-0">
+                <td className="flex flex-row  ">
+                  {dateData?.map((element: any) =>
+                    newDates?.includes(element.date) ? null : (
+                      <div className="flex md:flex-row gap-1">
+                        <div className="flex flex-col p-6 border-collapse border border-gray-400 w-40">
+                          <div className=" w-fit ">{element.date}</div>
+
+                          <div className="flex w-full items-center  mt-2">
+                            <input
+                              type="radio"
+                              className="w-fit h-fit text-indigo-600"
+                              name="dates"
+                              value="date1"
+                              // checked={selectedRadioB === "date1"}
+                              onChange={handleRadioButton}
+                            />
+                            <span className="ml-2 text-green">Available</span>
+                          </div>
+                        </div>
+                      </div>
+                    )
+                  )}
+                </td>
+                <td className="flex flex-row  ">
+                  {dateData?.map((element: any) =>
+                    newDates?.includes(element.date) ? (
+                      <div className="flex md:flex-row gap-2">
+                        <div className="flex flex-col  p-6 border-collapse border border-gray-400  ">
+                          {element.date}
+                          <div className="flex w-full items-center">
+                            <input
+                              disabled
+                              type="radio"
+                              className="w-fit h-fit text-indigo-600"
+                              name="dates"
+                              value="date2"
+                              checked={selectedRadioB === "date2"}
+                              onChange={handleRadioButton}
+                            />
+                            <span className="ml-2 text-red-600">
+                              Unavailable
+                            </span>
+                          </div>
+                          {/* <hr className="h-[2px]  bg-black" /> */}
+                        </div>
+                      </div>
+                    ) : null
+                  )}
+                </td>
+              </div>
             </tr>
           </tbody>
         </table>
