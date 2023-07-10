@@ -130,7 +130,7 @@ export default function HomeSearch(props: Props) {
                     setDepartDate(date);
                   }}
                   icon={<MdCalendarMonth />}
-                  // className=" w-full flex-shrink border border-gray-500 rounded-[4px] focus:outline-none focus:ring-1 focus:ring-blue-400 py-[11px] px-[14.5px]"
+                  className=" w-full flex-shrink border border-gray-500 rounded-[4px] focus:outline-none focus:ring-1 focus:ring-blue-400 py-[11px] px-[14.5px]"
                 />
               </div>
               <div className="flex justify-end">
@@ -143,7 +143,7 @@ export default function HomeSearch(props: Props) {
                     setCheckoutDate(date);
                   }}
                   icon={<MdCalendarMonth />}
-                  // className="w-full flex-shrink border border-gray-500 rounded-[4px] focus:outline-none focus:ring-1 focus:ring-blue-400 py-[11px] px-[14.5px]"
+                  className="w-full flex-shrink border border-gray-500 rounded-[4px] focus:outline-none focus:ring-1 focus:ring-blue-400 py-[11px] px-[14.5px]"
                 />
               </div>
             </div>
@@ -158,9 +158,8 @@ export default function HomeSearch(props: Props) {
                 onChange={(date: any) => {
                   setDepartDate(date);
                 }}
-
                 // icon={}
-                // className=" w-full  border border-gray-500 rounded-[4px] focus:outline-none focus:ring-1 focus:ring-blue-400 py-[11px] px-[14.5px]"
+                className=" w-full  border border-gray-500 rounded-[4px] focus:outline-none focus:ring-1 focus:ring-blue-400 py-[11px] px-[14.5px]"
               />
             </>
           )}

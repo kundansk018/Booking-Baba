@@ -4,8 +4,7 @@ import React, { useState } from "react";
 interface Props {
   travelType: any;
   className?: any;
-  onChange?: ((value: any) => void) | undefined
-
+  onChange?: ((value: any) => void) | undefined;
 }
 
 type Option = {
@@ -63,7 +62,7 @@ const DropdownItem: React.FC<DropdownItemProps> = ({ option }) => {
 interface Props {
   travelType: any;
   className?: any;
-  value?:any;
+  value?: any;
 }
 
 export default function Accordion(props: Props) {
@@ -92,10 +91,14 @@ export default function Accordion(props: Props) {
   ];
 
   const userHotelOptions: Option[] = [
-    { label: "Rooms", count: count1, setCount:(value)=>{ 
-      setCount1(value)
-      props.onChange&&props.onChange(value)
-    }},
+    {
+      label: "Rooms",
+      count: count1,
+      setCount: (value) => {
+        setCount1(value);
+        props.onChange && props.onChange(value);
+      },
+    },
     { label: "Adults (12+ yrs)", count: count2, setCount: setCount2 },
     { label: "Children (2-12 yrs)", count: count3, setCount: setCount3 },
   ];

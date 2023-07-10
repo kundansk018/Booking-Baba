@@ -25,7 +25,12 @@ export default function UDatePicker(props: Props) {
       minDate={props.minDate}
       selected={props.selected}
       onChange={props.onChange}
-      className={`w-full border border-gray-500 rounded-[4px] focus:outline-none focus:ring-1 focus:ring-blue-400 py-[11px] px-[14.5px] ${props?.className}`}
+      className={
+        props.className
+          ? props.className
+          : "  border border-gray-500 rounded-[4px] focus:outline-none focus:ring-1 focus:ring-blue-400 py-[11px] px-[14.5px]"
+      }
+      // className={`w-full border border-gray-500 rounded-[4px] focus:outline-none focus:ring-1 focus:ring-blue-400 py-[11px] px-[14.5px] ${props?.className}`}
     />
   );
 }
