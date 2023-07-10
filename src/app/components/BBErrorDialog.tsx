@@ -9,10 +9,10 @@ import BBButton from "./BBButton";
 import { BellIcon } from "@heroicons/react/24/solid";
 
 interface DialogProps {
-  dialogHeader: string;
-  dialogMessage: any;
+  dialogHeader?: string;
+  dialogMessage?: any;
   open: boolean;
-  onOkClick: () => void;
+  onOkClick?: () => void;
 }
 
 export default function BBErrorDialog(props: DialogProps) {

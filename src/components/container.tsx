@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import Navigationbar from "@/app/components/Navbar";
 import { RotatingLines } from "react-loader-spinner";
 import { useRouter } from "next/navigation";
+import { Dialog, DialogBody, DialogHeader } from "@material-tailwind/react";
 
 interface ContainerProps {
   children: any;
@@ -23,7 +24,7 @@ const Container = (props: ContainerProps) => {
   console.log("userData.rollType-----", userData?.data?.data?.rollType);
   // }, []);
   return (
-    <div className="relative">
+    <div className="relative  ">
       {userData?.data?.data?.rollType === 2 ? <Navigationbar /> : ""}
       {userData?.data?.data?.rollType === 2 ? "" : router.push("/auth")}
       {/* {!["/auth", "/"]?.includes(window?.location?.pathname) && (
@@ -32,21 +33,29 @@ const Container = (props: ContainerProps) => {
       {/* 
       {!["/auth", "/"]?.includes(pathname) && <Navigationbar />}  */}
       {props.children}
-      <>
-        {loading ? (
-          <div className="absolute top-0 z-50 flex h-full w-full items-center justify-center bg-white bg-opacity-30">
-            {/* <Spinner className="h-12 w-12" /> */}
-            <RotatingLines
-              strokeColor="green"
-              strokeWidth="5"
-              animationDuration="0.75"
-              width="96"
-              visible={true}
-            />
-          </div>
-        ) : null}
-      </>
+      {/* <div className=" "> */}
+      {loading ? (
+        <>
+          <Dialog
+            open
+            handler={() => console.log("")}
+            className="bg-opacity-0 border-0 border-none shadow-none "
+          >
+            <DialogBody className="bg-opacity-0 border-none shadow-none">
+              <div className="flex w-full justify-center  ">
+                <div className="w-fit h-fit border-[5px] border-blue-500 p-4 rounded-full border-x-transparent animate-spin ">
+                  {/* <div
+                    className="w-fit h-fit rounded-full animate-spin
+                     border-[25px] border-solid border-x-blue-500 border-y-gray-100  "
+                  ></div> */}
+                </div>
+              </div>
+            </DialogBody>
+          </Dialog>
+        </>
+      ) : null}
     </div>
+    // </div>
   );
 };
 
