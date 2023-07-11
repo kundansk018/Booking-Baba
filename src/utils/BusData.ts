@@ -192,6 +192,14 @@ const TABLE_ROWS = [
   },
 ];
 
-const headerData = [{}];
+const Bustype = [
+  { label: "Ac-Shivneri" },
+  { label: "Semi-Luxury" },
+  { label: "Night Express" },
+  { label: "Ordinary-Express" },
+  { label: "Day Ordinary" },
+  { label: "Ac-Volvo" },
+  { label: "Non-Ac-Shivneri" },
+];
 
-export { SEATS, TABLE_ROWS, headerData };
+export { SEATS, TABLE_ROWS, Bustype };

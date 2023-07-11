@@ -91,7 +91,7 @@ const FilterPage = () => {
       <div>
         <h3
           style={{
-            fontFamily: "Poppins ,sans-serif",
+           
             color: "#0c2f54",
             fontSize: "25px",
           }}
@@ -109,11 +109,14 @@ const FilterPage = () => {
               onClick={() => handleOpen(1)}
             >
               <h2
-                style={{
-                  fontFamily: "Poppins ,sans-serif",
-                  //  color: "#0071cc",
-                  fontSize: "16px",
-                }}
+                className="text-[16px] font-normal text-[#4c4d4d]"
+                // style={{
+                //   fontFamily: "sans-serif",
+                //   fontWeight: "normal",
+
+                //   color: "#4c4d4d",
+                //   fontSize: "16px",
+                // }}
               >
                 Departure Time
               </h2>
@@ -127,7 +130,6 @@ const FilterPage = () => {
                 <MultiRangeSlider
                   min={0}
                   max={1439}
-                  // step={0}
                   minValue={0}
                   maxValue={1439}
                   onInput={(e:any) => {
@@ -147,15 +149,17 @@ const FilterPage = () => {
               // }`}
               onClick={() => handleOpen2(2)}
             >
-              <p
+              <h2
                 style={{
-                  fontFamily: "Poppins ,sans-serif",
-                  // color: "#0071cc",
+                  fontFamily: "sans-serif",
+                  fontWeight: "normal",
+
+                  color: "#4c4d4d",
                   fontSize: "16px",
                 }}
               >
                 Arrival Time
-              </p>
+              </h2>
             </AccordionHeader>
             <AccordionBody>
               <div>
@@ -166,7 +170,6 @@ const FilterPage = () => {
                 <MultiRangeSlider
                   min={0}
                   max={1439}
-                  // step={5}
                   minValue={0}
                   maxValue={1439}
                   onInput={(e:any) => {
@@ -188,8 +191,10 @@ const FilterPage = () => {
             >
               <h2
                 style={{
-                  fontFamily: "Poppins ,sans-serif",
-                  // color: "#0071cc",
+                  fontFamily: "sans-serif",
+                  fontWeight: "normal",
+                  // fontStyle:"sans-serif"
+                  color: "#4c4d4d",
                   fontSize: "16px",
                 }}
               >

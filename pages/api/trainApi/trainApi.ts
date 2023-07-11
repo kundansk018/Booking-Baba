@@ -58,9 +58,7 @@ export async function addTrain(
 ) {
   try {
     const { fields, files } = await parseForm(request);
-
     const file = files?.imageUrl;
-
     let url = Array.isArray(file)
       ? file.map((f) => f.newFilename)
       : file.newFilename;
@@ -88,7 +86,7 @@ export async function updateTrain(
   response: NextApiResponse
 ) {
   const { fields } = await parseForm(request);
-
+ 
   console.log(" update train api Id is ", fields._id);
 
   const buses = await db.collection("Train Details");

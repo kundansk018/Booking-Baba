@@ -28,7 +28,7 @@ export default function Page() {
   const trainData: any = useSelector(
     (state: any) => state.train.userTrainDetails
   );
-  console.log("Train data is in list page ..", trainData);
+  console.log("Train data is in list page..", trainData);
 
   let from = trainData?.data[0]?.from_Stn;
   const to = trainData?.data[0]?.to_Stn;
@@ -52,117 +52,128 @@ export default function Page() {
         <div className="my-5">
           <SearchComponent travelType={type} />
         </div>
-        <Card className="overflow-scroll h-full w-full flex-row gap-5">
-          <div className="">
+        <div className="flex flex-row gap-5 ">
+          <div className="bg-white pr-4">
             <FilterPage />
           </div>
-          <div>
-            <div className="font-sans serif text-xl mb-4 pl-10 pt-3 text-center">
+
+          <div className="w-full bg-white ">
+            <div className="font-Poppins mb-4 pl-10 pt-3 text-center  text-[#0c2f54] text-2xl">
               {from} To {to}
             </div>
-            <table className="mx-auto border border-gray-300 w-[133%] table-auto text-left">
-              <thead>
-                <tr>
-                  {TABLE_HEAD.map((head) => (
-                    <th
-                      key={head}
-                      className="border-b border-blue-gray-100 bg-blue-gray-50 p-4"
-                    >
-                      <BBTypography
-                        variant="small"
-                        color="blue-gray"
-                        className="font-normal leading-none opacity-70"
+            <div
+              className="flex-grow overflow-y-scroll"
+              style={{ height: "72vh" }}
+            >
+              <table className=" mx-auto border border-gray-300 w-[100%]  text-left h-[70px]">
+                <thead>
+                  <tr>
+                    {/* <div className=""> */}
+                    {TABLE_HEAD.map((head) => (
+                      <th
+                        style={{ position: "sticky", top: "0" }}
+                        key={head}
+                        className="border-b border-blue-gray-100 bg-blue-gray-50 py-3 pl-10"
                       >
-                        {head}
-                      </BBTypography>
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {trainData?.data.map((element: any, index: any) => {
-                  const isLast = index === TABLE_ROWS.length - 1;
-
-                  return (
-                    <tr key={index}>
-                      <td className="text-center p-4 border-b border-blue-gray-50">
-                        <BBTypography variant="small">
-                          <span className="font-poppins text-base">
-                            {element.trainName}
-                          </span>
-                          <br />
-                          <span className="text-blue-gray">
-                            {element.trainNo}
-                          </span>
-                        </BBTypography>
-                      </td>
-                      <td className="text-center p-4 border-b border-blue-gray-50">
-                        <BBTypography variant="small">
-                          <span className="text-xl">{element.depTime}</span>
-                          <br />
-                          <span className="text-sm">
-                            {element.from_Stn}
-                            <br />
-                            {element.depDate}
-                          </span>
-                        </BBTypography>
-                      </td>
-                      <td className="text-center p-4 border-b border-blue-gray-50">
-                        <BBTypography variant="small">
-                          <span className="text-sm text-blue-gray">
-                            {element.duration}
-                          </span>
-                          <br />
-                          <span className="text-xs text-blue-gray">
-                            {element.stops} Stops
-                          </span>
-                        </BBTypography>
-                      </td>
-                      <td className="text-center p-4 border-b border-blue-gray-50">
-                        <BBTypography variant="small">
-                          <span className="text-xl">{element.arrivalTime}</span>
-                          <br />
-                          <span className="text-xs text-blue-gray">
-                            {element.to_Stn}
-                            <br />
-                            {element.arrDate}
-                          </span>
-                        </BBTypography>
-                      </td>
-                      <td className="text-center p-4 border-b border-blue-gray-50">
-                        {showModal ? (
-                          <CustomModal
-                            children={<TrainData />}
-                            showModalHeader={true}
-                            modalHeader="Train Details"
-                            isFlexible={true}
-                            topRightCloseButtonID="x-"
-                            showModal={true}
-                            showBackButton={true}
-                            showBBPSLogo={true}
-                            handleBackClick={handleCloseModal}
-                          />
-                        ) : null}
-
-                        <Button
-                          variant="outlined"
-                          style={{ color: "#0071cc;", fontSize: "14px" }}
-                          // color="lightBlue"
-                          // size="regular"
-                          onClick={() => handleChange(element._id)}
+                        <BBTypography
+                          variant="small"
+                          color="blue-gray"
+                          className="font-normal leading-none opacity-70"
                         >
-                          <span className="font-sans text-sm">
-                            Check Availability
-                          </span>
-                        </Button>
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
+                          {head}
+                        </BBTypography>
+                      </th>
+                    ))}
+                    {/* </div> */}
+                  </tr>
+                </thead>
+                <tbody>
+                  {trainData?.data.map((element: any, index: any) => {
+                    const isLast = index === TABLE_ROWS.length - 1;
+
+                    return (
+                      <tr key={index}>
+                        <td className="text-center p-4 border-b border-blue-gray-50 ">
+                          <BBTypography variant="small">
+                            <span className="font-Poppins text-lg  text-[#212529]">
+                              {element.trainName}
+                            </span>
+                            <br />
+                            <span className="text-blue-gray">
+                              {element.trainNo}
+                            </span>
+                          </BBTypography>
+                        </td>
+                        <td className="text-center p-4 border-b border-blue-gray-50">
+                          <BBTypography variant="small">
+                            <span className="text-lg">{element.depTime}</span>
+                            <br />
+                            <span className="text-[12.25px]">
+                              {element.from_Stn}
+                              <br />
+                              {element.depDate}
+                            </span>
+                          </BBTypography>
+                        </td>
+                        <td className="text-center p-4 border-b border-blue-gray-50">
+                          <BBTypography variant="small">
+                            <span className="text-[16px] text-blue-gray">
+                              {element.duration}
+                            </span>
+                            <br />
+                            <span className="text-[12.25px] text-blue-gray">
+                              {element.stops} Stops
+                            </span>
+                          </BBTypography>
+                        </td>
+                        <td className="text-center p-4 border-b border-blue-gray-50">
+                          <BBTypography variant="small">
+                            <span className="text-lg">
+                              {element.arrivalTime}
+                            </span>
+                            <br />
+                            <span className="text-[12.25px] text-blue-gray">
+                              {element.to_Stn}
+                              <br />
+                              {element.arrDate}
+                            </span>
+                          </BBTypography>
+                        </td>
+                        <td className="text-center p-4 border-b border-blue-gray-50">
+                          {showModal ? (
+                            <CustomModal
+                              children={<TrainData />}
+                              showModalHeader={true}
+                              modalHeader="Train Details"
+                              isFlexible={true}
+                              topRightCloseButtonID="x-"
+                              showModal={true}
+                              showBackButton={true}
+                              showBBPSLogo={true}
+                              handleBackClick={handleCloseModal}
+                            />
+                          ) : null}
+
+                          <Button
+                            variant="outlined"
+                            style={{ color: "#0071cc;", fontSize: "14px" }}
+                            // color="lightBlue"
+                            // size="regular"
+                            onClick={() => handleChange(element._id)}
+                          >
+                            <span className="font-sans text-sm font-light">
+                              Check Availability
+                            </span>
+                          </Button>
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
           </div>
-        </Card>
+        </div>
       </div>
       <div className="bg-white flex flex-col justify-center my-5">
         <UBannerFooter />

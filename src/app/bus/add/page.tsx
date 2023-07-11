@@ -436,7 +436,7 @@ export default function AddBus() {
             ripple={false}
             id="3"
             onChange={(e) => setLights(!lights)}
-            checked={system}
+            checked={lights}
             label="Reading Lights"
           />
 

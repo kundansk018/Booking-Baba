@@ -75,7 +75,7 @@ export const deleteTrainAction =
         dispatch({ type: TRAIN_REQUEST_FAIL, payload: null });
       }
     } catch (error) {
-      console.log(error);
+      console.log(error);       
     }
     dispatch({ type: REQUEST_COMPLETED, payload: null });
   };
