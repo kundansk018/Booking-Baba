@@ -35,6 +35,8 @@ export default async function handler(
         return await bookSeats(request, response);
       } else if (request.query?.action === "GET_BUS_NUMBER") {
         return await findByBusNumber(request, response);
+      } else if (request.query?.action === "GET_BOOKS_SEATS_DATA_BY_ID") {
+        return await getBookSeatsDataById(request, response);
       }
 
     default:
@@ -49,14 +51,14 @@ export async function addBus(
   response: NextApiResponse
 ) {
   try {
-    console.log("called api");
+    // console.log("called api");
 
     const { fields, files } = await parseForm(request);
 
     const file = files?.imageUrl;
 
-    console.log("fields in add bus ", fields);
-    console.log("file  in add bus  ", file);
+    // console.log("fields in add bus ", fields);
+    // console.log("file  in add bus  ", file);
 
     let url = Array.isArray(file)
       ? file.map((f) => f.newFilename)
@@ -154,12 +156,12 @@ export async function getAllBuses(
   request: NextApiRequest,
   response: NextApiResponse
 ) {
-  console.log("api called....");
+  // console.log("api called....");
 
   const { fields } = await parseForm(request);
-  console.log("fields", fields);
+  // console.log("fields", fields);
   const page: number = parseInt(fields.page as string) || 1;
-  console.log("page Number", fields.page);
+  // console.log("page Number", fields.page);
   const itemsPerPage: number = 3;
 
   try {
@@ -187,7 +189,7 @@ export async function getAllBuses(
       items,
     });
   } catch (error) {
-    console.log("error fetching data from mongodb", error);
+    // console.log("error fetching data from mongodb", error);
     response.status(500).json({ message: "internal server error" });
   }
 }
@@ -229,8 +231,36 @@ export async function findByBusNumber(
   response: NextApiResponse
 ) {
   const { fields } = await parseForm(request);
-  console.log("called find by bus number api");
+  // console.log("called find by bus number api");
   const bus = await db.collection("Bus_Book_Seats");
   const res = await bus.findOne({ busNumber: fields.busNumber });
+  // console.log("res:::::::::::::: in findByBusNumber", res);
   return response.status(200).json({ data: res ? res : "not available bus " });
+}
+
+// export async function updateSeats(
+//   request: NextApiRequest,
+//   response: NextApiResponse
+// ) {
+//   const { fields } = await parseForm(request);
+//   // console.log("called find by bus number api");
+//   const bus = await db.collection("Bus_Book_Seats");
+//   const res = await bus.findOne({ busNumber: fields.busNumber });
+//   // console.log("res:::::::::::::: in findByBusNumber", res);
+//   return response.status(200).json({ data: res ? res : "not available bus " });
+// }
+
+export async function getBookSeatsDataById(
+  request: NextApiRequest,
+  response: NextApiResponse
+) {
+  console.log("Called getBookSeatsDataBy Id");
+
+  const { fields } = await parseForm(request);
+  console.log("fields id in getBookSeatsDataBy Id", fields._id);
+
+  const bus = await db.collection("Bus_Book_Seats");
+  const res = await bus.findOne({ _id: new ObjectId(fields._id) });
+  console.log("response in getBookSeatsDataById*************", res);
+  return response.status(200).json({ data: res });
 }

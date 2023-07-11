@@ -10,6 +10,7 @@ import { useAppDispatch } from "@/redux/store";
 import { useRouter } from "next/navigation";
 import { getTrainBySearch } from "@/redux/action/trainAction";
 import { getBusBySearch } from "@/redux/action/busaction";
+import { HiLocationMarker } from "react-icons/hi";
 
 interface Props {
   from?: string;
@@ -40,7 +41,7 @@ const SearchComponent = (props: Props) => {
     if (!from && !to) {
       alert("plz enter details");
     } else {
-      if (from && to) {
+      if (from) {
         if (props.travelType === "train") {
           let data = { from_Stn: from, to_Stn: to };
           console.log("Searching for trains:", data);
@@ -89,6 +90,7 @@ const SearchComponent = (props: Props) => {
             setFrom(e.target.value);
           }}
           className="mix-w-fit"
+          icon={<HiLocationMarker />}
         />
         {props.travelType === "hotel" ? null : (
           <UInput
@@ -99,6 +101,7 @@ const SearchComponent = (props: Props) => {
             onChange={(e) => {
               setTo(e.target.value);
             }}
+            icon={<HiLocationMarker />}
           />
         )}
         {props.travelType === "hotel" ? (

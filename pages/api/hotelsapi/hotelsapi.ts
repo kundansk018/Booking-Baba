@@ -2,7 +2,6 @@ import { NextApiRequest, NextApiResponse } from "next";
 import getDB from "../connection";
 import { ObjectId } from "mongodb";
 import { parseForm } from "../../lib/parse-form";
-import moment from "moment";
 
 let db: any = undefined;
 
@@ -170,7 +169,7 @@ export async function bookHotel(
   
   const hotels = await db.collection("Hotel_Booked_Details");
   try{
-  const res = await hotels.insertOne({...request.body,created_date: moment().format('L'),updated_date: moment().format('L')});
+  const res = await hotels.insertOne(request.body);
   return response.status(200).json({ data: res, message:"Hotel Book Successfully" });
 }catch(error){
 

@@ -11,6 +11,8 @@ import { useAppDispatch } from "@/redux/store";
 import { useRouter } from "next/navigation";
 import { getTrainBySearch } from "@/redux/action/trainAction";
 import { getBusBySearch } from "@/redux/action/busaction";
+import { MdCalendarMonth } from "react-icons/md";
+import { HiLocationMarker } from "react-icons/hi";
 import { searchCityByName } from "@/redux/action/hotelaction";
 
 interface Props {
@@ -26,7 +28,7 @@ interface Props {
 
 export default function HomeSearch(props: Props) {
   const [from, setFrom] = useState("");
-  const [to, SetTo] = useState("");
+  const [to, setTo] = useState("");
   const [departDate, setDepartDate] = useState<Date | any>(null);
   const [checkoutDate, setCheckoutDate] = useState<Date | any>(null);
   const [dropDownValue, setDropdownValue] = useState("");
@@ -42,32 +44,32 @@ export default function HomeSearch(props: Props) {
 
   const handleSearch = () => {
     console.log("from nd to ", from, to);
-    if (!from ) {
+    if (!from) {
       alert("plz enter details");
     } else {
-      if (from ) {
-        if (props.travelType === "train") {
-          let data = { from_Stn: from, to_Stn: to };
-          console.log("Searching for trains:", data);
-          setCounter(counter + 1);
-          dispatch(getTrainBySearch(data)).then((res: any) => {
-            console.log("response train ???????????????????????", res);
-            router.push("/user/train/newtrain/list");
-          });
-        } else if (props.travelType === "hotel") {
-          let data = { city: from };
-          dispatch(searchCityByName(data))
-        } else {
-          let data = { from: from, to: to };
-          dispatch(getBusBySearch(data)).then((res: any) => {
-            console.log("response  bus     ???????????????????????", res);
-            // setShowBox(true);
-            router.push("/user/bus/buslist");
-          });
-        }
+      // if (from ) {
+      if (props.travelType === "train") {
+        let data = { from_Stn: from, to_Stn: to };
+        console.log("Searching for trains:", data);
+        setCounter(counter + 1);
+        dispatch(getTrainBySearch(data)).then((res: any) => {
+          console.log("response train ???????????????????????", res);
+          router.push("/user/train/newtrain/list");
+        });
+      } else if (props.travelType === "hotel") {
+        let data = { city: from };
+        dispatch(searchCityByName(data));
       } else {
-        alert("Please Insert Fields");
+        let data = { from: from, to: to };
+        dispatch(getBusBySearch(data)).then((res: any) => {
+          console.log("response  bus     ???????????????????????", res);
+          // setShowBox(true);
+          router.push("/user/bus/buslist");
+        });
       }
+      // } else {
+      //   alert("Please Insert Fields");
+      // }
     }
 
     const searchData = {
@@ -78,7 +80,6 @@ export default function HomeSearch(props: Props) {
       dropDownValue,
     };
 
-
     console.log("data", searchData);
     console.log("from", props.travelType);
     console.log("gefhgrhrhhrhrhryn r hrhethn", window.location.pathname);
@@ -87,7 +88,7 @@ export default function HomeSearch(props: Props) {
   return (
     <div className="w-full ">
       <div className="p-5 bg-white">
-        <div className="flex flex-col justify-center  gap-4">
+        <div className="flex flex-col justify-center w-full gap-4">
           <div className=" text-lg font-medium text-black">{props.title}</div>
           <div className="flex flex-row gap-5">
             <UInput
@@ -101,6 +102,7 @@ export default function HomeSearch(props: Props) {
               onChange={(e) => {
                 setFrom(e.target.value);
               }}
+              icon={<HiLocationMarker />}
             />
 
             {props.travelType === "hotel" ? null : (
@@ -110,8 +112,9 @@ export default function HomeSearch(props: Props) {
                 value={to}
                 placeholder="To"
                 onChange={(e) => {
-                  SetTo(e.target.value);
+                  setTo(e.target.value);
                 }}
+                icon={<HiLocationMarker />}
               />
             )}
           </div>
@@ -126,6 +129,7 @@ export default function HomeSearch(props: Props) {
                   onChange={(date: any) => {
                     setDepartDate(date);
                   }}
+                  icon={<MdCalendarMonth />}
                   className=" w-full flex-shrink border border-gray-500 rounded-[4px] focus:outline-none focus:ring-1 focus:ring-blue-400 py-[11px] px-[14.5px]"
                 />
               </div>
@@ -138,21 +142,26 @@ export default function HomeSearch(props: Props) {
                   onChange={(date: any) => {
                     setCheckoutDate(date);
                   }}
+                  icon={<MdCalendarMonth />}
                   className="w-full flex-shrink border border-gray-500 rounded-[4px] focus:outline-none focus:ring-1 focus:ring-blue-400 py-[11px] px-[14.5px]"
                 />
               </div>
             </div>
           ) : (
-            <UDatePicker
-              id="departDate"
-              placeholder="Depart Date"
-              minDate={new Date()}
-              selected={departDate}
-              onChange={(date: any) => {
-                setDepartDate(date);
-              }}
-              className=" w-full  border border-gray-500 rounded-[4px] focus:outline-none focus:ring-1 focus:ring-blue-400 py-[11px] px-[14.5px]"
-            />
+            // <div className="w-full relative flex justify-center items-center">
+            <>
+              <UDatePicker
+                id="departDate"
+                placeholder="Depart Date"
+                minDate={new Date()}
+                selected={departDate}
+                onChange={(date: any) => {
+                  setDepartDate(date);
+                }}
+                // icon={}
+                className=" w-full  border border-gray-500 rounded-[4px] focus:outline-none focus:ring-1 focus:ring-blue-400 py-[11px] px-[14.5px]"
+              />
+            </>
           )}
           <Accordion travelType={props.travelType} />
           <BBButton

@@ -3,8 +3,6 @@
 import React, { useState } from "react";
 import { Row } from "react-bootstrap";
 
-
-
 export default function BBSearch({ onClick }: any) {
   const [searchKey, setSearchKey] = useState("");
   return (

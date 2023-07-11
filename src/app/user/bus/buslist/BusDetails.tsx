@@ -37,25 +37,20 @@ export const BusDetails: React.FC<Props> = ({ myData }) => {
 
   const router = useRouter();
 
-  // console.log(" Data in Bus Details :::::: ", myData);
-
   const busDetails = useSelector((state: any) => state.bus.getBusById);
   const busNumber = busDetails?.data?.busnumber;
-  console.log("BusNumber ", busDetails?.data?.busnumber);
 
   const bookedSeats = useSelector((state: any) => state.seats.bookedSeats);
 
   let data = bookedSeats?.data?.data?.seats;
   let bookedSeatsData: any = [];
   bookedSeatsData = data ? JSON.parse(data) : "";
-  console.log("bookedSeatsData", bookedSeatsData);
+
   let bookedSeatsNo: any = [];
-  // bookedSeatsNo = bookedSeatsData?.map((element: any) => element.seat_number);
 
   bookedSeatsNo =
     bookedSeatsData &&
     bookedSeatsData?.map((element: any, index: any) => element?.seat_number);
-  console.log("booked seat no", bookedSeatsNo);
 
   useEffect(() => {
     if (busNumber) {
@@ -69,8 +64,6 @@ export const BusDetails: React.FC<Props> = ({ myData }) => {
 
     dispatch(getBookedSeats(formData));
   };
-
-  console.log("bus Details By id..:::::::::::::: ", busDetails);
 
   const onSeats = (selected_seat: any) => {
     let seatId = selected_seat.id;
@@ -96,14 +89,12 @@ export const BusDetails: React.FC<Props> = ({ myData }) => {
 
   const onBookSeats = () => {
     let b_Seats: any = [...seats];
-    console.log("seats ", b_Seats);
 
     let data = {
       b_Seats: JSON.stringify(b_Seats),
       totalPrice: price,
       busDetails: busDetails,
     };
-    console.log("data in busdetails page...", data);
 
     dispatch(book_seats(data)).then((res: any) => {
       router.push("/user/bus/details");
@@ -114,10 +105,7 @@ export const BusDetails: React.FC<Props> = ({ myData }) => {
     seats.pop();
     setCount(count + 1);
   };
-  console.log(
-    "busDetails?.data?.travelagencyname",
-    busDetails?.data?.travelagencyname
-  );
+
   return (
     <div className="h-[530px] overflow-y-scroll overflow-y-hidden">
       {/* <p className="text-black font-semibold text-xl">Bus Booking Details</p> */}
@@ -177,58 +165,83 @@ export const BusDetails: React.FC<Props> = ({ myData }) => {
                   Click on Seat to select/ deselect
                 </p>
                 <div className="flex">
-                  <div className="h-96 w-52 bg-grey-400 mx-auto border border-black">
-                    <p className="mx-auto -m-3 bg-[#e7e9ed] w-fit h-fit mb-2 ">
-                      Front
-                    </p>
-                    <div className="flex flex-wrap ">
-                      {SEATS?.map((element: any, index: any) => (
-                        <>
-                          {bookedSeatsNo.includes(element.seat_number) ? (
-                            <div
-                              key={index}
-                              className={`flex cursor-not-allowed justify-center mx-3 my-2 text-sm rounded-md px-3
+                  <div className="">
+                    <div className="h-96 w-52 bg-grey-400 mx-auto border border-black">
+                      <p className="mx-auto -m-3 bg-[#e7e9ed] w-fit h-fit mb-2 ">
+                        Front
+                      </p>
+                      <div className="flex flex-wrap ">
+                        {SEATS?.map((element: any, index: any) => (
+                          <>
+                            {bookedSeatsNo.includes(element.seat_number) ? (
+                              <div
+                                key={index}
+                                className={`flex cursor-not-allowed justify-center mx-3 my-2 text-sm rounded-md px-3
                              p-1 h-fit w-5 bg-gray-200 text-black ${
                                bookedSeatsNo.includes(element.seat_number)
                                  ? "book-seats text-white"
                                  : ""
                              } `}
-                            >
-                              {element.seat_number}
-                            </div>
-                          ) : (
-                            <div
-                              key={index}
-                              onClick={() => {
-                                onSeats(element);
-                              }}
-                              className={`flex cursor-pointer justify-center mx-3 my-2 text-sm rounded-md px-3
+                              >
+                                {element.seat_number}
+                              </div>
+                            ) : (
+                              <div
+                                key={index}
+                                onClick={() => {
+                                  onSeats(element);
+                                }}
+                                className={`flex cursor-pointer justify-center mx-3 my-2 text-sm rounded-md px-3
                              p-1 h-fit w-5 bg-gray-200 text-black ${
                                seats.includes(element)
                                  ? "selected-seats text-white"
                                  : ""
                              } `}
-                            >
-                              {element.seat_number}
-                            </div>
-                          )}
-                        </>
+                              >
+                                {element.seat_number}
+                              </div>
+                            )}
+                          </>
 
-                        // <div
-                        //   key={index}
-                        //   onClick={() => {
-                        //     onSeats(element);
-                        //   }}
-                        //   className={`flex cursor-pointer justify-center mx-3 my-2 text-sm rounded-md px-3
-                        //    p-1 h-fit w-5 bg-gray-200 text-black ${
-                        //      seats.includes(element)
-                        //        ? "selected-seats text-white"
-                        //        : ""
-                        //    } `}
-                        // >
-                        //   {element.seat_number}
-                        // </div>
-                      ))}
+                          // <div
+                          //   key={index}
+                          //   onClick={() => {
+                          //     onSeats(element);
+                          //   }}
+                          //   className={`flex cursor-pointer justify-center mx-3 my-2 text-sm rounded-md px-3
+                          //    p-1 h-fit w-5 bg-gray-200 text-black ${
+                          //      seats.includes(element)
+                          //        ? "selected-seats text-white"
+                          //        : ""
+                          //    } `}
+                          // >
+                          //   {element.seat_number}
+                          // </div>
+                        ))}
+                      </div>
+                    </div>
+                    <div className="flex flex-wrap p-2 gap-3 text-sm">
+                      <div className="flex">
+                        <span
+                          className="flex cursor-pointer justify-center items-center mx-1 mt-[3px] text-sm rounded-md px-2
+                              h-4 w-3 bg-gray-700"
+                        ></span>
+                        First Class
+                      </div>
+                      <div className="flex">
+                        <span
+                          className="flex cursor-pointer justify-center items-center mx-1 mt-[3px] text-sm rounded-md px-2
+                              h-4 w-3 bg-gray-400"
+                        ></span>
+                        Economy Class
+                      </div>
+                      <div className="flex">
+                        <span
+                          className="flex cursor-pointer justify-center items-center mx-1 mt-[3px] text-sm rounded-md px-2
+                              h-4 w-3 bg-red-900"
+                        ></span>
+                        Booked Seats
+                      </div>
                     </div>
                   </div>
                   <div className="h-full w-72 mx-auto border border-gray-100 bg-white p-3">

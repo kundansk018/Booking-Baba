@@ -15,6 +15,7 @@ import { getTrainById } from "@/redux/action/trainAction";
 import SearchComponent from "@/components/SearchComponent";
 import UBannerFooter from "@/components/userComponents/UBannerFooter";
 import UFooter from "@/components/userComponents/UFooter";
+import { CustomModalTrain } from "@/components/CustomModalTrain";
 
 interface Props {
   type?: any;
