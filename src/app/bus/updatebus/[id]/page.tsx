@@ -22,6 +22,7 @@ import {
 } from "@/redux/action/busaction";
 import { useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
+import { BusType } from "@/utils/BusData";
 
 export default function UpdateBus({ params }: any) {
   const dispatch = useAppDispatch();
@@ -328,6 +329,7 @@ export default function UpdateBus({ params }: any) {
               }}
               label="BusType"
             />
+
             <br />
 
             <BBDropdown

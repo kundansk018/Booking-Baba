@@ -100,11 +100,11 @@ export default function FilterPage() {
   };
 
   return (
-    <div className="text-2xl font-sans serif fontSize-25px mb-4 pl-10 -mt-2 ">
+    <div className="text-2xl font-Poppins fontSize-25px mb-4 -mt-2 ">
       <div>
         <h3
           style={{
-            fontFamily: "Poppins,sans-serif",
+            fontFamily: "Poppins,sans-serif ml-5",
             color: " #0c2f54",
             fontSize: "25px",
           }}
@@ -119,9 +119,10 @@ export default function FilterPage() {
               onClick={() => handleOpen(1)}
             >
               <h2
+                className="text-[#4c4d4d] font-normal text-[18px] font-Poppins"
                 style={{
-                  fontFamily: "Poppins,sans-serif",
-                  fontSize: "16px",
+                  fontFamily: "Poppins,sans-serif ",
+                  // fontSize: "16px",
                 }}
               >
                 Departure Time
@@ -152,9 +153,10 @@ export default function FilterPage() {
           <Accordion open={open2 === 2} icon={<Icon id={2} open={open2} />}>
             <AccordionHeader onClick={() => handleOpen2(2)}>
               <h2
+                className="text-[#4c4d4d] font-normal text-[18px] font-Poppins"
                 style={{
                   fontFamily: "Poppins,sans-serif",
-                  fontSize: "16px",
+                  // fontSize: "16px",
                 }}
               >
                 Price
@@ -185,9 +187,10 @@ export default function FilterPage() {
           <Accordion open={open3 === 3} icon={<Icon id={3} open={open3} />}>
             <AccordionHeader onClick={() => handleOpen3(3)}>
               <h2
+                className="text-[#4c4d4d] font-normal text-[18px] font-Poppins"
                 style={{
                   fontFamily: "Poppins,sans-serif",
-                  fontSize: "16px",
+                  // fontSize: "16px",
                 }}
               >
                 Bus Type{" "}
@@ -202,6 +205,7 @@ export default function FilterPage() {
                 />
 
                 <span
+                  className="text-[#4c4d4d] font-normal text-[18px] font-Poppins"
                   style={{
                     fontFamily: "Poppins,sans-serif",
                     fontSize: "16px",
@@ -220,6 +224,7 @@ export default function FilterPage() {
                 />
 
                 <span
+                  className="text-[#4c4d4d] font-normal text-[18px] font-Poppins"
                   style={{
                     fontFamily: "Poppins,sans-serif",
                     fontSize: "16px",
@@ -238,6 +243,7 @@ export default function FilterPage() {
                 />
 
                 <span
+                  className="text-[#4c4d4d] font-normal text-[18px] font-Poppins"
                   style={{
                     fontFamily: "Poppins,sans-serif",
                     fontSize: "16px",
@@ -254,10 +260,11 @@ export default function FilterPage() {
           <Accordion open={open4 === 4} icon={<Icon id={4} open={open4} />}>
             <AccordionHeader onClick={() => handleOpen4(4)}>
               <h2
+                className="text-[#4c4d4d] font-normal text-[18px] font-Poppins"
                 style={{
                   fontFamily: "Poppins,sans-serif",
-                  fontSize: "16px",
-                  lineHeight: "32px",
+                  // fontSize: "16px",
+                  // lineHeight: "32px",
                 }}
               >
                 Bus Operator{" "}
@@ -272,6 +279,7 @@ export default function FilterPage() {
                 />
 
                 <span
+                  className="text-[#4c4d4d] font-normal text-[18px] font-Poppins"
                   style={{
                     fontFamily: "Poppins,sans-serif",
                     fontSize: "16px",
@@ -290,6 +298,7 @@ export default function FilterPage() {
                 />
 
                 <span
+                  className="text-[#4c4d4d] font-normal text-[18px] font-Poppins"
                   style={{
                     fontFamily: "Poppins,sans-serif",
                     fontSize: "16px",
@@ -308,6 +317,7 @@ export default function FilterPage() {
                 />
 
                 <span
+                  className="text-[#4c4d4d] font-normal text-[18px] font-Poppins"
                   style={{
                     fontFamily: "Poppins,sans-serif",
                     fontSize: "16px",
@@ -326,6 +336,7 @@ export default function FilterPage() {
                 />
 
                 <span
+                  className="text-[#4c4d4d] font-normal text-[18px] font-Poppins"
                   style={{
                     fontFamily: "Poppins,sans-serif",
                     fontSize: "16px",
@@ -344,6 +355,7 @@ export default function FilterPage() {
                 />
 
                 <span
+                  className="text-[#4c4d4d] font-normal text-[18px] font-Poppins"
                   style={{
                     fontFamily: "Poppins,sans-serif",
                     fontSize: "16px",

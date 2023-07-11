@@ -2,7 +2,7 @@ import { Option, Select } from "@material-tailwind/react";
 
 interface Props {
   options?: any;
-  label: string;
+  label: any;
   value?: any;
   type?: string;
   onChange?: (e: any) => any; // for function type

@@ -88,7 +88,18 @@ export async function search(
   const { fields } = await parseForm(request);
   const { from, to } = fields;
   const buses = await db.collection("Bus Details");
-  const res = await buses.find({ from, to }).toArray();
+  const res = await buses
+  
+  .find({
+    $and:[
+      {
+      from:{ $regex: fields.from,$options:"i"},
+      },
+      {
+        to:{ $regex: fields.to,$options:"i"},
+        }
+    ]
+    }).toArray();
   return response.status(200).json({ data: res });
 }
 

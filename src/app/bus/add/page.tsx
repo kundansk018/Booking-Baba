@@ -21,6 +21,7 @@ import BBErrorDialog from "@/app/components/BBErrorDialog";
 import { useAppDispatch } from "@/redux/store";
 import { addBuses } from "@/redux/action/busaction";
 import { useRouter } from "next/navigation";
+import { BusType } from "@/utils/BusData";
 
 export default function AddBus() {
   const dispatch = useAppDispatch();
