@@ -28,7 +28,7 @@ export default function UDatePicker(props: Props) {
       className={
         props.className
           ? props.className
-          : "  border border-gray-500 rounded-[4px] focus:outline-none focus:ring-1 focus:ring-blue-400 py-[11px] px-[14.5px]"
+          : "  border border-gray-500 rounded-[4px] focus:outline-none focus:ring-1 focus:ring-blue-400 py-[12px] px-[14.5px]"
       }
       // className={`w-full border border-gray-500 rounded-[4px] focus:outline-none focus:ring-1 focus:ring-blue-400 py-[11px] px-[14.5px] ${props?.className}`}
     />

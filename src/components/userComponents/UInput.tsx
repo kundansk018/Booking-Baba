@@ -11,6 +11,7 @@ interface Props {
   onChange?: (e: any) => void; // for function type
   style?: any;
   label?: any;
+
   icon?: any;
 }
 

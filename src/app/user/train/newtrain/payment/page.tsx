@@ -6,6 +6,7 @@ import UHeader from "@/components/userComponents/UHeader";
 import UInput from "@/components/userComponents/UInput";
 import React from "react";
 import { FaUser } from "react-icons/fa";
+import { HiLocationMarker } from "react-icons/hi";
 
 const PaymentForm = () => (
   <div>
@@ -82,8 +83,8 @@ const PaymentForm = () => (
                               className=""
                               id="cardNumber"
                               required
-                              placeholder="card number"
                               icon={<FaUser />}
+                              placeholder="Card Number"
                             />
                           </div>
                           <div className="flex justify-between gap-5">
@@ -125,6 +126,7 @@ const PaymentForm = () => (
                                   required
                                 >
                                   <option value="">Expiry Year</option>
+
                                   <option>2023</option>
                                   <option>2024</option>
                                   <option>2025</option>

@@ -32,7 +32,7 @@ const DropdownItem: React.FC<DropdownItemProps> = ({ option }) => {
 
   return (
     <div className="border border-b-gray-300 border-t-0 border-x-0">
-      <div className=" flex items-center justify-between my-2  gap-[200px]">
+      <div className=" flex items-center justify-between my-[6px]  gap-[200px]">
         <div className="mr-2">{label}</div>
         <div className="flex items-center justify-between ">
           <button
@@ -106,7 +106,7 @@ export default function Accordion(props: Props) {
   const userTrainOptions: Option[] = [
     { label: "Adults (12+ yrs)", count: count1, setCount: setCount1 },
     { label: "Children (2-12 yrs)", count: count2, setCount: setCount2 },
-    { label: "Infants (Below 2 yrs)", count: count3, setCount: setCount3 },
+    { label: "Infants (< 2 yrs)", count: count3, setCount: setCount3 },
   ];
 
   const userBusOptions: Option[] = [
@@ -124,20 +124,23 @@ export default function Accordion(props: Props) {
             className=" px-3 flex flex-col justify-center items-center py-[9px] "
           >
             <div
-              className="flex justify-between cursor-pointer "
+              className="w-full flex justify-between cursor-pointer "
               onClick={() => toggleAccordion(index)}
             >
-              {window.location.pathname === "/user" ? (
-                <div className="w-[350px]">
-                  {option.count} {option.label}
+              <div className=" min-w-[224px]">
+                {/* {window.location.pathname === "/user" ? ( */}
+                <div className="flex flex-row ">
+                  <div>{option.count} </div>
+                  <div>{option.label}</div>
                 </div>
-              ) : (
-                <div className="w-[230px] text-center ">
+                {/* ) : ( */}
+                {/* <div className="w-[230px] text-center ">
                   {option.count} {option.label}
-                </div>
-              )}
+                </div> */}
+                {/* )} */}
+              </div>
               <svg
-                className={`w-24 h-6 transition-transform duration-300 ease-in-out transform ${
+                className={`w-fit  h-6 transition-transform duration-300 ease-in-out transform ${
                   index === activeIndex ? "rotate-180" : "rotate-0"
                 }`}
                 fill="none"
@@ -155,16 +158,16 @@ export default function Accordion(props: Props) {
             </div>
             <div className="flex justify-center">
               {index === activeIndex && (
-                <div className=" z-10 absolute  shadow-gray-700 shadow-md rounded-[4px] p-3  m-3 bg-white ">
+                <div className=" z-10 absolute  shadow-gray-700 shadow-md rounded-[4px] px-3 pb-3 pt-0 m-[10px] bg-white ">
                   {props.travelType === "hotel" ? (
-                    <div className="mt-2">
+                    <div className="mt-0">
                       {userHotelOptions.map((option, i) => (
                         <DropdownItem key={i} option={option} />
                       ))}
                     </div>
                   ) : props.travelType === "train" ? (
                     <>
-                      <div className="mt-2">
+                      <div className="mt-0">
                         {userTrainOptions.map((option, i) => (
                           <DropdownItem key={i} option={option} />
                         ))}
@@ -176,7 +179,7 @@ export default function Accordion(props: Props) {
                         onChange={(e) => {
                           setDropdownValue(e.target.value);
                         }}
-                        className="w-full  border border-gray-500 rounded-[4px] focus:outline-none focus:ring-1 focus:ring-blue-400 py-[12px] px-[14.5px]"
+                        className="w-full  border border-gray-500 rounded-[4px] focus:outline-none focus:ring-1 focus:ring-blue-400 py-[11px] px-[14.5px]"
                       >
                         <option value=" All Class" className="text-lg">
                           All Class

@@ -106,7 +106,7 @@ export default function UFooter() {
             <div className="flex flex-row text-[14px] h-[38px] newsletter">
               <div className="w-[65%]">
                 <UInput
-                  className="form-control  py-0 rounded-r-none"
+                  className="form-control  py-0 rounded-r-none "
                   placeholder="Your Email Address"
                   id="newsletterEmail"
                   type="text"

@@ -19,6 +19,7 @@ import {
 import { useAppDispatch } from "@/redux/store";
 import { LOGIN_REQUEST_SUCCESS } from "@/redux/constant";
 import { FaUser } from "react-icons/fa";
+import BBTypography from "./BBTypography";
 
 const navListMenuItems = [
   {
@@ -88,25 +89,19 @@ export default function Navigationbar() {
   }, []);
 
   const navList = (
-    <ul className="flex flex-col mt-[6px] gap-2 lg:flex-row lg:gap-6">
-      <Typography
+    <ul className="flex flex-col items-center gap-2 lg:flex-row lg:gap-6 text-sm font-Poppins font-medium">
+      <BBTypography
         as="li"
-        variant="small"
-        className="p-1 font-normal"
+        className="p-1 "
         onClick={() => router.push("/user")}
       >
         <a
-          style={{
-            font: "sans-serif",
-            fontSize: "14px",
-            color: "#0c2e53",
-          }}
           href="#"
-          className="flex items-center text-xl hover:text-black mt-2 pr-2"
+          className="flex items-center text-[15px] hover:text-tabchange mt-2 pr-2 text-headcolor"
         >
           Home
         </a>
-      </Typography>
+      </BBTypography>
 
       {/* <Menu
         open={isMenuOpen}
@@ -156,36 +151,24 @@ export default function Navigationbar() {
         <Collapse open={isMobileMenuOpen}>{renderItems}</Collapse>
       </div>
 
-      <Typography as="li" variant="small" className="p-1 font-normal">
+      <BBTypography as="li" className="p-1 ">
         <a
-          style={{
-            font: "sans-serif",
-            // fontFamily: "Poppins",
-            fontSize: "14px",
-            color: "#0c2e53",
-          }}
           href="#"
-          className="flex items-center text-xl hover:text-black mt-2 "
+          className="flex items-center text-[15px] hover:text-tabchange mt-2  text-headcolor"
           onClick={() => onLogOut()}
         >
           Log-Out
         </a>
-      </Typography>
-      <Typography as="li" variant="small" className="p-1 font-normal">
+      </BBTypography>
+      <BBTypography as="li" className="p-1 ">
         <a
-          style={{
-            font: "sans-serif",
-            // fontFamily: "Poppins",
-            fontSize: "14px",
-            color: "#0c2e53",
-          }}
           href="#"
-          className="flex items-center text-xl hover:text-black mt-2 "
+          className="flex items-center text-[15px] hover:text-tabchange mt-2 text-headcolor"
           onClick={() => router.push("/auth")}
         >
           Login / Signup
         </a>
-      </Typography>
+      </BBTypography>
 
       <Typography
         as="li"
@@ -195,7 +178,7 @@ export default function Navigationbar() {
       >
         <a
           href="#"
-          className="flex items-center text-white text-lg mt-2 bg-[#8f9dac] p-2 rounded-full"
+          className="flex items-center text-white text-base mt-2 bg-[#8f9dac] p-2 rounded-full"
         >
           <FaUser />
         </a>
@@ -204,76 +187,83 @@ export default function Navigationbar() {
   );
 
   return (
-    <div
-      style={{
-        boxShadow: "0 0 20px grey",
-      }}
-      className=" z-50 flex flex-1 m-auto w-[100%] h-[54px] sticky top-0 bg-[#fff]"
-    >
-      <div className="container flex items-center justify-between text-white">
-        <Typography
-          as="a"
-          href="/"
-          className="mr-4 cursor-pointer  font-medium mx-[20] fixed left-5 top-3 "
-        >
-          <b
-            style={{ fontFamily: "Poppins,sans-serif", color: "#0c2e53" }}
-            className="m-[20] text-2xl"
-            onClick={() => router.push("/")}
+    <div className="z-50 top-0 sticky bg-white">
+      <div
+        style={
+          {
+            // boxShadow: "0 0 20px grey",
+          }
+        }
+        className="max-w-screen-xl mx-auto  flex flex-1 m-auto  h-[54px] sticky top-0 bg-[#fff]"
+      >
+        <div className=" container flex items-center justify-between text-white">
+          <Typography
+            as="a"
+            href="/"
+            className=" cursor-pointer  font-medium mx-[20] fixed "
           >
-            Booking Baba
-          </b>
-        </Typography>
-        <div
-          style={{ position: "fixed", right: 28, top: 0 }}
-          className="hidden lg:block"
-        >
-          {navList}
-        </div>
-
-        <IconButton
-          variant="text"
-          className="fixed right-1 top-1 h-6 w-6 text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden"
-          ripple={false}
-          onClick={() => setOpenNav(!openNav)}
-        >
-          <div className="fixed right-10">
-            {openNav ? (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                className="h-6 w-6"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={2}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
-            ) : (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth={2}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              </svg>
-            )}
+            <b
+              // style={{ color: "#0c2e53" }}
+              className="m-[20] text-2xl text-lightgrey "
+              onClick={() => router.push("/")}
+            >
+              <span className="text-tabchange">B</span>ooking{" "}
+              <span className="text-tabchange">B</span>aba
+            </b>
+          </Typography>
+          <div
+            style={{ position: "fixed", right: 100, top: 0 }}
+            className="hidden lg:block"
+          >
+            {navList}
           </div>
-        </IconButton>
+
+          <IconButton
+            variant="text"
+            className="fixed right-1 top-1 h-6 w-6 text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden"
+            ripple={false}
+            onClick={() => setOpenNav(!openNav)}
+          >
+            <div className="fixed right-10">
+              {openNav ? (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  className="h-6 w-6"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              ) : (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M4 6h16M4 12h16M4 18h16"
+                  />
+                </svg>
+              )}
+            </div>
+          </IconButton>
+        </div>
+        <MobileNav open={openNav}>
+          <div className="container mr-0 bg-darkgreen text-white">
+            {navList}
+          </div>
+        </MobileNav>
       </div>
-      <MobileNav open={openNav}>
-        <div className="container mr-0 bg-darkgreen text-white">{navList}</div>
-      </MobileNav>
     </div>
   );
 }

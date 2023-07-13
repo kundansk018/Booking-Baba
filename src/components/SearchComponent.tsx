@@ -77,7 +77,7 @@ const SearchComponent = (props: Props) => {
 
   return (
     <div>
-      <div className="flex flex-row  gap-2 text-sm">
+      <div className="w-full flex flex-row gap-2 text-sm">
         <UInput
           type="text"
           id="from"
@@ -89,7 +89,7 @@ const SearchComponent = (props: Props) => {
           onChange={(e) => {
             setFrom(e.target.value);
           }}
-          className="mix-w-fit"
+          // className="min-w-fit"
           icon={<HiLocationMarker />}
         />
         {props.travelType === "hotel" ? null : (
@@ -105,41 +105,46 @@ const SearchComponent = (props: Props) => {
           />
         )}
         {props.travelType === "hotel" ? (
-          <>
+          <div className="flex flex-row gap-2">
+            <div>
+              <UDatePicker
+                id="departDate"
+                placeholder="Check In"
+                minDate={new Date()}
+                selected={departDate}
+                onChange={(date: any) => {
+                  setDepartDate(date);
+                }}
+              />
+            </div>
+            <div>
+              <UDatePicker
+                id="checkoutDate"
+                placeholder="Check Out"
+                minDate={new Date()}
+                selected={checkoutDate}
+                onChange={(date: any) => {
+                  setCheckoutDate(date);
+                }}
+              />
+            </div>
+          </div>
+        ) : (
+          <div>
             <UDatePicker
               id="departDate"
-              placeholder="Check In"
+              placeholder="Depart Date"
               minDate={new Date()}
               selected={departDate}
               onChange={(date: any) => {
                 setDepartDate(date);
               }}
             />
-
-            <UDatePicker
-              id="checkoutDate"
-              placeholder="Check Out"
-              minDate={new Date()}
-              selected={checkoutDate}
-              onChange={(date: any) => {
-                setCheckoutDate(date);
-              }}
-            />
-          </>
-        ) : (
-          <UDatePicker
-            id="departDate"
-            placeholder="Depart Date"
-            minDate={new Date()}
-            selected={departDate}
-            onChange={(date: any) => {
-              setDepartDate(date);
-            }}
-          />
+          </div>
         )}
-        <div>
-          <Accordion travelType={props.travelType} />
-        </div>
+        {/* <div> */}
+        <Accordion travelType={props.travelType} />
+        {/* </div> */}
 
         <BBButton
           label="Search"

@@ -12,14 +12,14 @@ export default function Hotel(props: Props) {
   return (
     <div>
       <div className=" ">
-        <div className="flex flex-row">
-          <div className="w-[45%]">
+        <div className="flex flex-wrap">
+          <div className="w-full lg:w-[45%] md:w-[45%]">
             <HomeSearch
               title="Book Domestic and International Hotels"
               travelType={props.type}
             />
           </div>
-          <div className="w-[55%]">
+          <div className="w-full lg:w-[55%] md:[55%]">
             <BAdCarousel travelType={props.type} />
           </div>
         </div>

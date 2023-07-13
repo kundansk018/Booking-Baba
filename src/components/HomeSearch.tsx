@@ -15,6 +15,7 @@ import { MdCalendarMonth } from "react-icons/md";
 import { HiLocationMarker } from "react-icons/hi";
 import { searchCityByName } from "@/redux/action/hotelaction";
 
+
 interface Props {
   from?: string;
   to?: string;
@@ -119,7 +120,7 @@ export default function HomeSearch(props: Props) {
             )}
           </div>
           {props.travelType === "hotel" ? (
-            <div className="flex flex-row justify-between">
+            <div className="flex flex-row justify-center  lg:justify-between">
               <div className="flex justify-start">
                 <UDatePicker
                   id="departDate"
