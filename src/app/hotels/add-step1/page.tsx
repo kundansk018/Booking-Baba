@@ -24,7 +24,6 @@ import BBErrorDialog from "@/app/components/BBErrorDialog";
 import Multiselect from "multiselect-react-dropdown";
 import {
   Basic_Facilities,
-
   Safety,
   food_facilities,
   general_services,
@@ -118,10 +117,7 @@ export default function AddHotels() {
     setSelectedSafety(names.toString());
   };
 
-
-  const [selectPayment, setSelectPayment] = useState(
-    "Select Mode Of Payment"
-  );
+  const [selectPayment, setSelectPayment] = useState("Select Mode Of Payment");
   const selectModePayment = (selectedList: any, selectedItem: any) => {
     setPayment(selectedList);
     let names = selectedList.map((element: any) => element.name);
@@ -146,7 +142,6 @@ export default function AddHotels() {
     let names = selectedList.map((element: any) => element.name);
     setPropertyType(names.toString());
   };
-
 
   const dispatch = useAppDispatch();
   const [errorDialogMessage, setErrorDialogMessage] = useState([]);
@@ -174,19 +169,18 @@ export default function AddHotels() {
       return;
     }
 
-    debugger
-    let selectedImg = fileInput.files[0]
-
+    debugger;
+    let selectedImg = fileInput.files[0];
 
     const url = URL.createObjectURL(selectedImg);
 
-    debugger
+    debugger;
     setFile(url);
     // setFile(selectedImg)
   };
 
   const addHotelDetails = () => {
-    debugger
+    // debugger
     let data: any = {
       hotelname: hotelname,
       ownerName: ownerName,
@@ -210,13 +204,9 @@ export default function AddHotels() {
       generalService: generalService,
       safety: safety,
       payment: payment,
-      property:property,
+      property: property,
       min_order_price: price,
-
     };
-
-
-
 
     let isErrorFound = false;
     let error: any = [];
@@ -299,10 +289,9 @@ export default function AddHotels() {
               containerProps={{ className: "w-[300px] mb-4" }}
               type="file"
               label="Hotel Photos"
-              //  value={file} 
+              //  value={file}
               //   onChange={(e) => setFile(e.target.value)}
-              onChange={
-                (e) => onFileUploadChange(e)}
+              onChange={(e) => onFileUploadChange(e)}
             />
             <BBInput
               containerProps={{ className: "" }}

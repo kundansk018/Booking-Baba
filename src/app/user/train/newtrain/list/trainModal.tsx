@@ -27,10 +27,10 @@ export default function TrainData() {
     setSelectedOption(event.target.value);
   };
 
-  let data = trainData ? JSON.parse(trainData?.data?.date) : null;
+  let latestData = trainData?.data?.date;
+  let data = latestData ? JSON.parse(latestData) : null;
   console.log("new data is ", data);
-  let newDates: any = [];
-  newDates = data?.map((element: any) => element?.date);
+  let newDates = data?.map((element: any) => element?.date);
   console.log("newDates", newDates);
   return (
     <div className="pt-7">
