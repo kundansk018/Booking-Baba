@@ -82,7 +82,10 @@ export default function Page() {
           <SearchComponent travelType={type} />
         </div>
         <div className="flex flex-row gap-5 ">
-          <div className="bg-white pr-4">
+          <div
+            className="bg-white pr-4"
+            style={{ height: "fit-content", position: "relative" }}
+          >
             <FilterPage />
           </div>
 
@@ -92,80 +95,74 @@ export default function Page() {
             </div>
             <div
               className="flex-grow overflow-y-scroll"
-              style={{ height: "72vh" }}
+              style={{ height: "85vh" }}
             >
               <table className=" mx-auto border border-gray-300 w-[100%]  text-left h-[70px]">
                 <thead>
                   <tr>
-                    {/* <div className=""> */}
                     {TABLE_HEAD.map((head) => (
                       <th
                         style={{ position: "sticky", top: "0" }}
                         key={head}
-                        className="border-b border-blue-gray-100 bg-blue-gray-50 py-3 pl-10"
+                        className="bg-[#f5f5f5] border-b border-blue-gray-100 py-3 pl-5"
                       >
-                        <BBTypography
-                          variant="small"
-                          color="blue-gray"
-                          className="font-normal leading-none opacity-70"
-                        >
+                        <BBTypography className="text-[#535b61] font-normal text-[12.50px] font-Poppins">
                           {head}
                         </BBTypography>
                       </th>
                     ))}
-                    {/* </div> */}
                   </tr>
                 </thead>
                 <tbody>
                   {trainData?.data.map((element: any, index: any) => {
-                    const isLast = index === TABLE_ROWS.length - 1;
+                    // const isLast = index === TABLE_ROWS.length - 1;
 
                     return (
                       <tr key={index}>
-                        <td className="text-center p-4 border-b border-blue-gray-50 ">
+                        <td className="p-7 border-b border-blue-gray-50">
                           <BBTypography variant="small">
-                            <span className="font-Poppins text-lg  text-[#212529]">
+                            <p className="font-Poppins text-lg  text-[#212529]">
                               {element.trainName}
-                            </span>
-                            <br />
-                            <span className="text-blue-gray">
+                            </p>
+                            <p className="text-sm text-[#9e9a9d]">
                               {element.trainNo}
-                            </span>
+                            </p>
                           </BBTypography>
                         </td>
-                        <td className="text-center p-4 border-b border-blue-gray-50">
+                        <td className="text-center border-b pr-10 border-blue-gray-50">
                           <BBTypography variant="small">
-                            <span className="text-lg">{element.depTime}</span>
-                            <br />
-                            <span className="text-[12.25px]">
+                            <p className="text-lg text-[#212529]">
+                              {element.depTime}
+                            </p>
+                            <p className="text-[12.25px] text-[#9e9a9d]">
                               {element.from_Stn}
-                              <br />
+                            </p>
+                            <p className="text-[12.25px] text-[#9e9a9d]">
                               {element.depDate}
-                            </span>
+                            </p>
                           </BBTypography>
                         </td>
-                        <td className="text-center p-4 border-b border-blue-gray-50">
+                        <td className="text-center pr-6 border-b border-blue-gray-50">
                           <BBTypography variant="small">
-                            <span className="text-[16px] text-blue-gray">
+                            <p className="text-[16px] text-blue-gray">
                               {element.duration}
-                            </span>
-                            <br />
-                            <span className="text-[12.25px] text-blue-gray">
+                            </p>
+                            <p className="text-[12.25px] text-[#9e9a9d]">
                               {element.stops} Stops
-                            </span>
+                            </p>
                           </BBTypography>
                         </td>
                         <td className="text-center p-4 border-b border-blue-gray-50">
                           <BBTypography variant="small">
-                            <span className="text-lg">
+                            <p className="text-lg text-[#212529]">
                               {element.arrivalTime}
-                            </span>
-                            <br />
-                            <span className="text-[12.25px] text-blue-gray">
+                            </p>
+                            <p className="text-[12.25px] text-[#9e9a9d]">
                               {element.to_Stn}
-                              <br />
+                            </p>
+                            <p className="text-[12.25px] text-[#9e9a9d]">
                               {element.arrDate}
-                            </span>
+                            </p>
                           </BBTypography>
                         </td>
                         <td className="text-center p-4 border-b border-blue-gray-50">

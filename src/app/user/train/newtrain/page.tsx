@@ -87,11 +87,11 @@ const FilterPage = () => {
   };
 
   return (
-    <div className="w-56 ml-10 mt-2">
+    <div className="w-56 ml-4 mt-2">
       <div>
         <h3
+          className="pb-2"
           style={{
-           
             color: "#0c2f54",
             fontSize: "25px",
           }}
@@ -100,7 +100,7 @@ const FilterPage = () => {
         </h3>
         <hr />
 
-        <div className="mb-4 pt-5">
+        <div className="mb-2 ">
           <Accordion open={open === 1} icon={<Icon id={1} open={open} />}>
             <AccordionHeader
               // className={`Accordion__Header--${
@@ -108,16 +108,7 @@ const FilterPage = () => {
               // }`}
               onClick={() => handleOpen(1)}
             >
-              <h2
-                className="text-[16px] font-normal text-[#4c4d4d]"
-                // style={{
-                //   fontFamily: "sans-serif",
-                //   fontWeight: "normal",
-
-                //   color: "#4c4d4d",
-                //   fontSize: "16px",
-                // }}
-              >
+              <h2 className="text-[17.50px] font-normal text-[#4c4d4d] font-Poppins">
                 Departure Time
               </h2>
             </AccordionHeader>
@@ -132,7 +123,7 @@ const FilterPage = () => {
                   max={1439}
                   minValue={0}
                   maxValue={1439}
-                  onInput={(e:any) => {
+                  onInput={(e: any) => {
                     handleDepartureTime(e);
                   }}
                 />
@@ -141,7 +132,7 @@ const FilterPage = () => {
           </Accordion>
         </div>
 
-        <div className="mb-4">
+        <div className="mb-2">
           <Accordion open={open2 === 2} icon={<Icon id={2} open={open2} />}>
             <AccordionHeader
               // className={`Accordion__Header--${
@@ -149,15 +140,7 @@ const FilterPage = () => {
               // }`}
               onClick={() => handleOpen2(2)}
             >
-              <h2
-                style={{
-                  fontFamily: "sans-serif",
-                  fontWeight: "normal",
-
-                  color: "#4c4d4d",
-                  fontSize: "16px",
-                }}
-              >
+              <h2 className="text-[17.50px] font-normal text-[#4c4d4d] font-Poppins">
                 Arrival Time
               </h2>
             </AccordionHeader>
@@ -172,7 +155,7 @@ const FilterPage = () => {
                   max={1439}
                   minValue={0}
                   maxValue={1439}
-                  onInput={(e:any) => {
+                  onInput={(e: any) => {
                     handleArrivalTime(e);
                   }}
                 />
@@ -189,16 +172,8 @@ const FilterPage = () => {
               // }`}
               onClick={() => handleOpen3(3)}
             >
-              <h2
-                style={{
-                  fontFamily: "sans-serif",
-                  fontWeight: "normal",
-                  // fontStyle:"sans-serif"
-                  color: "#4c4d4d",
-                  fontSize: "16px",
-                }}
-              >
-                Fare Class{" "}
+              <h2 className="text-[17.50px] font-normal text-[#4c4d4d] font-Poppins">
+                Fare Class
               </h2>
             </AccordionHeader>
             <AccordionBody>
