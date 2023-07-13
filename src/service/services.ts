@@ -134,6 +134,7 @@ export const getAllBuses = (page: any) => {
 };
 
 export const busSearch = (data: any) => {
+  console.log("called bus search service ::", data);
   let url = `${ENDPOINTS.busSearch}`;
   return client.post(url, data, headers);
 };

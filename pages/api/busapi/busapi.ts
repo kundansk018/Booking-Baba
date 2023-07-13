@@ -87,21 +87,23 @@ export async function search(
   request: NextApiRequest,
   response: NextApiResponse
 ) {
+  console.log("called search api");
   const { fields } = await parseForm(request);
   const { from, to } = fields;
   const buses = await db.collection("Bus Details");
+  // const res = await buses.find({ from, to }).toArray();
   const res = await buses
-  
-  .find({
-    $and:[
-      {
-      from:{ $regex: fields.from,$options:"i"},
-      },
-      {
-        to:{ $regex: fields.to,$options:"i"},
-        }
-    ]
-    }).toArray();
+    .find({
+      $and: [
+        {
+          from: { $regex: from, $options: "i" },
+        },
+        {
+          to: { $regex: to, $options: "i" },
+        },
+      ],
+    })
+    .toArray();
   return response.status(200).json({ data: res });
 }
 
@@ -114,7 +116,6 @@ export async function updateBus(
   const res = await buses.updateOne(
     { _id: new ObjectId(fields._id) },
     {
-      // $set: request.body.data,
       $set: {
         busname: fields.busname,
         busnumber: fields.busnumber,
@@ -189,7 +190,6 @@ export async function getAllBuses(
       items,
     });
   } catch (error) {
-    // console.log("error fetching data from mongodb", error);
     response.status(500).json({ message: "internal server error" });
   }
 }
@@ -209,7 +209,6 @@ export async function bookSeats(
   response: NextApiResponse
 ) {
   const { fields } = await parseForm(request);
-  // console.log("fields...........", fields);
   const bookSeats = await db.collection("Bus_Book_Seats");
   const res = await bookSeats.insertOne(fields);
   return response.status(200).json({ data: res });
@@ -231,24 +230,11 @@ export async function findByBusNumber(
   response: NextApiResponse
 ) {
   const { fields } = await parseForm(request);
-  // console.log("called find by bus number api");
   const bus = await db.collection("Bus_Book_Seats");
   const res = await bus.findOne({ busNumber: fields.busNumber });
   // console.log("res:::::::::::::: in findByBusNumber", res);
   return response.status(200).json({ data: res ? res : "not available bus " });
 }
-
-// export async function updateSeats(
-//   request: NextApiRequest,
-//   response: NextApiResponse
-// ) {
-//   const { fields } = await parseForm(request);
-//   // console.log("called find by bus number api");
-//   const bus = await db.collection("Bus_Book_Seats");
-//   const res = await bus.findOne({ busNumber: fields.busNumber });
-//   // console.log("res:::::::::::::: in findByBusNumber", res);
-//   return response.status(200).json({ data: res ? res : "not available bus " });
-// }
 
 export async function getBookSeatsDataById(
   request: NextApiRequest,

@@ -17,7 +17,7 @@ import { getBookedSeats } from "@/redux/action/seatBook";
 import UBannerFooter from "@/components/userComponents/UBannerFooter";
 import UFooter from "@/components/userComponents/UFooter";
 import UHeader from "@/components/userComponents/UHeader";
-
+import { TABLE_HEAD } from "@/utils/BusData";
 
 export default function page() {
   const busData: any = useSelector((state: any) => state.bus.userBusDetails);
@@ -30,44 +30,6 @@ export default function page() {
   // console.log("to ..==>>>>", to);
   const dispatch = useAppDispatch();
 
-  const TABLE_HEAD = ["Operators", "Departure", "Duration", "Arrival", "Price"];
-  const TABLE_ROWS = [
-    {
-      operators: "AJ Tour & Travels",
-      departure: "12:00",
-      duration: "06h 32 m",
-      arrival: "05.12 m",
-      price: "$250",
-    },
-    {
-      operators: "Shivneri Travels",
-      departure: "11:00",
-      duration: "03h 32 m",
-      arrival: "08.12 m",
-      price: "$550",
-    },
-    {
-      operators: "Chhatrapti Travels",
-      departure: "01:00",
-      duration: "08h 32 m",
-      arrival: "05.12 m",
-      price: "$350",
-    },
-    {
-      operators: "Akash Travels",
-      departure: "05:00",
-      duration: "10h 32 m",
-      arrival: "11.12 m",
-      price: "$650",
-    },
-    {
-      operators: " Ajit Travels",
-      departure: "05:00",
-      duration: "02h 32 m",
-      arrival: "08.12 m",
-      price: "$850",
-    },
-  ];
   const handleClosemodal = () => {
     setShowModal(false);
   };
@@ -139,7 +101,7 @@ export default function page() {
                 <table className="mx-auto border border-gray-300 w-[100%] text-left">
                   <thead className="w-">
                     <tr>
-                      {TABLE_HEAD.map((head, ind: number) => (
+                      {TABLE_HEAD.map((head: any, ind: number) => (
                         <th
                           style={{ position: "sticky", top: "0" }}
                           key={head}
@@ -162,14 +124,9 @@ export default function page() {
                   </thead>
                   <tbody>
                     {busData?.data?.map((element: any, index: any) => {
-                      const isLast = index === TABLE_ROWS.length - 1;
-                      const classes = isLast
-                        ? "p-4"
-                        : "p-4 border-b border-blue-gray-50";
-
                       return (
                         <tr key={index}>
-                          <td className={classes}>
+                          <td className="p-4 border-b border-blue-gray-50">
                             <BBTypography
                               variant="small"
                               color="blue-gray"
@@ -185,7 +142,7 @@ export default function page() {
                             </BBTypography>
                           </td>
 
-                          <td className={classes}>
+                          <td className="p-4 border-b border-blue-gray-50">
                             <BBTypography
                               variant="small"
                               color="blue-gray"
@@ -200,7 +157,7 @@ export default function page() {
                               </div>
                             </BBTypography>
                           </td>
-                          <td className={classes}>
+                          <td className="p-4 border-b border-blue-gray-50">
                             <BBTypography
                               variant="small"
                               color="blue-gray"
@@ -215,7 +172,7 @@ export default function page() {
                               </div>
                             </BBTypography>
                           </td>
-                          <td className={classes}>
+                          <td className="p-4 border-b border-blue-gray-50">
                             <BBTypography
                               variant="small"
                               color="blue-gray"
@@ -231,7 +188,9 @@ export default function page() {
                             </BBTypography>
                           </td>
                           <div className="w-fit">
-                            <td className={`${classes} w-fit`}>
+                            <td
+                              className={`${"p-4 border-b border-blue-gray-50"} w-fit`}
+                            >
                               <BBTypography
                                 variant="small"
                                 color="blue-gray"

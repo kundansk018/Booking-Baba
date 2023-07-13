@@ -1,7 +1,7 @@
 "use client";
 
 import UInput from "@/components/userComponents/UInput";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Tab, Tabs, TabsBody, TabsHeader } from "@material-tailwind/react";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
@@ -17,10 +17,13 @@ import UBannerFooter from "@/components/userComponents/UBannerFooter";
 
 const ConfirmationPage = () => {
   const userData: any = useSelector((state: any) => state.login.loginDetails);
+  console.log("userData in Details page", userData);
 
   const router = useRouter();
-  const [email, setEmail] = useState(userData?.email);
-  const [mobileNumber, setMobileNumber] = useState(userData?.mobileNumber);
+  const [email, setEmail] = useState(userData?.data?.data?.email);
+  const [mobileNumber, setMobileNumber] = useState(
+    userData?.data?.data?.mobileNumber
+  );
   const [firstName, setFirstName] = useState(userData?.firstName);
   const [lastName, setLastName] = useState(userData?.lastName);
   const [age, setAge] = useState("");
@@ -32,9 +35,11 @@ const ConfirmationPage = () => {
   ]);
   const dispatch = useAppDispatch();
 
-  // const seatsBookData = useSelector((state: any) => state.seats.seats);
+  const seatsBookData = useSelector((state: any) => state.seats.seats);
+  let status = seatsBookData?.status;
+  console.log("sts is::::::::", status);
 
-  // console.log("seatsBookData  in details page..", seatsBookData);
+  console.log("seatsBookData  in details page..", seatsBookData);
 
   // useEffect(() => {
   //   if (seatsBookData) {
@@ -94,9 +99,12 @@ const ConfirmationPage = () => {
       // persons: [{ firstName, lastName, age }],
       person: JSON.stringify(person),
     };
-    dispatch(seats(data)).then((res: any) => {
+    dispatch(seats(data));
+    // .then((res: any) => {
+    if (status === 200) {
       router.push("/user/bus/Invoice");
-    });
+    }
+    // });
   };
 
   const setFName = (index: number, value: any) => {
@@ -256,24 +264,6 @@ const ConfirmationPage = () => {
                 <div className="flex flex-wrap mb-4">
                   <div className="w-full sm:w-1/2 sm:pr-2 mb-3">
                     <UInput
-                      id="First Name"
-                      type="text"
-                      placeholder="First Name "
-                      value={firstName}
-                      onChange={(e) => setFirstName(e.target.value)}
-                    />
-                  </div>
-                  <div className="w-full sm:w-1/2 sm:pr-2 mb-3">
-                    <UInput
-                      id="Last Name"
-                      type="text"
-                      placeholder=" Last Name "
-                      value={lastName}
-                      onChange={(e) => setLastName(e.target.value)}
-                    />
-                  </div>
-                  <div className="w-full sm:w-1/2 sm:pr-2 mb-3">
-                    <UInput
                       id="email"
                       type="email"
                       placeholder=" Enter Email"
@@ -286,13 +276,17 @@ const ConfirmationPage = () => {
                     <UInput
                       id="phone"
                       type="text"
-                      placeholder="Enter Mobile Details"
+                      placeholder="Enter Mobile Number"
                       value={mobileNumber}
                       onChange={(e) => setMobileNumber(e.target.value)}
                     />
                   </div>
+                  <div className="alert text-sm alert-info text-[#0DCAF0] p-1 rounded-sm ">
+                    Your booking details will be sent to this email address and
+                    mobile number.
+                  </div>
                 </div>
-                <p className="font-semibold">Adult 1</p>
+                <p className="font-semibold">Passenger's Name</p>
                 <div className="cursor-pointer w-fit flex ">
                   <div className="">Add More</div>
                   <div className="">
@@ -300,25 +294,9 @@ const ConfirmationPage = () => {
                   </div>
                 </div>
                 {person.map((element: any, index: any) => (
-                  <div className="flex flex-wrap mb-4">
-                    {/* <div className="w-32 sm:w-32 sm:pr-1 mb-3">
-                    <BBDropdown
-                      className="w-32 h-12"
-                      options={[
-                        { label: "Mr" },
-                        { label: "Ms" },
-                        { label: "Mrs" },
-                      ]}
-                      value={title}
-                      onPress={(value: any) => {
-                        setTitle(value);
-                      }}
-                      label="Title"
-                    />
-                  </div> */}
-                    <div className="w-full sm:w-1/4 sm:pr-2 mb-3">
+                  <div className="flex flex-wrap mb-4 gap-2">
+                    <div className="w-full lg:w-[30%]  mb-3">
                       <UInput
-                        // className="w-full border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:border-blue-500"
                         id="passenger-name"
                         type="text"
                         placeholder="Enter First Name"
@@ -326,9 +304,8 @@ const ConfirmationPage = () => {
                         onChange={(e: any) => setFName(index, e.target.value)}
                       />
                     </div>
-                    <div className="w-full sm:w-1/4 sm:pr-2 mb-3">
+                    <div className="w-full lg:w-[30%] mb-3">
                       <UInput
-                        // className="w-full border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:border-blue-500"
                         id="passenger-name"
                         type="text"
                         placeholder="Enter Last Name"
@@ -337,9 +314,8 @@ const ConfirmationPage = () => {
                       />
                     </div>
 
-                    <div className="w-full sm:w-1/4 sm:pr-2 mb-3">
+                    <div className="w-full lg:w-[30%]  mb-3">
                       <UInput
-                        // className="w-full border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:border-blue-500"
                         id="passenger-age"
                         type="text"
                         placeholder="Age"
@@ -348,8 +324,12 @@ const ConfirmationPage = () => {
                       />
                     </div>
 
-                    <div className="w-full sm:w-1/3 sm:pr-2 mt-4">
-                      <BBButton onClick={onSub} className="w-fit" label={"-"} />
+                    <div className="w-full lg:w-[5%] mb-3">
+                      <BBButton
+                        onClick={onSub}
+                        className="w-full lg:w-fit "
+                        label={"-"}
+                      />
                     </div>
                   </div>
                 ))}
@@ -597,8 +577,3 @@ const ConfirmationPage = () => {
 };
 
 export default ConfirmationPage;
-
-
-
-
-

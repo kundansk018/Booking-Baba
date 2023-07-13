@@ -3,6 +3,7 @@
 import BBButton from "@/app/components/BBButton";
 import { getInvoiceDataInDB } from "@/redux/action/seatBook";
 import { useAppDispatch } from "@/redux/store";
+import { randomInt } from "crypto";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -16,7 +17,6 @@ const Invoice = () => {
   console.log("seatsBookData in Invoice page..", seatsBookData);
   let _id = seatsBookData?.data?.data?.insertedId;
   // console.log("seat book data id available",seatsBookData?.data?.data?.insertedId);
-
   console.log("id in invoice page", _id);
   useEffect(() => {
     if (seatsBookData && _id) {
@@ -25,6 +25,7 @@ const Invoice = () => {
       dispatch(getInvoiceDataInDB(_id));
     }
   }, [_id]);
+  // localStorage.setItem("id", _id);
 
   const invoiceLatestData = useSelector(
     (state: any) => state.seats.invoiceData
@@ -54,9 +55,16 @@ const Invoice = () => {
   let lastName = invoiceLatestData?.data?.data?.lastName;
 
   let person = invoiceLatestData?.data?.data?.person; //JSON Data
+  let personNames = [];
+  personNames = person ? JSON.parse(person) : null;
+  console.log("Person data in inoice page...", personNames);
+
+  let seatArr = [];
+  seatArr = seats ? JSON.parse(seats) : null;
+  console.log("seats Array is ", seatArr);
 
   return (
-    <div className="">
+    <div className="font-Poppins">
       <div className="card mx-auto px-10 py-5 border border-gray-400 rounded-[4px] bg-white bg-opacity-60 ">
         <div className="grid grid-cols-3 ">
           <div className="col-span-2  ">
@@ -122,15 +130,19 @@ const Invoice = () => {
             </p>
 
             <p className="font-bolt">
-              {firstName && lastName
-                ? firstName + " " + lastName
-                : "No Passeneger Name here"}
+              {personNames
+                ? personNames?.map((element: any, index: any) => (
+                    <div className="">
+                      {element.fName + " " + element.lName}
+                    </div>
+                  ))
+                : "No Passeneger Name Available"}
             </p>
           </div>
           <div className="  mb-3 sm:mb-0">
             <p className="text-sm text-[#00000080] text-uppercase">Seat:</p>
 
-            <p className="font-bolt">{seats ? seats.length : "16"}</p>
+            <p className="font-bolt">{seatArr ? seatArr.length : "0"}</p>
           </div>
           <div>
             <p className="  text-sm text-[#00000080] text-uppercase">

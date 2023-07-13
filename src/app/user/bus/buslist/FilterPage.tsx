@@ -69,6 +69,7 @@ export default function FilterPage() {
   };
 
   const handleDepartureTime = (e: any) => {
+    console.log("handle departute time in filter page ::: ", e);
     set_deptminValue(e.minValue);
     set_deptmaxValue(e.maxValue);
   };

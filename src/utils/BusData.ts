@@ -202,4 +202,6 @@ const Bustype = [
   { label: "Non-Ac-Shivneri" },
 ];
 
-export { SEATS, TABLE_ROWS, Bustype };
+const TABLE_HEAD = ["Operators", "Departure", "Duration", "Arrival", "Price"];
+
+export { SEATS, TABLE_ROWS, TABLE_HEAD, Bustype };

@@ -98,7 +98,7 @@ export const getBusesById = (id: any) => async (dispatch: AppDispatch) => {
 
 export const getBusBySearch = (data: any) => async (dispatch: AppDispatch) => {
   dispatch({ type: REQUEST_STARTED, payload: null });
-  // console.log("hefhebfje",data)
+  console.log("getBusBySearch daata :::: ", data);
 
   const res = await busSearch(data);
   if (res && res.status === 200) {

@@ -4,19 +4,11 @@ import BBButton from "@/app/components/BBButton";
 import BBInput from "@/app/components/BBInput";
 import "../../styles/hotel.css";
 
-import {
-  Card,
-  Typography,
-  Select,
-  Option,
-  Checkbox,
-  List,
-} from "@material-tailwind/react";
-import { Input } from "postcss";
+import { Typography, List } from "@material-tailwind/react";
 import { useState } from "react";
 import BBCheckbox from "@/app/components/BBCheckbox";
 import BBDropdown from "@/app/components/BBDropdown";
-import { type } from "os";
+
 import BBErrorDialog from "@/app/components/BBErrorDialog";
 import { useAppDispatch } from "@/redux/store";
 import { addBuses } from "@/redux/action/busaction";

@@ -12,6 +12,7 @@ interface Props {
   returnType?: "value";
   onClick?: (event: any) => any;
   className?: any;
+  displayValue?: any;
 }
 
 export default function BBDropdown(props: Props) {
