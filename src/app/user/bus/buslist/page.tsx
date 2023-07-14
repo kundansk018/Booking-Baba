@@ -21,13 +21,10 @@ import { TABLE_HEAD } from "@/utils/BusData";
 
 export default function page() {
   const busData: any = useSelector((state: any) => state.bus.userBusDetails);
-  // console.log("bus data is ..==>>>>", busData);
-
+  console.log("bus data /////////////", busData);
   const [showModal, setShowModal] = useState<boolean>(false);
   let from = busData?.data[0]?.from;
   let to = busData?.data[0]?.to;
-  // console.log("from ..==>>>>", from);
-  // console.log("to ..==>>>>", to);
   const dispatch = useAppDispatch();
 
   const handleClosemodal = () => {
@@ -43,34 +40,34 @@ export default function page() {
     console.log("id is+++++++++++++++", id);
   };
 
-  const [active, setActive] = React.useState(1);
+  // const [active, setActive] = React.useState(1);
 
-  const getItemProps = (index: any) =>
-    ({
-      variant: active === index ? "filled" : "text",
-      color: active === index ? "blue" : "blue-gray",
-      onClick: () => setActive(index),
-    } as any);
+  // const getItemProps = (index: any) =>
+  //   ({
+  //     variant: active === index ? "filled" : "text",
+  //     color: active === index ? "blue" : "blue-gray",
+  //     onClick: () => setActive(index),
+  //   } as any);
 
-  const next = () => {
-    if (active === 3) return;
+  // const next = () => {
+  //   if (active === 3) return;
 
-    setActive(active + 1);
-  };
+  //   setActive(active + 1);
+  // };
 
-  const prev = () => {
-    if (active === 1) return;
+  // const prev = () => {
+  //   if (active === 1) return;
 
-    setActive(active - 1);
-  };
+  //   setActive(active - 1);
+  // };
 
-  const getIsLast = (Element: Array<any>, index: number) => {
-    if (index === Element.length - 1) {
-      return true;
-    } else {
-      return false;
-    }
-  };
+  // const getIsLast = (Element: Array<any>, index: number) => {
+  //   if (index === Element.length - 1) {
+  //     return true;
+  //   } else {
+  //     return false;
+  //   }
+  // };
 
   return (
     <>
@@ -84,37 +81,36 @@ export default function page() {
             <SearchComponent travelType="bus" />
           </div>
 
-          <div className="flex flex-row gap-5 ">
-            <div className="p-5 w-[300px] bg-[#FFFFFF]">
+          <div className="flex flex-row gap-5 " style={{ height: "72vh" }}>
+            <div
+              className="p-5 w-[300px]  bg-[#FFFFFF] "
+              style={{ height: "fit-content", position: "relative" }}
+            >
               <FilterPage />
             </div>
 
             <div className="bg-[#FFFFFF] w-full">
-              <h1 className="text-2xl font-sans serif fontSize-25px mb-4 pl-10 pt-3 text-center ">
+              <h1 className="font-Poppins mb-4 pl-10 pt-3 text-center  text-[#0c2f54] text-2xl ">
                 {from} To {to}
               </h1>
-
+              <hr className="h-1 bg-[#f5f5f5]"></hr>
               <div
                 className=" flex-grow overflow-y-scroll"
-                style={{ height: "50vh" }}
+                style={{ height: "60vh" }}
               >
-                <table className="mx-auto border border-gray-300 w-[100%] text-left">
-                  <thead className="w-">
+                <table className="mx-auto  w-[100%] text-left">
+                  <thead className="">
                     <tr>
                       {TABLE_HEAD.map((head: any, ind: number) => (
                         <th
-                          style={{ position: "sticky", top: "0" }}
+                          style={{ position: "sticky", top: "0" }} //
                           key={head}
-                          className={`border-b border-blue-gray-100 bg-blue-gray-50 p-4  ${
-                            getIsLast(TABLE_HEAD, ind) === true
-                              ? "px-[3.5rem]"
-                              : ""
-                          }`}
+                          className="border-b border-blue-gray-100 bg-[#f5f5f5] p-2 "
                         >
                           <BBTypography
                             variant="small"
                             color="blue-gray"
-                            className={`font-bold leading-none opacity-70 w-fit`}
+                            className={`font-normal text-[12.50px] font-Poppins   text-[#535b61]`}
                           >
                             {head}
                           </BBTypography>
@@ -126,63 +122,63 @@ export default function page() {
                     {busData?.data?.map((element: any, index: any) => {
                       return (
                         <tr key={index}>
-                          <td className="p-4 border-b border-blue-gray-50">
+                          <td className={"p-4 border-b border-blue-gray-50"}>
                             <BBTypography
-                              variant="small"
-                              color="blue-gray"
-                              className="font-medium  text-black "
+                              // variant="small"
+                              // color="blue-gray"
+                              className=""
                             >
-                              <div className="font-extralight text-base ">
+                              <div className="font-Poppins text-[16px]  text-[#212529] ">
                                 {element.operator}
                               </div>
 
-                              <div className="font-extralight  text-gray-700">
+                              <div className="font-Poppins text-[12px] text-[#8e9a9d] ">
                                 {element.busType}
                               </div>
                             </BBTypography>
                           </td>
 
-                          <td className="p-4 border-b border-blue-gray-50">
+                          <td className={"p-4 border-b border-blue-gray-50"}>
                             <BBTypography
-                              variant="small"
-                              color="blue-gray"
-                              className="font-medium  text-black"
+                            // variant="small"
+                            // color="blue-gray"
+                            // className="font-medium  text-black"
                             >
-                              <div className="font-extralight text-base">
+                              <div className="font-Poppins text-[18px]  text-[#212529]">
                                 {element.departureTime}
                               </div>
 
-                              <div className="font-extralight  text-gray-700">
+                              <div className="font-Poppins text-[12px] text-[#8e9a9d]">
                                 {element.from}
                               </div>
                             </BBTypography>
                           </td>
-                          <td className="p-4 border-b border-blue-gray-50">
+                          <td className={"p-4 border-b border-blue-gray-50"}>
                             <BBTypography
-                              variant="small"
-                              color="blue-gray"
-                              className="font-medium  text-black"
+                            // variant="small"
+                            // color="blue-gray"
+                            // className="font-medium  text-black"
                             >
-                              <div className="font-extralight text-base">
+                              <div className="text-[16px] text-blue-gray">
                                 {element.duration}
                               </div>
 
-                              <div className="font-extralight  text-gray-700">
+                              <div className="font-Poppins text-[12px] text-[#8e9a9d]">
                                 {element.noofstop}
                               </div>
                             </BBTypography>
                           </td>
-                          <td className="p-4 border-b border-blue-gray-50">
+                          <td className={"p-4 border-b border-blue-gray-50"}>
                             <BBTypography
-                              variant="small"
-                              color="blue-gray"
-                              className="font-medium  text-black"
+                            // variant="small"
+                            // color="blue-gray"
+                            // className="font-medium  text-black"
                             >
-                              <div className="font-extralight text-base">
+                              <div className="font-Poppins text-[18px]  text-[#212529]">
                                 {element.arrivalTime}
                               </div>
 
-                              <div className="font-extralight  text-gray-700">
+                              <div className="font-Poppins text-[12px] text-[#8e9a9d]">
                                 {element.to}
                               </div>
                             </BBTypography>
@@ -194,9 +190,9 @@ export default function page() {
                               <BBTypography
                                 variant="small"
                                 color="blue-gray"
-                                className="font-semibold text-center text-xl"
+                                className="font-Poppins text-[21px] text-[#212529] text-center "
                               >
-                                {element.ticketprice}
+                                ${element.ticketprice}
                               </BBTypography>
 
                               <Button
@@ -217,7 +213,7 @@ export default function page() {
                   </tbody>
                 </table>
               </div>
-              <div className="flex justify-center items-center gap-4 mt-5">
+              {/* <div className="flex justify-center items-center gap-4 mt-5">
                 <Button
                   variant="text"
                   color="blue-gray"
@@ -242,7 +238,7 @@ export default function page() {
                   Next
                   <ArrowRightIcon strokeWidth={2} className="h-4 w-4" />
                 </Button>
-              </div>
+              </div> */}
             </div>
           </div>
           {showModal ? (

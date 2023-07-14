@@ -89,22 +89,24 @@ export default function Page() {
             <FilterPage />
           </div>
 
-          <div className="w-full bg-white ">
+          <div className="w-full bg-[#FFFFFF] ">
             <div className="font-Poppins mb-4 pl-10 pt-3 text-center  text-[#0c2f54] text-2xl">
               {from} To {to}
             </div>
+
+            <hr className="h-1 bg-[#f5f5f5]"></hr>
             <div
               className="flex-grow overflow-y-scroll"
               style={{ height: "85vh" }}
             >
-              <table className=" mx-auto border border-gray-300 w-[100%]  text-left h-[70px]">
+              <table className=" mx-auto  w-[100%]   text-left">
                 <thead>
                   <tr>
                     {TABLE_HEAD.map((head) => (
                       <th
                         style={{ position: "sticky", top: "0" }}
                         key={head}
-                        className="bg-[#f5f5f5] border-b border-blue-gray-100 py-3 pl-5"
+                        className="bg-[#f5f5f5] border-b border-blue-gray-100 py-2 pl-5"
                       >
                         <BBTypography className="text-[#535b61] font-normal text-[12.50px] font-Poppins">
                           {head}

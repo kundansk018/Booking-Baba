@@ -101,13 +101,13 @@ export default function FilterPage() {
   };
 
   return (
-    <div className="text-2xl font-Poppins fontSize-25px mb-4 -mt-2 ">
+    <div className="text-2xl font-Poppins h-350 fontSize-25px mb-4 -mt-2 ">
       <div>
         <h3
           style={{
             fontFamily: "Poppins,sans-serif ml-5",
             color: " #0c2f54",
-            fontSize: "25px",
+            fontSize: "21px",
           }}
         >
           {" "}
@@ -198,7 +198,10 @@ export default function FilterPage() {
               </h2>
             </AccordionHeader>
             <AccordionBody className="-my-3">
-              <label className="flex items-center space-x-2 font-bold">
+              <label
+                className="flex items-center space-x-2 font-bold"
+                style={{ backgroundColor: "white" }}
+              >
                 <input
                   type="checkbox"
                   checked={sleeper}

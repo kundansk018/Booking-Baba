@@ -9,6 +9,7 @@ interface button {
   color?: any;
   className?: string;
   children?: any;
+  variant?: any;
 }
 
 export default function BBButton(props: button) {
@@ -18,6 +19,7 @@ export default function BBButton(props: button) {
       onClick={props.onClick}
       color={props.color || "blue"}
       size={props.size}
+      variant={props.variant}
       className={` w-full text-white text-sm bg-blue-600 border border-blue-600 rounded-[4px] focus:outline-none focus:ring-1 focus:ring-blue-400 py-[11.5px] px-[14.5px] ${props?.className}`}
     >
       {props.children}

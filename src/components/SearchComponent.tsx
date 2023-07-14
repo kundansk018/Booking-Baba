@@ -37,7 +37,7 @@ const SearchComponent = (props: Props) => {
   console.log("from", arrivalDate);
 
   const handleSearch = () => {
-    console.log("from nd to ", from, to);
+    console.log("from and to ", from, to);
     if (!from && !to) {
       alert("plz enter details");
     } else {

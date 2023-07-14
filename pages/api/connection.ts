@@ -7,7 +7,7 @@ const getDB = async () => {
     "mongodb+srv://adeshphad:adeshphad@booking-baba.oqow5b3.mongodb.net/?retryWrites=true&w=majority";
     // "mongodb+srv://kbsavale:bookingbaba123@cluster0.zzkhcsh.mongodb.net/";
   // "mongodb+srv://jadhavbhushan228:mongo%40123@cluster0.up7udhf.mongodb.net/?retryWrites=true&w=majority";
-  // ("mongodb+srv://jadhavbhushan228:mongo%40123@cluster0.up7udhf.mongodb.net/?retryWrites=true&w=majority");
+ 
 
   const options: any = {
     useUnifiedTopology: true,
