@@ -15,12 +15,14 @@ interface Props {
   style?: any;
   label?: any;
   icon?: any;
+  
 }
 
 export default function UDatePicker(props: Props) {
   return (
     <DatePicker
       id="arrivalDate"
+      autoComplete="off"
       placeholderText={props.placeholder}
       minDate={props.minDate}
       selected={props.selected}

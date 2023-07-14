@@ -10,12 +10,13 @@ interface Props {
 
 export default function Bus(props: Props) {
   return (
-    <div>
-      <div className="flex flex-row">
-        <div className="w-[45%]">
+   <div>
+      <div className=" ">
+        <div className="flex flex-wrap">
+          <div className="w-full lg:w-[45%]">
           <HomeSearch title="Book Bus Tickets" travelType={props.type} />
         </div>
-        <div className="w-[55%]">
+          <div className="w-full lg:w-[55%]">
           <BAdCarousel travelType={props.type} />
         </div>
       </div>
@@ -27,5 +28,7 @@ export default function Bus(props: Props) {
         />
       </div>
     </div>
+              </div>
+
   );
 }

@@ -39,7 +39,7 @@ const Container = (props: ContainerProps) => {
           <Dialog
             open
             handler={() => console.log("")}
-            className="bg-opacity-0 border-0 border-none shadow-none "
+            className="bg-opacity-0 bg-none border-none shadow-none "
           >
             <DialogBody className="bg-opacity-0 border-none shadow-none">
               <div className="flex w-full justify-center  ">
