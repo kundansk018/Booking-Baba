@@ -120,7 +120,7 @@ export default function HomeSearch(props: Props) {
             )}
           </div>
           {props.travelType === "hotel" ? (
-            <div className="flex flex-row justify-center  lg:justify-between">
+            <div className="flex flex-row justify-between  lg:justify-between">
               <div className="flex justify-start">
                 <UDatePicker
                   id="departDate"

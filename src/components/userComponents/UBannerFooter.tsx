@@ -6,8 +6,8 @@ import HiSupport, { HiOutlineSupport } from "react-icons/hi";
 export default function UBannerFooter() {
   return (
     <>
-      <div className=" max-w-screen-xl mx-auto flex flex-row p-3 py-7 text-center">
-        <div className="w-1/4 flex flex-col">
+      <div className="container lg:max-w-screen-xl mx-auto flex flex-row   justify-center p-3 py-7 text-center">
+        <div className="lg:w-1/4 grid">
           <div className="flex justify-center text-[35px] text-uficon mb-3">
             <FaLock />
           </div>
@@ -20,7 +20,7 @@ export default function UBannerFooter() {
             </BBTypography>
           </div>
         </div>
-        <div className=" w-1/4 flex flex-col">
+        <div className=" lg:w-1/4 grid">
           <div className="flex justify-center text-[35px] text-uficon mb-3">
             <FaThumbsUp />
           </div>
@@ -33,7 +33,7 @@ export default function UBannerFooter() {
             </BBTypography>
           </div>
         </div>
-        <div className="w-1/4 flex flex-col">
+        <div className="lg:w-1/4  grid">
           <div className="flex justify-center text-[35px] text-uficon mb-3">
             <FaBullhorn />
           </div>
@@ -46,7 +46,7 @@ export default function UBannerFooter() {
             </BBTypography>
           </div>
         </div>
-        <div className=" w-1/4 flex flex-col">
+        <div className="lg:w-1/4 grid">
           <div className="flex justify-center text-[35px] text-uficon font-extrabold mb-3">
             <HiOutlineSupport />
           </div>

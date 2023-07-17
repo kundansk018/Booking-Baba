@@ -32,8 +32,10 @@ const DropdownItem: React.FC<DropdownItemProps> = ({ option }) => {
 
   return (
     <div className="border border-b-gray-300 border-t-0 border-x-0">
-      <div className=" flex items-center justify-between my-[6px]  gap-[200px]">
-        <div className="mr-2">{label}</div>
+      <div className=" flex items-center justify-between my-[6px]  ">
+        <div className="lg:w-[330px] md:w-[530px]">
+          <div className="">{label}</div>
+          </div>
         <div className="flex items-center justify-between ">
           <button
             className="bg-[#e7e9ed] text-black hover:bg-blue-700 font-bold h-8 w-8 rounded-sm flex justify-center items-center"
